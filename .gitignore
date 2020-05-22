@@ -3,3 +3,9 @@
 ################################################################################
 
 /BookStores/.vs/BookStores/v16
+/BookStores/Client/bin/Debug/netstandard2.1
+/BookStores/Client/obj
+/BookStores/Server/bin/Debug/netcoreapp3.1
+/BookStores/Server/obj
+/BookStores/Shared/bin/Debug/netstandard2.1
+/BookStores/Shared/obj
