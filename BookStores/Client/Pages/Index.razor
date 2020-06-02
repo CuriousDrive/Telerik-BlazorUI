@@ -1,7 +1,97 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+@using System.Collections.ObjectModel
+@using BookStores.Client.Models
 
-Welcome to your new app.
+<div class="col-12">
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <div class="col-12">
+        <p><b>Textbox</b></p>
+        <hr />
+        <TelerikTextBox Label="First Name"></TelerikTextBox>
+        <TelerikTextBox Value="Disabled"></TelerikTextBox>
+    </div>
+    <br />
+    <div class="col-12">
+        <p><b>Autocomplete</b></p>
+        <hr />
+        <TelerikAutoComplete Data="@States"
+                             Placeholder="Please select state"
+                             ValueChanged="@(state => OnStateChanged(state))" />
+        <TelerikAutoComplete Data="@Cities"
+                             Placeholder="Please select city" />
+    </div>
+    <br />
+    <div class="col-12">
+        <p><b>Multi-select</b></p>
+        <hr />
+        <TelerikMultiSelect Data="@products"
+                            @bind-Value="selectedProductId"
+                            ValueField="@nameof(Product.ProductId)"
+                            TextField="@nameof(Product.ProductName)"
+                            OnChange="PopulateSelectedProducts" />
+        
+        <p>Number Of Times Product Selected : @NumberOfTimesProductSelected</p>
+        <div>
+            
+            @foreach (int selectProductId in selectedProductId)
+            { 
+                <p>@selectProductId</p>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="col-12">
+        <p><b>Checkbox</b></p>
+        <hr />
+    </div>
+</div>
+
+
+@code {
+
+    //autocomplete properties
+    public string[] States = { "Missouri", "Kansas", "Pennsylvania" };
+    public string[] Cities = { "Columbia", "Topeka", "Philadelphia" };
+    public string SelectedState { get; set; }
+    public string SelectedCity { get; set; }
+
+    //multi-selecte properties
+    public List<Product> products { get; set; } = new List<Product>();
+    public List<int> selectedProductId { get; set; } = new List<int>();
+    public int NumberOfTimesProductSelected { get; set; }
+
+    //checkbox properties
+    public List<Item> GroceryItems { get; set; } = new List<Item>();
+
+    protected override Task OnInitializedAsync()
+    {
+        products.Add(new Product(1, "Dell Laptop"));
+        products.Add(new Product(2, "Acer Laptop"));
+
+        GroceryItems = new List<Item>();
+        GroceryItems.Add(new Item(1, "Milk"));
+        GroceryItems.Add(new Item(2, "Bacon"));
+        GroceryItems.Add(new Item(3, "Bagels"));
+        GroceryItems.Add(new Item(4, "Half & half"));
+        GroceryItems.Add(new Item(5, "Coffee"));
+
+        return base.OnInitializedAsync();
+    }
+
+    public void PopulateSelectedProducts()
+    {
+        NumberOfTimesProductSelected++;
+    }
+
+    private void OnStateChanged(string state)
+    {
+        if (state == "Missouri")
+            Cities = new string[] { "Columbia" };
+        if (state == "Kansas")
+            Cities = new string[] { "Topeka" };
+        if (state == "Pennsylvania")
+            Cities = new string[] { "Philadelphia" };
+    }
+
+}

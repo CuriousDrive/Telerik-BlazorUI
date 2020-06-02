@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -12,6 +12,5 @@
     <ProjectReference Include="..\Client\BookStores.Client.csproj" />
     <ProjectReference Include="..\Shared\BookStores.Shared.csproj" />
   </ItemGroup>
-
 
 </Project>
