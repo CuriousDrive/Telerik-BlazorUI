@@ -3,6 +3,9 @@
 @using System.Collections.ObjectModel
 @using BookStores.Client.Models
 
+<h2>Basic Controls</h2>
+<hr />
+
 <div class="col-12">
 
     <div class="col-12">
@@ -44,6 +47,17 @@
     <div class="col-12">
         <p><b>Checkbox</b></p>
         <hr />
+            @foreach(Item item in GroceryItems)
+            {
+                <TelerikCheckBox Id="@item.ItemId"
+                                 Enabled="@item.OutOfStock"
+                                 ValueChanged="@((bool value) => OnCheckboxValueChanged(value, item.ItemName))">
+                </TelerikCheckBox>
+                <label for="@item.ItemId" >@item.ItemName</label>
+                <br />
+            }
+        <hr />
+        <p>This checkbox has been @(CheckBoxValue ? "checked" : "unchecked") : @ItemSelected</p>
     </div>
 </div>
 
@@ -56,13 +70,15 @@
     public string SelectedState { get; set; }
     public string SelectedCity { get; set; }
 
-    //multi-selecte properties
+    //multi-select properties
     public List<Product> products { get; set; } = new List<Product>();
     public List<int> selectedProductId { get; set; } = new List<int>();
     public int NumberOfTimesProductSelected { get; set; }
 
     //checkbox properties
     public List<Item> GroceryItems { get; set; } = new List<Item>();
+    public string ItemSelected { get; set; }
+    public bool CheckBoxValue { get; set; }
 
     protected override Task OnInitializedAsync()
     {
@@ -70,11 +86,11 @@
         products.Add(new Product(2, "Acer Laptop"));
 
         GroceryItems = new List<Item>();
-        GroceryItems.Add(new Item(1, "Milk"));
-        GroceryItems.Add(new Item(2, "Bacon"));
-        GroceryItems.Add(new Item(3, "Bagels"));
-        GroceryItems.Add(new Item(4, "Half & half"));
-        GroceryItems.Add(new Item(5, "Coffee"));
+        GroceryItems.Add(new Item("1", "Milk", false, true));
+        GroceryItems.Add(new Item("2", "Bacon", false, true));
+        GroceryItems.Add(new Item("3", "Bagels", false, true));
+        GroceryItems.Add(new Item("4", "Half & half", false, false));
+        GroceryItems.Add(new Item("5", "Coffee", false, false));
 
         return base.OnInitializedAsync();
     }
@@ -94,4 +110,9 @@
             Cities = new string[] { "Philadelphia" };
     }
 
+    private void OnCheckboxValueChanged(bool value, string itemName)
+    {
+        ItemSelected = itemName;
+        CheckBoxValue = value;
+    }
 }

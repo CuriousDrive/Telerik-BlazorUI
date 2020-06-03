@@ -7,18 +7,28 @@ namespace BookStores.Client.Models
 {
     public class Item
     {
-        public int ItemId { get; set; }
+        public string ItemId { get; set; }
         public string ItemName { get; set; }
+        public bool Purchased { get; set; }
+        public bool OutOfStock { get; set; }
 
         public Item()
         {
 
         }
 
-        public Item(int itemId, string itemName)
+        public Item(string itemId, string itemName)
         {
             this.ItemId = itemId;
             this.ItemName = itemName;
+        }
+
+        public Item(string itemId, string itemName, bool purchased, bool outOfStock)
+        {
+            this.ItemId = itemId;
+            this.ItemName = itemName;
+            this.Purchased = purchased;
+            this.OutOfStock = outOfStock;
         }
     }
 }

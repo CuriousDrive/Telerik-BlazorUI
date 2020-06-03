@@ -1,0 +1,31 @@
+﻿@page "/listview"
+@using BookStores.Client.Models
+@inject HttpClient HttpClient
+
+<h2> Listview Control</h2>
+<hr />
+
+<div class="col-12">
+
+    @if (randomUserResponse.results != null && randomUserResponse.results.Length > 0)
+    {
+        @foreach (Results results in randomUserResponse.results)
+        {
+            
+            <img src="@results.picture.thumbnail"/>
+            <span>@results.name.first <span> </span> @results.name.last</span>
+            <br /> <br />
+        }
+    }
+
+</div>
+
+@code{
+
+    RandomUserResponse randomUserResponse = new RandomUserResponse();
+
+    protected override async Task OnInitializedAsync()
+    {
+        randomUserResponse = await HttpClient.GetFromJsonAsync<RandomUserResponse>("https://randomuser.me/api/?results=10");
+    }
+}
