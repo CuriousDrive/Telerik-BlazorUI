@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/bookstoresprd/databases/BookStores_PRD",
+      "type": "mssql.azure",
+      "connectionId": "BookStoresDB",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
