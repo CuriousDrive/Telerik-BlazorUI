@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System;
+using BookStores.Services;
+using BookStores.Models;
 
 namespace BookStores.Client
 {
@@ -12,6 +14,10 @@ namespace BookStores.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
+            
+            builder.Services.AddTransient<IBookStoresService<Author>, BookStoresService<Author>>();
+            builder.Services.AddTransient<IBookStoresService<Publisher>, BookStoresService<Publisher>>();
+
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             builder.Services.AddTelerikBlazor();

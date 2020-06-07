@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Data\\CuriousDrive\\Repos\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj": {}
+    "C:\\Data\\CuriousDrive\\Repos\\Telerik\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Data\\CuriousDrive\\Repos\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj": {
+    "C:\\Data\\CuriousDrive\\Repos\\Telerik\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Data\\CuriousDrive\\Repos\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj",
+        "projectUniqueName": "C:\\Data\\CuriousDrive\\Repos\\Telerik\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj",
         "projectName": "BookStoresWebAPI",
-        "projectPath": "C:\\Data\\CuriousDrive\\Repos\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj",
-        "packagesPath": "C:\\Users\\fahad.mullaji\\.nuget\\packages\\",
-        "outputPath": "C:\\Data\\CuriousDrive\\Repos\\Telerik\\BookStores\\WebAPI\\obj\\",
+        "projectPath": "C:\\Data\\CuriousDrive\\Repos\\Telerik\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Data\\CuriousDrive\\Repos\\Telerik\\Telerik\\BookStores\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Data\\CuriousDrive\\Repos\\Telerik\\BookStores\\NuGet.Config",
-          "C:\\Users\\fahad.mullaji\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Data\\CuriousDrive\\Repos\\Telerik\\Telerik\\BookStores\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -29,8 +28,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files (x86)\\Progress\\Telerik UI for Blazor 2.14.0\\packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/nuget": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -101,6 +99,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
