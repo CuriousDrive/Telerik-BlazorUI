@@ -82,7 +82,9 @@ namespace BookStoresWebAPI
                                   {
                                       builder.WithOrigins("http://example.com",
                                                           "http://www.contoso.com",
-                                                          "http://localhost:62775");
+                                                          "https://localhost:5002")
+                                                            .AllowAnyHeader()
+                                                            .AllowAnyMethod();
                                   });
             });
 

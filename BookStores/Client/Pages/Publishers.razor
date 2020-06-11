@@ -41,6 +41,13 @@
                     </div>
                 </div>
             </Template>
+            <EditTemplate>                
+                <TelerikTextBox @bind-Value="@context.PublisherName" Label="PublisherName"></TelerikTextBox>                
+                <TelerikTextBox @bind-Value="@context.City" Label="City"></TelerikTextBox>
+                <TelerikTextBox @bind-Value="@context.State" Label="State"></TelerikTextBox>
+                <br />
+                <ListViewCommandButton Command="Save">Save</ListViewCommandButton>
+            </EditTemplate>
         </TelerikListView>
     }
 </div>
@@ -73,34 +80,31 @@
 
         publisherList = await bookStoresService.GetAllAsync("publishers/GetPublishers");
 
+        publisherList = publisherList.OrderByDescending(pub => pub.PubId).ToList();
+
         StateHasChanged();
     }
 
-    private async Task CreatePublisher()
+    private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-
+        var publisher = (Publisher)listViewCommandEventArgs.Item;
         await bookStoresService.SaveAsync("publishers/CreatePublisher", publisher);
 
         await LoadPublishers();
-
-        publisher = new Publisher();
-
     }
 
-    private async Task UpdatePublisher()
+    private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-
-        await bookStoresService.UpdateAsync("publishers/UpdatePublisher", publisher.PubId, publisher);
+        var publisher = (Publisher)listViewCommandEventArgs.Item;
+        await bookStoresService.UpdateAsync("publishers/UpdatePublisher/", publisher.PubId, publisher);
 
         await LoadPublishers();
-
-        publisher = new Publisher();
-
     }
 
-    private async Task DeletePublisher()
+    private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-        await bookStoresService.DeleteAsync("publishers/DeletePublisher", 0);
+        var publisher = (Publisher)listViewCommandEventArgs.Item;
+        await bookStoresService.DeleteAsync("publishers/DeletePublisher/", publisher.PubId);
 
         await LoadPublishers();
     }

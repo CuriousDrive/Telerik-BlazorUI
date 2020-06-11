@@ -5,51 +5,6 @@
 @inject IJSRuntime JSRuntime
 
 <div class="col-12">
-    <h3><b>Enter Author Information</b></h3>
-    <hr />
-
-    <EditForm Model="@author" OnValidSubmit="@SaveAuthor">
-
-        <div class="col-12 row">
-            <label class="col-2 font-weight-bold">first name :</label>
-            <input @ref="firstNameTextBox" class="form-control col-3" @bind="author.FirstName" placeholder="first name" />
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-2 font-weight-bold">last name :</label>
-            <InputText class="form-control col-3" @bind-Value="author.LastName" placeholder="last name" />
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-2 font-weight-bold">city :</label>
-            <select class="form-control col-3">
-                @if (@Cities != null)
-                {
-                    <option value="">select city..</option>
-                    @foreach (var city in Cities)
-                    {
-                        <option value="@city">@city</option>
-                    }
-                }
-            </select>
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-2 font-weight-bold">email address :</label>
-            <InputText class="form-control col-3" @bind-Value="author.EmailAddress" placeholder="email address" />
-        </div>
-        <br />
-        <div class="col-12 row">
-            <span class="col-2"></span>
-            <input type="submit" class="form-control col-1 btn btn-primary" value="Save" />
-            <span>&nbsp;</span>
-            <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" />
-        </div>
-    </EditForm>
-</div>
-<br />
-
-<div class="col-12">
 
     <h3><b>Authors</b></h3>
 
@@ -59,27 +14,18 @@
     }
     else
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>FirstName</th>
-                    <th>LastName</th>
-                    <th>City</th>
-                    <th>EmailAddress</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var author in authorList)
-                {
-                    <tr>
-                        <td>@author.FirstName</td>
-                        <td>@author.LastName</td>
-                        <td>@author.City</td>
-                        <td>@author.EmailAddress</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <TelerikGrid Data="@authorList" Page="10"
+                     OnCreate="CreateAuthor"
+                     OnUpdate="UpdateAuthor"
+                     OnDelete="DeleteAuthor"
+                     Pageable="true">
+            <GridColumns>
+                <GridColumn Field="@nameof(Author.FirstName)" Title="First Name"></GridColumn>
+                <GridColumn Field="@nameof(Author.LastName)" Title="Last Name"></GridColumn>
+                <GridColumn Field="@nameof(Author.City)" Title="City"></GridColumn>
+                <GridColumn Field="@nameof(Author.EmailAddress)" Title="Email Address"></GridColumn>
+            </GridColumns>
+        </TelerikGrid>
     }
 
 </div>
@@ -113,7 +59,6 @@
 
         author = new Author();
         authorList = new List<Author>();
-        //authorList = await authorService.GetAuthors();
 
         Cities = new string[] { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "San Francisco", "Charlotte", "Indianapolis", "Seattle", "Denver", "Washington" };
 
@@ -163,85 +108,37 @@
 
     private async Task LoadAuthors()
     {
-        await Task.Delay(500);
+        //await Task.Delay(500);
 
         authorList = filteredAuthorList = await bookStoresService.GetAllAsync("authors/GetAuthors");
 
-        //if (authorList != null)
-        //    authorList = authorList.OrderByDescending(auth => auth.AuthorId).ToList();
+        if (authorList != null)
+            authorList = authorList.OrderByDescending(auth => auth.AuthorId).ToList();
 
         StateHasChanged();
     }
 
-    private async Task SaveAuthor()
+    private async Task CreateAuthor()
     {
         author.City = SelectedCity;
 
-        if (author.AuthorId == 0)
-            await bookStoresService.SaveAsync("authors/CreateAuthor", author);
-        else
-            await bookStoresService.UpdateAsync("authors/UpdateAuthor", author.AuthorId, author);
+        await bookStoresService.SaveAsync("authors/CreateAuthor", author);
 
         await LoadAuthors();
-
-        Result = true;
-        IsVisible = true;
-
-        var firstName = author.FirstName;
-        var lastName = author.LastName;
-
-        RecordName = firstName + " " + lastName;
-
-        author = new Author();
-
-        //await JSRuntime.InvokeVoidAsync("saveMessage", firstName, lastName);
-        await JSRuntime.InvokeVoidAsync("setFocusOnElement", firstNameTextBox);
     }
 
-    private async Task DeleteAuthor(int authorId)
+    private async Task UpdateAuthor()    
     {
-        await bookStoresService.DeleteAsync("authors/DeleteAuthor/", authorId);
+
+        await bookStoresService.UpdateAsync("authors/UpdateAuthor", author.AuthorId, author);
+
         await LoadAuthors();
-
-        //throw new Exception("DeleteAuthor");
     }
 
-    private void EditAuthor(Author argAuthor)
+    private async Task DeleteAuthor()
     {
-        author = argAuthor;
-    }
-
-    private void OnSelectCityChange(ChangeEventArgs changeEventArgs)
-    {
-        SelectedCity = (string)changeEventArgs.Value;
-    }
-
-    private void OnAuthorSearchTextChanged(ChangeEventArgs changeEventArgs, string columnTitle)
-    {
-        string searchText = changeEventArgs.Value.ToString();
-        IsGridViewFiltered = true;
-
-        switch (columnTitle)
-        {
-            case "AuthorId":
-                filteredAuthorList = authorList.Where(auth => auth.AuthorId.ToString().Contains(searchText)).ToList();
-                break;
-            case "FirstName":
-                filteredAuthorList = authorList.Where(auth => auth.FirstName.ToLower().Contains(searchText)).ToList();
-                break;
-            case "LastName":
-                filteredAuthorList = authorList.Where(auth => auth.LastName.ToLower().Contains(searchText)).ToList();
-                break;
-            case "City":
-                filteredAuthorList = authorList.Where(auth => auth.City.ToLower().Contains(searchText)).ToList();
-                break;
-            case "EmailAddress":
-                filteredAuthorList = authorList.Where(auth => auth.EmailAddress.ToLower().Contains(searchText)).ToList();
-                break;
-            default:
-                Console.WriteLine("Default case");
-                break;
-        }
+        await bookStoresService.DeleteAsync("authors/DeleteAuthor/", 0);
+        await LoadAuthors();
     }
 
 }
