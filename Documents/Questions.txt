@@ -1,0 +1,18 @@
+I have some questions for Sara,
+
+1. Is it okay if I use dark theme for Visual Studio when I make videos?
+2. How long do you want these videos to be?
+3. How do you want me to get started with the videos?
+4. Are we sharing the code on GitHub?
+5. Is it okay if I share behind the scene on Curious Drive - twitter, Insta and Facebook account. 
+6. Streaming?
+7. Do you sponsor videos for any channels?
+
+Technical - 
+
+TelerikTextBox placeholder
+what is k-card
+is there any way to not show the whole namespace?
+
+Need a proposal 
+notes on videos outline 
