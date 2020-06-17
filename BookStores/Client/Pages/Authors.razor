@@ -18,13 +18,24 @@
                      OnCreate="CreateAuthor"
                      OnUpdate="UpdateAuthor"
                      OnDelete="DeleteAuthor"
+                     EditMode="GridEditMode.Popup"
                      Pageable="true">
             <GridColumns>
                 <GridColumn Field="@nameof(Author.FirstName)" Title="First Name"></GridColumn>
                 <GridColumn Field="@nameof(Author.LastName)" Title="Last Name"></GridColumn>
                 <GridColumn Field="@nameof(Author.City)" Title="City"></GridColumn>
                 <GridColumn Field="@nameof(Author.EmailAddress)" Title="Email Address"></GridColumn>
+                
+                <GridCommandColumn>
+                    <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Update</GridCommandButton>
+                    <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
+                    <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>
+                    <GridCommandButton Command="Cancel" Icon="cancel" ShowInEdit="true">Cancel</GridCommandButton>
+                </GridCommandColumn>
             </GridColumns>
+            <GridToolBar>
+                <GridCommandButton Command="Add" Icon="Add">Add Product</GridCommandButton>
+            </GridToolBar>
         </TelerikGrid>
     }
 
@@ -32,112 +43,45 @@
 
 @code {
 
-    public Author author { get; set; }
     public List<Author> authorList { get; set; }
-    public List<Author> filteredAuthorList { get; set; }
-    public string SelectedCity { get; set; }
-
-
-    public bool IsVisible { get; set; }
-    public bool Result { get; set; }
-    public string RecordName { get; set; }
     public string[] Cities { get; set; }
-    public bool IsGridViewFiltered { get; set; }
-    bool isLoading = true;
-
-    ElementReference firstNameTextBox;
-
-    protected override void OnInitialized()
-    {
-        Console.WriteLine("Authors - OnInitialized");
-        base.OnInitialized();
-    }
 
     protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine("Authors - OnInitializedAsync");
 
-        author = new Author();
         authorList = new List<Author>();
+        await LoadAuthors();
 
         Cities = new string[] { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "San Francisco", "Charlotte", "Indianapolis", "Seattle", "Denver", "Washington" };
 
         await base.OnInitializedAsync();
     }
 
-    protected override void OnParametersSet()
-    {
-        Console.WriteLine("Authors - OnParametersSet");
-        base.OnParametersSet();
-    }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        Console.WriteLine("Authors - OnParametersSetAsync");
-        await base.OnParametersSetAsync();
-    }
-
-    protected override bool ShouldRender()
-    {
-        base.ShouldRender();
-        Console.WriteLine("Authors - ShouldRender");
-
-        return true;
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        Console.WriteLine("Authors - OnAfterRender - firstRender = " + firstRender);
-        base.OnAfterRender(firstRender);
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        Console.WriteLine("Authors - OnAfterRenderAsync - firstRender = " + firstRender);
-
-        if (firstRender)
-        {
-            await LoadAuthors();
-
-            isLoading = false;
-            StateHasChanged();
-        }
-
-        await base.OnAfterRenderAsync(firstRender);
-    }
-
     private async Task LoadAuthors()
     {
-        //await Task.Delay(500);
-
-        authorList = filteredAuthorList = await bookStoresService.GetAllAsync("authors/GetAuthors");
-
-        if (authorList != null)
-            authorList = authorList.OrderByDescending(auth => auth.AuthorId).ToList();
-
-        StateHasChanged();
+        authorList = await bookStoresService.GetAllAsync("authors/GetAuthors");
     }
 
-    private async Task CreateAuthor()
+    private async Task CreateAuthor(GridCommandEventArgs gridCommandEventArgs)
     {
-        author.City = SelectedCity;
-
+        Author author = (Author)gridCommandEventArgs.Item;
         await bookStoresService.SaveAsync("authors/CreateAuthor", author);
 
         await LoadAuthors();
     }
 
-    private async Task UpdateAuthor()    
+    private async Task UpdateAuthor(GridCommandEventArgs gridCommandEventArgs)
     {
-
-        await bookStoresService.UpdateAsync("authors/UpdateAuthor", author.AuthorId, author);
+        Author author = (Author)gridCommandEventArgs.Item;
+        await bookStoresService.UpdateAsync("authors/UpdateAuthor/", author.AuthorId, author);
 
         await LoadAuthors();
     }
 
-    private async Task DeleteAuthor()
+    private async Task DeleteAuthor(GridCommandEventArgs gridCommandEventArgs)
     {
-        await bookStoresService.DeleteAsync("authors/DeleteAuthor/", 0);
+        Author author = (Author)gridCommandEventArgs.Item;
+        await bookStoresService.DeleteAsync("authors/DeleteAuthor/", author.AuthorId);
         await LoadAuthors();
     }
 

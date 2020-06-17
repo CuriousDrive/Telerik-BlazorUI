@@ -12,17 +12,29 @@
         <p><b>Textbox</b></p>
         <hr />
         <TelerikTextBox Label="First Name"></TelerikTextBox>
-        <TelerikTextBox Value="Disabled"></TelerikTextBox>
+        <TelerikTextBox Value="Disabled" Enabled="true"></TelerikTextBox>
+    </div>
+    <br />
+    <div class="col-12">
+        <p><b>Dropdownlist</b></p>
+        <hr />
+        <TelerikDropDownList Data="@Cities"                             
+                             DefaultText="Please select city" 
+                             ValueChanged="@((string value) => OnDropdownDropDownListChanged(value))"/>
+        
+        <TelerikDropDownList Data="@States"
+                             @bind-Value="@SelectedCity"
+                             DefaultText="Please select state" />
     </div>
     <br />
     <div class="col-12">
         <p><b>Autocomplete</b></p>
         <hr />
+        <TelerikAutoComplete Data="@Cities"
+                             Placeholder="Please select city" />
         <TelerikAutoComplete Data="@States"
                              Placeholder="Please select state"
                              ValueChanged="@(state => OnStateChanged(state))" />
-        <TelerikAutoComplete Data="@Cities"
-                             Placeholder="Please select city" />
     </div>
     <br />
     <div class="col-12">
@@ -33,12 +45,12 @@
                             ValueField="@nameof(Product.ProductId)"
                             TextField="@nameof(Product.ProductName)"
                             OnChange="PopulateSelectedProducts" />
-        
+
         <p>Number Of Times Product Selected : @NumberOfTimesProductSelected</p>
         <div>
-            
+
             @foreach (int selectProductId in selectedProductId)
-            { 
+            {
                 <p>@selectProductId</p>
             }
         </div>
@@ -47,15 +59,15 @@
     <div class="col-12">
         <p><b>Checkbox</b></p>
         <hr />
-            @foreach(Item item in GroceryItems)
-            {
-                <TelerikCheckBox Id="@item.ItemId"
-                                 Enabled="@item.OutOfStock"
-                                 ValueChanged="@((bool value) => OnCheckboxValueChanged(value, item.ItemName))">
-                </TelerikCheckBox>
-                <label for="@item.ItemId" >@item.ItemName</label>
-                <br />
-            }
+        @foreach (Item item in GroceryItems)
+        {
+            <TelerikCheckBox Id="@item.ItemId"
+                             Enabled="@item.OutOfStock"
+                             ValueChanged="@((bool value) => OnCheckboxValueChanged(value, item.ItemName))">
+            </TelerikCheckBox>
+            <label for="@item.ItemId">@item.ItemName</label>
+            <br />
+        }
         <hr />
         <p>This checkbox has been @(CheckBoxValue ? "checked" : "unchecked") : @ItemSelected</p>
     </div>
@@ -114,5 +126,10 @@
     {
         ItemSelected = itemName;
         CheckBoxValue = value;
+    }
+
+    private void OnDropdownDropDownListChanged(string selectedCity)
+    { 
+        // we can write code here to filter the state
     }
 }
