@@ -14,18 +14,39 @@
     }
     else
     {
-        <TelerikGrid Data="@authorList" Page="10"
+        <TelerikGrid Data="@authorList" 
                      OnCreate="CreateAuthor"
                      OnUpdate="UpdateAuthor"
                      OnDelete="DeleteAuthor"
                      EditMode="GridEditMode.Popup"
-                     Pageable="true">
+                     Pageable="true"
+                     Page="10"
+                     Sortable="true"
+                     Reorderable="true"
+                     Resizable="true"
+                     Groupable="true">
             <GridColumns>
+                <GridColumn Title="Image" Editable="false" Width="110px">
+                    <Template>
+                        @{
+                            var author = context as Author;
+                            Random random = new Random();
+                            int index = random.Next(11);
+                            <img src="@String.Format("/img/" + index + ".jpg")" />
+                        }
+                    </Template>
+                </GridColumn>
                 <GridColumn Field="@nameof(Author.FirstName)" Title="First Name"></GridColumn>
                 <GridColumn Field="@nameof(Author.LastName)" Title="Last Name"></GridColumn>
-                <GridColumn Field="@nameof(Author.City)" Title="City"></GridColumn>
-                <GridColumn Field="@nameof(Author.EmailAddress)" Title="Email Address"></GridColumn>
-                
+                <GridColumn Field="@nameof(Author.City)" Title="City">
+                    <EditorTemplate>
+                        <TelerikDropDownList Data="@Cities"
+                                             @bind-Value="@SelectedCity"
+                                             DefaultText="Please select city"
+                                             Width="250px"/>
+                    </EditorTemplate>                    
+                </GridColumn>
+                <GridColumn Field="@nameof(Author.EmailAddress)" Title="Email Address"></GridColumn>                
                 <GridCommandColumn>
                     <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Update</GridCommandButton>
                     <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
@@ -45,6 +66,7 @@
 
     public List<Author> authorList { get; set; }
     public string[] Cities { get; set; }
+    public string SelectedCity { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

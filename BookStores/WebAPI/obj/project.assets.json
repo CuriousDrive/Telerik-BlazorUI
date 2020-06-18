@@ -9172,17 +9172,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj",
+      "projectUniqueName": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj",
       "projectName": "BookStoresWebAPI",
-      "projectPath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj",
+      "projectPath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\BookStores\\WebAPI\\BookStoresWebAPI.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Telerik\\BookStores\\WebAPI\\obj\\",
+      "outputPath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\BookStores\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Telerik\\BookStores\\NuGet.Config",
+        "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\BookStores\\NuGet.Config",
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
