@@ -3,10 +3,15 @@
 ################################################################################
 
 /BookStores/.vs/BookStores/v16
-/BookStores/Client/bin/Debug/netstandard2.1
-/BookStores/Client/obj
-/BookStores/Server/bin/Debug/netcoreapp3.1
-/BookStores/Server/obj
-/BookStores/Shared/bin/Debug/netstandard2.1
-/BookStores/Shared/obj
+
+"/BookStoresWebAPI/bin/"
+"/BookStoresWebAPI/bin/Release/netcoreapp3.1/"
+"/BookStoresWebAPI/obj/"
+
+"/FinalEpisode/BookStores/Client/bin/Debug/netstandard2.1"
+"/FinalEpisode/BookStores/Client/obj"
+
+"/Episode 1/BookStores/Client/bin/Debug/netstandard2.1"
+"/Episode 1/BookStores/Client/obj"
+
 /.vs

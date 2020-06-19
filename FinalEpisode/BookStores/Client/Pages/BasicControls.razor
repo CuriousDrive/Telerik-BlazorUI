@@ -1,0 +1,135 @@
+﻿@page "/"
+
+@using System.Collections.ObjectModel
+@using BookStores.Client.Models
+
+<h2>Basic Controls</h2>
+<hr />
+
+<div class="col-12">
+
+    <div class="col-12">
+        <p><b>Textbox</b></p>
+        <hr />
+        <TelerikTextBox Label="First Name"></TelerikTextBox>
+        <TelerikTextBox Value="Disabled" Enabled="true"></TelerikTextBox>
+    </div>
+    <br />
+    <div class="col-12">
+        <p><b>Dropdownlist</b></p>
+        <hr />
+        <TelerikDropDownList Data="@Cities"                             
+                             DefaultText="Please select city" 
+                             ValueChanged="@((string value) => OnDropdownDropDownListChanged(value))"/>
+        
+        <TelerikDropDownList Data="@States"
+                             @bind-Value="@SelectedCity"
+                             DefaultText="Please select state" />
+    </div>
+    <br />
+    <div class="col-12">
+        <p><b>Autocomplete</b></p>
+        <hr />
+        <TelerikAutoComplete Data="@Cities"
+                             Placeholder="Please select city" />
+        <TelerikAutoComplete Data="@States"
+                             Placeholder="Please select state"
+                             ValueChanged="@(state => OnStateChanged(state))" />
+    </div>
+    <br />
+    <div class="col-12">
+        <p><b>Multi-select</b></p>
+        <hr />
+        <TelerikMultiSelect Data="@products"
+                            @bind-Value="selectedProductId"
+                            ValueField="@nameof(Product.ProductId)"
+                            TextField="@nameof(Product.ProductName)"
+                            OnChange="PopulateSelectedProducts" />
+
+        <p>Number Of Times Product Selected : @NumberOfTimesProductSelected</p>
+        <div>
+
+            @foreach (int selectProductId in selectedProductId)
+            {
+                <p>@selectProductId</p>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="col-12">
+        <p><b>Checkbox</b></p>
+        <hr />
+        @foreach (Item item in GroceryItems)
+        {
+            <TelerikCheckBox Id="@item.ItemId"
+                             Enabled="@item.OutOfStock"
+                             ValueChanged="@((bool value) => OnCheckboxValueChanged(value, item.ItemName))">
+            </TelerikCheckBox>
+            <label for="@item.ItemId">@item.ItemName</label>
+            <br />
+        }
+        <hr />
+        <p>This checkbox has been @(CheckBoxValue ? "checked" : "unchecked") : @ItemSelected</p>
+    </div>
+</div>
+
+
+@code {
+
+    //autocomplete properties
+    public string[] States = { "Missouri", "Kansas", "Pennsylvania" };
+    public string[] Cities = { "Columbia", "Topeka", "Philadelphia" };
+    public string SelectedState { get; set; }
+    public string SelectedCity { get; set; }
+
+    //multi-select properties
+    public List<Product> products { get; set; } = new List<Product>();
+    public List<int> selectedProductId { get; set; } = new List<int>();
+    public int NumberOfTimesProductSelected { get; set; }
+
+    //checkbox properties
+    public List<Item> GroceryItems { get; set; } = new List<Item>();
+    public string ItemSelected { get; set; }
+    public bool CheckBoxValue { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        products.Add(new Product(1, "Dell Laptop"));
+        products.Add(new Product(2, "Acer Laptop"));
+
+        GroceryItems = new List<Item>();
+        GroceryItems.Add(new Item("1", "Milk", false, true));
+        GroceryItems.Add(new Item("2", "Bacon", false, true));
+        GroceryItems.Add(new Item("3", "Bagels", false, true));
+        GroceryItems.Add(new Item("4", "Half & half", false, false));
+        GroceryItems.Add(new Item("5", "Coffee", false, false));
+
+        return base.OnInitializedAsync();
+    }
+
+    public void PopulateSelectedProducts()
+    {
+        NumberOfTimesProductSelected++;
+    }
+
+    private void OnStateChanged(string state)
+    {
+        if (state == "Missouri")
+            Cities = new string[] { "Columbia" };
+        if (state == "Kansas")
+            Cities = new string[] { "Topeka" };
+        if (state == "Pennsylvania")
+            Cities = new string[] { "Philadelphia" };
+    }
+
+    private void OnCheckboxValueChanged(bool value, string itemName)
+    {
+        ItemSelected = itemName;
+        CheckBoxValue = value;
+    }
+
+    private void OnDropdownDropDownListChanged(string selectedCity)
+    { 
+        // we can write code here to filter the state
+    }
+}

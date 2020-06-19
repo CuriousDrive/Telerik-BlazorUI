@@ -1,0 +1,110 @@
+﻿@page "/authors"
+@using BookStores.Models
+@using BookStores.Services
+@inject IBookStoresService<Author> bookStoresService
+@inject IJSRuntime JSRuntime
+
+<div class="col-12">
+
+    <h3><b>Authors</b></h3>
+
+    @if (authorList == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <TelerikGrid Data="@authorList" 
+                     OnCreate="CreateAuthor"
+                     OnUpdate="UpdateAuthor"
+                     OnDelete="DeleteAuthor"
+                     EditMode="GridEditMode.Popup"
+                     Pageable="true"
+                     Page="10"
+                     Sortable="true"
+                     Reorderable="true"
+                     Resizable="true"
+                     Groupable="true">
+            <GridColumns>
+                <GridColumn Title="Image" Editable="false" Width="110px">
+                    <Template>
+                        @{
+                            var author = context as Author;
+                            Random random = new Random();
+                            int index = random.Next(11);
+                            <img src="@String.Format("/img/" + index + ".jpg")" />
+                        }
+                    </Template>
+                </GridColumn>
+                <GridColumn Field="@nameof(Author.FirstName)" Title="First Name"></GridColumn>
+                <GridColumn Field="@nameof(Author.LastName)" Title="Last Name"></GridColumn>
+                <GridColumn Field="@nameof(Author.City)" Title="City">
+                    <EditorTemplate>
+                        <TelerikDropDownList Data="@Cities"
+                                             @bind-Value="@SelectedCity"
+                                             DefaultText="Please select city"
+                                             Width="250px"/>
+                    </EditorTemplate>                    
+                </GridColumn>
+                <GridColumn Field="@nameof(Author.EmailAddress)" Title="Email Address"></GridColumn>                
+                <GridCommandColumn>
+                    <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Update</GridCommandButton>
+                    <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
+                    <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>
+                    <GridCommandButton Command="Cancel" Icon="cancel" ShowInEdit="true">Cancel</GridCommandButton>
+                </GridCommandColumn>
+            </GridColumns>
+            <GridToolBar>
+                <GridCommandButton Command="Add" Icon="Add">Add Product</GridCommandButton>
+            </GridToolBar>
+        </TelerikGrid>
+    }
+
+</div>
+
+@code {
+
+    public List<Author> authorList { get; set; }
+    public string[] Cities { get; set; }
+    public string SelectedCity { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        authorList = new List<Author>();
+        await LoadAuthors();
+
+        Cities = new string[] { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "San Francisco", "Charlotte", "Indianapolis", "Seattle", "Denver", "Washington" };
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadAuthors()
+    {
+        authorList = await bookStoresService.GetAllAsync("authors/GetAuthors");
+    }
+
+    private async Task CreateAuthor(GridCommandEventArgs gridCommandEventArgs)
+    {
+        Author author = (Author)gridCommandEventArgs.Item;
+        await bookStoresService.SaveAsync("authors/CreateAuthor", author);
+
+        await LoadAuthors();
+    }
+
+    private async Task UpdateAuthor(GridCommandEventArgs gridCommandEventArgs)
+    {
+        Author author = (Author)gridCommandEventArgs.Item;
+        await bookStoresService.UpdateAsync("authors/UpdateAuthor/", author.AuthorId, author);
+
+        await LoadAuthors();
+    }
+
+    private async Task DeleteAuthor(GridCommandEventArgs gridCommandEventArgs)
+    {
+        Author author = (Author)gridCommandEventArgs.Item;
+        await bookStoresService.DeleteAsync("authors/DeleteAuthor/", author.AuthorId);
+        await LoadAuthors();
+    }
+
+}
