@@ -1,0 +1,14 @@
+﻿Telerik Textboxes - 
+	CSS is the same. you can assign "form-control col-6"
+	It is easier to set disabled 
+	You can assign Value and @bind-value
+	You can not assign value in the EditForm
+
+Telerik Dropdownlist - 
+	like textboxes you can not have value for dropdown list in the edit form
+	Becuase of that, you can not load state dropdown using whatever is getting loaded from the city 
+	Basically cascade loading does not work in edit forms at least
+	But I can show the selected state - yes this working - I am going to add this in the demo
+	I used the templates and came up with this code
+
+	
