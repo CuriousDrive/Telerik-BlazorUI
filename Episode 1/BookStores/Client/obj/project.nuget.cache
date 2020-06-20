@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4bvmVcRcJ5W1tEim82TfD6KQWbun6NnF8VCJ4QdHxxrqRzkNtgfw30jesLmZwClBTsQAo1YZ1YQ7FHfGj6uluA==",
+  "dgSpecHash": "l18LVoJQwPmNsHyBj0VlqlfYOOZT+iJo5acHbLSR1NAtzAkDE6niAedMNMlk+GLdidAKss5wumpCYIQb8DTxNA==",
   "success": true,
-  "projectFilePath": "c:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj",
+  "projectFilePath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\blazorcomponentutilities\\1.6.0\\blazorcomponentutilities.1.6.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\blazorpro.spinkit\\1.2.0\\blazorpro.spinkit.1.2.0.nupkg.sha512",

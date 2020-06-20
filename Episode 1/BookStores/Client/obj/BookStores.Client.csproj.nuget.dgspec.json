@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj": {}
+    "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj": {}
   },
   "projects": {
-    "c:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj": {
+    "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj",
+        "projectUniqueName": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj",
         "projectName": "BookStores.Client",
-        "projectPath": "c:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj",
+        "projectPath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\BookStores.Client.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "c:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\obj\\",
+        "outputPath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "c:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\NuGet.Config",
+          "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 1\\BookStores\\NuGet.Config",
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"

@@ -81,7 +81,6 @@
     public bool Result { get; set; }
     public string RecordName { get; set; }
     public bool ReloadList { get; set; }
-    bool isLoading = true;
 
     protected override void OnInitialized()
     {
@@ -94,8 +93,6 @@
         if (firstRender)
         {
             await LoadPublishers();
-
-            isLoading = false;
             StateHasChanged();
         }
 

@@ -7,6 +7,7 @@
 "/BookStoresWebAPI/bin/"
 "/BookStoresWebAPI/bin/Release/netcoreapp3.1/"
 "/BookStoresWebAPI/obj/"
+"/BookStoresWebAPI/obj/Release/netcoreapp3.1/"
 
 "/FinalEpisode/BookStores/Client/bin/Debug/netstandard2.1"
 "/FinalEpisode/BookStores/Client/obj"
@@ -15,3 +16,12 @@
 "/Episode 1/BookStores/Client/obj"
 
 /.vs
+/BookStoresWebAPI/bin/Debug/netcoreapp3.1
+/BookStoresWebAPI/obj/Debug/netcoreapp3.1
+/BookStoresWebAPI/obj/project.nuget.cache
+/BookStoresWebAPI/obj/project.assets.json
+/BookStoresWebAPI/obj/BookStoresWebAPI.csproj.nuget.g.targets
+/BookStoresWebAPI/obj/BookStoresWebAPI.csproj.nuget.g.props
+/BookStoresWebAPI/obj/BookStoresWebAPI.csproj.nuget.dgspec.json
+/Episode 1/BookStores/Client/obj/Debug/netstandard2.1
+/Episode 1/BookStores/Client/bin/Debug/netstandard2.1
