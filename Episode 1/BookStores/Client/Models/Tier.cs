@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BookStores.Models
 {
-    public class BookType
+    public class Tier
     {
         public int Id { get; set; }
-        public string Type { get; set; }
+        public string TierName { get; set; }
     }
 }

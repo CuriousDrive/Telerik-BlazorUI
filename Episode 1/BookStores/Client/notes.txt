@@ -48,10 +48,41 @@ Telerik Multiselect -
     Very interesting setup here. I was struggling with an error for like an hour
     the @bind-value should be of List<int> assuming your ValueField is an int
     Also it does not stop giving error until you mention below fields
-    Data, @bind-value, ValueField, TextField,
+    Data, @bind-value, ValueField and TextField
     It did not work until I put the not null condition on top of it
+    I am also going to show how you can handle OnChange event and show what has been selected in the multiselect
+    Filtering might get little tricky
 
+        @if (BookTypes != null && BookTypes.Count() > 0)
+        {
+            <TelerikMultiSelect Data="@BookTypes"
+                                @bind-Value="@SelectedBookTypesValue"
+                                ValueField="@nameof(BookType.Id)"
+                                TextField="@nameof(BookType.Type)"
+                                OnChange="@OnMultiSelectChange"
+                                Placeholder="select booktype..."
+                                Width="350px"
+                                Id="products-multiselect" />
 
+            @if (SelectedBookTypesText != null && SelectedBookTypesText.Count() > 0)
+            {
+                @foreach (string selectedText in SelectedBookTypesText)
+                {
+                    <strong>
+                        @string.Join(",", selectedText);
+                    </strong>
+                }
+            }
+        }
+        public List<int> SelectedBookTypesValue { get; set; }
+        public List<string> SelectedBookTypesText { get; set; }
+
+        private void OnMultiSelectChange()
+        {
+            SelectedBookTypesText = BookTypes.Where(bt => SelectedBookTypesValue.Contains(bt.Id))
+                                                .Select(bt => bt.Type).ToList();
+        }
 
 Telerik Checkboxes - 
+    Finally I am getting ready work on this component
 	
