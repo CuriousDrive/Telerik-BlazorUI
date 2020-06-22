@@ -11,7 +11,8 @@ namespace BookStores.Models
         public int AuthorId { get; set; }
         public string FirstName { get; set; }        
         public string LastName { get; set; }
-        public string City { get; set; }        
+        public string City { get; set; }
+        public string State { get; set; }
         public string EmailAddress { get; set; }
         public int Salary { get; set; }
         public string Phone { get; set; }

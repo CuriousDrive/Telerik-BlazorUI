@@ -1,14 +1,57 @@
-﻿Telerik Textboxes - 
+﻿So I am going to start of without EditForm. At the end when getting ready show forms and validations 
+Sent an email to Ed to figure out how can I used ValueChanged event in the EditForm
+
+Telerik Textboxes - 
 	CSS is the same. you can assign "form-control col-6"
 	It is easier to set disabled 
 	You can assign Value and @bind-value
-	You can not assign value in the EditForm
+
+	        <TelerikTextBox Id="txtFirstName"
+                            Class="form-control col-6"
+                            Enabled="true"
+                            @bind-Value="author.FirstName"></TelerikTextBox>
 
 Telerik Dropdownlist - 
-	like textboxes you can not have value for dropdown list in the edit form
-	Becuase of that, you can not load state dropdown using whatever is getting loaded from the city 
-	Basically cascade loading does not work in edit forms at least
-	But I can show the selected state - yes this working - I am going to add this in the demo
+	I am going to try and show cascade loading for city and state
 	I used the templates and came up with this code
+    DefaultText is something that I did 
+	        
+            <TelerikDropDownList Id="ddCity"
+                                 Class="form-control col-6"
+                                 Data="Cities"
+                                 DefaultText = "Please select city.."
+                                 ValueChanged="@((string value) => OnSelectCity(value))">
+                <HeaderTemplate><div class="font-weight-bolder">Header</div></HeaderTemplate>
+                <FooterTemplate><div class="font-weight-bolder">Footer</div></FooterTemplate>
+                <ValueTemplate>
+                    <div>@(context as string)</div>
+                </ValueTemplate>
+                <ItemTemplate>
+                    <div>@((context as string) + ", " + GetStateFromCity(context))</div>
+                </ItemTemplate>
+            </TelerikDropDownList>
 
+Telerik AutoComplete - 
+	For this I am going to use same city and state example
+    TelerikAutoComplete is almost like dropdonw list
+    Make sure to use placeholder for this control instead of using Default Text
+
+            <TelerikAutoComplete Id="acCity"
+                                 Class="form-control col-6"
+                                 Data="@Cities"
+                                 Placeholder="please select city..."                                 
+                                 ValueChanged="@((string value) => OnSelectCity(value))">
+            </TelerikAutoComplete>
+
+
+Telerik Multiselect - 
+    Very interesting setup here. I was struggling with an error for like an hour
+    the @bind-value should be of List<int> assuming your ValueField is an int
+    Also it does not stop giving error until you mention below fields
+    Data, @bind-value, ValueField, TextField,
+    It did not work until I put the not null condition on top of it
+
+
+
+Telerik Checkboxes - 
 	

@@ -4,98 +4,121 @@
 @inject IBookStoresService<Author> bookStoresService
 @inject IJSRuntime JSRuntime
 
-    <div class="col-12">
-        <h3><b>Enter Author Information</b></h3>
-        <hr />
-        
-        @*<EditForm Model="@author" OnValidSubmit="@SaveAuthor">*@
-            <div class="col-12 row">
-                <label class="col-3 font-weight-bold">first name :</label>
-                @*<InputText class="form-control col-6" @bind-Value="author.FirstName" placeholder="first name" />*@
-                <TelerikTextBox Id="txtFirstName"
-                            Enabled="true"
-                            @bind-Value="author.FirstName"
-                            Class="form-control col-6"></TelerikTextBox>
-            </div>
-            <br />
-            <div class="col-12 row">
-                <label class="col-3 font-weight-bold">last name :</label>
-                @*<InputText class="form-control col-6" @bind-Value="author.LastName" placeholder="last name" />*@
-                <TelerikTextBox Id="txtLastName"
-                                Enabled="true"
-                                @bind-Value="author.LastName"
-                                Class="form-control col-6"></TelerikTextBox>
-            </div>
-            <br />
-            <div class="col-12 row">
-                <label class="col-3 font-weight-bold">city :</label>
-                @*<select class="form-control col-6">
-                    @if (@Cities != null)
-                    {
-                        <option value="">select city..</option>
-                        @foreach (var city in Cities)
-                        {
-                            <option value="@city">@city</option>
-                        }
-                    }
-                </select>*@
-                <TelerikDropDownList Id="ddCity"                                     
-                                     @bind-Value="author.City"
-                                     Data="Cities"
-                                     Class="form-control col-6">
-                    <HeaderTemplate>
-                        <div class="font-weight-bolder">Header</div>
-                    </HeaderTemplate>
-                    <FooterTemplate>
-                        <div class="font-weight-bolder">Footer</div>
-                    </FooterTemplate>
-                    <ValueTemplate>
-                        <div>@((context as string))</div>
-                    </ValueTemplate>
-                    <ItemTemplate>
-                        <div>@((context as string) + " - " + GetStateFromCity(context))</div>
-                    </ItemTemplate>
-                </TelerikDropDownList>
-                @*<span class="col-2 font-weight-bolder">&nbsp;@SelectedState</span>*@
-            </div>
-            <br />
-            <div class="col-12 row">
-                <label class="col-3 font-weight-bold">Book Types :</label>
-                <select class="form-control col-6">
-                    @if (BookTypes != null)
-                    {
-                        <option value="">select book type..</option>
-                        @foreach (var bookType in BookTypes)
-                        {
-                            <option value="@bookType">@bookType</option>
-                        }
-                    }
-                </select>
-            </div>
-            <br />
-            <div class="col-12 row">
-                <label class="col-3 font-weight-bold">Subscriptions :</label>
+<div class="col-12">
+    <h3><b>Enter Author Information</b></h3>
+    <hr />
 
-                <input type="checkbox" />
-                <span>&nbsp;</span>
-                <label class="col-2 font-weight-bold">All</label>
-                <input type="checkbox" />
-                <span>&nbsp;</span>
-                <label class="col-2 font-weight-bold">Tier 1</label>
-                <span>&nbsp;</span>
-                <input type="checkbox" />
-                <span>&nbsp;</span>
-                <label class="col-2 font-weight-bold">Tier 2</label>
-            </div>
-            <br />
-            <div class="col-12 row">
-                <span class="col-3"></span>
-                <input type="submit" class="form-control col-1 btn btn-primary" value="Save" />
-                <span>&nbsp;</span>
-                <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" />
-            </div>
-        @*</EditForm>*@
+    @*<EditForm Model="@author" OnValidSubmit="@SaveAuthor">*@
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">first name :</label>
+        @*<InputText class="form-control col-6" @bind-Value="author.FirstName" placeholder="first name" />*@
+        <TelerikTextBox Id="txtFirstName"
+                        Enabled="true"
+                        @bind-Value="author.FirstName"
+                        Class="form-control col-6"></TelerikTextBox>
     </div>
+    <br />
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">last name :</label>
+        @*<InputText class="form-control col-6" @bind-Value="author.LastName" placeholder="last name" />*@
+        <TelerikTextBox Id="txtLastName"
+                        Enabled="true"
+                        @bind-Value="author.LastName"
+                        Class="form-control col-6"></TelerikTextBox>
+    </div>
+    <br />
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">city :</label>
+        @*<select class="form-control col-6">
+                @if (@Cities != null)
+                {
+                    <option value="">select city..</option>
+                    @foreach (var city in Cities)
+                    {
+                        <option value="@city">@city</option>
+                    }
+                }
+            </select>*@
+        <TelerikAutoComplete Id="acCity"
+                             Class="form-control col-6"
+                             Data="@Cities"
+                             Placeholder="please select city..."
+                             ValueChanged="@((string value) => OnSelectCity(value))">
+        </TelerikAutoComplete>
+    </div>
+    <br />
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">state :</label>
+        @*<select class="form-control col-6">
+                @if (States != null)
+                {
+                    <option value="">select state..</option>
+                    @foreach (var state in States)
+                    {
+                        <option value="@state">@state</option>
+                    }
+                }
+            </select>*@
+        <TelerikAutoComplete Id="acState"
+                             Class="form-control col-6"
+                             Data="@States"
+                             Placeholder="please select state..."
+                             @bind-Value="author.State">
+        </TelerikAutoComplete>
+    </div>
+    <br />
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">Book Types :</label>
+        @*<select class="form-control col-6">
+            @if (BookTypes != null)
+            {
+                <option value="">select book type..</option>
+                @foreach (var bookType in BookTypes)
+                {
+                    <option value="@bookType">@bookType</option>
+                }
+            }
+        </select>*@
+        @if (BookTypes != null && BookTypes.Count() > 0)
+        {
+            <TelerikMultiSelect Data="@BookTypes"
+                                @bind-Value="@SelectedBookTypes"
+                                ValueField="@nameof(BookType.Id)"
+                                TextField="@nameof(BookType.Type)"
+                                OnChange="@((int value) => OnMultiSelectChange(value))"
+                                Placeholder="select booktype..."
+                                Width="350px"
+                                Id="products-multiselect" />
+
+            
+        }
+        <br />
+
+    </div>
+    <br />
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">Subscriptions :</label>
+
+        <input type="checkbox" />
+        <span>&nbsp;</span>
+        <label class="col-2 font-weight-bold">All</label>
+        <input type="checkbox" />
+        <span>&nbsp;</span>
+        <label class="col-2 font-weight-bold">Tier 1</label>
+        <span>&nbsp;</span>
+        <input type="checkbox" />
+        <span>&nbsp;</span>
+        <label class="col-2 font-weight-bold">Tier 2</label>
+    </div>
+    <br />
+    <div class="col-12 row">
+        <span class="col-3"></span>
+        <input type="submit" class="form-control col-1 btn btn-primary" value="Save" />
+        <span>&nbsp;</span>
+        <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" />
+    </div>
+    @*</EditForm>*@
+</div>
 <br />
 <div class="col-12">
 
@@ -134,6 +157,8 @@
     public Author author { get; set; }
     public List<Author> authorList { get; set; }
     public string SelectedState { get; set; }
+    public List<int> SelectedBookTypes { get; set; }
+    public string SelectedBookType { get; set; }
 
     public string[] Cities { get; set; } =
         new string[] { "New York City", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
@@ -144,14 +169,19 @@
     public string[] States { get; set; } =
         new string[] { "NY", "CA", "IL", "AZ", "PA", "OH", "NC", "IN", "WA", "CO", "TX", "FL" };
 
-    public string[] BookTypes { get; set; } =
-        new string[] { "Fiction", "Nonfiction" };
+    public List<BookType> BookTypes = new List<BookType>();
 
     protected override async Task OnInitializedAsync()
     {
         author = new Author();
         authorList = new List<Author>();
         await LoadAuthors();
+
+        //loading book types
+        BookType bookType1 = new BookType { Id = "1", Type = "Fiction" };
+        BookTypes.Add(bookType1);
+        BookType bookType2 = new BookType { Id = "2", Type = "Non-Fiction" };
+        BookTypes.Add(bookType2);
 
         await base.OnInitializedAsync();
     }
@@ -168,7 +198,6 @@
 
     private async Task SaveAuthor()
     {
-
         if (author.AuthorId == 0)
             await bookStoresService.SaveAsync("authors/CreateAuthor", author);
         else
@@ -193,7 +222,12 @@
     private void OnSelectCity(string city)
     {
         author.City = city;
-        SelectedState = GetStateFromCity(city);
+        author.State = GetStateFromCity(city);
+    }
+
+    private void OnMultiSelectChange(int id)
+    {
+        //SelectedBookType = BookTypes.Where()
     }
 
     private string GetStateFromCity(string city)
