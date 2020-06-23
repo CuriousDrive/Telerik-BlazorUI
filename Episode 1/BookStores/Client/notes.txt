@@ -98,6 +98,8 @@ Telerik Checkboxes -
 
 ----------------------------- some extra code -------------------------------------
 
+        C:\Data\CuriousDrive\GitHub Repos\Telerik\BookStoresWebAPI
+
         private void OnSelectCity(string city)
         {
             author.City = city;

@@ -10,7 +10,12 @@
     <EditForm Model="@author" OnValidSubmit="@CreateAuthor">
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">First Name :</label>
-            <input class="form-control col-4" @bind="author.FirstName" placeholder="first name" />
+            <TelerikTextBox Id="txtFirstName"
+                            Class="form-control col-4"
+                            ValueExpression="@(() => author.FirstName)"
+                            Enabled="@(SetTextBoxAccess())"
+                            ValueChanged="@((string value) => TextBoxEventHandler(value))"></TelerikTextBox>
+            <div class="col-4">@TextBoxValue</div>
         </div>
         <br />
         <div class="col-12 row">
@@ -128,6 +133,7 @@
 
 @code {
 
+    //properties
     public Author author { get; set; }
     public List<Author> authorList { get; set; }
 
@@ -140,7 +146,20 @@
     public string[] States { get; set; } =
         new string[] { "NY", "CA", "IL", "AZ", "PA", "OH", "NC", "IN", "WA", "CO", "TX", "FL" };
 
-    public List<BookType> BookTypes = new List<BookType>();    
+    public List<BookType> BookTypes = new List<BookType>();
+    public string TextBoxValue { get; set; }
+
+    //methods
+
+    private bool SetTextBoxAccess()
+    {
+        return true;
+    }
+
+    private void TextBoxEventHandler(object value)
+    {
+        TextBoxValue = value;
+    }
 
     protected override async Task OnInitializedAsync()
     {

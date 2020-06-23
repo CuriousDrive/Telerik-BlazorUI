@@ -25,3 +25,5 @@
 /BookStoresWebAPI/obj/BookStoresWebAPI.csproj.nuget.dgspec.json
 /Episode 1/BookStores/Client/obj/Debug/netstandard2.1
 /Episode 1/BookStores/Client/bin/Debug/netstandard2.1
+/Episode 1/BookStores/Client/bin/Release/netstandard2.1
+/Episode 1/BookStores/Client/obj/Release/netstandard2.1
