@@ -83,6 +83,61 @@ Telerik Multiselect -
                                                 .Select(bt => bt.Type).ToList();
         }
 
+        
+
+
 Telerik Checkboxes - 
     Finally I am getting ready work on this component
+
+        public List<SubscriptionType> SubscriptionTypes = new List<SubscriptionType>();
+        //loading tiers 
+        SubscriptionTypes.Add(new SubscriptionType { Id = 1, SubscriptionName = "Gold" });
+        SubscriptionTypes.Add(new SubscriptionType { Id = 1, SubscriptionName = "Silver" });
+        SubscriptionTypes.Add(new SubscriptionType { Id = 1, SubscriptionName = "Bronze" });
+        
+
+----------------------------- some extra code -------------------------------------
+
+        private void OnSelectCity(string city)
+        {
+            author.City = city;
+            author.State = GetStateFromCity(city);
+        }
+
+        private void OnMultiSelectChange()
+        {
+            SelectedBookTypesText = BookTypes.Where(bt => SelectedBookTypesValue.Contains(bt.Id))
+                                                .Select(bt => bt.Type).ToList();
+        }
+
+        private string GetStateFromCity(string city)
+        {
+            if (city == "New York City")
+                return "NY";
+            if (city == "Los Angeles" || city == "San Diego" || city == "San Jose" || city == "San Francisco")
+                return "CA";
+            if (city == "San Antonio" || city == "Houston" || city == "Dallas" || city == "Austin" || city == "Fort Worth")
+                return "TX";
+            if (city == "Chicago")
+                return "IL";
+            if (city == "Phoenix")
+                return "AZ";
+            if (city == "Philadelphia")
+                return "PA";
+            if (city == "Jacksonville")
+                return "FL";
+            if (city == "Columbus")
+                return "OH";
+            if (city == "Charlotte")
+                return "NC";
+            if (city == "Indianapolis")
+                return "IN";
+            if (city == "Seattle")
+                return "WA";
+            if (city == "Denver")
+                return "CO";
+
+            return "";
+        }
+
 	

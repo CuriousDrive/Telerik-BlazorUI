@@ -7,29 +7,20 @@
 <div class="col-12">
     <h3><b>Enter Author Information</b></h3>
     <hr />
-
-    <EditForm Model="@author" OnValidSubmit="@SaveAuthor">
+    <EditForm Model="@author" OnValidSubmit="@CreateAuthor">
         <div class="col-12 row">
-            <label class="col-3 font-weight-bold">first name :</label>
-            @*<InputText class="form-control col-6" @bind-Value="author.FirstName" placeholder="first name" />*@
-            <TelerikTextBox Id="txtFirstName"
-                            Enabled="true"
-                            @bind-Value="author.FirstName"
-                            Class="form-control col-6"></TelerikTextBox>
+            <label class="col-3 font-weight-bold">First Name :</label>
+            <input class="form-control col-4" @bind="author.FirstName" placeholder="first name" />
         </div>
         <br />
         <div class="col-12 row">
-            <label class="col-3 font-weight-bold">last name :</label>
-            @*<InputText class="form-control col-6" @bind-Value="author.LastName" placeholder="last name" />*@
-            <TelerikTextBox Id="txtLastName"
-                            Enabled="true"
-                            @bind-Value="author.LastName"
-                            Class="form-control col-6"></TelerikTextBox>
+            <label class="col-3 font-weight-bold">Last Name :</label>
+            <input class="form-control col-4" @bind="author.LastName" placeholder="last name" />           
         </div>
         <br />
         <div class="col-12 row">
-            <label class="col-3 font-weight-bold">city :</label>
-            @*<select class="form-control col-6">
+            <label class="col-3 font-weight-bold">City :</label>
+            <select class="form-control col-4" @bind="author.City">
                 @if (@Cities != null)
                 {
                     <option value="">select city..</option>
@@ -38,19 +29,12 @@
                         <option value="@city">@city</option>
                     }
                 }
-            </select>*@
-            <TelerikAutoComplete Id="acCity"
-                                 Class="form-control col-6"
-                                 Data="@Cities"
-                                 Placeholder="please select city..."
-                                 ValueChanged="@((string value) => OnSelectCity(value))"
-                                 ValueExpression="@(() => author.City)">
-            </TelerikAutoComplete>
+            </select>
         </div>
         <br />
         <div class="col-12 row">
-            <label class="col-3 font-weight-bold">state :</label>
-            @*<select class="form-control col-6">
+            <label class="col-3 font-weight-bold">State :</label>
+            <select class="form-control col-4">
                 @if (States != null)
                 {
                     <option value="">select state..</option>
@@ -59,48 +43,21 @@
                         <option value="@state">@state</option>
                     }
                 }
-            </select>*@
-            <TelerikAutoComplete Id="acState"
-                                 Class="form-control col-6"
-                                 Data="@States"
-                                 Placeholder="please select state..."
-                                 @bind-Value="author.State">
-            </TelerikAutoComplete>
+            </select>
         </div>
         <br />
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">Book Types :</label>
-            @*<select class="form-control col-6">
+            <select class="form-control col-4">
                 @if (BookTypes != null)
                 {
                     <option value="">select book type..</option>
                     @foreach (var bookType in BookTypes)
                     {
-                        <option value="@bookType">@bookType</option>
+                        <option value="@bookType">@bookType.Type</option>
                     }
                 }
-            </select>*@
-            @if (BookTypes != null && BookTypes.Count() > 0)
-            {
-                <TelerikMultiSelect Data="@BookTypes"
-                                    @bind-Value="@SelectedBookTypesValue"
-                                    ValueField="@nameof(BookType.Id)"
-                                    TextField="@nameof(BookType.Type)"
-                                    OnChange="@OnMultiSelectChange"
-                                    Placeholder="select booktype..."
-                                    Width="350px"
-                                    Id="products-multiselect" />
-
-                @if (SelectedBookTypesText != null && SelectedBookTypesText.Count() > 0)
-                {
-                    @foreach (string selectedText in SelectedBookTypesText)
-                    {
-                        <strong>
-                            @string.Join(",", selectedText);
-                        </strong>
-                    }
-                }
-            }
+            </select>
             <br />
         </div>
         <br />
@@ -108,25 +65,25 @@
             <label class="col-3 font-weight-bold">Subscriptions :</label>
             <input type="checkbox" />
             <span>&nbsp;</span>
-            <label class="col-6">All</label>
+            <label class="col-4">All</label>
         </div>
         <div class="col-12 row">
             <label class="col-3 font-weight-bold"></label>
             <input type="checkbox" />
             <span>&nbsp;</span>
-            <label class="col-6">Gold Corporate Tier</label>            
+            <label class="col-4">Gold</label>            
         </div>
         <div class="col-12 row">
             <label class="col-3 font-weight-bold"></label>
             <input type="checkbox" />
             <span>&nbsp;</span>
-            <label class="col-6">Silver Corporate Tier</label>
+            <label class="col-4">Silver</label>
         </div>        
         <div class="col-12 row">
             <label class="col-3 font-weight-bold"></label>
             <input type="checkbox" />
             <span>&nbsp;</span>
-            <label class="col-6">Bronze Corporate Tier</label>
+            <label class="col-4">Bronze</label>
         </div>
         <br />
         <div class="col-12 row">
@@ -139,7 +96,6 @@
 </div>
 <br />
 <div class="col-12">
-
     <h3><b>Authors</b></h3>
 
     @if (authorList == null)
@@ -151,8 +107,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>FirstName</th>
-                    <th>LastName</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>City</th>
                 </tr>
             </thead>
@@ -174,9 +130,6 @@
 
     public Author author { get; set; }
     public List<Author> authorList { get; set; }
-    public string SelectedState { get; set; }
-    public List<int> SelectedBookTypesValue { get; set; }
-    public List<string> SelectedBookTypesText { get; set; }
 
     public string[] Cities { get; set; } =
         new string[] { "New York City", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
@@ -187,8 +140,7 @@
     public string[] States { get; set; } =
         new string[] { "NY", "CA", "IL", "AZ", "PA", "OH", "NC", "IN", "WA", "CO", "TX", "FL" };
 
-    public List<BookType> BookTypes = new List<BookType>();
-    public List<Tier> Tiers = new List<Tier>();
+    public List<BookType> BookTypes = new List<BookType>();    
 
     protected override async Task OnInitializedAsync()
     {
@@ -199,12 +151,6 @@
         //loading book types
         BookTypes.Add(new BookType { Id = 1, Type = "Fiction" });
         BookTypes.Add(new BookType { Id = 2, Type = "Non-Fiction" });
-
-        //loading tiers 
-        Tiers.Add(new Tier { Id = 1, TierName = "Gold Corporate Tier" });
-        Tiers.Add(new Tier { Id = 1, TierName = "Silver Corporate Tier" });
-        Tiers.Add(new Tier { Id = 1, TierName = "Bronze Corporate Tier" });
-
 
         await base.OnInitializedAsync();
     }
@@ -219,11 +165,19 @@
         StateHasChanged();
     }
 
-    private async Task SaveAuthor()
+    private async Task CreateAuthor()
     {
         if (author.AuthorId == 0)
             await bookStoresService.SaveAsync("authors/CreateAuthor", author);
-        else
+
+        await LoadAuthors();
+
+        author = new Author();
+    }
+
+    private async Task UpdateAuthor()
+    {
+        if(author.AuthorId != 0)
             await bookStoresService.UpdateAsync("authors/UpdateAuthor", author.AuthorId, author);
 
         await LoadAuthors();
@@ -237,50 +191,4 @@
         await LoadAuthors();
     }
 
-    private void EditAuthor(Author argAuthor)
-    {
-        author = argAuthor;
-    }
-
-    private void OnSelectCity(string city)
-    {
-        author.City = city;
-        author.State = GetStateFromCity(city);
-    }
-
-    private void OnMultiSelectChange()
-    {
-        SelectedBookTypesText = BookTypes.Where(bt => SelectedBookTypesValue.Contains(bt.Id))
-                                            .Select(bt => bt.Type).ToList();
-    }
-
-    private string GetStateFromCity(string city)
-    {
-        if (city == "New York City")
-            return "NY";
-        if (city == "Los Angeles" || city == "San Diego" || city == "San Jose" || city == "San Francisco")
-            return "CA";
-        if (city == "San Antonio" || city == "Houston" || city == "Dallas" || city == "Austin" || city == "Fort Worth")
-            return "TX";
-        if (city == "Chicago")
-            return "IL";
-        if (city == "Phoenix")
-            return "AZ";
-        if (city == "Philadelphia")
-            return "PA";
-        if (city == "Jacksonville")
-            return "FL";
-        if (city == "Columbus")
-            return "OH";
-        if (city == "Charlotte")
-            return "NC";
-        if (city == "Indianapolis")
-            return "IN";
-        if (city == "Seattle")
-            return "WA";
-        if (city == "Denver")
-            return "CO";
-
-        return "";
-    }
 }

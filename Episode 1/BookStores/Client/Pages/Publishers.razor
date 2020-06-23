@@ -10,13 +10,13 @@
     <EditForm Model="@publisher" OnValidSubmit="@SavePublisher">
 
         <div class="col-12 row">
-            <label class="col-2 font-weight-bold">first name :</label>
+            <label class="col-2 font-weight-bold">Publisher Name :</label>
             <input @ref="publisherNameTextBox" class="form-control col-3" @bind="publisher.PublisherName" placeholder="publisher's name" />
 
         </div>
         <br />
         <div class="col-12 row">
-            <label class="col-2 font-weight-bold">city :</label>
+            <label class="col-2 font-weight-bold">City :</label>
             <select class="form-control col-3">
                 @if (@Cities != null)
                 {
@@ -101,8 +101,6 @@
 
     private async Task LoadPublishers()
     {
-        await Task.Delay(500);
-
         publisherList = filteredPublisherList = await bookStoresService.GetAllAsync("publishers/GetPublishers");
 
         StateHasChanged();
