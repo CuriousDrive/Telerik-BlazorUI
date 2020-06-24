@@ -11,16 +11,17 @@
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">First Name :</label>
             <TelerikTextBox Id="txtFirstName"
-                            Class="form-control col-4"
+                            Class="form-control col-4"                            
                             ValueExpression="@(() => author.FirstName)"
                             Enabled="@(SetTextBoxAccess())"
-                            ValueChanged="@((string value) => TextBoxEventHandler(value))"></TelerikTextBox>
-            <div class="col-4">@TextBoxValue</div>
+                            ValueChanged="@((string value) => TextBoxEventHandler(value))"></TelerikTextBox>            
         </div>
         <br />
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">Last Name :</label>
-            <input class="form-control col-4" @bind="author.LastName" placeholder="last name" />           
+            <TelerikTextBox Id="txtFirstName"
+                            Class="form-control col-4"
+                            @bind-Value="author.LastName"></TelerikTextBox>           
         </div>
         <br />
         <div class="col-12 row">
@@ -31,10 +32,20 @@
                     <option value="">select city..</option>
                     @foreach (var city in Cities)
                     {
-                        <option value="@city">@city</option>
+                        <option value="@city.Id">@city.CityName</option>
                     }
                 }
             </select>
+
+            @if (Cities != null && Cities.Count > 0)
+            {
+                <TelerikDropDownList Id="ddlCities"
+                                     Class="form-control col-4"
+                                     Data="@Cities"
+                                     @bind-Value="author.City"
+                                     ValueField="@nameof(City.Id)"
+                                     TextField="@nameof(City.CityName)"></TelerikDropDownList>
+            }
         </div>
         <br />
         <div class="col-12 row">
@@ -45,10 +56,11 @@
                     <option value="">select state..</option>
                     @foreach (var state in States)
                     {
-                        <option value="@state">@state</option>
+                        <option value="@state.Id">@state.StateName</option>
                     }
                 }
             </select>
+           
         </div>
         <br />
         <div class="col-12 row">
@@ -135,18 +147,12 @@
 
     //properties
     public Author author { get; set; }
-    public List<Author> authorList { get; set; }
-
-    public string[] Cities { get; set; } =
-        new string[] { "New York City", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
-                    "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville",
-                    "Fort Worth", "Columbus", "San Francisco", "Charlotte", "Indianapolis", "Seattle",
-                    "Denver" };
-
-    public string[] States { get; set; } =
-        new string[] { "NY", "CA", "IL", "AZ", "PA", "OH", "NC", "IN", "WA", "CO", "TX", "FL" };
+    public List<Author> authorList { get; set; }   
 
     public List<BookType> BookTypes = new List<BookType>();
+    public List<City> Cities { get; set; } = new List<City>();
+    public List<State> States { get; set; } = new List<State>();
+
     public string TextBoxValue { get; set; }
 
     //methods
@@ -156,8 +162,9 @@
         return true;
     }
 
-    private void TextBoxEventHandler(object value)
+    private void TextBoxEventHandler(string value)
     {
+        author.FirstName = value;
         TextBoxValue = value;
     }
 
@@ -167,9 +174,11 @@
         authorList = new List<Author>();
         await LoadAuthors();
 
-        //loading book types
-        BookTypes.Add(new BookType { Id = 1, Type = "Fiction" });
-        BookTypes.Add(new BookType { Id = 2, Type = "Non-Fiction" });
+        //loading dropdownlist
+        LoadCities();
+        LoadStates();
+
+        LoadBookTypes();
 
         await base.OnInitializedAsync();
     }
@@ -182,6 +191,52 @@
             authorList = authorList.OrderByDescending(auth => auth.AuthorId).ToList();
 
         StateHasChanged();
+    }
+
+    private void LoadCities()
+    {
+        Cities.Add(new City { Id = "1", CityName = "New York City" });
+        Cities.Add(new City { Id = "2", CityName = "Los Angeles" });
+        Cities.Add(new City { Id = "3", CityName = "Chicago" });
+        Cities.Add(new City { Id = "4", CityName = "Houston" });
+        Cities.Add(new City { Id = "5", CityName = "Phoenix" });
+        Cities.Add(new City { Id = "6", CityName = "Philadelphia" });
+        Cities.Add(new City { Id = "7", CityName = "San Antonio" });
+        Cities.Add(new City { Id = "8", CityName = "San Diego" });
+        Cities.Add(new City { Id = "9", CityName = "Dallas" });
+        Cities.Add(new City { Id = "10", CityName = "San Jose" });
+        Cities.Add(new City { Id = "11", CityName = "Austin" });
+        Cities.Add(new City { Id = "12", CityName = "Jacksonville" });
+        Cities.Add(new City { Id = "13", CityName = "Fort Worth" });
+        Cities.Add(new City { Id = "14", CityName = "Columbus" });
+        Cities.Add(new City { Id = "15", CityName = "San Francisco" });
+        Cities.Add(new City { Id = "16", CityName = "Charlotte" });
+        Cities.Add(new City { Id = "17", CityName = "Indianapolis" });
+        Cities.Add(new City { Id = "18", CityName = "Seattle" });
+        Cities.Add(new City { Id = "19", CityName = "Denver" });
+    }
+
+    private void LoadStates()
+    {        
+        States.Add(new State { Id = 1, StateName = "NY" });
+        States.Add(new State { Id = 1, StateName = "CA" });
+        States.Add(new State { Id = 1, StateName = "IL" });
+        States.Add(new State { Id = 1, StateName = "AZ" });
+        States.Add(new State { Id = 1, StateName = "PA" });
+        States.Add(new State { Id = 1, StateName = "OH" });
+        States.Add(new State { Id = 1, StateName = "NC" });
+        States.Add(new State { Id = 1, StateName = "IN" });
+        States.Add(new State { Id = 1, StateName = "WA" });
+        States.Add(new State { Id = 1, StateName = "CO" });
+        States.Add(new State { Id = 1, StateName = "TX" });
+        States.Add(new State { Id = 1, StateName = "FL" });
+    }
+
+    private void LoadBookTypes()
+    {
+        //loading book types
+        BookTypes.Add(new BookType { Id = 1, Type = "Fiction" });
+        BookTypes.Add(new BookType { Id = 2, Type = "Non-Fiction" });
     }
 
     private async Task CreateAuthor()
