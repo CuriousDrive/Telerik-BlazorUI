@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\State.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\Authors - Copy.razor" />
     <Content Remove="Pages\Publishers - Copy.razor" />
   </ItemGroup>

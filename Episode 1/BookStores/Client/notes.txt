@@ -142,4 +142,49 @@ Telerik Checkboxes -
             return "";
         }
 
+
+        States.Add(new State { Id = "1", StateName = "NY" });
+        States.Add(new State { Id = "2", StateName = "CA" });
+        States.Add(new State { Id = "3", StateName = "IL" });
+        States.Add(new State { Id = "4", StateName = "AZ" });
+        States.Add(new State { Id = "5", StateName = "PA" });
+        States.Add(new State { Id = "6", StateName = "OH" });
+        States.Add(new State { Id = "7", StateName = "NC" });
+        States.Add(new State { Id = "8", StateName = "IN" });
+        States.Add(new State { Id = "9", StateName = "WA" });
+        States.Add(new State { Id = "10", StateName = "CO" });
+        States.Add(new State { Id = "11", StateName = "TX" });
+        States.Add(new State { Id = "12", StateName = "FL" });
+
+         @if (Cities != null && Cities.Count > 0)
+            {
+                <TelerikDropDownList Id="ddlCities"
+                                     Class="form-control col-4"
+                                     Data="@Cities"
+                                     ValueExpression="@(() => author.City)"
+                                     TextField="@nameof(City.CityName)"
+                                     ValueField="@nameof(City.Id)"                                     
+                                     ValueChanged="@((string value) => DropdownEventHandler(value))"></TelerikDropDownList>
+
+                <div class="col-4">@DropdownListValue</div>
+            }
+
+            @if (States != null && States.Length > 0)
+            {
+                <TelerikDropDownList Id="ddlStates"
+                                     Class="form-control col-4"
+                                     Data="@States"
+                                     @bind-Value="author.State"></TelerikDropDownList>
+            }
+
+            <select class="form-control col-4" @bind="author.City">
+                @if (@Cities != null)
+                {
+                    <option value="">select city..</option>
+                    @foreach (var city in Cities)
+                    {
+                        <option value="@city.Id">@city.CityName</option>
+                    }
+                }
+            </select>
 	

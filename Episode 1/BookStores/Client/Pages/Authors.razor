@@ -11,56 +11,43 @@
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">First Name :</label>
             <TelerikTextBox Id="txtFirstName"
-                            Class="form-control col-4"                            
+                            Class="form-control col-4"
                             ValueExpression="@(() => author.FirstName)"
                             Enabled="@(SetTextBoxAccess())"
-                            ValueChanged="@((string value) => TextBoxEventHandler(value))"></TelerikTextBox>            
+                            ValueChanged="@((string value) => TextBoxEventHandler(value))"></TelerikTextBox>
         </div>
         <br />
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">Last Name :</label>
             <TelerikTextBox Id="txtFirstName"
                             Class="form-control col-4"
-                            @bind-Value="author.LastName"></TelerikTextBox>           
+                            @bind-Value="author.LastName"></TelerikTextBox>
         </div>
         <br />
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">City :</label>
-            <select class="form-control col-4" @bind="author.City">
-                @if (@Cities != null)
-                {
-                    <option value="">select city..</option>
-                    @foreach (var city in Cities)
-                    {
-                        <option value="@city.Id">@city.CityName</option>
-                    }
-                }
-            </select>
-
-            @if (Cities != null && Cities.Count > 0)
+            @if (Cities.Count() > 0)
             {
                 <TelerikDropDownList Id="ddlCities"
                                      Class="form-control col-4"
-                                     Data="@Cities"
-                                     @bind-Value="author.City"
+                                     ValueExpression="@(() => author.City)"
+                                     TextField="@nameof(City.CityName)"
                                      ValueField="@nameof(City.Id)"
-                                     TextField="@nameof(City.CityName)"></TelerikDropDownList>
+                                     Data="Cities"
+                                     ValueChanged="@((string value) => DropDownListEventHandler(value))"></TelerikDropDownList>
+                <div class="col-4">@DropDownListValue</div>
             }
         </div>
         <br />
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">State :</label>
-            <select class="form-control col-4">
-                @if (States != null)
-                {
-                    <option value="">select state..</option>
-                    @foreach (var state in States)
-                    {
-                        <option value="@state.Id">@state.StateName</option>
-                    }
-                }
-            </select>
-           
+            @if (States.Length > 0)
+            {
+                <TelerikDropDownList Id="ddlStates"
+                                     Class="form-control col-4"
+                                     @bind-Value="author.State"                                     
+                                     Data="States"></TelerikDropDownList>
+            }
         </div>
         <br />
         <div class="col-12 row">
@@ -88,14 +75,14 @@
             <label class="col-3 font-weight-bold"></label>
             <input type="checkbox" />
             <span>&nbsp;</span>
-            <label class="col-4">Gold</label>            
+            <label class="col-4">Gold</label>
         </div>
         <div class="col-12 row">
             <label class="col-3 font-weight-bold"></label>
             <input type="checkbox" />
             <span>&nbsp;</span>
             <label class="col-4">Silver</label>
-        </div>        
+        </div>
         <div class="col-12 row">
             <label class="col-3 font-weight-bold"></label>
             <input type="checkbox" />
@@ -147,13 +134,16 @@
 
     //properties
     public Author author { get; set; }
-    public List<Author> authorList { get; set; }   
+    public List<Author> authorList { get; set; }
 
     public List<BookType> BookTypes = new List<BookType>();
     public List<City> Cities { get; set; } = new List<City>();
-    public List<State> States { get; set; } = new List<State>();
+
+    public string[] States { get; set; } =
+        new string[] { "NY", "CA", "IL", "AZ", "PA", "OH", "NC", "IN", "WA", "CO", "TX", "FL" };
 
     public string TextBoxValue { get; set; }
+    public string DropDownListValue { get; set; }
 
     //methods
 
@@ -168,6 +158,14 @@
         TextBoxValue = value;
     }
 
+    private void DropDownListEventHandler(string value)
+    {
+        DropDownListValue = value;
+        string selectedCity = Cities.Where(ct => ct.Id == DropDownListValue).FirstOrDefault().CityName;
+        author.State = GetStateFromCity(selectedCity);
+        author.City = selectedCity;
+    }
+
     protected override async Task OnInitializedAsync()
     {
         author = new Author();
@@ -176,7 +174,6 @@
 
         //loading dropdownlist
         LoadCities();
-        LoadStates();
 
         LoadBookTypes();
 
@@ -216,22 +213,6 @@
         Cities.Add(new City { Id = "19", CityName = "Denver" });
     }
 
-    private void LoadStates()
-    {        
-        States.Add(new State { Id = 1, StateName = "NY" });
-        States.Add(new State { Id = 1, StateName = "CA" });
-        States.Add(new State { Id = 1, StateName = "IL" });
-        States.Add(new State { Id = 1, StateName = "AZ" });
-        States.Add(new State { Id = 1, StateName = "PA" });
-        States.Add(new State { Id = 1, StateName = "OH" });
-        States.Add(new State { Id = 1, StateName = "NC" });
-        States.Add(new State { Id = 1, StateName = "IN" });
-        States.Add(new State { Id = 1, StateName = "WA" });
-        States.Add(new State { Id = 1, StateName = "CO" });
-        States.Add(new State { Id = 1, StateName = "TX" });
-        States.Add(new State { Id = 1, StateName = "FL" });
-    }
-
     private void LoadBookTypes()
     {
         //loading book types
@@ -251,7 +232,7 @@
 
     private async Task UpdateAuthor()
     {
-        if(author.AuthorId != 0)
+        if (author.AuthorId != 0)
             await bookStoresService.UpdateAsync("authors/UpdateAuthor", author.AuthorId, author);
 
         await LoadAuthors();
@@ -265,4 +246,33 @@
         await LoadAuthors();
     }
 
+    private string GetStateFromCity(string city)
+    {
+        if (city == "New York City")
+            return "NY";
+        if (city == "Los Angeles" || city == "San Diego" || city == "San Jose" || city == "San Francisco")
+            return "CA";
+        if (city == "San Antonio" || city == "Houston" || city == "Dallas" || city == "Austin" || city == "Fort Worth")
+            return "TX";
+        if (city == "Chicago")
+            return "IL";
+        if (city == "Phoenix")
+            return "AZ";
+        if (city == "Philadelphia")
+            return "PA";
+        if (city == "Jacksonville")
+            return "FL";
+        if (city == "Columbus")
+            return "OH";
+        if (city == "Charlotte")
+            return "NC";
+        if (city == "Indianapolis")
+            return "IN";
+        if (city == "Seattle")
+            return "WA";
+        if (city == "Denver")
+            return "CO";
+
+        return "";
+    }
 }
