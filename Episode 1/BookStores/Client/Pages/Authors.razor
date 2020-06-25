@@ -28,24 +28,36 @@
             <label class="col-3 font-weight-bold">City :</label>
             @if (Cities.Count() > 0)
             {
-                <TelerikDropDownList Id="ddlCities"
+                <TelerikAutoComplete Id="ddlCities"
                                      Class="form-control col-4"
-                                     ValueExpression="@(() => author.City)"
-                                     TextField="@nameof(City.CityName)"
-                                     ValueField="@nameof(City.Id)"
+                                     @bind-Value="author.City"                                     
+                                     ValueField="@nameof(City.CityName)"
+                                     Placeholder="please select city..."
+                                     ClearButton="false"
+                                     Filterable="true"
+                                     FilterOperator="filterOperator"
                                      Data="Cities"
-                                     ValueChanged="@((string value) => DropDownListEventHandler(value))"></TelerikDropDownList>
-                <div class="col-4">@DropDownListValue</div>
+                                     OnChange="DropDownListEventHandler">
+                    <HeaderTemplate>
+                        <h5>Popular cities in USA</h5>
+                    </HeaderTemplate>
+                    <FooterTemplate>
+                        <h5>Total Cities : @Cities.Count()</h5>
+                    </FooterTemplate>
+                    <ItemTemplate Context="city">
+                        @city.CityName, @GetStateFromCity(city.CityName)
+                    </ItemTemplate>
+                </TelerikAutoComplete>
             }
         </div>
-        <br />
+        <br />        
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">State :</label>
             @if (States.Length > 0)
             {
                 <TelerikDropDownList Id="ddlStates"
                                      Class="form-control col-4"
-                                     @bind-Value="author.State"                                     
+                                     @bind-Value="author.State"
                                      Data="States"></TelerikDropDownList>
             }
         </div>
@@ -145,6 +157,8 @@
     public string TextBoxValue { get; set; }
     public string DropDownListValue { get; set; }
 
+    Telerik.Blazor.StringFilterOperator filterOperator { get; set; } = StringFilterOperator.Contains;
+
     //methods
 
     private bool SetTextBoxAccess()
@@ -158,12 +172,12 @@
         TextBoxValue = value;
     }
 
-    private void DropDownListEventHandler(string value)
+    private void DropDownListEventHandler(object value)
     {
-        DropDownListValue = value;
-        string selectedCity = Cities.Where(ct => ct.Id == DropDownListValue).FirstOrDefault().CityName;
-        author.State = GetStateFromCity(selectedCity);
-        author.City = selectedCity;
+        DropDownListValue = (string)value;
+        //string selectedCity = Cities.Where(ct => ct.Id == DropDownListValue).FirstOrDefault().CityName;
+        author.State = GetStateFromCity(DropDownListValue);
+        //author.City = selectedCity;
     }
 
     protected override async Task OnInitializedAsync()

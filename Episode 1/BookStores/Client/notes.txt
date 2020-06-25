@@ -35,6 +35,7 @@ Telerik AutoComplete -
 	For this I am going to use same city and state example
     TelerikAutoComplete is almost like dropdonw list
     Make sure to use placeholder for this control instead of using Default Text
+    Filterable, FilterOperator, MinLength, Placeholder, ClearButton
 
             <TelerikAutoComplete Id="acCity"
                                  Class="form-control col-6"
@@ -187,4 +188,41 @@ Telerik Checkboxes -
                     }
                 }
             </select>
+
+
+            <HeaderTemplate>
+                        <h5>Popular cities in USA</h5>
+                    </HeaderTemplate>
+                    <FooterTemplate>
+                        <h5>Popular cities in USA</h5>
+                    </FooterTemplate>
+                    <ValueTemplate Context="city">
+                       @city.CityName
+                    </ValueTemplate>
+                    <ItemTemplate Context="city">
+                        @city.CityName, @GetStateFromCity(city.CityName)
+                    </ItemTemplate>
+
+
+                    <TelerikDropDownList Id="ddlCities"
+                                     Class="form-control col-4"
+                                     ValueExpression="@(() => author.City)"
+                                     TextField="@nameof(City.CityName)"
+                                     ValueField="@nameof(City.Id)"
+                                     Data="Cities"
+                                     ValueChanged="@((string value) => DropDownListEventHandler(value))">
+
+                    <HeaderTemplate>
+                        <h5>Popular cities in USA</h5>
+                    </HeaderTemplate>
+                    <FooterTemplate>
+                        <h5>Popular cities in USA</h5>
+                    </FooterTemplate>
+                    <ValueTemplate Context="city">
+                        @city.CityName
+                    </ValueTemplate>
+                    <ItemTemplate Context="city">
+                        @city.CityName, @GetStateFromCity(city.CityName)
+                    </ItemTemplate>
+                </TelerikDropDownList>
 	
