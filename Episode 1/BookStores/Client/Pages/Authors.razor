@@ -28,21 +28,22 @@
             <label class="col-3 font-weight-bold">City :</label>
             @if (Cities.Count() > 0)
             {
-                <TelerikAutoComplete Id="ddlCities"
+                <TelerikAutoComplete Id="acCities"
                                      Class="form-control col-4"
-                                     @bind-Value="author.City"                                     
+                                     @bind-Value="author.City"
+                                     Data="Cities"
                                      ValueField="@nameof(City.CityName)"
+                                     Filterable="true"
+                                     MinLength="2"
+                                     FilterOperator="StringFilterOperator"
                                      Placeholder="please select city..."
                                      ClearButton="false"
-                                     Filterable="true"
-                                     FilterOperator="filterOperator"
-                                     Data="Cities"
                                      OnChange="DropDownListEventHandler">
                     <HeaderTemplate>
-                        <h5>Popular cities in USA</h5>
+                        <strong>Top Cities</strong>
                     </HeaderTemplate>
                     <FooterTemplate>
-                        <h5>Total Cities : @Cities.Count()</h5>
+                        <strong>Total : @Cities.Count()</strong>
                     </FooterTemplate>
                     <ItemTemplate Context="city">
                         @city.CityName, @GetStateFromCity(city.CityName)
@@ -157,7 +158,7 @@
     public string TextBoxValue { get; set; }
     public string DropDownListValue { get; set; }
 
-    Telerik.Blazor.StringFilterOperator filterOperator { get; set; } = StringFilterOperator.Contains;
+    Telerik.Blazor.StringFilterOperator StringFilterOperator { get; set; } = StringFilterOperator.Contains;
 
     //methods
 
