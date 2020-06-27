@@ -51,7 +51,7 @@
                 </TelerikAutoComplete>
             }
         </div>
-        <br />        
+        <br />
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">State :</label>
             @if (States.Length > 0)
@@ -65,17 +65,29 @@
         <br />
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">Book Types :</label>
-            <select class="form-control col-4">
-                @if (BookTypes != null)
+
+            <TelerikMultiSelect Id="msBookTypes"
+                                Class="form-control col-4"
+                                Data="BookTypes"
+                                TextField="@nameof(BookType.Type)"
+                                ValueField="@nameof(BookType.Id)"
+                                ValueExpression="@(() => SelectedBookTypeIds)"
+                                Filterable="true"
+                                ValueChanged="@((List<int> value) => MultiSelectEventHandler(value))"
+                                OnRead="LoadBookTypes"></TelerikMultiSelect>
+            <div class="col-4">LoadBookTypes gets call @Count times</div>
+
+        </div>
+        <br />
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">@Message</label>
+            @if (SelectedBookTypeIds.Count() > 0)
+            {
+                @foreach (int selectedId in SelectedBookTypeIds)
                 {
-                    <option value="">select book type..</option>
-                    @foreach (var bookType in BookTypes)
-                    {
-                        <option value="@bookType">@bookType.Type</option>
-                    }
+                    @(BookTypes.Where(bt => bt.Id == selectedId).FirstOrDefault().Type) <span>,</span>
                 }
-            </select>
-            <br />
+            }
         </div>
         <br />
         <div class="col-12 row">
@@ -160,7 +172,22 @@
 
     Telerik.Blazor.StringFilterOperator StringFilterOperator { get; set; } = StringFilterOperator.Contains;
 
+    public List<int> SelectedBookTypeIds { get; set; } = new List<int>();
+
+    public string Message { get; set; }
+    public int Count { get; set; }
     //methods
+
+    private void MultiSelectEventHandler(object value)
+    {
+        List<int> selectedIds = (List<int>)value;
+        SelectedBookTypeIds = selectedIds;
+
+        if (selectedIds.Count() > 3)
+            Message = "more than 3 book types have been selected.";
+        else
+            Message = "";
+    }
 
     private bool SetTextBoxAccess()
     {
@@ -187,10 +214,11 @@
         authorList = new List<Author>();
         await LoadAuthors();
 
-        //loading dropdownlist
+        //loading cities
         LoadCities();
 
-        LoadBookTypes();
+        //loading booktypes
+        //LoadBookTypes();
 
         await base.OnInitializedAsync();
     }
@@ -228,11 +256,26 @@
         Cities.Add(new City { Id = "19", CityName = "Denver" });
     }
 
-    private void LoadBookTypes()
+    private void LoadBookTypes(MultiSelectReadEventArgs multiSelectReadEventArgs)
     {
+        Count++;
+
+        Telerik.DataSource.FilterDescriptor filterDescriptor
+                        = multiSelectReadEventArgs.Request.Filters[0] as Telerik.DataSource.FilterDescriptor;
+
+        string input = filterDescriptor.Value.ToString();
+        string op = filterDescriptor.Operator.ToString();
+
         //loading book types
-        BookTypes.Add(new BookType { Id = 1, Type = "Fiction" });
-        BookTypes.Add(new BookType { Id = 2, Type = "Non-Fiction" });
+        BookTypes.Add(new BookType { Id = 1, Type = "Adventure" });
+        BookTypes.Add(new BookType { Id = 2, Type = "Romance" });
+        BookTypes.Add(new BookType { Id = 3, Type = "Mystery" });
+        BookTypes.Add(new BookType { Id = 4, Type = "Horror" });
+        BookTypes.Add(new BookType { Id = 5, Type = "Thriller" });
+        BookTypes.Add(new BookType { Id = 6, Type = "Science Fiction" });
+        BookTypes.Add(new BookType { Id = 7, Type = "Cooking" });
+        BookTypes.Add(new BookType { Id = 8, Type = "Development" });
+        BookTypes.Add(new BookType { Id = 9, Type = "Motivational" });
     }
 
     private async Task CreateAuthor()

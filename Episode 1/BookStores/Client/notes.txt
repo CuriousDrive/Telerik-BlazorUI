@@ -178,17 +178,16 @@ Telerik Checkboxes -
                                      @bind-Value="author.State"></TelerikDropDownList>
             }
 
-            <select class="form-control col-4" @bind="author.City">
-                @if (@Cities != null)
+            <select class="form-control col-4">
+                @if (BookTypes != null)
                 {
                     <option value="">select city..</option>
-                    @foreach (var city in Cities)
+                    @foreach (var bookType in BookTypes)
                     {
-                        <option value="@city.Id">@city.CityName</option>
+                        <option value="@bookType.Id">@bookType.Type</option>
                     }
                 }
             </select>
-
 
             <HeaderTemplate>
                         <h5>Popular cities in USA</h5>
@@ -226,3 +225,42 @@ Telerik Checkboxes -
                     </ItemTemplate>
                 </TelerikDropDownList>
 	
+------------------------------------------
+
+Data, TextField, ValueField, @bind-Value
+public List<int> SelectedBookTypeIds { get; set; } = new List<int>();
+
+Two Way Binding using SelectedBookTypesId
+@if (SelectedBookTypeIds.Count() > 0)
+            {
+                @foreach (int selectedId in SelectedBookTypeIds)
+                { 
+                    @(BookTypes.Where(bt => bt.Id == selectedId).FirstOrDefault().Type) <span>,</span>
+                }
+            }
+
+Placeholder, ClearButton, Filterable, FilterOperator, MinLength
+
+OnChange, ValueChanged Event
+public string Message { get; set; }
+private void MultiSelectEventHandler(object value)
+    {
+        List<int> selectedIds = (List<int>)value;
+
+        if (selectedIds.Count() > 3)
+            Message = "more than 3 book types have been selected.";
+        else
+            Message = "";
+    }
+
+OnRead Event - MultiSelectReadEventArgs
+
+Telerik.DataSource.FilterDescriptor filterDescriptor
+                        = multiSelectReadEventArgs.Request.Filters[0] as Telerik.DataSource.FilterDescriptor;
+
+        string input = filterDescriptor.Value.ToString();
+        string op = filterDescriptor.Operator.ToString();
+
+------------------------------------------
+
+
