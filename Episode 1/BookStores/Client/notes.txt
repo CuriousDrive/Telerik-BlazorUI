@@ -263,4 +263,72 @@ Telerik.DataSource.FilterDescriptor filterDescriptor
 
 ------------------------------------------
 
+            <div class="col-12 row">
+                <label class="col-3 font-weight-bold">Subscriptions :</label>
+                <input type="checkbox" />
+                <span>&nbsp;</span>
+                <label class="col-4">All</label>
+            </div>
+            @if (Subscriptions.Count() > 0)
+            {
+                @foreach (Subscription subscription in Subscriptions)
+                { 
+                    <div class="col-12 row">
+                        <div class="col-3"></div>
+                        <label class="col-4">
+                            <input type="checkbox" @bind="subscription.Selected"/>
+                            @subscription.SubscriptionName
+                        </label>
+                        <div class="col-4">@subscription.Selected</div>
+                    </div>
+                }
+            }
+            <br />
+        
+            @if (Subscriptions.Count() > 0)
+            {
+                <div class="col-12 row">
+                    <label class="col-3 font-weight-bold">Subscriptions :</label>
+                    <label>
+                        <TelerikCheckBox Id="cbAll"   
+                                         @bind-Value="SelectAllValue"
+                                         Indeterminate="SelectAllInderminateValue"></TelerikCheckBox>
+                        All
+                    </label>
+                </div>
+                @foreach (Subscription subscription in Subscriptions)
+                {
+                    <div class="col-12 row">
+                        <div class="col-3"></div>
+                        <div class="col-4">
+                            <label>
+                                <TelerikCheckBox Id="@("cb" + subscription.Id.ToString())"
+                                                 @bind-Value="subscription.Selected"></TelerikCheckBox>
+                                @subscription.SubscriptionName
+                            </label>
+                        </div>
+                    </div>
+                }
+            }
+
+            public bool SelectAllValue
+            {
+                get
+                {
+                    return Subscriptions.All(sub => sub.Selected);
+                }
+                set
+                {
+                    Subscriptions.ForEach(sub => sub.Selected = value);
+                }
+            }
+
+            public bool SelectAllInderminateValue
+            {
+                get
+                {
+                    return !SelectAllValue && Subscriptions.Any(sub => sub.Selected);
+                }
+            }
+
 

@@ -91,29 +91,29 @@
         </div>
         <br />
         <div class="col-12 row">
-            <label class="col-3 font-weight-bold">Subscriptions :</label>
-            <input type="checkbox" />
-            <span>&nbsp;</span>
-            <label class="col-4">All</label>
+            <label class="col-3 font-weight-bold">Subscriptions :</label>            
+            <label class="col-4">
+                <TelerikCheckBox Id="cbAll"
+                                 @bind-Value="SelectAll"
+                                 Indeterminate="SelectAllInderminate"></TelerikCheckBox>
+                All
+            </label>
         </div>
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold"></label>
-            <input type="checkbox" />
-            <span>&nbsp;</span>
-            <label class="col-4">Gold</label>
-        </div>
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold"></label>
-            <input type="checkbox" />
-            <span>&nbsp;</span>
-            <label class="col-4">Silver</label>
-        </div>
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold"></label>
-            <input type="checkbox" />
-            <span>&nbsp;</span>
-            <label class="col-4">Bronze</label>
-        </div>
+        @if (Subscriptions.Count() > 0)
+        {
+            @foreach (Subscription subscription in Subscriptions)
+            {
+                <div class="col-12 row">
+                    <div class="col-3"></div>
+                    <label class="col-4">
+                        <TelerikCheckBox Id="cbSubs"
+                                         @bind-Value="subscription.Selected"></TelerikCheckBox>
+                        @subscription.SubscriptionName
+                    </label>
+                    <div class="col-4">@subscription.Selected</div>
+                </div>
+            }
+        }
         <br />
         <div class="col-12 row">
             <span class="col-3"></span>
@@ -158,11 +158,13 @@
 @code {
 
     //properties
+
     public Author author { get; set; }
     public List<Author> authorList { get; set; }
 
     public List<BookType> BookTypes = new List<BookType>();
     public List<City> Cities { get; set; } = new List<City>();
+    public List<Subscription> Subscriptions { get; set; } = new List<Subscription>();
 
     public string[] States { get; set; } =
         new string[] { "NY", "CA", "IL", "AZ", "PA", "OH", "NC", "IN", "WA", "CO", "TX", "FL" };
@@ -176,7 +178,26 @@
 
     public string Message { get; set; }
     public int Count { get; set; }
-    //methods
+
+    public bool SelectAll
+    {
+        get
+        {
+            return Subscriptions.All(sub => sub.Selected);
+        }
+        set
+        {
+            Subscriptions.ForEach(sub => sub.Selected = value);
+        }
+    }
+
+    public bool SelectAllInderminate
+    {
+        get
+        {
+            return !SelectAll && Subscriptions.Any(sub => sub.Selected);
+        }
+    }
 
     private void MultiSelectEventHandler(object value)
     {
@@ -220,6 +241,9 @@
         //loading booktypes
         //LoadBookTypes();
 
+        //loading subscriptions
+        LoadSubscriptions();
+
         await base.OnInitializedAsync();
     }
 
@@ -260,12 +284,6 @@
     {
         Count++;
 
-        Telerik.DataSource.FilterDescriptor filterDescriptor
-                        = multiSelectReadEventArgs.Request.Filters[0] as Telerik.DataSource.FilterDescriptor;
-
-        string input = filterDescriptor.Value.ToString();
-        string op = filterDescriptor.Operator.ToString();
-
         //loading book types
         BookTypes.Add(new BookType { Id = 1, Type = "Adventure" });
         BookTypes.Add(new BookType { Id = 2, Type = "Romance" });
@@ -276,6 +294,13 @@
         BookTypes.Add(new BookType { Id = 7, Type = "Cooking" });
         BookTypes.Add(new BookType { Id = 8, Type = "Development" });
         BookTypes.Add(new BookType { Id = 9, Type = "Motivational" });
+    }
+
+    private void LoadSubscriptions()
+    {
+        Subscriptions.Add(new Subscription { Id = 1, SubscriptionName = "Gold" });
+        Subscriptions.Add(new Subscription { Id = 2, SubscriptionName = "Silver" });
+        Subscriptions.Add(new Subscription { Id = 3, SubscriptionName = "Bronze" });
     }
 
     private async Task CreateAuthor()
