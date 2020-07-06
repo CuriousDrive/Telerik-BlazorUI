@@ -27,3 +27,10 @@
 /Episode 1/BookStores/Client/bin/Debug/netstandard2.1
 /Episode 1/BookStores/Client/bin/Release/netstandard2.1
 /Episode 1/BookStores/Client/obj/Release/netstandard2.1
+/Episode 2/BookStores/.vs/BookStores/v16
+/Episode 2/BookStores/Client/bin/Debug/netstandard2.1
+/Episode 2/BookStores/Client/obj
+/Episode 2/BookStores/Server/bin/Debug/netcoreapp3.1
+/Episode 2/BookStores/Server/obj
+/Episode 2/BookStores/Shared/bin/Debug/netstandard2.1
+/Episode 2/BookStores/Shared/obj

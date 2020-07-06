@@ -224,6 +224,28 @@ Telerik Checkboxes -
                         @city.CityName, @GetStateFromCity(city.CityName)
                     </ItemTemplate>
                 </TelerikDropDownList>
+
+                <TelerikAutoComplete Id="acCities"
+                                     Class="form-control col-4"
+                                     @bind-Value="author.City"
+                                     Data="Cities"
+                                     ValueField="@nameof(City.CityName)"
+                                     Filterable="true"
+                                     MinLength="2"
+                                     FilterOperator="StringFilterOperator"
+                                     Placeholder="please select city..."
+                                     ClearButton="false"
+                                     OnChange="DropDownListEventHandler">
+                    <HeaderTemplate>
+                        <strong>Top Cities</strong>
+                    </HeaderTemplate>
+                    <FooterTemplate>
+                        <strong>Total : @Cities.Count()</strong>
+                    </FooterTemplate>
+                    <ItemTemplate Context="city">
+                        @city.CityName, @GetStateFromCity(city.CityName)
+                    </ItemTemplate>
+                </TelerikAutoComplete>
 	
 ------------------------------------------
 

@@ -15,6 +15,7 @@
                             ValueExpression="@(() => author.FirstName)"
                             Enabled="@(SetTextBoxAccess())"
                             ValueChanged="@((string value) => TextBoxEventHandler(value))"></TelerikTextBox>
+            <div class="col-4">@TextBoxValue</div>
         </div>
         <br />
         <div class="col-12 row">
