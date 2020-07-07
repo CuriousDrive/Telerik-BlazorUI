@@ -233,7 +233,7 @@
     protected override async Task OnInitializedAsync()
     {
         author = new Author();
-        authorList = new List<Author>();
+        //authorList = new List<Author>();
         await LoadAuthors();
 
         //loading cities
@@ -250,7 +250,7 @@
 
     private async Task LoadAuthors()
     {
-        authorList = await bookStoresService.GetAllAsync("authors/GetAuthors");
+        authorList = await bookStoresService.GetAllAsync("authors/getauthors");
 
         if (authorList != null)
             authorList = authorList.OrderByDescending(auth => auth.AuthorId).ToList();
@@ -307,7 +307,7 @@
     private async Task CreateAuthor()
     {
         if (author.AuthorId == 0)
-            await bookStoresService.SaveAsync("authors/CreateAuthor", author);
+            await bookStoresService.SaveAsync("authors/createauthor", author);
 
         await LoadAuthors();
 
