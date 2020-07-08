@@ -6,18 +6,15 @@
 <div class="col-12">
     <h3><b>Enter Publisher Information</b></h3>
     <hr />
-
-    <EditForm Model="@publisher" OnValidSubmit="@SavePublisher">
-
+    <EditForm Model="@publisher">
         <div class="col-12 row">
-            <label class="col-2 font-weight-bold">Publisher Name :</label>
-            <input @ref="publisherNameTextBox" class="form-control col-3" @bind="publisher.PublisherName" placeholder="publisher's name" />
-
+            <label class="col-3 font-weight-bold">Publisher Name :</label>
+            <input class="form-control col-4" @bind="publisher.PublisherName" placeholder="publisher's name" />
         </div>
         <br />
         <div class="col-12 row">
-            <label class="col-2 font-weight-bold">City :</label>
-            <select class="form-control col-3">
+            <label class="col-3 font-weight-bold">City :</label>
+            <select class="form-control col-4">
                 @if (@Cities != null)
                 {
                     <option value="">select city..</option>
@@ -30,14 +27,12 @@
         </div>
         <br />
         <div class="col-12 row">
-            <span class="col-2"></span>
+            <span class="col-3"></span>
             <input type="submit" class="form-control col-1 btn btn-primary" value="Save" />
             <span>&nbsp;</span>
             <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" />
         </div>
-
     </EditForm>
-
 </div>
 <br />
 <div class="col-12">
@@ -48,39 +43,48 @@
     }
     else
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>PublisherName</th>
-                    <th>City</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var publisher in publisherList)
-                {
-                    <tr>
-                        <td>@publisher.PublisherName</td>
-                        <td>@publisher.City</td>
-
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <TelerikListView Data="publisherList"
+                         Pageable="true"
+                         PageSize="5"
+                         OnUpdate="UpdatePublisher"
+                         OnDelete="DeletePublisher"
+                         OnCreate="CreatePublisher">
+            <HeaderTemplate>
+                <ListViewCommandButton Command="Add">Add</ListViewCommandButton>
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="col-12 row" style="font-size:x-large">
+                        @publisher.PublisherName
+                    </div>
+                    <div class="col-12 row">
+                        <div class="col-8" style="font-size:large">
+                            @publisher.City, @publisher.State
+                        </div>
+                        <div class="col-4">
+                            <ListViewCommandButton Command="Edit">Edit</ListViewCommandButton>
+                            <ListViewCommandButton Command="Delete">Delete</ListViewCommandButton>
+                        </div>
+                    </div>                    
+                </div>                
+            </Template>
+            <EditTemplate Context="publisher">
+                <TelerikTextBox @bind-Value="publisher.PublisherName" PlaceHolder="publisher name"></TelerikTextBox>
+                <br />
+                <TelerikDropDownList Data="Cities"
+                                     @bind-Value="publisher.City"></TelerikDropDownList>
+                <br />
+                <ListViewCommandButton Command="Save">Save</ListViewCommandButton>
+            </EditTemplate>
+        </TelerikListView>
     }
 </div>
 
 @code {
 
     public Publisher publisher { get; set; }
-    public List<Publisher> publisherList { get; set; }
-    public List<Publisher> filteredPublisherList { get; set; }
+    public List<Publisher> publisherList { get; set; } = new List<Publisher>();
     public string[] Cities { get; set; }
-    ElementReference publisherNameTextBox;
-
-    public bool IsVisible { get; set; }
-    public bool Result { get; set; }
-    public string RecordName { get; set; }
-    public bool ReloadList { get; set; }
 
     protected override void OnInitialized()
     {
@@ -101,67 +105,35 @@
 
     private async Task LoadPublishers()
     {
-        publisherList = filteredPublisherList = await bookStoresService.GetAllAsync("publishers/GetPublishers");
+        publisherList = await bookStoresService.GetAllAsync("publishers/getpublishers");
+
+        if (publisherList != null)
+            publisherList = publisherList.OrderByDescending(pub => pub.PubId).ToList();
 
         StateHasChanged();
     }
 
-    private async Task SavePublisher()
+    private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-        if (publisher.PubId == 0)
-            await bookStoresService.SaveAsync("publishers/CreatePublisher", publisher);
-        else
-            await bookStoresService.UpdateAsync("publishers/UpdatePublisher", publisher.PubId, publisher);
+        var publisher = (Publisher)listViewCommandEventArgs.Item;
+        await bookStoresService.SaveAsync("publishers/CreatePublisher", publisher);
 
         await LoadPublishers();
-
-        Result = true;
-        IsVisible = true;
-
-        var publisherName = publisher.PublisherName;
-
-        RecordName = publisherName;
-
-        publisher = new Publisher();
-
     }
 
-    private async Task DeletePublisher(int pubId)
+    private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-        await bookStoresService.DeleteAsync("publishers/DeletePublisher", pubId);
+        var publisher = (Publisher)listViewCommandEventArgs.Item;
+        await bookStoresService.UpdateAsync("publishers/UpdatePublisher/", publisher.PubId, publisher);
 
         await LoadPublishers();
-
-        //throw new Exception("DeleteAuthor");
     }
 
-    private void EditPublisher(Publisher argPublisher)
+    private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-        publisher = argPublisher;
-    }
+        var publisher = (Publisher)listViewCommandEventArgs.Item;
+        await bookStoresService.DeleteAsync("publishers/DeletePublisher/", publisher.PubId);
 
-    private void OnPublisherSearchTextChanged(ChangeEventArgs changeEventArgs, string columnTitle)
-    {
-        string searchText = changeEventArgs.Value.ToString();
-
-        ReloadList = true;
-
-        switch (columnTitle)
-        {
-            case "PublisherId":
-                filteredPublisherList = publisherList.Where(pub => pub.PubId.ToString().Contains(searchText)).ToList();
-                break;
-            case "PublisherName":
-                filteredPublisherList = publisherList.Where(pub => pub.PublisherName.ToLower().Contains(searchText)).ToList();
-                break;
-            case "City":
-                filteredPublisherList = publisherList.Where(pub => pub.City.ToLower().Contains(searchText)).ToList();
-                break;
-            default:
-                Console.WriteLine("Default case");
-                break;
-        }
-
-        StateHasChanged();
+        await LoadPublishers();
     }
 }

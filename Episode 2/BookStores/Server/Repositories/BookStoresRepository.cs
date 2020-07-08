@@ -9,11 +9,12 @@ namespace BookStores.Server.Repositories
     public class BookStoresRepository
     {
         public List<Author> AuthorList = new List<Author>();
+        public List<Publisher> PublisherList = new List<Publisher>();
         public BookStoresRepository()
         {
             LoadAuthors();
-        }
-        
+            LoadPublishers();
+        }        
         public void LoadAuthors()
         {
             AuthorList.Add(new Author { AuthorId = 1, LastName = "Stringer", FirstName = "Dirk", Phone = "415 843-2991", Address = "301 Putnam", City = "Oakland", State = "CA", Zip = "95688", EmailAddress = "dirk.stringer@gmail.com" });
@@ -35,6 +36,18 @@ namespace BookStores.Server.Repositories
             AuthorList.Add(new Author { AuthorId = 1, LastName = "Dull", FirstName = "Ann", Phone = "415 836-7128", Address = "67 Seventh Av.", City = "Palo Alto", State = "CA", Zip = "94301", EmailAddress = "ann.dull@gmail.com" });
             AuthorList.Add(new Author { AuthorId = 1, LastName = "Ringer", FirstName = "Anne", Phone = "801 826 - 0752", Address = "PO Box 792", City = "Salt Lake City", State = "UT", Zip = "84152", EmailAddress = "anne.ringer@gmail.com" });
             AuthorList.Add(new Author { AuthorId = 1, LastName = "Gringlesby", FirstName = "Burt", Phone = "707 938-6445", Address = "PO Box 792.", City = "Covelo", State = "CA", Zip = "95428", EmailAddress = "burt.gringlesby@gmail.com" });
+        }
+        public void LoadPublishers()
+        {
+            PublisherList.Add(new Publisher { PubId = 1, PublisherName = "New Moon Books", City = "Boston", State = "MA", Country = "USA" });
+            PublisherList.Add(new Publisher { PubId = 2, PublisherName = "Binnet & Hardley", City = "Washington", State = "DC", Country = "USA" });
+            PublisherList.Add(new Publisher { PubId = 3, PublisherName = "Algodata Infosystems", City = "Berkeley", State = "CA", Country = "USA" });
+            PublisherList.Add(new Publisher { PubId = 4, PublisherName = "Five Lakes Publishing", City = "Chicago", State = "IL", Country = "USA" }); 
+            PublisherList.Add(new Publisher { PubId = 5, PublisherName = "Ramona Publishers", City = "Dallas", State = "TX", Country = "USA" });
+            PublisherList.Add(new Publisher { PubId = 6, PublisherName = "GGG&G", City = "Manchen", State = "", Country = "Germany" });
+            PublisherList.Add(new Publisher { PubId = 7, PublisherName = "Scootney Books", City = "New York", State = "NY", Country = "USA" });
+            PublisherList.Add(new Publisher { PubId = 8, PublisherName = "Lucerne Publishing", City = "Paris", State = "", Country = "France" });
+            PublisherList.Add(new Publisher { PubId = 9, PublisherName = "Addison-Wesley", City = "Boston", State = "MA", Country = "USA" });
         }
     }
 }
