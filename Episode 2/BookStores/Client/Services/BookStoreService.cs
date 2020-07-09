@@ -14,10 +14,6 @@ namespace BookStores.Services
         
         public BookStoresService(HttpClient httpClient)
         {
-          
-            httpClient.BaseAddress = new Uri("https://localhost:5001/");
-            httpClient.DefaultRequestHeaders.Add("User-Agent", "BookStoresWasm");
-
             _httpClient = httpClient;
         }
 

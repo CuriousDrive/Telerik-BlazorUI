@@ -14,10 +14,14 @@ namespace BookStores.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
+            
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddTransient<IBookStoresService<Author>, BookStoresService<Author>>();
-            builder.Services.AddTransient<IBookStoresService<Publisher>, BookStoresService<Publisher>>();
+            builder.Services.AddHttpClient<IBookStoresService<Author>, BookStoresService<Author>>
+                ("AuthorAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+
+            builder.Services.AddHttpClient<IBookStoresService<Publisher>, BookStoresService<Publisher>>
+                ("PublisherAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
             builder.Services.AddTelerikBlazor();
 
