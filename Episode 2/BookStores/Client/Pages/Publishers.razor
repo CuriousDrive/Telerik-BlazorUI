@@ -41,27 +41,32 @@
     }
     else
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>PublisherName</th>
-                    <th>City</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var publisher in publisherList)
-                {
-                    <tr>
-                        <td>@publisher.PublisherName</td>
-                        <td>@publisher.City</td>
-                        <td>
-                            <button class="btn btn-danger" @onclick="@(() => DeletePublisher(publisher.PubId))">Delete</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <TelerikListView Data="publisherList"
+                         Pageable="true"
+                         PageSize="5">
+            <HeaderTemplate>
+                <div class="col-12">
+                    <TelerikButton>Sort</TelerikButton>
+                </div>
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="col-12 row" style="font-size:x-large">
+                        @publisher.PublisherName                        
+                    </div>
+                    <div class="col-12 row">
+                        <div class="col-8" style="font-size:large">
+                            @publisher.City, @publisher.State
+                        </div>
+                        <div class="col-4">
+                        </div>
+                    </div>
+                </div>
+            </Template>
+            <FooterTemplate>
+                <strong style="font-size:large">Total Count : @publisherList.Count()</strong>
+            </FooterTemplate>
+        </TelerikListView>
     }
 </div>
 
@@ -100,7 +105,7 @@
 
     private async Task DeletePublisher(int id)
     {
-        await _httpClient.DeleteAsync("publishers/deletepublisher/"+ id);
+        await _httpClient.DeleteAsync("publishers/deletepublisher/" + id);
 
         await LoadPublishers();
     }

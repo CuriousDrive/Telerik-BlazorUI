@@ -7,7 +7,7 @@ namespace BookStoresWebAPI.Models
     {
         public User()
         {
-            RefreshTokens = new HashSet<RefreshToken>();
+            
         }
 
         public int UserId { get; set; }
@@ -23,6 +23,5 @@ namespace BookStoresWebAPI.Models
 
         public virtual Publisher Pub { get; set; }
         public virtual Role Role { get; set; }
-        public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
     }
 }

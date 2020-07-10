@@ -1,11 +1,11 @@
 ﻿    Introduction
-    Demo App
-    Template & Paging
+    Demo App - Done
+    Template, Pagable, PageSize 
+    HeaderTemplate & FooterTemplate
     Manual Data Source Operations
         - OnRead Event
         - PageChanged Event
         - You can make custom methods to make filter and sort operations
-    HeaderTemplate & FooterTemplate
     EditTemplate 
         - I want to have cascading dropdown list 
         - Enums for Add, Edit , Save, Delete and Cancel
