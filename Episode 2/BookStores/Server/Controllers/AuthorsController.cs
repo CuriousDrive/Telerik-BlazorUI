@@ -23,25 +23,26 @@ namespace BookStoresWebAPI.Controllers
 
         // GET: api/Authors
         [HttpGet("GetAuthors")]
-        public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
+        public ActionResult<IEnumerable<Author>> GetAuthors()
         {
-            List<Author> authorList = _bookStoresRepository.AuthorList;
-            return await Task.FromResult(authorList);
+            List<Author> authorList = _bookStoresRepository.GetAuthors();
+            return authorList;
         }
 
         // GET: api/Authors/5
         [HttpGet("GetAuthor/{id}")]
-        public async Task<ActionResult<Author>> GetAuthor(int id)
+        public ActionResult<Author> GetAuthor(int id)
         {
-            return NoContent();
+            return _bookStoresRepository.GetAuthor(id);
         }
 
         // PUT: api/Authors/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("UpdateAuthor/{id}")]
-        public async Task<IActionResult> PutAuthor(int id, Author author)
+        public IActionResult UpdateAuthor(int id, Author author)
         {
+            _bookStoresRepository.UpdateAuthor(id, author);
             return NoContent();
         }
 
@@ -49,18 +50,17 @@ namespace BookStoresWebAPI.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost("CreateAuthor")]
-        public async Task<ActionResult<Author>> PostAuthor(Author author)
+        public ActionResult<Author> CreateAuthor(Author author)
         {
-            author.AuthorId = _bookStoresRepository.AuthorList.Max(auth => auth.AuthorId) + 1;
-            _bookStoresRepository.AuthorList.Add(author);
-
-            return CreatedAtAction("GetAuthor", new { id = author.AuthorId }, author);
+            _bookStoresRepository.CreateAuthor(author);
+            return NoContent();
         }
 
         // DELETE: api/Authors/5
         [HttpDelete("DeleteAuthor/{id}")]
-        public async Task<ActionResult<Author>> DeleteAuthor(int id)
+        public ActionResult<Author> DeleteAuthor(int id)
         {
+            _bookStoresRepository.DeleteAuthor(id);
             return NoContent();
         }
 

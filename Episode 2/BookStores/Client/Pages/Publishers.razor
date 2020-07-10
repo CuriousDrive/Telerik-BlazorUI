@@ -1,38 +1,36 @@
 ﻿@page "/publishers"
 @using BookStores.Services
 @using BookStores.Models
-@inject IBookStoresService<Publisher> bookStoresService
+@inject HttpClient _httpClient
 
 <div class="col-12">
     <h3><b>Enter Publisher Information</b></h3>
     <hr />
-    <EditForm Model="@publisher">
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">Publisher Name :</label>
-            <input class="form-control col-4" @bind="publisher.PublisherName" placeholder="publisher's name" />
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">City :</label>
-            <select class="form-control col-4">
-                @if (@Cities != null)
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">Publisher Name :</label>
+        <input class="form-control col-4" @bind="publisher.PublisherName" placeholder="publisher's name" />
+    </div>
+    <br />
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">City :</label>
+        <select class="form-control col-4" @bind="publisher.City">
+            @if (@Cities != null)
+            {
+                <option value="">select city..</option>
+                @foreach (var city in Cities)
                 {
-                    <option value="">select city..</option>
-                    @foreach (var city in Cities)
-                    {
-                        <option value="@city">@city</option>
-                    }
+                    <option value="@city">@city</option>
                 }
-            </select>
-        </div>
-        <br />
-        <div class="col-12 row">
-            <span class="col-3"></span>
-            <input type="submit" class="form-control col-1 btn btn-primary" value="Save" />
-            <span>&nbsp;</span>
-            <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" />
-        </div>
-    </EditForm>
+            }
+        </select>
+    </div>
+    <br />
+    <div class="col-12 row">
+        <span class="col-3"></span>
+        <input type="submit" class="form-control col-1 btn btn-primary" value="Save" @onclick="CreatePublisher" />
+        <span>&nbsp;</span>
+        <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" @onclick="ClearPublisher" />
+    </div>
 </div>
 <br />
 <div class="col-12">
@@ -43,40 +41,27 @@
     }
     else
     {
-        <TelerikListView Data="publisherList"
-                         Pageable="true"
-                         PageSize="5"
-                         OnUpdate="UpdatePublisher"
-                         OnDelete="DeletePublisher"
-                         OnCreate="CreatePublisher">
-            <HeaderTemplate>
-                <ListViewCommandButton Command="Add">Add</ListViewCommandButton>
-            </HeaderTemplate>
-            <Template Context="publisher">
-                <div class="card">
-                    <div class="col-12 row" style="font-size:x-large">
-                        @publisher.PublisherName
-                    </div>
-                    <div class="col-12 row">
-                        <div class="col-8" style="font-size:large">
-                            @publisher.City, @publisher.State
-                        </div>
-                        <div class="col-4">
-                            <ListViewCommandButton Command="Edit">Edit</ListViewCommandButton>
-                            <ListViewCommandButton Command="Delete">Delete</ListViewCommandButton>
-                        </div>
-                    </div>                    
-                </div>                
-            </Template>
-            <EditTemplate Context="publisher">
-                <TelerikTextBox @bind-Value="publisher.PublisherName" PlaceHolder="publisher name"></TelerikTextBox>
-                <br />
-                <TelerikDropDownList Data="Cities"
-                                     @bind-Value="publisher.City"></TelerikDropDownList>
-                <br />
-                <ListViewCommandButton Command="Save">Save</ListViewCommandButton>
-            </EditTemplate>
-        </TelerikListView>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>PublisherName</th>
+                    <th>City</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var publisher in publisherList)
+                {
+                    <tr>
+                        <td>@publisher.PublisherName</td>
+                        <td>@publisher.City</td>
+                        <td>
+                            <button class="btn btn-danger" @onclick="@(() => DeletePublisher(publisher.PubId))">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
 </div>
 
@@ -86,54 +71,50 @@
     public List<Publisher> publisherList { get; set; } = new List<Publisher>();
     public string[] Cities { get; set; }
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
         publisher = new Publisher();
-        Cities = new string[] { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "San Francisco", "Charlotte", "Indianapolis", "Seattle", "Denver", "Washington" };
-    }
+        Cities = new string[] { "Boston", "Washington", "Berkeley", "Chicago", "Dallas", "Manchen", "New York", "Paris" };
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await LoadPublishers();
-            StateHasChanged();
-        }
-
-        await base.OnAfterRenderAsync(firstRender);
+        await LoadPublishers();
     }
 
     private async Task LoadPublishers()
     {
-        publisherList = await bookStoresService.GetAllAsync("publishers/getpublishers");
+        publisherList = await _httpClient.GetFromJsonAsync<List<Publisher>>("publishers/getpublishers");
 
         if (publisherList != null)
             publisherList = publisherList.OrderByDescending(pub => pub.PubId).ToList();
 
+        publisher = new Publisher();
+
         StateHasChanged();
     }
 
-    private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+    private async Task CreatePublisher()
     {
-        var publisher = (Publisher)listViewCommandEventArgs.Item;
-        await bookStoresService.SaveAsync("publishers/CreatePublisher", publisher);
+        await _httpClient.PostAsJsonAsync<Publisher>("publishers/createpublisher", publisher);
 
         await LoadPublishers();
     }
 
-    private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+    private async Task DeletePublisher(int id)
     {
-        var publisher = (Publisher)listViewCommandEventArgs.Item;
-        await bookStoresService.UpdateAsync("publishers/UpdatePublisher/", publisher.PubId, publisher);
+        await _httpClient.DeleteAsync("publishers/deletepublisher/"+ id);
 
         await LoadPublishers();
     }
 
-    private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+    private async Task UpdatePublisher()
     {
-        var publisher = (Publisher)listViewCommandEventArgs.Item;
-        await bookStoresService.DeleteAsync("publishers/DeletePublisher/", publisher.PubId);
+        await _httpClient.PutAsJsonAsync<Publisher>("publishers/UpdatePublisher/", publisher);
 
         await LoadPublishers();
     }
+
+    private void ClearPublisher()
+    {
+        publisher = new Publisher();
+    }
+
 }

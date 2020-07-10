@@ -1,4 +1,20 @@
-﻿    -- taking backup of this before getting started with using Telerik ListView Component
+﻿    Introduction
+    Demo App
+    Template & Paging
+    Manual Data Source Operations
+        - OnRead Event
+        - PageChanged Event
+        - You can make custom methods to make filter and sort operations
+    HeaderTemplate & FooterTemplate
+    EditTemplate 
+        - I want to have cascading dropdown list 
+        - Enums for Add, Edit , Save, Delete and Cancel
+        - CUD Events - OnCreate, OnUpdate and OnDelete
+        - OnEdit and OnCancel Events    
+    
+    -----------------------------------------------------------------------------------------------------
+    
+    -- taking backup of this before getting started with using Telerik ListView Component
 
     @if (publisherList == null)
     {
@@ -56,40 +72,78 @@
     <TelerikListView Data="publisherList"
                          Pageable="true"
                          PageSize="5"
-                         OnUpdate="@UpdatePublisher"
-                         OnCreate="@CreatePublisher"
-                         OnDelete="@DeletePublisher">
-            <HeaderTemplate>                
-                &nbsp;<ListViewCommandButton Command="Add">Add</ListViewCommandButton>                
+                         OnUpdate="UpdatePublisher"
+                         OnDelete="DeletePublisher"
+                         OnCreate="CreatePublisher"
+                         @ref="TheListViewRef">
+            <HeaderTemplate>
+                <ListViewCommandButton Command="Add">Add</ListViewCommandButton>
             </HeaderTemplate>
-            <Template>
+            <Template Context="publisher">
                 <div class="card">
+                    <div class="col-12 row" style="font-size:x-large">
+                        @publisher.PublisherName
+                    </div>
                     <div class="col-12 row">
-                        <div class="col-8">
-                            <br />
-                            <span style="font-size:x-large">@context.PublisherName</span>
-                            <br />
-                            <span style="font-size:large">@context.City , @context.State</span>
-                            <br />
+                        <div class="col-8" style="font-size:large">
+                            @publisher.City, @publisher.State
                         </div>
                         <div class="col-4">
-                            <br />
                             <ListViewCommandButton Command="Edit">Edit</ListViewCommandButton>
-                            <span> </span>
                             <ListViewCommandButton Command="Delete">Delete</ListViewCommandButton>
-                            <br />
                         </div>
-                    </div>
-                </div>
+                    </div>                    
+                </div>                
             </Template>
-            <EditTemplate>                
-                <TelerikTextBox @bind-Value="@context.PublisherName" Label="PublisherName"></TelerikTextBox>                
-                <TelerikTextBox @bind-Value="@context.City" Label="City"></TelerikTextBox>
-                <TelerikTextBox @bind-Value="@context.State" Label="State"></TelerikTextBox>
+            <EditTemplate Context="publisher">
+                <TelerikTextBox @bind-Value="publisher.PublisherName" PlaceHolder="publisher name"></TelerikTextBox>
+                <br />
+                <TelerikDropDownList Data="Cities" 
+                                     Value="publisher.City"
+                                     ValueChanged="@((string value) => OnChangeEventHandler(value, publisher))"></TelerikDropDownList>
                 <br />
                 <ListViewCommandButton Command="Save">Save</ListViewCommandButton>
             </EditTemplate>
         </TelerikListView>
+        
+
+        //Func<string, Publisher> OnChangeEventHandler(string value)
+
+        private void OnChangeEventHandler(string value, Publisher publisher1)
+        {
+            publisher1.City = value;
+            publisher1.State = "TX";
+        }
+
+        private void EditPublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+        {
+            publisher = listViewCommandEventArgs.Item as Publisher;
+        }
+
+        private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+        {
+            var publisher = (Publisher)listViewCommandEventArgs.Item;
+            await bookStoresService.SaveAsync("publishers/CreatePublisher", publisher);
+
+            await LoadPublishers();
+        }
+
+        private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+        {
+            var publisher = (Publisher)listViewCommandEventArgs.Item;
+            await bookStoresService.UpdateAsync("publishers/UpdatePublisher/", publisher.PubId, publisher);
+
+            await LoadPublishers();
+        }
+
+        private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+        {
+            var publisher = (Publisher)listViewCommandEventArgs.Item;
+            await bookStoresService.DeleteAsync("publishers/DeletePublisher/", publisher.PubId);
+
+            await LoadPublishers();
+        }
+
 
         -----------------------------------------------------------------------------------------------------
 

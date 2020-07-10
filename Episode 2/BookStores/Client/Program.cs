@@ -20,9 +20,6 @@ namespace BookStores.Client
             builder.Services.AddHttpClient<IBookStoresService<Author>, BookStoresService<Author>>
                 ("AuthorAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
-            builder.Services.AddHttpClient<IBookStoresService<Publisher>, BookStoresService<Publisher>>
-                ("PublisherAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
-
             builder.Services.AddTelerikBlazor();
 
             await builder.Build().RunAsync();
