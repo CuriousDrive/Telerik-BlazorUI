@@ -1,17 +1,18 @@
 ﻿    Introduction
     Demo App - Done
-    Template, Pagable, PageSize 
+    Template
     HeaderTemplate & FooterTemplate
     Manual Data Source Operations
-        - OnRead Event
+        - Pagable, PageSize 
         - PageChanged Event
-        - You can make custom methods to make filter and sort operations
     EditTemplate 
         - I want to have cascading dropdown list 
         - Enums for Add, Edit , Save, Delete and Cancel
         - CUD Events - OnCreate, OnUpdate and OnDelete
-        - OnEdit and OnCancel Events    
-    
+        - OnEdit and OnCancel Events
+    Manual Data Source Operations
+        - OnRead Event        
+        - You can make custom methods to make filter and sort operations
     -----------------------------------------------------------------------------------------------------
     
     -- taking backup of this before getting started with using Telerik ListView Component
@@ -147,4 +148,28 @@
 
         -----------------------------------------------------------------------------------------------------
 
-        So you need to add <Template> in order it not throw an error
+        Section - 2 Backup 
+        <TelerikListView Data="publisherList">
+            <HeaderTemplate>
+                <strong style="font-size:large">Best publishers in USA</strong>
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bolder">@publisher.PublisherName</h5>
+                                <p class="card-subtitle">@publisher.City, @publisher.State</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Template>
+            <FooterTemplate>
+                <strong style="font-size:large">Total Count : @publisherList.Count()</strong>
+            </FooterTemplate>
+        </TelerikListView>
