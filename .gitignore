@@ -3,3 +3,22 @@
 ################################################################################
 
 /.vs
+/Episode 1 - Introduction/.vs/BookStores
+/Episode 1 - Introduction/Client/bin/Debug/netstandard2.1
+/Episode 1 - Introduction/Client/obj
+/Episode 1 - Introduction/Server/bin/Debug/netcoreapp3.1
+/Episode 1 - Introduction/Server/obj
+/Episode 1 - Introduction/Shared/bin/Debug/netstandard2.1
+/Episode 1 - Introduction/Shared/obj
+/Episode 1 - Introduction/Shared/Notes.txt
+/Episode 2 - ListView/.vs/BookStores
+/Episode 2 - ListView/Client/bin/Debug/netstandard2.1
+/Episode 2 - ListView/Client/obj
+/Episode 2 - ListView/Server/bin/Debug/netcoreapp3.1
+/Episode 2 - ListView/Server/obj
+/Episode 2 - ListView/Shared/bin/Debug/netstandard2.1
+/Episode 2 - ListView/Shared/obj
+/Episode 2 - ListView/Shared/Notes.txt
+/Episode 5 - Final/.vs/BookStores
+/Episode 5 - Final/Client/bin/Debug/netstandard2.1
+/Episode 5 - Final/Client/obj
