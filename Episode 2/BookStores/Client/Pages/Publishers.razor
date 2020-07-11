@@ -41,27 +41,30 @@
     }
     else
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>PublisherName</th>
-                    <th>City</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var publisher in publisherList)
-                {
-                    <tr>
-                        <td>@publisher.PublisherName</td>
-                        <td>@publisher.City</td>
-                        <td>
-                            <button class="btn btn-danger" @onclick="@(() => DeletePublisher(publisher.PubId))">Delete</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <TelerikListView Data="publisherList">
+            <HeaderTemplate>
+                <strong style="font-size:larger">Best Publishers in USA</strong>
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card text-white bg-dark">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bolder">@publisher.PublisherName</h5>
+                                <p class="card-subtitle">@publisher.City , @publisher.State</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Template>
+            <FooterTemplate>
+                <strong style="font-size:larger">Total Count : @publisherList.Count()</strong>
+            </FooterTemplate>
+        </TelerikListView>
     }
 </div>
 
