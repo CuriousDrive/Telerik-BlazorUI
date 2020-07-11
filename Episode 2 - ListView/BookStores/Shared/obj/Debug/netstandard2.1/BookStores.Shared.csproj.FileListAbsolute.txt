@@ -1,0 +1,9 @@
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\bin\Debug\netstandard2.1\BookStores.Shared.deps.json
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\bin\Debug\netstandard2.1\BookStores.Shared.dll
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\bin\Debug\netstandard2.1\BookStores.Shared.pdb
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\obj\Debug\netstandard2.1\BookStores.Shared.csprojAssemblyReference.cache
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\obj\Debug\netstandard2.1\BookStores.Shared.AssemblyInfoInputs.cache
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\obj\Debug\netstandard2.1\BookStores.Shared.AssemblyInfo.cs
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\obj\Debug\netstandard2.1\BookStores.Shared.csproj.CoreCompileInputs.cache
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\obj\Debug\netstandard2.1\BookStores.Shared.dll
+C:\Data\CuriousDrive\GitHub Repos\Telerik\Episode 2\BookStores\Shared\obj\Debug\netstandard2.1\BookStores.Shared.pdb

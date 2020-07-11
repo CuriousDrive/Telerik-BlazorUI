@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 2\\BookStores\\Shared\\BookStores.Shared.csproj": {}
+  },
+  "projects": {
+    "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 2\\BookStores\\Shared\\BookStores.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 2\\BookStores\\Shared\\BookStores.Shared.csproj",
+        "projectName": "BookStores.Shared",
+        "projectPath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 2\\BookStores\\Shared\\BookStores.Shared.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 2\\BookStores\\Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik\\Episode 2\\BookStores\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\User\\AppData\\Roaming\\Telerik\\Updates\\telerik.ui.for.blazor.hotfix.2.15.0.commercial\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
