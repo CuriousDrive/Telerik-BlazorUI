@@ -1,8 +1,7 @@
 ﻿@page "/"
 @using BookStores.Models
 @using BookStores.Services
-@inject IBookStoresService<Author> bookStoresService
-@inject IJSRuntime JSRuntime
+@inject HttpClient _httpClient
 
 <div class="col-12">
     <h3><b>Enter Author Information</b></h3>
@@ -250,7 +249,7 @@
 
     private async Task LoadAuthors()
     {
-        authorList = await bookStoresService.GetAllAsync("authors/getauthors");
+        authorList = await _httpClient.GetFromJsonAsync<List<Author>>("authors/getauthors");
 
         if (authorList != null)
             authorList = authorList.OrderByDescending(auth => auth.AuthorId).ToList();
@@ -307,7 +306,7 @@
     private async Task CreateAuthor()
     {
         if (author.AuthorId == 0)
-            await bookStoresService.SaveAsync("authors/createauthor", author);
+            await _httpClient.PostAsJsonAsync<Author>("authors/createauthor", author);
 
         await LoadAuthors();
 
@@ -317,7 +316,7 @@
     private async Task UpdateAuthor()
     {
         if (author.AuthorId != 0)
-            await bookStoresService.UpdateAsync("authors/UpdateAuthor", author.AuthorId, author);
+            await _httpClient.PutAsJsonAsync<Author>("authors/UpdateAuthor" + author.AuthorId, author);
 
         await LoadAuthors();
 
@@ -326,7 +325,7 @@
 
     private async Task DeleteAuthor(int authorId)
     {
-        await bookStoresService.DeleteAsync("authors/DeleteAuthor/", authorId);
+        await _httpClient.DeleteAsync("authors/DeleteAuthor/"+ authorId);
         await LoadAuthors();
     }
 
