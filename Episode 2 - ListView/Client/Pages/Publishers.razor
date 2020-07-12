@@ -41,9 +41,28 @@
     }
     else
     {
-        <TelerikListView Data="publisherList">
+        <TelerikListView Data="publisherList"
+                         Pageable="Paging"
+                         PageSize="PageSizeOption"
+                         PageChanged="PageChangedHandler">
             <HeaderTemplate>
-                <strong style="font-size:larger">Best Publishers in USA</strong>
+                <br/>
+                <div class="col-12 row">
+                    <label style="font-size:large; font-weight:bold">
+                        Enable Paging :
+                        <TelerikCheckBox @bind-Value="Paging"></TelerikCheckBox>
+                        &nbsp;
+                    </label>
+                    <label style="font-size:large; font-weight:bold">
+                        Page Size :
+                        <TelerikDropDownList Data="PageSizeOptions"
+                                             @bind-Value="PageSizeOption"
+                                             Class="col-3"></TelerikDropDownList>
+                    </label>
+                    <label style="font-size:large; font-weight:bold">
+                        @PageChangeMessage
+                    </label>
+                </div>
             </HeaderTemplate>
             <Template Context="publisher">
                 <div class="card">
@@ -74,6 +93,15 @@
     public List<Publisher> publisherList { get; set; } = new List<Publisher>();
     public string[] Cities { get; set; }
 
+    public bool Paging { get; set; } = true;
+    public int[] PageSizeOptions { get; set; } = new int[] { 2, 3, 4, 5, 10 };
+    public int PageSizeOption { get; set; } = 5;
+    public string PageChangeMessage { get; set; }
+
+    private void PageChangedHandler(int currentPageNumber)
+    {
+        PageChangeMessage = "You are on page : " + currentPageNumber;
+    }
 
     protected async override Task OnInitializedAsync()
     {
