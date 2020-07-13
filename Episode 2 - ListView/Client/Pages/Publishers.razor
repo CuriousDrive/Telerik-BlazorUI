@@ -4,6 +4,36 @@
 @inject HttpClient _httpClient
 
 <div class="col-12">
+    <h3><b>Enter Publisher Information</b></h3>
+    <hr />
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">Publisher Name :</label>
+        <input class="form-control col-4" @bind="publisher.PublisherName" placeholder="publisher's name" />
+    </div>
+    <br />
+    <div class="col-12 row">
+        <label class="col-3 font-weight-bold">City :</label>
+        <select class="form-control col-4" @bind="publisher.City">
+            @if (@Cities != null)
+            {
+                <option value="">select city..</option>
+                @foreach (var city in Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            }
+        </select>
+    </div>
+    <br />
+    <div class="col-12 row">
+        <span class="col-3"></span>
+        <input type="submit" class="form-control col-1 btn btn-primary" value="Save" @onclick="CreatePublisher" />
+        <span>&nbsp;</span>
+        <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" @onclick="ClearPublisher" />
+    </div>
+</div>
+<br />
+<div class="col-12">
 
     @if (publisherList == null)
     {
@@ -14,10 +44,7 @@
         <TelerikListView Data="publisherList"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
-                         PageChanged="PageChangedHandler"
-                         OnDelete="DeletePublisher"
-                         OnUpdate="UpdatePublisher"
-                         OnCreate="CreatePublisher">
+                         PageChanged="PageChangedHandler">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -36,11 +63,8 @@
                 </div>
                 <div class="col-12 row">
                     <label style="font-size:large; font-weight:bold">
-                        @PageChangedMessage                        
+                        @PageChangedMessage
                     </label>
-                </div>                
-                <div class="col-12 row">
-                    <ListViewCommandButton Command="Add" Icon="@IconName.Plus">Add</ListViewCommandButton>                   
                 </div>
                 <br />
             </HeaderTemplate>
@@ -57,35 +81,9 @@
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <br />
-                            <ListViewCommandButton Command="Delete" Icon="@IconName.Delete">Delete</ListViewCommandButton>
-                            <ListViewCommandButton Command="Edit" Icon="@IconName.Edit">Edit</ListViewCommandButton>
-                        </div>
                     </div>
                 </div>
             </Template>
-            <EditTemplate Context="publisher">
-                <div class="card">
-                    <div class="row no-gutters">
-                        <div class="col-md-2">
-                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>                                
-                                <TelerikDropDownList Data="Cities"
-                                                     Value="publisher.City"
-                                                     ValueChanged="@((string value) => ValueChangedHandler(value, publisher))"></TelerikDropDownList>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <br />
-                            <ListViewCommandButton Command="Save" Icon="@IconName.Save">Save</ListViewCommandButton>
-                        </div>
-                    </div>
-                </div>
-            </EditTemplate>
             <FooterTemplate>
                 <strong style="font-size:larger">Total Count : @publisherList.Count()</strong>
             </FooterTemplate>
@@ -104,6 +102,7 @@
     public int PageSizeOption { get; set; } = 5;
     public string PageChangedMessage { get; set; }
 
+    //Events
     protected async override Task OnInitializedAsync()
     {
         publisher = new Publisher();
@@ -117,12 +116,7 @@
         PageChangedMessage = "You are on page : " + currentPageNumber;
     }
 
-    private void ValueChangedHandler(string value, Publisher publisher)
-    {
-        publisher.City = value;
-        publisher.State = GetStateFromCity(value);
-    }
-
+    //CRUD Operations
     private async Task LoadPublishers()
     {
         publisherList = await _httpClient.GetFromJsonAsync<List<Publisher>>("publishers/getpublishers");
@@ -135,30 +129,31 @@
         StateHasChanged();
     }
 
-    private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+    private async Task CreatePublisher()
     {
-        Publisher publisher = listViewCommandEventArgs.Item as Publisher;
+
         await _httpClient.PostAsJsonAsync<Publisher>("publishers/createpublisher", publisher);
 
         await LoadPublishers();
     }
 
-    private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+    private async Task UpdatePublisher()
     {
-        Publisher publisher = listViewCommandEventArgs.Item as Publisher;
+
+        await _httpClient.PutAsJsonAsync<Publisher>("publishers/UpdatePublisher/" + publisher.PubId, publisher);
+
+        await LoadPublishers();
+    }
+
+    private async Task DeletePublisher()
+    {
+
         await _httpClient.DeleteAsync("publishers/deletepublisher/" + publisher.PubId);
 
         await LoadPublishers();
     }
 
-    private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
-    {
-        Publisher publisher1 = listViewCommandEventArgs.Item as Publisher;
-        await _httpClient.PutAsJsonAsync<Publisher>("publishers/UpdatePublisher/" + publisher1.PubId, publisher1);
-
-        await LoadPublishers();
-    }
-
+    //Other Methods
     private void ClearPublisher()
     {
         publisher = new Publisher();
