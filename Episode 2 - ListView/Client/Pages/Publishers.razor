@@ -4,36 +4,6 @@
 @inject HttpClient _httpClient
 
 <div class="col-12">
-    <h3><b>Enter Publisher Information</b></h3>
-    <hr />
-    <div class="col-12 row">
-        <label class="col-3 font-weight-bold">Publisher Name :</label>
-        <input class="form-control col-4" @bind="publisher.PublisherName" placeholder="publisher's name" />
-    </div>
-    <br />
-    <div class="col-12 row">
-        <label class="col-3 font-weight-bold">City :</label>
-        <select class="form-control col-4" @bind="publisher.City">
-            @if (@Cities != null)
-            {
-                <option value="">select city..</option>
-                @foreach (var city in Cities)
-                {
-                    <option value="@city">@city</option>
-                }
-            }
-        </select>
-    </div>
-    <br />
-    <div class="col-12 row">
-        <span class="col-3"></span>
-        <input type="submit" class="form-control col-1 btn btn-primary" value="Save" @onclick="CreatePublisher" />
-        <span>&nbsp;</span>
-        <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" @onclick="ClearPublisher" />
-    </div>
-</div>
-<br />
-<div class="col-12">
 
     @if (publisherList == null)
     {
@@ -44,7 +14,10 @@
         <TelerikListView Data="publisherList"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
-                         PageChanged="PageChangedHandler">
+                         PageChanged="PageChangedHandler"
+                         OnDelete="DeletePublisher"
+                         OnUpdate="UpdatePublisher"
+                         OnCreate="CreatePublisher">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -63,9 +36,13 @@
                 </div>
                 <div class="col-12 row">
                     <label style="font-size:large; font-weight:bold">
-                        @PageChangedMessage
+                        @PageChangedMessage                        
                     </label>
+                </div>                
+                <div class="col-12 row">
+                    <ListViewCommandButton Command="Add" Icon="@IconName.Plus">Add</ListViewCommandButton>                   
                 </div>
+                <br />
             </HeaderTemplate>
             <Template Context="publisher">
                 <div class="card">
@@ -73,16 +50,42 @@
                         <div class="col-md-2">
                             <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bolder">@publisher.PublisherName</h5>
                                 <p class="card-subtitle">@publisher.City , @publisher.State</p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <br />
+                            <ListViewCommandButton Command="Delete" Icon="@IconName.Delete">Delete</ListViewCommandButton>
+                            <ListViewCommandButton Command="Edit" Icon="@IconName.Edit">Edit</ListViewCommandButton>
+                        </div>
                     </div>
                 </div>
             </Template>
+            <EditTemplate Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>                                
+                                <TelerikDropDownList Data="Cities"
+                                                     Value="publisher.City"
+                                                     ValueChanged="@((string value) => ValueChangedHandler(value, publisher))"></TelerikDropDownList>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br />
+                            <ListViewCommandButton Command="Save" Icon="@IconName.Save">Save</ListViewCommandButton>
+                        </div>
+                    </div>
+                </div>
+            </EditTemplate>
             <FooterTemplate>
                 <strong style="font-size:larger">Total Count : @publisherList.Count()</strong>
             </FooterTemplate>
@@ -104,7 +107,7 @@
     protected async override Task OnInitializedAsync()
     {
         publisher = new Publisher();
-        Cities = new string[] { "Boston", "Washington", "Berkeley", "Chicago", "Dallas", "New York", "Portland", "Naperville", "Nashville" };
+        Cities = new string[] { "Boston", "Washington", "Berkeley", "Chicago", "Dallas", "New York City", "Portland", "Naperville", "Nashville" };
 
         await LoadPublishers();
     }
@@ -112,6 +115,12 @@
     private void PageChangedHandler(int currentPageNumber)
     {
         PageChangedMessage = "You are on page : " + currentPageNumber;
+    }
+
+    private void ValueChangedHandler(string value, Publisher publisher)
+    {
+        publisher.City = value;
+        publisher.State = GetStateFromCity(value);
     }
 
     private async Task LoadPublishers()
@@ -126,23 +135,26 @@
         StateHasChanged();
     }
 
-    private async Task CreatePublisher()
+    private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
+        Publisher publisher = listViewCommandEventArgs.Item as Publisher;
         await _httpClient.PostAsJsonAsync<Publisher>("publishers/createpublisher", publisher);
 
         await LoadPublishers();
     }
 
-    private async Task DeletePublisher(int id)
+    private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-        await _httpClient.DeleteAsync("publishers/deletepublisher/" + id);
+        Publisher publisher = listViewCommandEventArgs.Item as Publisher;
+        await _httpClient.DeleteAsync("publishers/deletepublisher/" + publisher.PubId);
 
         await LoadPublishers();
     }
 
-    private async Task UpdatePublisher()
+    private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-        await _httpClient.PutAsJsonAsync<Publisher>("publishers/UpdatePublisher/", publisher);
+        Publisher publisher1 = listViewCommandEventArgs.Item as Publisher;
+        await _httpClient.PutAsJsonAsync<Publisher>("publishers/UpdatePublisher/" + publisher1.PubId, publisher1);
 
         await LoadPublishers();
     }
@@ -150,6 +162,40 @@
     private void ClearPublisher()
     {
         publisher = new Publisher();
+    }
+
+    private string GetStateFromCity(string city)
+    {
+        if (city == "New York City")
+            return "NY";
+        if (city == "Los Angeles" || city == "San Diego" || city == "San Jose" || city == "San Francisco")
+            return "CA";
+        if (city == "San Antonio" || city == "Houston" || city == "Dallas" || city == "Austin" || city == "Fort Worth")
+            return "TX";
+        if (city == "Chicago")
+            return "IL";
+        if (city == "Phoenix")
+            return "AZ";
+        if (city == "Philadelphia")
+            return "PA";
+        if (city == "Jacksonville")
+            return "FL";
+        if (city == "Columbus")
+            return "OH";
+        if (city == "Charlotte")
+            return "NC";
+        if (city == "Indianapolis")
+            return "IN";
+        if (city == "Seattle")
+            return "WA";
+        if (city == "Denver")
+            return "CO";
+        if (city == "Boston")
+            return "MA";
+        if (city == "Washington")
+            return "MA";
+
+        return "";
     }
 
 }

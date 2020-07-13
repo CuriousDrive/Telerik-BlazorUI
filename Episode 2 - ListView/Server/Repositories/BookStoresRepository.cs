@@ -49,13 +49,13 @@ namespace BookStores.Server.Repositories
             PublisherList.Add(new Publisher { PubId = 4, PublisherName = "Five Lakes Publishing", City = "Chicago", State = "IL", Country = "USA" });
             PublisherList.Add(new Publisher { PubId = 5, PublisherName = "Ramona Publishers", City = "Dallas", State = "TX", Country = "USA" });
             PublisherList.Add(new Publisher { PubId = 6, PublisherName = "HarperCollins", City = "Washington", State = "DC", Country = "USA" });
-            PublisherList.Add(new Publisher { PubId = 7, PublisherName = "Scootney Books", City = "New York", State = "NY", Country = "USA" });
-            PublisherList.Add(new Publisher { PubId = 8, PublisherName = "Workman Publishing", City = "New York", State = "NY", Country = "USA" });
+            PublisherList.Add(new Publisher { PubId = 7, PublisherName = "Scootney Books", City = "New York City", State = "NY", Country = "USA" });
+            PublisherList.Add(new Publisher { PubId = 8, PublisherName = "Workman Publishing", City = "New York City", State = "NY", Country = "USA" });
             PublisherList.Add(new Publisher { PubId = 9, PublisherName = "Addison-Wesley", City = "Boston", State = "MA", Country = "USA" });
             PublisherList.Add(new Publisher { PubId = 10, PublisherName = "Chronicle Books", City = "Portland", State = "OR", Country = "USA" });
             PublisherList.Add(new Publisher { PubId = 11, PublisherName = "Sourcebooks", City = "Naperville", State = "IL", Country = "USA" });
             PublisherList.Add(new Publisher { PubId = 12, PublisherName = "B&H Publishing", City = "Nashville", State = "TN", Country = "USA" });
-            PublisherList.Add(new Publisher { PubId = 13, PublisherName = "W.W. Norton", City = "New York", State = "NY", Country = "USA" });            
+            PublisherList.Add(new Publisher { PubId = 13, PublisherName = "W.W. Norton", City = "New York City", State = "NY", Country = "USA" });            
         }
 
         //Publishers
