@@ -3,36 +3,7 @@
 @using BookStores.Models
 @inject HttpClient _httpClient
 
-<div class="col-12">
-    <h3><b>Enter Publisher Information</b></h3>
-    <hr />
-    <div class="col-12 row">
-        <label class="col-3 font-weight-bold">Publisher Name :</label>
-        <input class="form-control col-4" @bind="publisher.PublisherName" placeholder="publisher's name" />
-    </div>
-    <br />
-    <div class="col-12 row">
-        <label class="col-3 font-weight-bold">City :</label>
-        <select class="form-control col-4" @bind="publisher.City">
-            @if (@Cities != null)
-            {
-                <option value="">select city..</option>
-                @foreach (var city in Cities)
-                {
-                    <option value="@city">@city</option>
-                }
-            }
-        </select>
-    </div>
-    <br />
-    <div class="col-12 row">
-        <span class="col-3"></span>
-        <input type="submit" class="form-control col-1 btn btn-primary" value="Save" @onclick="CreatePublisher" />
-        <span>&nbsp;</span>
-        <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" @onclick="ClearPublisher" />
-    </div>
-</div>
-<br />
+
 <div class="col-12">
 
     @if (publisherList == null)
@@ -44,7 +15,10 @@
         <TelerikListView Data="publisherList"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
-                         PageChanged="PageChangedHandler">
+                         PageChanged="PageChangedHandler"
+                         OnDelete="DeletePublisher"
+                         OnUpdate="UpdatePublisher"
+                         OnCreate="CreatePublisher">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -66,6 +40,9 @@
                         @PageChangedMessage
                     </label>
                 </div>
+                <div class="col-12 row">
+                    <ListViewCommandButton Command="Add" Icon="@IconName.Plus">Add</ListViewCommandButton>
+                </div>
                 <br />
             </HeaderTemplate>
             <Template Context="publisher">
@@ -81,9 +58,34 @@
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <br />
+                            <ListViewCommandButton Command="Edit" Icon="@IconName.Edit">Edit</ListViewCommandButton>
+                            <ListViewCommandButton Command="Delete" Icon="@IconName.Delete">Delete</ListViewCommandButton>
+                        </div>
                     </div>
                 </div>
             </Template>
+            <EditTemplate Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>
+                                <TelerikDropDownList Data="Cities" @bind-Value="publisher.City"></TelerikDropDownList>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br />
+                            <ListViewCommandButton Command="Save" Icon="@IconName.Save">Save</ListViewCommandButton>                            
+                        </div>
+                    </div>
+                </div>
+            </EditTemplate>
             <FooterTemplate>
                 <strong style="font-size:larger">Total Count : @publisherList.Count()</strong>
             </FooterTemplate>
@@ -129,25 +131,25 @@
         StateHasChanged();
     }
 
-    private async Task CreatePublisher()
+    private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-
+        var publisher = listViewCommandEventArgs.Item as Publisher;
         await _httpClient.PostAsJsonAsync<Publisher>("publishers/createpublisher", publisher);
 
         await LoadPublishers();
     }
 
-    private async Task UpdatePublisher()
+    private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-
+        var publisher = listViewCommandEventArgs.Item as Publisher;
         await _httpClient.PutAsJsonAsync<Publisher>("publishers/UpdatePublisher/" + publisher.PubId, publisher);
 
         await LoadPublishers();
     }
 
-    private async Task DeletePublisher()
+    private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
-
+        var publisher = listViewCommandEventArgs.Item as Publisher;
         await _httpClient.DeleteAsync("publishers/deletepublisher/" + publisher.PubId);
 
         await LoadPublishers();
