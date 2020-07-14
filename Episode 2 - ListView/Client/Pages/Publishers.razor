@@ -108,7 +108,7 @@
     protected async override Task OnInitializedAsync()
     {
         publisher = new Publisher();
-        Cities = new string[] { "Boston", "Washington", "Berkeley", "Chicago", "Dallas", "New York City", "Portland", "Naperville", "Nashville" };
+        Cities = new string[] { "Boston", "Washington", "Chicago", "Dallas", "New York City", "Portland", "Naperville", "Nashville" };
 
         await LoadPublishers();
     }
@@ -116,6 +116,12 @@
     private void PageChangedHandler(int currentPageNumber)
     {
         PageChangedMessage = "You are on page : " + currentPageNumber;
+    }
+
+    private void ValueChangedHandler(string city, Publisher publisher)
+    {
+        publisher.State = GetStateFromCity(city);
+        publisher.City = city;
     }
 
     //CRUD Operations
@@ -169,7 +175,7 @@
             return "CA";
         if (city == "San Antonio" || city == "Houston" || city == "Dallas" || city == "Austin" || city == "Fort Worth")
             return "TX";
-        if (city == "Chicago")
+        if (city == "Chicago" || city == "Naperville")
             return "IL";
         if (city == "Phoenix")
             return "AZ";
@@ -190,7 +196,13 @@
         if (city == "Boston")
             return "MA";
         if (city == "Washington")
-            return "MA";
+            return "DC";
+        if (city == "Washington")
+            return "DC";
+        if (city == "Portland")
+            return "OR";
+        if (city == "Nashville")
+            return "TN";
 
         return "";
     }
