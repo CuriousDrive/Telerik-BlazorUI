@@ -75,7 +75,8 @@
                         <div class="col-md-6">
                             <div class="card-body">
                                 <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>
-                                <TelerikDropDownList Data="Cities" @bind-Value="publisher.City"></TelerikDropDownList>
+                                <TelerikDropDownList Data="Cities" 
+                                                     @bind-Value="publisher.City"></TelerikDropDownList>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
@@ -103,12 +104,13 @@
     public int[] PageSizeOptions { get; set; } = new int[] { 2, 3, 4, 5, 10 };
     public int PageSizeOption { get; set; } = 5;
     public string PageChangedMessage { get; set; }
+    
 
     //Events
     protected async override Task OnInitializedAsync()
     {
         publisher = new Publisher();
-        Cities = new string[] { "Boston", "Washington", "Chicago", "Dallas", "New York City", "Portland", "Naperville", "Nashville" };
+        Cities = new string[] { "Boston", "Washington", "Chicago", "Dallas", "Berkeley", "New York City", "Portland", "Naperville", "Nashville" };
 
         await LoadPublishers();
     }
@@ -118,19 +120,13 @@
         PageChangedMessage = "You are on page : " + currentPageNumber;
     }
 
-    private void ValueChangedHandler(string city, Publisher publisher)
-    {
-        publisher.State = GetStateFromCity(city);
-        publisher.City = city;
-    }
-
     //CRUD Operations
     private async Task LoadPublishers()
     {
         publisherList = await _httpClient.GetFromJsonAsync<List<Publisher>>("publishers/getpublishers");
 
-        if (publisherList != null)
-            publisherList = publisherList.OrderByDescending(pub => pub.PubId).ToList();
+        //if (publisherList != null)
+        //    publisherList = publisherList.OrderByDescending(pub => pub.PubId).ToList();
 
         publisher = new Publisher();
 
@@ -171,7 +167,7 @@
     {
         if (city == "New York City")
             return "NY";
-        if (city == "Los Angeles" || city == "San Diego" || city == "San Jose" || city == "San Francisco")
+        if (city == "Los Angeles" || city == "San Diego" || city == "San Jose" || city == "San Francisco" || city == "Berkeley")
             return "CA";
         if (city == "San Antonio" || city == "Houston" || city == "Dallas" || city == "Austin" || city == "Fort Worth")
             return "TX";
@@ -195,8 +191,6 @@
             return "CO";
         if (city == "Boston")
             return "MA";
-        if (city == "Washington")
-            return "DC";
         if (city == "Washington")
             return "DC";
         if (city == "Portland")
