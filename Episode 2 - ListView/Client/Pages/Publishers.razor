@@ -18,7 +18,9 @@
                          PageChanged="PageChangedHandler"
                          OnDelete="DeletePublisher"
                          OnUpdate="UpdatePublisher"
-                         OnCreate="CreatePublisher">
+                         OnCreate="CreatePublisher"
+                         OnEdit="EditHandler"
+                         OnCancel="CancelHandler">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -76,13 +78,16 @@
                             <div class="card-body">
                                 <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>
                                 <TelerikDropDownList Data="Cities" 
-                                                     @bind-Value="publisher.City"></TelerikDropDownList>
+                                                     Value="publisher.City"
+                                                     ValueChanged="@((string value) => ValueChangedHandler(value, publisher))"
+                                                     Enabled="EditCities"></TelerikDropDownList>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <br />
-                            <ListViewCommandButton Command="Save" Icon="@IconName.Save">Save</ListViewCommandButton>                            
+                            <ListViewCommandButton Command="Save" Icon="@IconName.Save">Save</ListViewCommandButton>
+                            <ListViewCommandButton Command="Cancel" Icon="@IconName.Cancel">Cancel</ListViewCommandButton>
                         </div>
                     </div>
                 </div>
@@ -104,7 +109,7 @@
     public int[] PageSizeOptions { get; set; } = new int[] { 2, 3, 4, 5, 10 };
     public int PageSizeOption { get; set; } = 5;
     public string PageChangedMessage { get; set; }
-    
+    public bool EditCities { get; set; }
 
     //Events
     protected async override Task OnInitializedAsync()
@@ -118,6 +123,24 @@
     private void PageChangedHandler(int currentPageNumber)
     {
         PageChangedMessage = "You are on page : " + currentPageNumber;
+    }
+
+    private void EditHandler(ListViewCommandEventArgs listViewCommandEventArgs)
+    {
+        var publisher = listViewCommandEventArgs.Item as Publisher;
+        EditCities = publisher.PubId < 4 ? true : false;
+    }
+
+    private void CancelHandler(ListViewCommandEventArgs listViewCommandEventArgs)
+    {
+        var publisher = listViewCommandEventArgs.Item as Publisher;
+        //EditCities = publisher.PubId < 4 ? true : false;
+    }
+
+    private void ValueChangedHandler(string city, Publisher publisher)
+    {
+        publisher.State = GetStateFromCity(city);
+        publisher.City = city;
     }
 
     //CRUD Operations
