@@ -1,18 +1,21 @@
 ﻿@page "/publishers"
 @using BookStores.Services
 @using BookStores.Models
+@using Telerik.DataSource
+@using Telerik.DataSource.Extensions
+@using System.Collections.Generic
 @inject HttpClient _httpClient
 
 
 <div class="col-12">
 
-    @if (publisherList == null)
+    @if (PublishersByPage == null && AllPublishers == null)
     {
         <p><em>Loading...</em></p>
     }
     else
     {
-        <TelerikListView Data="publisherList"
+        <TelerikListView Data="AllPublishers"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
                          PageChanged="PageChangedHandler"
@@ -42,6 +45,20 @@
                         @PageChangedMessage
                     </label>
                 </div>
+                <div class="col-12 row">
+                    <TelerikTextBox @bind-Value="@FilterText"></TelerikTextBox>
+                    <TelerikButton OnClick="@Filter">Filter</TelerikButton> &nbsp;
+                    <TelerikButton OnClick="@ClearFilter">Clear Filter</TelerikButton>
+                </div>
+                <br />
+                <div class="col-12 row">
+                    Sort by Name:&nbsp;
+                    <TelerikDropDownList Data="SortDirections"
+                                         @bind-Value="SortDirection"
+                                         Width="150px"></TelerikDropDownList> &nbsp;
+                    <TelerikButton @onclick="Sort">Sort</TelerikButton>
+                </div>
+                <br />
                 <div class="col-12 row">
                     <ListViewCommandButton Command="Add" Icon="@IconName.Plus">Add</ListViewCommandButton>
                 </div>
@@ -77,7 +94,7 @@
                         <div class="col-md-6">
                             <div class="card-body">
                                 <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>
-                                <TelerikDropDownList Data="Cities" 
+                                <TelerikDropDownList Data="Cities"
                                                      Value="publisher.City"
                                                      ValueChanged="@((string value) => ValueChangedHandler(value, publisher))"
                                                      Enabled="EditCities"></TelerikDropDownList>
@@ -93,7 +110,7 @@
                 </div>
             </EditTemplate>
             <FooterTemplate>
-                <strong style="font-size:larger">Total Count : @publisherList.Count()</strong>
+                <strong style="font-size:larger">Total Count : @AllPublishers.Count()</strong>
             </FooterTemplate>
         </TelerikListView>
     }
@@ -101,28 +118,41 @@
 
 @code {
 
-    public Publisher publisher { get; set; }
-    public List<Publisher> publisherList { get; set; } = new List<Publisher>();
+    public List<Publisher> PublishersByPage { get; set; } = new List<Publisher>();
+    public List<Publisher> AllPublishers { get; set; } = new List<Publisher>();
     public string[] Cities { get; set; }
 
     public bool Paging { get; set; } = true;
     public int[] PageSizeOptions { get; set; } = new int[] { 2, 3, 4, 5, 10 };
     public int PageSizeOption { get; set; } = 5;
     public string PageChangedMessage { get; set; }
-    public bool EditCities { get; set; }
+    public bool EditCities { get; set; } = true;
+    public int TotalCount { get; set; }
+    public string FilterText { get; set; }
+    public string[] SortDirections { get; set; } = new string[] { "Ascending", "Descending" };
+    public string SortDirection { get; set; }
 
     //Events
     protected async override Task OnInitializedAsync()
     {
-        publisher = new Publisher();
+        //loading cities
         Cities = new string[] { "Boston", "Washington", "Chicago", "Dallas", "Berkeley", "New York City", "Portland", "Naperville", "Nashville" };
 
-        await LoadPublishers();
+        //getting total count of publishers
+        TotalCount = await GetTotalCount();
+
+        //getting all publishers
+        AllPublishers = await GetAllPublishers();
+    }
+
+    private async Task OnReadHandler(ListViewReadEventArgs listViewReadEventArgs)
+    {
+        PublishersByPage = await GetPublishersByPage(listViewReadEventArgs.Request.Page, listViewReadEventArgs.Request.PageSize);
     }
 
     private void PageChangedHandler(int currentPageNumber)
     {
-        PageChangedMessage = "You are on page : " + currentPageNumber;
+        //PageChangedMessage = "You are on page : " + currentPageNumber;
     }
 
     private void EditHandler(ListViewCommandEventArgs listViewCommandEventArgs)
@@ -144,16 +174,19 @@
     }
 
     //CRUD Operations
-    private async Task LoadPublishers()
+    private async Task<List<Publisher>> GetPublishersByPage(int pageIndex, int pageSize)
     {
-        publisherList = await _httpClient.GetFromJsonAsync<List<Publisher>>("publishers/getpublishers");
+        return await _httpClient.GetFromJsonAsync<List<Publisher>>($"publishers/getpublishersbypage?pageIndex={pageIndex}&pageSize={pageSize}");
+    }
 
-        //if (publisherList != null)
-        //    publisherList = publisherList.OrderByDescending(pub => pub.PubId).ToList();
+    private async Task<int> GetTotalCount()
+    {
+        return await _httpClient.GetFromJsonAsync<int>("publishers/gettotalcount");
+    }
 
-        publisher = new Publisher();
-
-        StateHasChanged();
+    private async Task<List<Publisher>> GetAllPublishers()
+    {
+        return await _httpClient.GetFromJsonAsync<List<Publisher>>("publishers/getpublishers");
     }
 
     private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
@@ -161,7 +194,7 @@
         var publisher = listViewCommandEventArgs.Item as Publisher;
         await _httpClient.PostAsJsonAsync<Publisher>("publishers/createpublisher", publisher);
 
-        await LoadPublishers();
+        AllPublishers = await GetAllPublishers();
     }
 
     private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
@@ -169,7 +202,7 @@
         var publisher = listViewCommandEventArgs.Item as Publisher;
         await _httpClient.PutAsJsonAsync<Publisher>("publishers/UpdatePublisher/" + publisher.PubId, publisher);
 
-        await LoadPublishers();
+        AllPublishers = await GetAllPublishers();
     }
 
     private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
@@ -177,13 +210,13 @@
         var publisher = listViewCommandEventArgs.Item as Publisher;
         await _httpClient.DeleteAsync("publishers/deletepublisher/" + publisher.PubId);
 
-        await LoadPublishers();
+        AllPublishers = await GetAllPublishers();
     }
 
     //Other Methods
     private void ClearPublisher()
     {
-        publisher = new Publisher();
+        //publisher = new Publisher();
     }
 
     private string GetStateFromCity(string city)
@@ -224,4 +257,42 @@
         return "";
     }
 
+    private async Task Filter()
+    {
+        var request = new DataSourceRequest()
+        {
+            Filters = new List<IFilterDescriptor>()
+        };
+        request.Filters.Add(new FilterDescriptor("PublisherName", FilterOperator.Contains, FilterText));
+
+        if (FilterText != string.Empty)
+        {
+            AllPublishers = AllPublishers.ToDataSourceResult(request).Data as List<Publisher>;
+        }
+        else
+        {
+            AllPublishers = await GetAllPublishers();
+        }
+    }
+
+    private async Task ClearFilter()
+    {
+        FilterText = string.Empty;
+        await Filter();
+    }
+
+    private void Sort()
+    {
+        var request = new DataSourceRequest()
+        {
+            Sorts = new List<SortDescriptor>()
+        };
+
+        if(SortDirection == "Ascending")
+            request.Sorts.Add(new SortDescriptor("PublisherName", ListSortDirection.Ascending));
+        else
+            request.Sorts.Add(new SortDescriptor("PublisherName", ListSortDirection.Descending));
+
+        AllPublishers = AllPublishers.ToDataSourceResult(request).Data as List<Publisher>;
+    }
 }

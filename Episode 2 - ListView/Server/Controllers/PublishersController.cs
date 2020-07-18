@@ -10,7 +10,6 @@ using BookStores.Server.Repositories;
 
 namespace BookStoresWebAPI.Controllers
 {
-    //[Authorize]
     [Route("[controller]")]
     [ApiController]
     public class PublishersController : ControllerBase
@@ -23,7 +22,7 @@ namespace BookStoresWebAPI.Controllers
             _bookStoresRepository = bookStoresRepository;
         }
 
-        // GET: api/Publishers
+        // GET: Publishers/GetPublishers
         [HttpGet("GetPublishers")]
         public ActionResult<IEnumerable<Publisher>> GetPublishers()
         {
@@ -31,7 +30,23 @@ namespace BookStoresWebAPI.Controllers
             return publisherList;
         }
 
-        // GET: api/Publishers/5
+        // GET: Publishers/GetPublishersByPage
+        [HttpGet("GetPublishersByPage")]
+        public async Task<ActionResult<IEnumerable<Publisher>>> GetPublishersByPage(int pageIndex, int pageSize)
+        {
+            await Task.Delay(200); //database/network connection delay
+            List<Publisher> publisherList = _bookStoresRepository.GetPublishers();
+            return publisherList.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        // GET: Publishers/GetTotalCount
+        [HttpGet("GetTotalCount")]
+        public ActionResult<int> GetTotalCount()
+        {
+            return _bookStoresRepository.GetPublishers().Count();
+        }
+
+        // GET: Publishers/5
         [HttpGet("GetPublisher/{id}")]
         
         public ActionResult<Publisher> GetPublisher(int id)
@@ -39,7 +54,7 @@ namespace BookStoresWebAPI.Controllers
             return _bookStoresRepository.GetPublisher(id);
         }
 
-        // PUT: api/Publishers/5
+        // PUT: Publishers/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("UpdatePublisher/{id}")]
@@ -49,7 +64,7 @@ namespace BookStoresWebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Publishers
+        // POST: Publishers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost("CreatePublisher")]
@@ -59,7 +74,7 @@ namespace BookStoresWebAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Publishers/5
+        // DELETE: Publishers/5
         [HttpDelete("DeletePublisher/{id}")]
         public ActionResult<Publisher> DeletePublisher(int id)
         {
