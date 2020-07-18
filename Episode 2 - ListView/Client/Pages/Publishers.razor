@@ -15,7 +15,7 @@
     }
     else
     {
-        <TelerikListView Data="AllPublishers"
+        <TelerikListView Data="PublishersByPage"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
                          PageChanged="PageChangedHandler"
@@ -23,7 +23,9 @@
                          OnUpdate="UpdatePublisher"
                          OnCreate="CreatePublisher"
                          OnEdit="EditHandler"
-                         OnCancel="CancelHandler">
+                         OnCancel="CancelHandler"
+                         OnRead="OnReadHandler"
+                         TotalCount="TotalCount">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -110,7 +112,7 @@
                 </div>
             </EditTemplate>
             <FooterTemplate>
-                <strong style="font-size:larger">Total Count : @AllPublishers.Count()</strong>
+                <strong style="font-size:larger">Total Count : @TotalCount</strong>
             </FooterTemplate>
         </TelerikListView>
     }
@@ -142,7 +144,7 @@
         TotalCount = await GetTotalCount();
 
         //getting all publishers
-        AllPublishers = await GetAllPublishers();
+        //AllPublishers = await GetAllPublishers();
     }
 
     private async Task OnReadHandler(ListViewReadEventArgs listViewReadEventArgs)
