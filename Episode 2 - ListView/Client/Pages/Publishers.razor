@@ -280,8 +280,6 @@
             if (response.IsSuccessStatusCode)
             {
                 AllPublishers = await response.Content.ReadFromJsonAsync<List<Publisher>>();
-
-                StateHasChanged();
             }
         }
         else
