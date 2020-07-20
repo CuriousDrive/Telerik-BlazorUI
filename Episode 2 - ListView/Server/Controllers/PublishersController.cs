@@ -34,7 +34,7 @@ namespace BookStoresWebAPI.Controllers
         [HttpGet("GetPublishersByPage")]
         public async Task<ActionResult<IEnumerable<Publisher>>> GetPublishersByPage(int pageIndex, int pageSize)
         {
-            await Task.Delay(200); //database/network connection delay
+            await Task.Delay(400); //database/network connection delay
             List<Publisher> publisherList = _bookStoresRepository.GetPublishers();
             return publisherList.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }

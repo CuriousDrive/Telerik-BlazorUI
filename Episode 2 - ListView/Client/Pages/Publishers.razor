@@ -29,12 +29,14 @@
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
+                    &nbsp;
                     <label style="font-size:large; font-weight:bold">
                         Enable Paging :
                         <TelerikCheckBox @bind-Value="Paging"></TelerikCheckBox>
                     </label>
                 </div>
                 <div class="col-12 row">
+                    &nbsp;
                     <label style="font-size:large; font-weight:bold">
                         Page Size :
                         <TelerikDropDownList Data="PageSizeOptions"
@@ -43,17 +45,20 @@
                     </label>
                 </div>
                 <div class="col-12 row">
+                    &nbsp;
                     <label style="font-size:large; font-weight:bold">
                         @PageChangedMessage
                     </label>
                 </div>
                 <div class="col-12 row">
+                    &nbsp;
                     <TelerikTextBox @bind-Value="@FilterText"></TelerikTextBox>
                     <TelerikButton OnClick="@Filter">Filter</TelerikButton> &nbsp;
                     <TelerikButton OnClick="@ClearFilter">Clear Filter</TelerikButton>
                 </div>
                 <br />
                 <div class="col-12 row">
+                    &nbsp;
                     Sort by Name:&nbsp;
                     <TelerikDropDownList Data="SortDirections"
                                          @bind-Value="SortDirection"
@@ -62,6 +67,7 @@
                 </div>
                 <br />
                 <div class="col-12 row">
+                    &nbsp;
                     <ListViewCommandButton Command="Add" Icon="@IconName.Plus">Add</ListViewCommandButton>
                 </div>
                 <br />
@@ -112,9 +118,10 @@
                 </div>
             </EditTemplate>
             <FooterTemplate>
-                <strong style="font-size:larger">Total Count : @TotalCount</strong>
+                <strong style="font-size:larger">Total Count : TotalCount</strong>
             </FooterTemplate>
         </TelerikListView>
+        <br/>
     }
 </div>
 
@@ -145,6 +152,7 @@
 
         //getting all publishers
         //AllPublishers = await GetAllPublishers();
+
     }
 
     private async Task OnReadHandler(ListViewReadEventArgs listViewReadEventArgs)
@@ -160,7 +168,7 @@
     private void EditHandler(ListViewCommandEventArgs listViewCommandEventArgs)
     {
         var publisher = listViewCommandEventArgs.Item as Publisher;
-        EditCities = publisher.PubId < 4 ? true : false;
+        EditCities = publisher.PubId > 4 ? true : false;
     }
 
     private void CancelHandler(ListViewCommandEventArgs listViewCommandEventArgs)
