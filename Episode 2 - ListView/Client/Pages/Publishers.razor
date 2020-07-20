@@ -15,7 +15,7 @@
     }
     else
     {
-        <TelerikListView Data="AllPublishers"
+        <TelerikListView Data="PublishersByPage"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
                          PageChanged="PageChangedHandler"
@@ -23,7 +23,9 @@
                          OnUpdate="UpdatePublisher"
                          OnCreate="CreatePublisher"
                          OnEdit="EditHandler"
-                         OnCancel="CancelHandler">
+                         OnCancel="CancelHandler"
+                         OnRead="OnReadHandler"
+                         TotalCount="TotalCount">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -50,16 +52,16 @@
                 </div>
                 <div class="col-12 row">
                     &nbsp;
-                    Sort by Name:&nbsp;
-                    <TelerikDropDownList Data="SortDirections"
-                                         @bind-Value="SortDirection"
-                                         Width="150px"></TelerikDropDownList> &nbsp;
-                    <TelerikButton @onclick="Sort">Sort</TelerikButton>
+                    <label style="font-size:large; font-weight:bold">Sort by Publihser Name : </label>&nbsp;
+                        <TelerikDropDownList Data="SortDirections"
+                                             @bind-Value="SortDirection"
+                                             Width="150px"></TelerikDropDownList> &nbsp;
+                        <TelerikButton @onclick="Sort">Sort</TelerikButton>
                 </div>
                 <br />
                 <div class="col-12 row">
                     &nbsp;
-                    <TelerikTextBox @bind-Value="@FilterText"></TelerikTextBox>
+                    <TelerikTextBox @bind-Value="@FilterText" PlaceHolder="Search by publisher name" Width="250px"></TelerikTextBox> &nbsp;
                     <TelerikButton OnClick="@Filter">Filter</TelerikButton> &nbsp;
                     <TelerikButton OnClick="@ClearFilter">Clear Filter</TelerikButton>
                 </div>
@@ -116,7 +118,7 @@
                 </div>
             </EditTemplate>
             <FooterTemplate>
-                <strong style="font-size:larger">Total Count : @AllPublishers.Count()</strong>
+                <strong style="font-size:larger">Total Count : @TotalCount</strong>
             </FooterTemplate>
         </TelerikListView>
         <br/>
@@ -149,7 +151,7 @@
         TotalCount = await GetTotalCount();
 
         //getting all publishers
-        AllPublishers = await GetAllPublishers();
+        //AllPublishers = await GetAllPublishers();
 
     }
 
@@ -271,7 +273,7 @@
         {
             Filters = new List<IFilterDescriptor>()
         };
-        request.Filters.Add(new FilterDescriptor("PublisherName", FilterOperator.Contains, FilterText));
+        request.Filters.Add(new FilterDescriptor("PublisherName", FilterOperator.EndsWith, FilterText));
 
         if (FilterText != string.Empty)
         {
