@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using BookStoresWebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using BookStores.Server.Repositories;
+using Telerik.DataSource;
+using Telerik.DataSource.Extensions;
+
 
 namespace BookStoresWebAPI.Controllers
 {
@@ -44,6 +47,14 @@ namespace BookStoresWebAPI.Controllers
         public ActionResult<int> GetTotalCount()
         {
             return _bookStoresRepository.GetPublishers().Count();
+        }
+
+        // POST: Publishers/GetPublishersByName
+        [HttpPost("GetPublishersByName")]
+        public IEnumerable<Publisher> GetPublishersByName([FromBody] DataSourceRequest request)
+        {
+            DataSourceResult result = _bookStoresRepository.GetPublishers().ToDataSourceResult(request);
+            return result.Data.OfType<Publisher>().ToList();
         }
 
         // GET: Publishers/5

@@ -15,7 +15,7 @@
     }
     else
     {
-        <TelerikListView Data="PublishersByPage"
+        <TelerikListView Data="AllPublishers"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
                          PageChanged="PageChangedHandler"
@@ -23,9 +23,7 @@
                          OnUpdate="UpdatePublisher"
                          OnCreate="CreatePublisher"
                          OnEdit="EditHandler"
-                         OnCancel="CancelHandler"
-                         OnRead="OnReadHandler"
-                         TotalCount="TotalCount">
+                         OnCancel="CancelHandler">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -52,18 +50,18 @@
                 </div>
                 <div class="col-12 row">
                     &nbsp;
-                    <TelerikTextBox @bind-Value="@FilterText"></TelerikTextBox>
-                    <TelerikButton OnClick="@Filter">Filter</TelerikButton> &nbsp;
-                    <TelerikButton OnClick="@ClearFilter">Clear Filter</TelerikButton>
-                </div>
-                <br />
-                <div class="col-12 row">
-                    &nbsp;
                     Sort by Name:&nbsp;
                     <TelerikDropDownList Data="SortDirections"
                                          @bind-Value="SortDirection"
                                          Width="150px"></TelerikDropDownList> &nbsp;
                     <TelerikButton @onclick="Sort">Sort</TelerikButton>
+                </div>
+                <br />
+                <div class="col-12 row">
+                    &nbsp;
+                    <TelerikTextBox @bind-Value="@FilterText"></TelerikTextBox>
+                    <TelerikButton OnClick="@Filter">Filter</TelerikButton> &nbsp;
+                    <TelerikButton OnClick="@ClearFilter">Clear Filter</TelerikButton>
                 </div>
                 <br />
                 <div class="col-12 row">
@@ -118,7 +116,7 @@
                 </div>
             </EditTemplate>
             <FooterTemplate>
-                <strong style="font-size:larger">Total Count : TotalCount</strong>
+                <strong style="font-size:larger">Total Count : @AllPublishers.Count()</strong>
             </FooterTemplate>
         </TelerikListView>
         <br/>
@@ -151,7 +149,7 @@
         TotalCount = await GetTotalCount();
 
         //getting all publishers
-        //AllPublishers = await GetAllPublishers();
+        AllPublishers = await GetAllPublishers();
 
     }
 
@@ -277,7 +275,14 @@
 
         if (FilterText != string.Empty)
         {
-            AllPublishers = AllPublishers.ToDataSourceResult(request).Data as List<Publisher>;
+            var response = await _httpClient.PostAsJsonAsync<DataSourceRequest>("publishers/getpublishersbyname", request); //AllPublishers.ToDataSourceResult(request).Data as List<Publisher>;
+
+            if (response.IsSuccessStatusCode)
+            {
+                AllPublishers = await response.Content.ReadFromJsonAsync<List<Publisher>>();
+
+                StateHasChanged();
+            }
         }
         else
         {
