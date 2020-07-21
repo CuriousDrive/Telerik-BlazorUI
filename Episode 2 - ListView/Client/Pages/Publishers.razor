@@ -15,7 +15,7 @@
     }
     else
     {
-        <TelerikListView Data="AllPublishers"
+        <TelerikListView Data="PublishersByPage"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
                          PageChanged="PageChangedHandler"
@@ -23,7 +23,9 @@
                          OnUpdate="UpdatePublisher"
                          OnCreate="CreatePublisher"
                          OnEdit="EditHandler"
-                         OnCancel="CancelHandler">
+                         OnCancel="CancelHandler"
+                         OnRead="OnReadHandler"
+                         TotalCount="TotalCount">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -116,7 +118,7 @@
                 </div>
             </EditTemplate>
             <FooterTemplate>
-                <strong style="font-size:larger">Total Count : @AllPublishers.Count()</strong>
+                <strong style="font-size:larger">Total Count : @TotalCount</strong>
             </FooterTemplate>
         </TelerikListView>
         <br/>
@@ -146,10 +148,10 @@
         Cities = new string[] { "Boston", "Washington", "Chicago", "Dallas", "Berkeley", "New York City", "Portland", "Naperville", "Nashville" };
 
         //getting total count of publishers
-        //TotalCount = await GetTotalCount();
+        TotalCount = await GetTotalCount();
 
         //getting all publishers
-        AllPublishers = await GetAllPublishers();
+        //AllPublishers = await GetAllPublishers();
 
     }
 
