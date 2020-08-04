@@ -1,0 +1,361 @@
+﻿@page "/"
+@using BookStores.Models
+@using BookStores.Services
+@inject HttpClient _httpClient
+
+<div class="col-12">
+    <h3><b>Enter Author Information</b></h3>
+    <hr />
+    <EditForm Model="@author" OnValidSubmit="@CreateAuthor">
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">First Name :</label>
+            <TelerikTextBox Id="txtFirstName"
+                            Class="form-control col-4"
+                            ValueExpression="@(() => author.FirstName)"
+                            Enabled="@(SetTextBoxAccess())"
+                            ValueChanged="@((string value) => TextBoxEventHandler(value))"></TelerikTextBox>
+            <div class="col-4">@TextBoxValue</div>
+        </div>
+        <br />
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">Last Name :</label>
+            <TelerikTextBox Id="txtFirstName"
+                            Class="form-control col-4"
+                            @bind-Value="author.LastName"></TelerikTextBox>
+        </div>
+        <br />
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">City :</label>
+            @if (Cities.Count() > 0)
+            {
+                <TelerikAutoComplete Id="acCities"
+                                     Class="form-control col-4"
+                                     @bind-Value="author.City"
+                                     Data="Cities"
+                                     ValueField="@nameof(City.CityName)"
+                                     Filterable="true"
+                                     MinLength="2"
+                                     FilterOperator="StringFilterOperator"
+                                     Placeholder="please select city..."
+                                     ClearButton="false"
+                                     OnChange="DropDownListEventHandler">
+                    <HeaderTemplate>
+                        <strong>Top Cities</strong>
+                    </HeaderTemplate>
+                    <FooterTemplate>
+                        <strong>Total : @Cities.Count()</strong>
+                    </FooterTemplate>
+                    <ItemTemplate Context="city">
+                        @city.CityName, @GetStateFromCity(city.CityName)
+                    </ItemTemplate>
+                </TelerikAutoComplete>
+            }
+        </div>
+        <br />
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">State :</label>
+            @if (States.Length > 0)
+            {
+                <TelerikDropDownList Id="ddlStates"
+                                     Class="form-control col-4"
+                                     @bind-Value="author.State"
+                                     Data="States"></TelerikDropDownList>
+            }
+        </div>
+        <br />
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">Book Types :</label>
+
+            <TelerikMultiSelect Id="msBookTypes"
+                                Class="form-control col-4"
+                                Data="BookTypes"
+                                TextField="@nameof(BookType.Type)"
+                                ValueField="@nameof(BookType.Id)"
+                                ValueExpression="@(() => SelectedBookTypeIds)"
+                                Filterable="true"
+                                ValueChanged="@((List<int> value) => MultiSelectEventHandler(value))"
+                                OnRead="LoadBookTypes"></TelerikMultiSelect>
+            <div class="col-4">LoadBookTypes gets call @Count times</div>
+
+        </div>
+        <br />
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">@Message</label>
+            @if (SelectedBookTypeIds.Count() > 0)
+            {
+                @foreach (int selectedId in SelectedBookTypeIds)
+                {
+                    @(BookTypes.Where(bt => bt.Id == selectedId).FirstOrDefault().Type) <span>,</span>
+                }
+            }
+        </div>
+        <br />
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">Subscriptions :</label>            
+            <label class="col-4">
+                <TelerikCheckBox Id="cbAll"
+                                 @bind-Value="SelectAll"
+                                 Indeterminate="SelectAllInderminate"></TelerikCheckBox>
+                All
+            </label>
+        </div>
+        @if (Subscriptions.Count() > 0)
+        {
+            @foreach (Subscription subscription in Subscriptions)
+            {
+                <div class="col-12 row">
+                    <div class="col-3"></div>
+                    <label class="col-4">
+                        <TelerikCheckBox Id="cbSubs"
+                                         @bind-Value="subscription.Selected"></TelerikCheckBox>
+                        @subscription.SubscriptionName
+                    </label>
+                    <div class="col-4">@subscription.Selected</div>
+                </div>
+            }
+        }
+        <br />
+        <div class="col-12 row">
+            <span class="col-3"></span>
+            <input type="submit" class="form-control col-1 btn btn-primary" value="Save" />
+            <span>&nbsp;</span>
+            <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" />
+        </div>
+    </EditForm>
+</div>
+<br />
+<div class="col-12">
+    <h3><b>Authors</b></h3>
+
+    @if (authorList == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var author in authorList)
+                {
+                    <tr>
+                        <td>@author.FirstName</td>
+                        <td>@author.LastName</td>
+                        <td>@author.City</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+
+    //properties
+
+    public Author author { get; set; }
+    public List<Author> authorList { get; set; }
+
+    public List<BookType> BookTypes = new List<BookType>();
+    public List<City> Cities { get; set; } = new List<City>();
+    public List<Subscription> Subscriptions { get; set; } = new List<Subscription>();
+
+    public string[] States { get; set; } =
+        new string[] { "NY", "CA", "IL", "AZ", "PA", "OH", "NC", "IN", "WA", "CO", "TX", "FL" };
+
+    public string TextBoxValue { get; set; }
+    public string DropDownListValue { get; set; }
+
+    Telerik.Blazor.StringFilterOperator StringFilterOperator { get; set; } = StringFilterOperator.Contains;
+
+    public List<int> SelectedBookTypeIds { get; set; } = new List<int>();
+
+    public string Message { get; set; }
+    public int Count { get; set; }
+
+    public bool SelectAll
+    {
+        get
+        {
+            return Subscriptions.All(sub => sub.Selected);
+        }
+        set
+        {
+            Subscriptions.ForEach(sub => sub.Selected = value);
+        }
+    }
+
+    public bool SelectAllInderminate
+    {
+        get
+        {
+            return !SelectAll && Subscriptions.Any(sub => sub.Selected);
+        }
+    }
+
+    private void MultiSelectEventHandler(object value)
+    {
+        List<int> selectedIds = (List<int>)value;
+        SelectedBookTypeIds = selectedIds;
+
+        if (selectedIds.Count() > 3)
+            Message = "more than 3 book types have been selected.";
+        else
+            Message = "";
+    }
+
+    private bool SetTextBoxAccess()
+    {
+        return true;
+    }
+
+    private void TextBoxEventHandler(string value)
+    {
+        author.FirstName = value;
+        TextBoxValue = value;
+    }
+
+    private void DropDownListEventHandler(object value)
+    {
+        DropDownListValue = (string)value;
+        //string selectedCity = Cities.Where(ct => ct.Id == DropDownListValue).FirstOrDefault().CityName;
+        author.State = GetStateFromCity(DropDownListValue);
+        //author.City = selectedCity;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        author = new Author();
+        //authorList = new List<Author>();
+        await LoadAuthors();
+
+        //loading cities
+        LoadCities();
+
+        //loading booktypes
+        //LoadBookTypes();
+
+        //loading subscriptions
+        LoadSubscriptions();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadAuthors()
+    {
+        authorList = await _httpClient.GetFromJsonAsync<List<Author>>("authors/getauthors");
+
+        if (authorList != null)
+            authorList = authorList.OrderByDescending(auth => auth.AuthorId).ToList();
+
+        StateHasChanged();
+    }
+
+    private void LoadCities()
+    {
+        Cities.Add(new City { Id = "1", CityName = "New York City" });
+        Cities.Add(new City { Id = "2", CityName = "Los Angeles" });
+        Cities.Add(new City { Id = "3", CityName = "Chicago" });
+        Cities.Add(new City { Id = "4", CityName = "Houston" });
+        Cities.Add(new City { Id = "5", CityName = "Phoenix" });
+        Cities.Add(new City { Id = "6", CityName = "Philadelphia" });
+        Cities.Add(new City { Id = "7", CityName = "San Antonio" });
+        Cities.Add(new City { Id = "8", CityName = "San Diego" });
+        Cities.Add(new City { Id = "9", CityName = "Dallas" });
+        Cities.Add(new City { Id = "10", CityName = "San Jose" });
+        Cities.Add(new City { Id = "11", CityName = "Austin" });
+        Cities.Add(new City { Id = "12", CityName = "Jacksonville" });
+        Cities.Add(new City { Id = "13", CityName = "Fort Worth" });
+        Cities.Add(new City { Id = "14", CityName = "Columbus" });
+        Cities.Add(new City { Id = "15", CityName = "San Francisco" });
+        Cities.Add(new City { Id = "16", CityName = "Charlotte" });
+        Cities.Add(new City { Id = "17", CityName = "Indianapolis" });
+        Cities.Add(new City { Id = "18", CityName = "Seattle" });
+        Cities.Add(new City { Id = "19", CityName = "Denver" });
+    }
+
+    private void LoadBookTypes(MultiSelectReadEventArgs multiSelectReadEventArgs)
+    {
+        Count++;
+
+        //loading book types
+        BookTypes.Add(new BookType { Id = 1, Type = "Adventure" });
+        BookTypes.Add(new BookType { Id = 2, Type = "Romance" });
+        BookTypes.Add(new BookType { Id = 3, Type = "Mystery" });
+        BookTypes.Add(new BookType { Id = 4, Type = "Horror" });
+        BookTypes.Add(new BookType { Id = 5, Type = "Thriller" });
+        BookTypes.Add(new BookType { Id = 6, Type = "Science Fiction" });
+        BookTypes.Add(new BookType { Id = 7, Type = "Cooking" });
+        BookTypes.Add(new BookType { Id = 8, Type = "Development" });
+        BookTypes.Add(new BookType { Id = 9, Type = "Motivational" });
+    }
+
+    private void LoadSubscriptions()
+    {
+        Subscriptions.Add(new Subscription { Id = 1, SubscriptionName = "Gold" });
+        Subscriptions.Add(new Subscription { Id = 2, SubscriptionName = "Silver" });
+        Subscriptions.Add(new Subscription { Id = 3, SubscriptionName = "Bronze" });
+    }
+
+    private async Task CreateAuthor()
+    {
+        if (author.AuthorId == 0)
+            await _httpClient.PostAsJsonAsync<Author>("authors/createauthor", author);
+
+        await LoadAuthors();
+
+        author = new Author();
+    }
+
+    private async Task UpdateAuthor()
+    {
+        if (author.AuthorId != 0)
+            await _httpClient.PutAsJsonAsync<Author>("authors/UpdateAuthor" + author.AuthorId, author);
+
+        await LoadAuthors();
+
+        author = new Author();
+    }
+
+    private async Task DeleteAuthor(int authorId)
+    {
+        await _httpClient.DeleteAsync("authors/DeleteAuthor/"+ authorId);
+        await LoadAuthors();
+    }
+
+    private string GetStateFromCity(string city)
+    {
+        if (city == "New York City")
+            return "NY";
+        if (city == "Los Angeles" || city == "San Diego" || city == "San Jose" || city == "San Francisco")
+            return "CA";
+        if (city == "San Antonio" || city == "Houston" || city == "Dallas" || city == "Austin" || city == "Fort Worth")
+            return "TX";
+        if (city == "Chicago")
+            return "IL";
+        if (city == "Phoenix")
+            return "AZ";
+        if (city == "Philadelphia")
+            return "PA";
+        if (city == "Jacksonville")
+            return "FL";
+        if (city == "Columbus")
+            return "OH";
+        if (city == "Charlotte")
+            return "NC";
+        if (city == "Indianapolis")
+            return "IN";
+        if (city == "Seattle")
+            return "WA";
+        if (city == "Denver")
+            return "CO";
+
+        return "";
+    }
+}

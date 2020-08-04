@@ -1,0 +1,385 @@
+﻿    Introduction
+    Demo App - Done
+    Template
+    HeaderTemplate & FooterTemplate
+    Manual Data Source Operations
+        - Pagable, PageSize 
+        - PageChanged Event
+    EditTemplate 
+        - I want to have cascading dropdown list 
+        - Enums for Add, Edit , Save, Delete and Cancel
+        - CUD Events - OnCreate, OnUpdate and OnDelete
+        - OnEdit and OnCancel Events
+    Manual Data Source Operations
+        - OnRead Event        
+        - You can make custom methods to make filter and sort operations
+    -----------------------------------------------------------------------------------------------------
+    
+    -- taking backup of this before getting started with using Telerik ListView Component
+
+    @if (publisherList == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>PublisherName</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var publisher in publisherList)
+                {
+                    <tr>
+                        <td>@publisher.PublisherName</td>
+                        <td>@publisher.City</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    private async Task SavePublisher()
+    {
+        if (publisher.PubId == 0)
+            await bookStoresService.SaveAsync("publishers/createpublisher", publisher);
+        else
+            await bookStoresService.UpdateAsync("publishers/updatepublisher", publisher.PubId, publisher);
+
+        await LoadPublishers();
+
+        publisher = new Publisher();
+    }
+
+    private async Task DeletePublisher(int pubId)
+    {
+        await bookStoresService.DeleteAsync("publishers/DeletePublisher", pubId);
+
+        await LoadPublishers();
+    }
+
+    private void EditPublisher(Publisher argPublisher)
+    {
+        publisher = argPublisher;
+    }
+
+    -----------------------------------------------------------------------------------------------------
+
+    -- this is from when I studied the ListView Component the first time
+    <TelerikListView Data="publisherList"
+                         Pageable="true"
+                         PageSize="5"
+                         OnUpdate="UpdatePublisher"
+                         OnDelete="DeletePublisher"
+                         OnCreate="CreatePublisher"
+                         @ref="TheListViewRef">
+            <HeaderTemplate>
+                <ListViewCommandButton Command="Add">Add</ListViewCommandButton>
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="col-12 row" style="font-size:x-large">
+                        @publisher.PublisherName
+                    </div>
+                    <div class="col-12 row">
+                        <div class="col-8" style="font-size:large">
+                            @publisher.City, @publisher.State
+                        </div>
+                        <div class="col-4">
+                            <ListViewCommandButton Command="Edit">Edit</ListViewCommandButton>
+                            <ListViewCommandButton Command="Delete">Delete</ListViewCommandButton>
+                        </div>
+                    </div>                    
+                </div>                
+            </Template>
+            <EditTemplate Context="publisher">
+                <TelerikTextBox @bind-Value="publisher.PublisherName" PlaceHolder="publisher name"></TelerikTextBox>
+                <br />
+                <TelerikDropDownList Data="Cities" 
+                                     Value="publisher.City"
+                                     ValueChanged="@((string value) => OnChangeEventHandler(value, publisher))"></TelerikDropDownList>
+                <br />
+                <ListViewCommandButton Command="Save">Save</ListViewCommandButton>
+            </EditTemplate>
+        </TelerikListView>
+        
+
+        //Func<string, Publisher> OnChangeEventHandler(string value)
+
+        private void OnChangeEventHandler(string value, Publisher publisher1)
+        {
+            publisher1.City = value;
+            publisher1.State = "TX";
+        }
+
+        private void EditPublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+        {
+            publisher = listViewCommandEventArgs.Item as Publisher;
+        }
+
+        private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+        {
+            var publisher = (Publisher)listViewCommandEventArgs.Item;
+            await bookStoresService.SaveAsync("publishers/CreatePublisher", publisher);
+
+            await LoadPublishers();
+        }
+
+        private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+        {
+            var publisher = (Publisher)listViewCommandEventArgs.Item;
+            await bookStoresService.UpdateAsync("publishers/UpdatePublisher/", publisher.PubId, publisher);
+
+            await LoadPublishers();
+        }
+
+        private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+        {
+            var publisher = (Publisher)listViewCommandEventArgs.Item;
+            await bookStoresService.DeleteAsync("publishers/DeletePublisher/", publisher.PubId);
+
+            await LoadPublishers();
+        }
+
+
+        -----------------------------------------------------------------------------------------------------
+
+        Section - 2 Backup 
+        <TelerikListView Data="publisherList">
+            <HeaderTemplate>
+                <strong style="font-size:large">Best publishers in USA</strong>
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bolder">@publisher.PublisherName</h5>
+                                <p class="card-subtitle">@publisher.City, @publisher.State</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Template>
+            <FooterTemplate>
+                <strong style="font-size:large">Total Count : @publisherList.Count()</strong>
+            </FooterTemplate>
+        </TelerikListView>
+
+        -----------------------------------------------------------------------------------------------------
+
+        Getting ready for Paging section, this is how it shoudl look like now - 
+
+        <TelerikListView Data="publisherList"
+                         Pageable="true"
+                         PageSize="PageSizeOption"
+                         PageChanged="PageChangedHandler">
+            <HeaderTemplate>
+                <TelerikDropDownList Data="PageSizeOptions"                                     
+                                     @bind-Value="PageSizeOption"
+                                     Class="col-1"></TelerikDropDownList>
+                <strong>@PageChangeMessage</strong>
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bolder">@publisher.PublisherName</h5>
+                                <p class="card-subtitle">@publisher.City , @publisher.State</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Template>
+            <FooterTemplate>
+                <strong style="font-size:larger">Total Count : @publisherList.Count()</strong>
+            </FooterTemplate>
+        </TelerikListView>
+
+        -----------------------------------------------------------------------------------------------------
+
+	    public int[] PageSizeOptions { get; set; } = new int[] { 2, 3, 4, 5, 10 };
+    	public int PageSizeOption { get; set; } = 5;
+
+
+        <TelerikListView Data="publisherList"
+                         Pageable="Paging"
+                         PageSize="PageSizeOption"
+                         PageChanged="PageChangedHandler">
+            <HeaderTemplate>
+                <br />
+                <div class="row col-12">
+                    <label style="font-size:large; font-weight:bold">
+                        Enable Paging :
+                        <TelerikCheckBox @bind-Value="Paging"></TelerikCheckBox>
+                        &nbsp;
+                    </label>
+                    <label style="font-size:large; font-weight:bold">
+                        Page size :
+                        <TelerikDropDownList Data="PageSizeOptions"
+                                             @bind-Value="PageSizeOption"
+                                             Class="col-3"></TelerikDropDownList>
+                    </label>
+                    <label style="font-size:large; font-weight:bold">
+                        @PageChangeMessage
+                    </label>
+                </div>
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bolder">@publisher.PublisherName</h5>
+                                <p class="card-subtitle">@publisher.City , @publisher.State</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Template>
+            <FooterTemplate>
+                <strong style="font-size:larger">Total Count : @publisherList.Count()</strong>
+            </FooterTemplate>
+        </TelerikListView>
+
+        -----------------------------------------------------------------------------------------------------
+
+        - I removed the add block from the top of the page
+
+        <div class="col-12">
+            <h3><b>Enter Publisher Information</b></h3>
+            <hr />
+            <div class="col-12 row">
+                <label class="col-3 font-weight-bold">Publisher Name :</label>
+                <input class="form-control col-4" @bind="publisher.PublisherName" placeholder="publisher's name" />
+            </div>
+            <br />
+            <div class="col-12 row">
+                <label class="col-3 font-weight-bold">City :</label>
+                <select class="form-control col-4" @bind="publisher.City">
+                    @if (@Cities != null)
+                    {
+                        <option value="">select city..</option>
+                        @foreach (var city in Cities)
+                        {
+                            <option value="@city">@city</option>
+                        }
+                    }
+                </select>
+            </div>
+            <br />
+            <div class="col-12 row">
+                <span class="col-3"></span>
+                <input type="submit" class="form-control col-1 btn btn-primary" value="Save" @onclick="CreatePublisher" />
+                <span>&nbsp;</span>
+                <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" @onclick="ClearPublisher" />
+            </div>
+        </div>
+
+        Maybe found a bug - When you don't mention anything in EditTemplate it does something with 1st 2 items
+
+        -- this is how it should look like
+        
+        <TelerikListView Data="publisherList"
+                         Pageable="Paging"
+                         PageSize="PageSizeOption"
+                         PageChanged="PageChangedHandler"
+                         OnDelete="DeletePublisher"
+                         OnUpdate="UpdatePublisher"
+                         OnCreate="CreatePublisher">
+            <HeaderTemplate>
+                <br />
+                <div class="col-12 row">
+                    <label style="font-size:large; font-weight:bold">
+                        Enable Paging :
+                        <TelerikCheckBox @bind-Value="Paging"></TelerikCheckBox>
+                    </label>
+                </div>
+                <div class="col-12 row">
+                    <label style="font-size:large; font-weight:bold">
+                        Page Size :
+                        <TelerikDropDownList Data="PageSizeOptions"
+                                             @bind-Value="PageSizeOption"
+                                             Class="col-3"></TelerikDropDownList>
+                    </label>
+                </div>
+                <div class="col-12 row">
+                    <label style="font-size:large; font-weight:bold">
+                        @PageChangedMessage                        
+                    </label>
+                </div>                
+                <div class="col-12 row">
+                    <ListViewCommandButton Command="Add" Icon="@IconName.Plus">Add</ListViewCommandButton>                   
+                </div>
+                <br />
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bolder">@publisher.PublisherName</h5>
+                                <p class="card-subtitle">@publisher.City , @publisher.State</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br />
+                            <ListViewCommandButton Command="Delete" Icon="@IconName.Delete">Delete</ListViewCommandButton>
+                            <ListViewCommandButton Command="Edit" Icon="@IconName.Edit">Edit</ListViewCommandButton>
+                        </div>
+                    </div>
+                </div>
+            </Template>
+            <EditTemplate Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>                                
+                                <TelerikDropDownList Data="Cities"
+                                                     Value="publisher.City"
+                                                     ValueChanged="@((string value) => ValueChangedHandler(value, publisher))"></TelerikDropDownList>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br />
+                            <ListViewCommandButton Command="Save" Icon="@IconName.Save">Save</ListViewCommandButton>
+                        </div>
+                    </div>
+                </div>
+            </EditTemplate>
+            <FooterTemplate>
+                <strong style="font-size:larger">Total Count : @publisherList.Count()</strong>
+            </FooterTemplate>
+        </TelerikListView>
+
+        -- going to copy this for edit template
+
+        <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>                     
+        <TelerikDropDownList Data="Cities" @bind-Value="publisher.City"></TelerikDropDownList>
+                                                     
+	
