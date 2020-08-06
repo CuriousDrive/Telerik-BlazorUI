@@ -19,6 +19,8 @@ namespace BookStoresWebAPI.Models
         public string State { get; set; }
         public string Zip { get; set; }
         public string EmailAddress { get; set; }
+        public decimal Salary { get; set; }
+        public int BooksCount { get; set; }
 
         public virtual ICollection<BookAuthor> BookAuthors { get; set; }
     }

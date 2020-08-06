@@ -1,11 +1,56 @@
-﻿Let's get ready with Telerik GridView
+﻿Sections - 
+
+Introduction & Scope -
+
+Using TelerikGrid - 
+
+Paging  - Basics
+        - Paging from the code
+
+Sorting - Basics
+        - Sorting from the code
+
+Filtering   - Basics
+            - Filter mode Row and Menu
+            - Filter from the code
+
+Grouping & Aggregates   - Basics
+                        - Grouping from the code
+                        - @context.Average,Count,Min,Sum
+                        - GroupHeaderTemplate & GroupFooterTemplate
+
+Editing     - Popup Editing
+                You should have EDIT and DELETE button
+                You don't need the SAVE and CANCEL button in the GridColumnCommand
+                On Click of Edit or Add you'll the popup for calling update and create
+                Performance is the best in this case
+            
+            - InLine Editing
+                You should have SAVE and CANCEL button in ShowInEdit mode
+                You should have EDIT and DELETE button as default
+
+            - InCell Editing
+                You should have SAVE and DELETE button, SAVE with ShowInEdit parameter set to true
+                You don't need EDIT button in the GridColumnCommand as you are editing in cell
+                CANCEL is not implemented at this time
+                
+Selection - 
+            
+
+------------------------------------------------------------------------------------------------  
+
 
 Questions - 
+How do I make my columns invisible?
+What if you want more columns to be updated in the popup and less to show?
 
-What do these properties do =>  Resizable="true" 
-                                Reorderable="true"
+InCell Edit mode does not even need the save button.
+I was able to save the record if I click anywhere on the page
 
+------------------------------------------------------------------------------------------------  
 
+Suggestions -
+In filter mode row, it would be nice to go to next column on tab key
 
 ------------------------------------------------------------------------------------------------  
 

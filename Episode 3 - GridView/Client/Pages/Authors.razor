@@ -14,29 +14,42 @@
     {
        <TelerikGrid Data="AuthorList"
                     Pageable="true"
-                    Sortable="true"
-                    Resizable="true"
+                    Sortable="true"                    
                     Groupable="true"
+                    Resizable="true"
+                    Reorderable="true"
                     FilterMode="GridFilterMode.FilterRow"
+                    EditMode="@GridEditMode.Inline"
                     OnCreate="CreateAuthor"
                     OnUpdate="UpdateAuthor"
                     OnDelete="DeleteAuthor">
            <GridToolBar>
                <GridCommandButton Command="Add" Icon="@IconName.Plus">Add</GridCommandButton>
            </GridToolBar>
-           <GridColumns>
+           <GridAggregates>
+               <GridAggregate Field="@nameof(Author.AuthorId)" Aggregate="@GridAggregateType.Count"></GridAggregate>
+               <GridAggregate Field="@nameof(Author.Salary)" Aggregate="@GridAggregateType.Max"></GridAggregate>
+               <GridAggregate Field="@nameof(Author.BooksCount)" Aggregate="@GridAggregateType.Sum"></GridAggregate>
+           </GridAggregates>
+           <GridColumns>               
                <GridColumn Field="@nameof(Author.FirstName)" Title="First Name"></GridColumn>
                <GridColumn Field="@nameof(Author.LastName)" Title="Last Name"></GridColumn>
                <GridColumn Field="@nameof(Author.City)" Title="City"></GridColumn>
-               <GridColumn Field="@nameof(Author.State)" Title="State"></GridColumn>
+               <GridColumn Field="@nameof(Author.State)" Title="State">
+                   <GroupHeaderTemplate>
+                       <strong>Authors : @context.Count</strong> <br/>
+                       <strong>Max Salary : @context.Max</strong> <br />
+                       <strong>Total Books Written : @context.Sum</strong>
+                   </GroupHeaderTemplate>
+               </GridColumn>
                <GridCommandColumn>
-                   <GridCommandButton Command="Save" Icon="@IconName.Save">Save</GridCommandButton>
                    <GridCommandButton Command="Edit" Icon="@IconName.Edit">Edit</GridCommandButton>
                    <GridCommandButton Command="Delete" Icon="@IconName.Delete">Delete</GridCommandButton>
-                   <GridCommandButton Command="Cancel" Icon="@IconName.Cancel">Cancel</GridCommandButton>
+                   
+                   <GridCommandButton Command="Save" Icon="@IconName.Save" ShowInEdit="true">Save</GridCommandButton>
+                   <GridCommandButton Command="Cancel" Icon="@IconName.Cancel" ShowInEdit="true">Cancel</GridCommandButton>
                </GridCommandColumn>
            </GridColumns>
-           
        </TelerikGrid> 
     }
 </div>
@@ -119,7 +132,7 @@
     {
         Author = new Author();
         //authorList = new List<Author>();
-        await LoadAuthors();
+        AuthorList = await GetAuthors();
 
         //loading cities
         LoadCities();
@@ -133,14 +146,14 @@
         await base.OnInitializedAsync();
     }
 
-    private async Task LoadAuthors()
+    private async Task<List<Author>> GetAuthors()
     {
-        AuthorList = await _httpClient.GetFromJsonAsync<List<Author>>("authors/getauthors");
+        List<Author> authorList = await _httpClient.GetFromJsonAsync<List<Author>>("authors/getauthors");
 
-        if (AuthorList != null)
-            AuthorList = AuthorList.OrderByDescending(auth => auth.AuthorId).ToList();
+        if (authorList != null)
+            authorList = authorList.OrderByDescending(auth => auth.AuthorId).ToList();
 
-        StateHasChanged();
+        return authorList;
     }
 
     private void LoadCities()
@@ -195,28 +208,24 @@
         if (Author.AuthorId == 0)
             await _httpClient.PostAsJsonAsync<Author>("authors/createauthor", Author);
 
-        await LoadAuthors();
-
-        Author = new Author();
+        AuthorList = await GetAuthors();
     }
 
     private async Task UpdateAuthor(GridCommandEventArgs gridCommandEventArgs)
     {
         Author = gridCommandEventArgs.Item as Author;
         if (Author.AuthorId != 0)
-            await _httpClient.PutAsJsonAsync<Author>("authors/UpdateAuthor" + Author.AuthorId, Author);
+            await _httpClient.PutAsJsonAsync<Author>("authors/UpdateAuthor/" + Author.AuthorId, Author);
 
-        await LoadAuthors();
-
-        Author = new Author();
+        AuthorList = await GetAuthors();
     }
 
     private async Task DeleteAuthor(GridCommandEventArgs gridCommandEventArgs)
     {
-
         Author = gridCommandEventArgs.Item as Author;
         await _httpClient.DeleteAsync("authors/DeleteAuthor/"+ Author.AuthorId);
-        await LoadAuthors();
+
+        AuthorList = await GetAuthors();
     }
 
     private string GetStateFromCity(string city)

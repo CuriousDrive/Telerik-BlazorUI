@@ -13,10 +13,11 @@ namespace BookStores.Models
         public string LastName { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public string EmailAddress { get; set; }
-        public int Salary { get; set; }
+        public string EmailAddress { get; set; }        
         public string Phone { get; set; }
-        
+        public decimal Salary { get; set; }
+        public int BooksCount { get; set; }
+
         public Author()
         {
 
