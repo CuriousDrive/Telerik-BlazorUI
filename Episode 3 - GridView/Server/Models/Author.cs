@@ -5,11 +5,6 @@ namespace BookStoresWebAPI.Models
 {
     public partial class Author
     {
-        public Author()
-        {
-            BookAuthors = new HashSet<BookAuthor>();
-        }
-
         public int AuthorId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -21,7 +16,5 @@ namespace BookStoresWebAPI.Models
         public string EmailAddress { get; set; }
         public decimal Salary { get; set; }
         public int BooksCount { get; set; }
-
-        public virtual ICollection<BookAuthor> BookAuthors { get; set; }
     }
 }

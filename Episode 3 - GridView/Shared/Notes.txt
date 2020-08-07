@@ -34,18 +34,21 @@ Editing     - Popup Editing
                 You don't need EDIT button in the GridColumnCommand as you are editing in cell
                 CANCEL is not implemented at this time
                 
-Selection - 
+Selection   - 
             
 
 ------------------------------------------------------------------------------------------------  
 
 
 Questions - 
+
 How do I make my columns invisible?
+
 What if you want more columns to be updated in the popup and less to show?
 
-InCell Edit mode does not even need the save button.
-I was able to save the record if I click anywhere on the page
+For Edit and Add, in both cases the popup shows the update button
+
+Is there anything that I can use for formating the dollar amount
 
 ------------------------------------------------------------------------------------------------  
 

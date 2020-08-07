@@ -1,0 +1,111 @@
+﻿@page "/books"
+@using BookStores.Models
+@using BookStores.Services
+@inject HttpClient _httpClient
+
+<div class="col-12">
+    <h3><b>Books</b></h3>
+    <hr />
+    @if (BookList == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <TelerikGrid Data="BookList"
+                     Pageable="true"
+                     Sortable="true"
+                     Groupable="true"
+                     Resizable="true"
+                     Reorderable="true"
+                     FilterMode="GridFilterMode.FilterRow"
+                     EditMode="@GridEditMode.Popup"
+                     OnCreate="CreateBook"
+                     OnUpdate="UpdateBook"
+                     OnDelete="DeleteBook">
+            <GridToolBar>
+                <GridCommandButton Command="Add" Icon="@IconName.Plus">Add</GridCommandButton>
+            </GridToolBar>
+            <GridColumns>                
+                <GridColumn Field="@nameof(Book.Title)" Title="Title">
+                    <GroupHeaderTemplate>
+                        Total Count @context.Count
+                    </GroupHeaderTemplate>
+                </GridColumn>
+                <GridColumn Field="@nameof(Book.AuthorName)" Title="Author"></GridColumn>
+                <GridColumn Field="@nameof(Book.Type)" Title="Type"></GridColumn>
+                <GridColumn Field="@nameof(Book.Price)" Title="Price">
+                </GridColumn>
+                <GridColumn Field="@nameof(Book.Sales)" Title="Sales" Groupable="false">
+                    <GroupFooterTemplate>
+                        <strong>Total Sales : @context.Sum</strong> <br />
+                    </GroupFooterTemplate>
+                </GridColumn>
+                <GridCommandColumn>
+                    <GridCommandButton Command="Edit" Icon="@IconName.Edit">Edit</GridCommandButton>
+                    <GridCommandButton Command="Delete" Icon="@IconName.Delete">Delete</GridCommandButton>
+
+                    <GridCommandButton Command="Save" Icon="@IconName.Save" ShowInEdit="true">Save</GridCommandButton>
+                    <GridCommandButton Command="Cancel" Icon="@IconName.Cancel" ShowInEdit="true">Cancel</GridCommandButton>
+                </GridCommandColumn>
+            </GridColumns>
+            <GridAggregates>
+                <GridAggregate Field="@nameof(Book.Sales)" Aggregate="@GridAggregateType.Sum"></GridAggregate>
+                <GridAggregate Field="@nameof(Book.Title)" Aggregate="@GridAggregateType.Count"></GridAggregate>
+            </GridAggregates>
+        </TelerikGrid>
+    }
+</div>
+
+@code {
+
+    //properties
+
+    public Book Book { get; set; }
+    public List<Book> BookList { get; set; }
+
+    
+    protected override async Task OnInitializedAsync()
+    {
+        Book = new Book();
+        BookList = await GetBooks();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task<List<Book>> GetBooks()
+    {
+        List<Book> BookList = await _httpClient.GetFromJsonAsync<List<Book>>("Books/getBooks");
+
+        if (BookList != null)
+            BookList = BookList.OrderByDescending(auth => auth.BookId).ToList();
+
+        return BookList;
+    }
+
+    private async Task CreateBook(GridCommandEventArgs gridCommandEventArgs)
+    {
+        Book = gridCommandEventArgs.Item as Book;
+        if (Book.BookId == 0)
+            await _httpClient.PostAsJsonAsync<Book>("Books/createBook", Book);
+
+        BookList = await GetBooks();
+    }
+
+    private async Task UpdateBook(GridCommandEventArgs gridCommandEventArgs)
+    {
+        Book = gridCommandEventArgs.Item as Book;
+        if (Book.BookId != 0)
+            await _httpClient.PutAsJsonAsync<Book>("Books/UpdateBook/" + Book.BookId, Book);
+
+        BookList = await GetBooks();
+    }
+
+    private async Task DeleteBook(GridCommandEventArgs gridCommandEventArgs)
+    {
+        Book = gridCommandEventArgs.Item as Book;
+        await _httpClient.DeleteAsync("Books/DeleteBook/" + Book.BookId);
+
+        BookList = await GetBooks();
+    }
+}

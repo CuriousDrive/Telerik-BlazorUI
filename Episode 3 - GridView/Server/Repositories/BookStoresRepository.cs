@@ -1,6 +1,7 @@
 ﻿using BookStoresWebAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Telerik.Blazor.Components;
@@ -10,11 +11,13 @@ namespace BookStores.Server.Repositories
     public class BookStoresRepository
     {
         public List<Author> AuthorList = new List<Author>();
+        public List<Book> BookList = new List<Book>();
         public List<Publisher> PublisherList = new List<Publisher>();
 
         public BookStoresRepository()
         {
             LoadAuthorList();
+            LoadBookList();
             LoadPublishers();
         }
 
@@ -41,6 +44,27 @@ namespace BookStores.Server.Repositories
             AuthorList.Add(new Author { AuthorId = 18, LastName = "Ringer", FirstName = "Anne", Phone = "801 826 - 0752", Address = "PO Box 792", City = "Salt Lake City", State = "UT", Zip = "84152", EmailAddress = "anne.ringer@gmail.com", Salary = 8237.65M, BooksCount = 5 });
             AuthorList.Add(new Author { AuthorId = 19, LastName = "Gringlesby", FirstName = "Burt", Phone = "707 938-6445", Address = "PO Box 792.", City = "Covelo", State = "CA", Zip = "95428", EmailAddress = "burt.gringlesby@gmail.com", Salary = 4375.94M, BooksCount = 6 });
         }
+        private void LoadBookList()
+        {
+            BookList.Add(new Book { BookId = 1, Title = "The Godfather", AuthorName = "Mario Puzo", Type = "Crime novel", Price = 29, Sales = 9988, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 2, Title = "Harry Potter and the Sorcerer's Stone", AuthorName = "J.K. Rowling", Type = "Fantasy Fiction", Price = 49, Sales = 8949534, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 3, Title = "Fight club", AuthorName = "Chuck Palahniuk", Type = "Novel", Price = 35, Sales = 75234, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 4, Title = "The Lord of the Rings. Part 1", AuthorName = "J. R. R. Tolkien", Type = "Adventure fiction", Price = 21, Sales = 897034, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 5, Title = "Clean Architecture", AuthorName = "Robert Cecil Martin", Type = "Fiction", Price = 30, Sales = 100000, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 6, Title = "The Sicilian", AuthorName = "Mario Puzo", Type = "Crime novel", Price = 29, Sales = 9988, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 7, Title = "Harry Potter and the Deathly Hallows", AuthorName = "J.K. Rowling", Type = "Fantasy Fiction", Price = 49, Sales = 824923, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 8, Title = "Haunted", AuthorName = "Chuck Palahniuk", Type = "Novel", Price = 35, Sales = 75234, PublishedDate = DateTime.Now });            
+            BookList.Add(new Book { BookId = 9, Title = "The Hobbit", AuthorName = "J. R. R. Tolkien", Type = "Adventure fiction", Price = 21, Sales = 897034, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 10, Title = "Clean Code", AuthorName = "Robert Cecil Martin", Type = "Fiction", Price = 30, Sales = 100000, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 11, Title = "The Last Don", AuthorName = "Mario Puzo", Type = "Crime novel", Price = 29, Sales = 9988, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 12, Title = "Harry Potter and the Chamber of Secrets", AuthorName = "J.K. Rowling", Type = "Fantasy Fiction", Price = 49, Sales = 234234, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 13, Title = "Survivor", AuthorName = "Chuck Palahniuk", Type = "Novel", Price = 35, Sales = 34535, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 14, Title = "Unfinished Tales", AuthorName = "J. R. R. Tolkien", Type = "Adventure fiction", Price = 21, Sales = 897034, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 15, Title = "Clean Agile: Back to Basics", AuthorName = "Robert Cecil Martin", Type = "Fiction", Price = 30, Sales = 100000, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 16, Title = "The Family", AuthorName = "Robert Cecil Martin", Type = "Fiction", Price = 30, Sales = 100000, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 17, Title = "Harry Potter and the Prisoner of Azkaban", AuthorName = "J.K. Rowling", Type = "Fantasy Fiction", Price = 39, Sales = 332141, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 18, Title = "The Two Towers", AuthorName = "J. R. R. Tolkien", Type = "Adventure fiction", Price = 21, Sales = 897034, PublishedDate = DateTime.Now });
+        }
         private void LoadPublishers()
         {
             PublisherList.Add(new Publisher { PubId = 1, PublisherName = "New Moon Books", City = "Boston", State = "MA", Country = "USA" });
@@ -56,6 +80,71 @@ namespace BookStores.Server.Repositories
             PublisherList.Add(new Publisher { PubId = 11, PublisherName = "Sourcebooks", City = "Naperville", State = "IL", Country = "USA" });
             PublisherList.Add(new Publisher { PubId = 12, PublisherName = "B&H Publishing", City = "Nashville", State = "TN", Country = "USA" });
             PublisherList.Add(new Publisher { PubId = 13, PublisherName = "W.W. Norton", City = "New York City", State = "NY", Country = "USA" });            
+        }
+
+
+        //Authors
+        public List<Author> GetAuthors()
+        {
+            return this.AuthorList;
+        }
+
+        public Author GetAuthor(int id)
+        {
+            return this.AuthorList.Where(auth => auth.AuthorId == id).FirstOrDefault();
+        }
+
+        public void UpdateAuthor(int id, Author author)
+        {
+            Author AuthorToUpdate = this.AuthorList.Where(auth => auth.AuthorId == id).First();
+            var index = this.AuthorList.IndexOf(AuthorToUpdate);
+
+            if (index != -1)
+                this.AuthorList[index] = author;
+        }
+
+        public void CreateAuthor(Author author)
+        {
+            author.AuthorId = AuthorList.Max(auth => auth.AuthorId) + 1;
+            this.AuthorList.Add(author);
+        }
+
+        public void DeleteAuthor(int id)
+        {
+            Author Author = this.AuthorList.Where(auth => auth.AuthorId == id).FirstOrDefault();
+            this.AuthorList.Remove(Author);
+        }
+
+        //Books
+        public List<Book> GetBooks()
+        {
+            return this.BookList;
+        }
+
+        public Book GetBook(int id)
+        {
+            return this.BookList.Where(auth => auth.BookId == id).FirstOrDefault();
+        }
+
+        public void UpdateBook(int id, Book Book)
+        {
+            Book BookToUpdate = this.BookList.Where(auth => auth.BookId == id).First();
+            var index = this.BookList.IndexOf(BookToUpdate);
+
+            if (index != -1)
+                this.BookList[index] = Book;
+        }
+
+        public void CreateBook(Book Book)
+        {
+            Book.BookId = BookList.Max(auth => auth.BookId) + 1;
+            this.BookList.Add(Book);
+        }
+
+        public void DeleteBook(int id)
+        {
+            Book Book = this.BookList.Where(auth => auth.BookId == id).FirstOrDefault();
+            this.BookList.Remove(Book);
         }
 
         //Publishers
@@ -90,37 +179,7 @@ namespace BookStores.Server.Repositories
             this.PublisherList.Remove(publisher);
         }
 
-        //Authors
-        public List<Author> GetAuthors()
-        {
-            return this.AuthorList;
-        }
-
-        public Author GetAuthor(int id)
-        {
-            return this.AuthorList.Where(auth => auth.AuthorId == id).FirstOrDefault();
-        }
-
-        public void UpdateAuthor(int id, Author author)
-        {
-            Author AuthorToUpdate = this.AuthorList.Where(auth => auth.AuthorId == id).First();
-            var index = this.AuthorList.IndexOf(AuthorToUpdate);
-
-            if (index != -1)
-                this.AuthorList[index] = author;
-        }
-
-        public void CreateAuthor(Author author)
-        {
-            author.AuthorId = AuthorList.Max(auth => auth.AuthorId) + 1;
-            this.AuthorList.Add(author);
-        }
-
-        public void DeleteAuthor(int id)
-        {
-            Author Author = this.AuthorList.Where(auth => auth.AuthorId == id).FirstOrDefault();
-            this.AuthorList.Remove(Author);
-        }
+       
 
     }
 }
