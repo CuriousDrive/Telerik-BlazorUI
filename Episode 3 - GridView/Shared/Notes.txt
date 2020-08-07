@@ -34,8 +34,15 @@ Editing     - Popup Editing
                 You don't need EDIT button in the GridColumnCommand as you are editing in cell
                 CANCEL is not implemented at this time
                 
-Selection   - 
-            
+Selection   - SelectionMode => None (Default)
+            - Single 
+                    Explain Keyboard bindings too
+                    OnSelectedChangedEvent()
+                    Two-way Binding
+            - Multiple
+                    
+     
+         
 
 ------------------------------------------------------------------------------------------------  
 

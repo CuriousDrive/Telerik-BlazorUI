@@ -6,7 +6,16 @@
 <div class="col-12">
     <h3><b>Books</b></h3>
     <hr />
-    @if (BookList == null)
+    @if (SelectedBooks != null && SelectedBooks.Count() > 0)
+    {
+        <strong>Selected Books : </strong>
+        @foreach (Book book in SelectedBooks)
+        { 
+            <span>@book.Title ,&nbsp;</span> 
+        }
+        <br />
+    }
+    @if (BookList == null || SelectedBooks == null)
     {
         <p><em>Loading...</em></p>
     }
@@ -22,11 +31,14 @@
                      EditMode="@GridEditMode.Popup"
                      OnCreate="CreateBook"
                      OnUpdate="UpdateBook"
-                     OnDelete="DeleteBook">
+                     OnDelete="DeleteBook"
+                     SelectionMode="@GridSelectionMode.Multiple"
+                     @bind-SelectedItems="SelectedBooks">
             <GridToolBar>
                 <GridCommandButton Command="Add" Icon="@IconName.Plus">Add</GridCommandButton>
             </GridToolBar>
-            <GridColumns>                
+            <GridColumns>
+                <GridCheckboxColumn SelectAll="false" Title="Select"></GridCheckboxColumn>
                 <GridColumn Field="@nameof(Book.Title)" Title="Title">
                     <GroupHeaderTemplate>
                         Total Count @context.Count
@@ -59,16 +71,26 @@
 
 @code {
 
-    //properties
+        //properties
 
     public Book Book { get; set; }
     public List<Book> BookList { get; set; }
 
-    
+    public IEnumerable<Book> SelectedBooks { get; set; } = new List<Book>();
+
+    //EventHandlers
+    private void OnSelectHandler(IEnumerable<Book> books)
+    {
+        SelectedBooks = books;
+    }
+
+    //Component Events
     protected override async Task OnInitializedAsync()
     {
         Book = new Book();
         BookList = await GetBooks();
+
+        //SelectedBooks = BookList.Where(book => book.BookId == 1).ToList();
 
         await base.OnInitializedAsync();
     }
