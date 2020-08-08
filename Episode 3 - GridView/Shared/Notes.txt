@@ -33,29 +33,38 @@ Editing     - Popup Editing
                 You should have SAVE and DELETE button, SAVE with ShowInEdit parameter set to true
                 You don't need EDIT button in the GridColumnCommand as you are editing in cell
                 CANCEL is not implemented at this time
+
+            - CustomEditor Template* - Manage Product Screen - Blazing Coffee
                 
+Form-Validations    - using System.ComponentModel.DataAnnotations;
+                    - Required and ErrorMessage
+
 Selection   - SelectionMode => None (Default)
             - Single 
                     Explain Keyboard bindings too
                     OnSelectedChangedEvent()
                     Two-way Binding
             - Multiple
-                    
-     
-         
+                    Explain Keyboard bindings too
+                    OnSelectedChangedEvent()
+                    Two-way Binding
+
+Excel Export - 
 
 ------------------------------------------------------------------------------------------------  
 
 
 Questions - 
 
-How do I make my columns invisible?
+GroupHeaderTemplate does not work for Max value?
 
-What if you want more columns to be updated in the popup and less to show?
+How do I make my columns invisible? What if you want more columns to be updated in the popup and less to show?
+
+Is the scope ok?
 
 For Edit and Add, in both cases the popup shows the update button
 
-Is there anything that I can use for formating the dollar amount
+When are we going to make it public
 
 ------------------------------------------------------------------------------------------------  
 
@@ -64,176 +73,93 @@ In filter mode row, it would be nice to go to next column on tab key
 
 ------------------------------------------------------------------------------------------------  
 
--- from the last episode
+-- this is going to be probable final output from the video
 
-        <TelerikGrid Data="@authorList" 
-                     OnCreate="CreateAuthor"
-                     OnUpdate="UpdateAuthor"
-                     OnDelete="DeleteAuthor"
-                     EditMode="GridEditMode.Popup"
-                     Pageable="true"
-                     Page="10"
-                     Sortable="true"
-                     Reorderable="true"
-                     Resizable="true"
-                     Groupable="true">
-            <GridColumns>
-                <GridColumn Title="Image" Editable="false" Width="110px">
-                    <Template>
-                        @{
-                            var author = context as Author;
-                            Random random = new Random();
-                            int index = random.Next(11);
-                            <img src="@String.Format("/img/" + index + ".jpg")" />
-                        }
-                    </Template>
-                </GridColumn>
-                <GridColumn Field="@nameof(Author.FirstName)" Title="First Name"></GridColumn>
-                <GridColumn Field="@nameof(Author.LastName)" Title="Last Name"></GridColumn>
-                <GridColumn Field="@nameof(Author.City)" Title="City">
-                    <EditorTemplate>
-                        <TelerikDropDownList Data="@Cities"
-                                             @bind-Value="@SelectedCity"
-                                             DefaultText="Please select city"
-                                             Width="250px"/>
-                    </EditorTemplate>                    
-                </GridColumn>
-                <GridColumn Field="@nameof(Author.EmailAddress)" Title="Email Address"></GridColumn>                
-                <GridCommandColumn>
-                    <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Update</GridCommandButton>
-                    <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
-                    <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>
-                    <GridCommandButton Command="Cancel" Icon="cancel" ShowInEdit="true">Cancel</GridCommandButton>
-                </GridCommandColumn>
-            </GridColumns>
-            <GridToolBar>
-                <GridCommandButton Command="Add" Icon="Add">Add Product</GridCommandButton>
-            </GridToolBar>
-        </TelerikGrid>
-
-------------------------------------------------------------------------------------------------  
-
--- back up of the basic component code 
-
-<div class="col-12">
-    <h3><b>Enter Author Information</b></h3>
-    <hr />
-    <EditForm Model="@author" OnValidSubmit="@CreateAuthor">
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">First Name :</label>
-            <TelerikTextBox Id="txtFirstName"
-                            Class="form-control col-4"
-                            ValueExpression="@(() => author.FirstName)"
-                            Enabled="@(SetTextBoxAccess())"
-                            ValueChanged="@((string value) => TextBoxEventHandler(value))"></TelerikTextBox>
-            <div class="col-4">@TextBoxValue</div>
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">Last Name :</label>
-            <TelerikTextBox Id="txtFirstName"
-                            Class="form-control col-4"
-                            @bind-Value="author.LastName"></TelerikTextBox>
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">City :</label>
-            @if (Cities.Count() > 0)
+        <div class="col-12">
+            <h3><b>Books</b></h3>
+            <hr />
+            @if (SelectedBooks != null && SelectedBooks.Count() > 0)
             {
-                <TelerikAutoComplete Id="acCities"
-                                     Class="form-control col-4"
-                                     @bind-Value="author.City"
-                                     Data="Cities"
-                                     ValueField="@nameof(City.CityName)"
-                                     Filterable="true"
-                                     MinLength="2"
-                                     FilterOperator="StringFilterOperator"
-                                     Placeholder="please select city..."
-                                     ClearButton="false"
-                                     OnChange="DropDownListEventHandler">
-                    <HeaderTemplate>
-                        <strong>Top Cities</strong>
-                    </HeaderTemplate>
-                    <FooterTemplate>
-                        <strong>Total : @Cities.Count()</strong>
-                    </FooterTemplate>
-                    <ItemTemplate Context="city">
-                        @city.CityName, @GetStateFromCity(city.CityName)
-                    </ItemTemplate>
-                </TelerikAutoComplete>
-            }
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">State :</label>
-            @if (States.Length > 0)
-            {
-                <TelerikDropDownList Id="ddlStates"
-                                     Class="form-control col-4"
-                                     @bind-Value="author.State"
-                                     Data="States"></TelerikDropDownList>
-            }
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">Book Types :</label>
-
-            <TelerikMultiSelect Id="msBookTypes"
-                                Class="form-control col-4"
-                                Data="BookTypes"
-                                TextField="@nameof(BookType.Type)"
-                                ValueField="@nameof(BookType.Id)"
-                                ValueExpression="@(() => SelectedBookTypeIds)"
-                                Filterable="true"
-                                ValueChanged="@((List<int> value) => MultiSelectEventHandler(value))"
-                                OnRead="LoadBookTypes"></TelerikMultiSelect>
-            <div class="col-4">LoadBookTypes gets call @Count times</div>
-
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">@Message</label>
-            @if (SelectedBookTypeIds.Count() > 0)
-            {
-                @foreach (int selectedId in SelectedBookTypeIds)
+                <strong>Selected Books : </strong>
+                @foreach (Book book in SelectedBooks)
                 {
-                    @(BookTypes.Where(bt => bt.Id == selectedId).FirstOrDefault().Type) <span>,</span>
+                    <span>@book.Title ,&nbsp;</span>
                 }
+                <br />
             }
-        </div>
-        <br />
-        <div class="col-12 row">
-            <label class="col-3 font-weight-bold">Subscriptions :</label>            
-            <label class="col-4">
-                <TelerikCheckBox Id="cbAll"
-                                 @bind-Value="SelectAll"
-                                 Indeterminate="SelectAllInderminate"></TelerikCheckBox>
-                All
-            </label>
-        </div>
-        @if (Subscriptions.Count() > 0)
-        {
-            @foreach (Subscription subscription in Subscriptions)
+            @if (BookList == null || SelectedBooks == null)
             {
-                <div class="col-12 row">
-                    <div class="col-3"></div>
-                    <label class="col-4">
-                        <TelerikCheckBox Id="cbSubs"
-                                         @bind-Value="subscription.Selected"></TelerikCheckBox>
-                        @subscription.SubscriptionName
-                    </label>
-                    <div class="col-4">@subscription.Selected</div>
-                </div>
+                <p><em>Loading...</em></p>
             }
-        }
-        <br />
-        <div class="col-12 row">
-            <span class="col-3"></span>
-            <input type="submit" class="form-control col-1 btn btn-primary" value="Save" />
-            <span>&nbsp;</span>
-            <input type="submit" class="form-control col-1 btn btn-primary" value="Clear" />
+            else
+            {
+                <TelerikGrid Data="BookList"
+                             Pageable="true"
+                             Sortable="true"
+                             Groupable="true"
+                             Resizable="true"
+                             Reorderable="true"
+                             FilterMode="GridFilterMode.FilterRow"
+                             EditMode="@GridEditMode.Popup"
+                             OnCreate="CreateBook"
+                             OnUpdate="UpdateBook"
+                             OnDelete="DeleteBook"
+                             SelectionMode="@GridSelectionMode.Multiple"
+                             @bind-SelectedItems="SelectedBooks">
+                    <GridToolBar>
+                        <GridCommandButton Command="Add" Icon="@IconName.Plus">Add</GridCommandButton>
+                    </GridToolBar>
+                    <GridColumns>
+                        <GridCheckboxColumn SelectAll="false" Title="Select"></GridCheckboxColumn>
+                        <GridColumn Field="@nameof(Book.Title)" Title="Title"></GridColumn>
+                        <GridColumn Field="@nameof(Book.AuthorName)" Title="Author">
+                            <GroupHeaderTemplate>
+                                <span>Total Count @context.Count</span>&nbsp;
+                                <span>Max Sales @context.Max</span>
+                            </GroupHeaderTemplate>
+                        </GridColumn>
+                        <GridColumn Field="@nameof(Book.Type)" Title="Type"></GridColumn>
+                        <GridColumn Field="@nameof(Book.Price)" Title="Price">
+                            <Template>
+                                @((context as Book).Price.ToString("C2"))
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Field="@nameof(Book.Sales)" Title="Sales">
+                            <GroupHeaderTemplate>
+                                <span>Max Sales @(((decimal)context.Max).ToString("N0"))</span>
+                            </GroupHeaderTemplate>
+                            <GroupFooterTemplate>
+                                <span>Max Sales @(((decimal)context.Max).ToString("N0"))</span><br />
+                                <span>Total Sales : @(((decimal)context.Sum).ToString("N0")) </span>
+                            </GroupFooterTemplate>
+                            <Template>
+                                @((context as Book).Sales.ToString("N0"))
+                            </Template>
+                        </GridColumn>
+                        <GridCommandColumn>
+                            <GridCommandButton Command="Edit" Icon="@IconName.Edit">Edit</GridCommandButton>
+                            <GridCommandButton Command="Delete" Icon="@IconName.Delete">Delete</GridCommandButton>
+
+                            <GridCommandButton Command="Save" Icon="@IconName.Save" ShowInEdit="true">Save</GridCommandButton>
+                            <GridCommandButton Command="Cancel" Icon="@IconName.Cancel" ShowInEdit="true">Cancel</GridCommandButton>
+                        </GridCommandColumn>
+                    </GridColumns>
+                    <GridAggregates>
+                        <GridAggregate Field="@nameof(Book.Sales)" Aggregate="@GridAggregateType.Sum"></GridAggregate>
+                        <GridAggregate Field="@nameof(Book.Sales)" Aggregate="@GridAggregateType.Max"></GridAggregate>
+                        <GridAggregate Field="@nameof(Book.AuthorName)" Aggregate="@GridAggregateType.Count"></GridAggregate>
+                    </GridAggregates>
+                </TelerikGrid>
+            }
         </div>
-    </EditForm>
-</div>
-<br />
+
+
+        public IEnumerable<Book> SelectedBooks { get; set; } = new List<Book>();
+
+        //EventHandlers
+        private void OnSelectHandler(IEnumerable<Book> books)
+        {
+            SelectedBooks = books;
+        }
+
 
