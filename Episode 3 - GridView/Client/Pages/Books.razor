@@ -11,29 +11,25 @@
     }
     else
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author Name</th>
-                    <th>Type</th>
-                    <th>Price</th>
-                    <th>Sales</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var book in BookList)
-                {
-                    <tr>
-                        <td>@book.Title</td>
-                        <td>@book.AuthorName</td>
-                        <td>@book.Type</td>
-                        <td>@book.Price.ToString("C2")</td>
-                        <td>@book.Sales.ToString("N0")</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <TelerikGrid Data="BookList"
+                     Resizable="true"
+                     Reorderable="true">
+            <GridColumns>
+                <GridColumn Field="@nameof(Book.Title)"></GridColumn>
+                <GridColumn Field="@nameof(Book.AuthorName)" Title="Author Name"></GridColumn>
+                <GridColumn Field="@nameof(Book.Type)"></GridColumn>
+                <GridColumn Field="@nameof(Book.Price)">
+                    <Template>
+                        @((context as Book).Price.ToString("C2"))
+                    </Template>
+                </GridColumn>
+                <GridColumn Field="@nameof(Book.Sales)">
+                    <Template>
+                        @((context as Book).Sales.ToString("N0"))
+                    </Template>
+                </GridColumn>
+            </GridColumns>
+        </TelerikGrid>
     }
 </div>
 
