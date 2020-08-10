@@ -41,8 +41,7 @@
     //properties
 
     public Book Book { get; set; }
-    public List<Book> BookList { get; set; }
-
+    public List<Book> BookList { get; set; }   
 
     //Component Events
     protected override async Task OnInitializedAsync()
@@ -64,7 +63,7 @@
     }
 
     private async Task CreateBook()
-    {        
+    {
         if (Book.BookId == 0)
             await _httpClient.PostAsJsonAsync<Book>("Books/createBook", Book);
 
@@ -72,7 +71,7 @@
     }
 
     private async Task UpdateBook()
-    {        
+    {
         if (Book.BookId != 0)
             await _httpClient.PutAsJsonAsync<Book>("Books/UpdateBook/" + Book.BookId, Book);
 
@@ -84,5 +83,10 @@
         await _httpClient.DeleteAsync("Books/DeleteBook/" + Book.BookId);
 
         BookList = await GetBooks();
+    }
+
+    private async Task<int> GetUserPageSize()
+    {
+        return await Task.FromResult<int>(10);
     }
 }
