@@ -64,6 +64,14 @@ namespace BookStores.Server.Repositories
             BookList.Add(new Book { BookId = 16, Title = "The Family", AuthorName = "Robert Cecil Martin", Type = "Fiction", Price = 30, Sales = 100000, PublishedDate = DateTime.Now });
             BookList.Add(new Book { BookId = 17, Title = "Harry Potter and the Prisoner of Azkaban", AuthorName = "J.K. Rowling", Type = "Fantasy Fiction", Price = 39, Sales = 332141, PublishedDate = DateTime.Now });
             BookList.Add(new Book { BookId = 18, Title = "The Two Towers", AuthorName = "J. R. R. Tolkien", Type = "Adventure fiction", Price = 21, Sales = 897034, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 19, Title = "To Kill a Mockingbird", AuthorName = "Harper Lee", Type = "Novel", Price = 9.99M, Sales = 11123, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 20, Title = "The Great Gatsby", AuthorName = "F. Scott Fitzgerald", Type = "Tragedy", Price = 11.22M, Sales = 23427, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 21, Title = "One Hundred Years of Solitude", AuthorName = "Gabriel García Márquez", Type = "Novel", Price = 8.99M, Sales = 5323422, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 22, Title = "A Passage to India", AuthorName = "E. M. Forster", Type = "Novel", Price = 6.77M, Sales = 273648, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 23, Title = "Invisible Man", AuthorName = "Ralph Ellison", Type = "Fiction", Price = 17.56M, Sales = 897034, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 24, Title = "War and Peace", AuthorName = "Leo Tolstoy", Type = "Novel", Price = 21.32M, Sales = 213123, PublishedDate = DateTime.Now });            
+            BookList.Add(new Book { BookId = 25, Title = "Odyssey", AuthorName = "Homer", Type = "Epic", Price = 21, Sales = 634, PublishedDate = DateTime.Now });
+            BookList.Add(new Book { BookId = 26, Title = "Catch-22", AuthorName = "Joseph Heller", Type = "Novel", Price = 45.66M, Sales = 44121, PublishedDate = DateTime.Now });
         }
         private void LoadPublishers()
         {
