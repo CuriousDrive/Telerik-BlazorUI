@@ -15,7 +15,10 @@
     {
         <TelerikGrid Data="BookList"
                      Resizable="true"
-                     Reorderable="true">
+                     Reorderable="true"
+                     Pageable="true"
+                     PageSize="@UserPageSize"
+                     @bind-Page="@CurrentPage">
             <GridColumns>
                 <GridColumn Field="@nameof(Book.Title)"></GridColumn>
                 <GridColumn Field="@nameof(Book.AuthorName)" Title="Author Name"></GridColumn>
@@ -41,13 +44,17 @@
     //properties
 
     public Book Book { get; set; }
-    public List<Book> BookList { get; set; }   
+    public List<Book> BookList { get; set; }
+    public int UserPageSize { get; set; }
+    public int CurrentPage { get; set; }
 
     //Component Events
     protected override async Task OnInitializedAsync()
     {
         Book = new Book();
         BookList = await GetBooks();
+
+        UserPageSize = await GetUserPageSize();
 
         await base.OnInitializedAsync();
     }
