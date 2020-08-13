@@ -1,6 +1,7 @@
 ﻿@page "/books"
 @using BookStores.Models
 @using BookStores.Services
+@using Telerik.DataSource
 @inject HttpClient _httpClient
 
 <div class="col-12">
@@ -13,12 +14,16 @@
     }
     else
     {
+        <TelerikButton @onclick="SortBySales"> Sort By Sales</TelerikButton>
+        <br /><br />
         <TelerikGrid Data="BookList"
                      Resizable="true"
                      Reorderable="true"
                      Pageable="true"
                      PageSize="@UserPageSize"
-                     @bind-Page="@CurrentPage">
+                     @bind-Page="@CurrentPage"
+                     Sortable="true"
+                     @ref="BooksGrid">
             <GridColumns>
                 <GridColumn Field="@nameof(Book.Title)"></GridColumn>
                 <GridColumn Field="@nameof(Book.AuthorName)" Title="Author Name"></GridColumn>
@@ -36,7 +41,7 @@
             </GridColumns>
         </TelerikGrid>
     }
-    <br/><br />
+    <br /><br />
 </div>
 
 @code {
@@ -47,6 +52,23 @@
     public List<Book> BookList { get; set; }
     public int UserPageSize { get; set; }
     public int CurrentPage { get; set; }
+
+    public TelerikGrid<Book> BooksGrid { get; set; }
+
+    private async Task SortBySales()
+    {
+        SortDescriptor sortDescriptor = new SortDescriptor();
+        sortDescriptor.Member = "Sales";
+        sortDescriptor.SortDirection = ListSortDirection.Descending;
+
+        List<SortDescriptor> sortDescriptors = new List<SortDescriptor>();
+        sortDescriptors.Add(sortDescriptor);
+
+        GridState<Book> gridState = new GridState<Book>();
+        gridState.SortDescriptors = sortDescriptors;
+
+        await BooksGrid.SetState(gridState);
+    }
 
     //Component Events
     protected override async Task OnInitializedAsync()
