@@ -14,11 +14,11 @@
     }
     else
     {
-        <TelerikButton @onclick="SortBySales"> Sort By Sales</TelerikButton>
+        <TelerikButton @onclick="SortBySales">Sort By Sales</TelerikButton>
         <br /><br />
         <TelerikTextBox @bind-Value="Title" PlaceHolder="Title"></TelerikTextBox>
         <TelerikTextBox @bind-Value="AuthorName" PlaceHolder="Author Name"></TelerikTextBox>
-        <TelerikButton @onclick="FilterByTitleAndAuthor"> Filter By Title And Author</TelerikButton>
+        <TelerikButton @onclick="FilterByTitleAndAuthor">Filter By Title And Author</TelerikButton>
         <br /><br />
         <TelerikGrid Data="BookList"
                      Resizable="true"
@@ -63,7 +63,8 @@
 
     public TelerikGrid<Book> BooksGrid { get; set; }
 
-    private async Task SortBySales()
+
+    private void SortBySales()
     {
         SortDescriptor sortDescriptor = new SortDescriptor();
         sortDescriptor.Member = "Sales";
@@ -75,10 +76,10 @@
         GridState<Book> gridState = new GridState<Book>();
         gridState.SortDescriptors = sortDescriptors;
 
-        await BooksGrid.SetState(gridState);
+        BooksGrid.SetState(gridState);
     }
 
-    private async Task FilterByTitleAndAuthor()
+    private void FilterByTitleAndAuthor()
     {
         List<FilterDescriptorBase> filterDescriptorBases = new List<FilterDescriptorBase>();
         filterDescriptorBases.Add(new FilterDescriptor() { Member = "Title", Operator = FilterOperator.Contains, Value = Title, MemberType = typeof(string) });
@@ -87,7 +88,7 @@
         GridState<Book> gridState = new GridState<Book>();
         gridState.FilterDescriptors = filterDescriptorBases;
 
-        await BooksGrid.SetState(gridState);
+        BooksGrid.SetState(gridState);
     }
 
     //Component Events
