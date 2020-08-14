@@ -16,7 +16,10 @@
     {
         <TelerikButton @onclick="SortBySales"> Sort By Sales</TelerikButton>
         <br /><br />
-        
+        <TelerikTextBox @bind-Value="Title" PlaceHolder="Title"></TelerikTextBox>
+        <TelerikTextBox @bind-Value="AuthorName" PlaceHolder="Author Name"></TelerikTextBox>
+        <TelerikButton @onclick="FilterByTitleAndAuthor"> Filter By Title And Author</TelerikButton>
+        <br /><br />
         <TelerikGrid Data="BookList"
                      Resizable="true"
                      Reorderable="true"
@@ -24,7 +27,8 @@
                      PageSize="@UserPageSize"
                      @bind-Page="@CurrentPage"
                      Sortable="true"
-                     @ref="BooksGrid">
+                     @ref="BooksGrid"
+                     FilterMode="@GridFilterMode.FilterMenu">
             <GridColumns>
                 <GridColumn Field="@nameof(Book.Title)"></GridColumn>
                 <GridColumn Field="@nameof(Book.AuthorName)" Title="Author Name"></GridColumn>
@@ -54,6 +58,9 @@
     public int UserPageSize { get; set; }
     public int CurrentPage { get; set; }
 
+    public string Title { get; set; } = "";
+    public string AuthorName { get; set; } = "";
+
     public TelerikGrid<Book> BooksGrid { get; set; }
 
     private async Task SortBySales()
@@ -67,6 +74,18 @@
 
         GridState<Book> gridState = new GridState<Book>();
         gridState.SortDescriptors = sortDescriptors;
+
+        await BooksGrid.SetState(gridState);
+    }
+
+    private async Task FilterByTitleAndAuthor()
+    {
+        List<FilterDescriptorBase> filterDescriptorBases = new List<FilterDescriptorBase>();
+        filterDescriptorBases.Add(new FilterDescriptor() { Member = "Title", Operator = FilterOperator.Contains, Value = Title, MemberType = typeof(string) });
+        filterDescriptorBases.Add(new FilterDescriptor() { Member = "AuthorName", Operator = FilterOperator.Contains, Value = AuthorName, MemberType = typeof(string) });
+
+        GridState<Book> gridState = new GridState<Book>();
+        gridState.FilterDescriptors = filterDescriptorBases;
 
         await BooksGrid.SetState(gridState);
     }
