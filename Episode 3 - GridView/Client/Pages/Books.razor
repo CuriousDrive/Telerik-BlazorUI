@@ -115,7 +115,7 @@
     private async Task CreateBook()
     {
         if (Book.BookId == 0)
-            await _httpClient.PostAsJsonAsync<Book>("Books/createBook", Book);
+            await _httpClient.PostAsJsonAsync<Book>("Books/createBook", null);
 
         BookList = await GetBooks();
     }
@@ -123,14 +123,14 @@
     private async Task UpdateBook()
     {
         if (Book.BookId != 0)
-            await _httpClient.PutAsJsonAsync<Book>("Books/UpdateBook/" + Book.BookId, Book);
+            await _httpClient.PutAsJsonAsync<Book>("Books/UpdateBook/" + 0, null);
 
         BookList = await GetBooks();
     }
 
     private async Task DeleteBook()
     {
-        await _httpClient.DeleteAsync("Books/DeleteBook/" + Book.BookId);
+        await _httpClient.DeleteAsync("Books/DeleteBook/" + 0);
 
         BookList = await GetBooks();
     }
