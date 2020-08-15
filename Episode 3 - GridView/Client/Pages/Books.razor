@@ -28,7 +28,14 @@
                      @bind-Page="@CurrentPage"
                      Sortable="true"
                      @ref="BooksGrid"
-                     FilterMode="@GridFilterMode.FilterMenu">
+                     FilterMode="@GridFilterMode.FilterMenu"
+                     OnDelete="DeleteBook"
+                     EditMode="@GridEditMode.Popup"
+                     OnUpdate="UpdateBook"
+                     OnCreate="CreateBook">
+            <GridToolBar>
+                <GridCommandButton Command="Add" Icon="add">Add</GridCommandButton>
+            </GridToolBar>
             <GridColumns>
                 <GridColumn Field="@nameof(Book.Title)"></GridColumn>
                 <GridColumn Field="@nameof(Book.AuthorName)" Title="Author Name"></GridColumn>
@@ -43,6 +50,10 @@
                         @((context as Book).Sales.ToString("N0"))
                     </Template>
                 </GridColumn>
+                <GridCommandColumn>
+                    <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
+                    <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>
+                </GridCommandColumn>
             </GridColumns>
         </TelerikGrid>
     }
@@ -112,21 +123,24 @@
         return BookList;
     }
 
-    private async Task CreateBook()
+    private async Task CreateBook(GridCommandEventArgs gridCommandEventArgs)
     {
-        await _httpClient.PostAsJsonAsync<Book>("Books/createBook", null);
+        var book = gridCommandEventArgs.Item as Book;
+        await _httpClient.PostAsJsonAsync<Book>("Books/createBook", book);
         BookList = await GetBooks();
     }
 
-    private async Task UpdateBook()
+    private async Task UpdateBook(GridCommandEventArgs gridCommandEventArgs)
     {
-        await _httpClient.PutAsJsonAsync<Book>("Books/UpdateBook/" + 0, null);
+        var book = gridCommandEventArgs.Item as Book;
+        await _httpClient.PutAsJsonAsync<Book>("Books/UpdateBook/" + book.BookId, book);
         BookList = await GetBooks();
     }
 
-    private async Task DeleteBook()
+    private async Task DeleteBook(GridCommandEventArgs gridCommandEventArgs)
     {
-        await _httpClient.DeleteAsync("Books/DeleteBook/" + 0);
+        var book = gridCommandEventArgs.Item as Book;
+        await _httpClient.DeleteAsync("Books/DeleteBook/" + book.BookId);
         BookList = await GetBooks();
     }
 
