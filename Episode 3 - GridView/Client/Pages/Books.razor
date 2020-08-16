@@ -50,7 +50,7 @@
                         @((context as Book).Sales.ToString("N0"))
                     </Template>
                 </GridColumn>
-                <GridCommandColumn>
+                <GridCommandColumn>                   
                     <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
                     <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>
                 </GridCommandColumn>
@@ -67,14 +67,12 @@
     public Book Book { get; set; }
     public List<Book> BookList { get; set; }
     public int UserPageSize { get; set; }
-    public int CurrentPage { get; set; }
-    public int UpdateCount { get; set; }
+    public int CurrentPage { get; set; }    
 
     public string Title { get; set; } = "Of";
     public string AuthorName { get; set; } = "J.K.";
 
     public TelerikGrid<Book> BooksGrid { get; set; }
-
 
     private void SortBySales()
     {
@@ -133,8 +131,6 @@
 
     private async Task UpdateBook(GridCommandEventArgs gridCommandEventArgs)
     {
-        UpdateCount++;            
-        
         var book = gridCommandEventArgs.Item as Book;
         await _httpClient.PutAsJsonAsync<Book>("Books/UpdateBook/" + book.BookId, book);
         BookList = await GetBooks();
