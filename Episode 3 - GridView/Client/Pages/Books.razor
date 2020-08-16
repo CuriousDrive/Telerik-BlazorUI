@@ -30,7 +30,7 @@
                      @ref="BooksGrid"
                      FilterMode="@GridFilterMode.FilterMenu"
                      OnDelete="DeleteBook"
-                     EditMode="@GridEditMode.Popup"
+                     EditMode="@GridEditMode.Incell"
                      OnUpdate="UpdateBook"
                      OnCreate="CreateBook">
             <GridToolBar>
@@ -50,7 +50,9 @@
                         @((context as Book).Sales.ToString("N0"))
                     </Template>
                 </GridColumn>
-                <GridCommandColumn>                   
+                <GridCommandColumn>
+                    <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Save</GridCommandButton>
+                    <GridCommandButton Command="Cancel" Icon="cancel" ShowInEdit="true">Cancel</GridCommandButton>
                     <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
                     <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>
                 </GridCommandColumn>
