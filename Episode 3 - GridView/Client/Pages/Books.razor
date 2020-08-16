@@ -68,6 +68,7 @@
     public List<Book> BookList { get; set; }
     public int UserPageSize { get; set; }
     public int CurrentPage { get; set; }
+    public int UpdateCount { get; set; }
 
     public string Title { get; set; } = "Of";
     public string AuthorName { get; set; } = "J.K.";
@@ -132,6 +133,8 @@
 
     private async Task UpdateBook(GridCommandEventArgs gridCommandEventArgs)
     {
+        UpdateCount++;            
+        
         var book = gridCommandEventArgs.Item as Book;
         await _httpClient.PutAsJsonAsync<Book>("Books/UpdateBook/" + book.BookId, book);
         BookList = await GetBooks();
