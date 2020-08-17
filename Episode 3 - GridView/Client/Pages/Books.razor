@@ -30,7 +30,7 @@
                      @ref="BooksGrid"
                      FilterMode="@GridFilterMode.FilterMenu"
                      OnDelete="DeleteBook"
-                     EditMode="@GridEditMode.Incell"
+                     EditMode="@GridEditMode.Inline"
                      OnUpdate="UpdateBook"
                      OnCreate="CreateBook">
             <GridToolBar>
@@ -69,12 +69,46 @@
     public Book Book { get; set; }
     public List<Book> BookList { get; set; }
     public int UserPageSize { get; set; }
-    public int CurrentPage { get; set; }    
+    public int CurrentPage { get; set; }
 
     public string Title { get; set; } = "Of";
     public string AuthorName { get; set; } = "J.K.";
 
     public TelerikGrid<Book> BooksGrid { get; set; }
+
+    private void OnStateInitHandler(GridStateEventArgs<Book> gridStateEventArgs)
+    {
+        //sorting
+        SortDescriptor sortDescriptor = new SortDescriptor();
+        sortDescriptor.Member = "Sales";
+        sortDescriptor.SortDirection = ListSortDirection.Descending;
+
+        List<SortDescriptor> sortDescriptors = new List<SortDescriptor>();
+        sortDescriptors.Add(sortDescriptor);
+
+        GridState<Book> gridState = new GridState<Book>();
+        gridState.SortDescriptors = sortDescriptors;
+
+        //filtering
+        List<FilterDescriptorBase> filterDescriptorBases = new List<FilterDescriptorBase>();
+        filterDescriptorBases.Add(new FilterDescriptor() { Member = "Title", Operator = FilterOperator.Contains, Value = Title, MemberType = typeof(string) });
+        filterDescriptorBases.Add(new FilterDescriptor() { Member = "AuthorName", Operator = FilterOperator.Contains, Value = AuthorName, MemberType = typeof(string) });
+
+        gridState.FilterDescriptors = filterDescriptorBases;
+
+        //grouping
+        GroupDescriptor groupDescriptor = new GroupDescriptor();
+        groupDescriptor.Member = "Price";
+        groupDescriptor.MemberType = typeof(decimal);
+
+        List<GroupDescriptor> groupDescriptors = new List<GroupDescriptor>();
+        groupDescriptors.Add(groupDescriptor);
+
+        gridState.GroupDescriptors = groupDescriptors;
+
+        gridStateEventArgs.GridState = gridState;
+
+    }
 
     private void SortBySales()
     {
