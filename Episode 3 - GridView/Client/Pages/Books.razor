@@ -92,14 +92,13 @@
         //filtering
         List<FilterDescriptorBase> filterDescriptorBases = new List<FilterDescriptorBase>();
         filterDescriptorBases.Add(new FilterDescriptor() { Member = "Title", Operator = FilterOperator.Contains, Value = Title, MemberType = typeof(string) });
-        filterDescriptorBases.Add(new FilterDescriptor() { Member = "AuthorName", Operator = FilterOperator.Contains, Value = AuthorName, MemberType = typeof(string) });
 
         gridState.FilterDescriptors = filterDescriptorBases;
 
         //grouping
         GroupDescriptor groupDescriptor = new GroupDescriptor();
-        groupDescriptor.Member = "Price";
-        groupDescriptor.MemberType = typeof(decimal);
+        groupDescriptor.Member = "Type";
+        groupDescriptor.MemberType = typeof(string);
 
         List<GroupDescriptor> groupDescriptors = new List<GroupDescriptor>();
         groupDescriptors.Add(groupDescriptor);
