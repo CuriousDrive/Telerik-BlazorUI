@@ -32,7 +32,8 @@
                      OnDelete="DeleteBook"
                      EditMode="@GridEditMode.Inline"
                      OnUpdate="UpdateBook"
-                     OnCreate="CreateBook">
+                     OnCreate="CreateBook"
+                     Groupable="true">
             <GridToolBar>
                 <GridCommandButton Command="Add" Icon="add">Add</GridCommandButton>
             </GridToolBar>
@@ -45,7 +46,7 @@
                         @((context as Book).Price.ToString("C2"))
                     </Template>
                 </GridColumn>
-                <GridColumn Field="@nameof(Book.Sales)">
+                <GridColumn Field="@nameof(Book.Sales)" Groupable="false">
                     <Template>
                         @((context as Book).Sales.ToString("N0"))
                     </Template>
