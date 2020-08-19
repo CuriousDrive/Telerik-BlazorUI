@@ -40,7 +40,11 @@
             <GridColumns>
                 <GridColumn Field="@nameof(Book.Title)"></GridColumn>
                 <GridColumn Field="@nameof(Book.AuthorName)" Title="Author Name"></GridColumn>
-                <GridColumn Field="@nameof(Book.Type)"></GridColumn>
+                <GridColumn Field="@nameof(Book.Type)">
+                    <GroupHeaderTemplate>
+                        <strong>Total Count : @context.Count</strong>
+                    </GroupHeaderTemplate>
+                </GridColumn>
                 <GridColumn Field="@nameof(Book.Price)">
                     <Template>
                         @((context as Book).Price.ToString("C2"))
@@ -50,6 +54,9 @@
                     <Template>
                         @((context as Book).Sales.ToString("N0"))
                     </Template>
+                    <GroupFooterTemplate>
+                        <strong>Total Sales : </strong>@context.Sum
+                    </GroupFooterTemplate>
                 </GridColumn>
                 <GridCommandColumn>
                     <GridCommandButton Command="Save" Icon="save" ShowInEdit="true">Save</GridCommandButton>
@@ -58,6 +65,10 @@
                     <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>
                 </GridCommandColumn>
             </GridColumns>
+            <GridAggregates>
+                <GridAggregate Field="@nameof(Book.Type)" Aggregate="GridAggregateType.Count"></GridAggregate>
+                <GridAggregate Field="@nameof(Book.Sales)" Aggregate="GridAggregateType.Sum"></GridAggregate>
+            </GridAggregates>
         </TelerikGrid>
     }
     <br /><br />
