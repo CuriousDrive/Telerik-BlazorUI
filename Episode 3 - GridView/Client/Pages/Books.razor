@@ -20,6 +20,16 @@
         <TelerikTextBox @bind-Value="AuthorName" PlaceHolder="Author Name"></TelerikTextBox>
         <TelerikButton @onclick="FilterByTitleAndAuthor">Filter By Title And Author</TelerikButton>
         <br /><br />
+        @if (SelectedBooks != null)
+        {
+            <strong>Selected Books : </strong>
+            @foreach (Book book in SelectedBooks)
+            {
+                <span>@book.Title,&nbsp;</span>
+            }
+            <br />
+        }
+        <br />
         <TelerikGrid Data="BookList"
                      Resizable="true"
                      Reorderable="true"
@@ -33,11 +43,14 @@
                      EditMode="@GridEditMode.Inline"
                      OnUpdate="UpdateBook"
                      OnCreate="CreateBook"
-                     Groupable="true">
+                     Groupable="true"
+                     SelectionMode="GridSelectionMode.Multiple"
+                     SelectedItemsChanged="@((IEnumerable<Book> books) => SelectedItemsChangedHandler(books))">
             <GridToolBar>
                 <GridCommandButton Command="Add" Icon="add">Add</GridCommandButton>
             </GridToolBar>
             <GridColumns>
+                <GridCheckboxColumn SelectAllMode="GridSelectAllMode.All"></GridCheckboxColumn>
                 <GridColumn Field="@nameof(Book.Title)"></GridColumn>
                 <GridColumn Field="@nameof(Book.AuthorName)" Title="Author Name"></GridColumn>
                 <GridColumn Field="@nameof(Book.Type)">
@@ -87,6 +100,12 @@
     public string AuthorName { get; set; } = "J.K.";
 
     public TelerikGrid<Book> BooksGrid { get; set; }
+    public IEnumerable<Book> SelectedBooks { get; set; } = Enumerable.Empty<Book>();
+
+    private void SelectedItemsChangedHandler(IEnumerable<Book> books)
+    {
+        SelectedBooks = books;
+    }
 
     private void OnStateInitHandler(GridStateEventArgs<Book> gridStateEventArgs)
     {
