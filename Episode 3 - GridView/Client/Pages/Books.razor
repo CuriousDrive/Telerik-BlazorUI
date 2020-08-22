@@ -48,7 +48,11 @@
                      SelectedItemsChanged="@((IEnumerable<Book> books) => SelectedItemsChangedHandler(books))">
             <GridToolBar>
                 <GridCommandButton Command="Add" Icon="add">Add</GridCommandButton>
+                <GridCommandButton Command="ExcelExport" Icon="@IconName.FileExcel">Export to Excel</GridCommandButton>
             </GridToolBar>
+            <GridExport>
+                <GridExcelExport FileName="@("Books_" + DateTime.Now.ToShortDateString())" AllPages="true"></GridExcelExport>
+            </GridExport>
             <GridColumns>
                 <GridCheckboxColumn SelectAllMode="GridSelectAllMode.All"></GridCheckboxColumn>
                 <GridColumn Field="@nameof(Book.Title)"></GridColumn>
