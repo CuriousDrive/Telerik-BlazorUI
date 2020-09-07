@@ -133,25 +133,13 @@
     }
     else
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>City</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var author in authorList)
-                {
-                    <tr>
-                        <td>@author.FirstName</td>
-                        <td>@author.LastName</td>
-                        <td>@author.City</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <TelerikGrid Data="authorList">
+            <GridColumns>
+                <GridColumn Field="@nameof(Author.FirstName)"></GridColumn>
+                <GridColumn Field="@nameof(Author.LastName)" Title="Author Name"></GridColumn>
+                <GridColumn Field="@nameof(Author.City)"></GridColumn>
+            </GridColumns>
+        </TelerikGrid>
     }
 </div>
 

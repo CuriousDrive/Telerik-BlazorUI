@@ -98,6 +98,8 @@ app {
 
 .content {
     padding-top: 1.1rem;
+    flex: auto;
+    width: 100%;
 }
 
 .navbar-toggler {

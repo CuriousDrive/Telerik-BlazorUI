@@ -1,17 +1,38 @@
 ﻿@inherits LayoutComponentBase
 
 <TelerikRootComponent>
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <TelerikDrawer Data="MenuItems"
+                   MiniMode="true"
+                   Mode="DrawerMode.Push"
+                   Expanded="true"
+                   @ref="TelerikDrawer">
+        <Content>
+            <div class="main">
+                <div class="top-row px-4">
+                    <TelerikButton></TelerikButton>
+                    <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+                </div>
 
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-        </div>
+                <div class="content px-4">
+                    @Body
+                </div>
+            </div>            
+        </Content>
+    </TelerikDrawer>
 
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
 </TelerikRootComponent>
+
+@code {
+
+    TelerikDrawer<MenuItem> TelerikDrawer { get; set; }
+
+    private IEnumerable<MenuItem> MenuItems =>
+        new List<MenuItem>
+        {
+            new MenuItem{Text = "Authors", Icon = IconName.User, Url="/"},
+            new MenuItem{Text = "Publishers", Icon = IconName.Blogger, Url="/publishers"},
+            new MenuItem{Text = "Books", Icon = IconName.FilePdf, Url="/books"},
+
+        };
+
+}
