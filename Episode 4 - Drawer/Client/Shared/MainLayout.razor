@@ -1,66 +1,17 @@
 ﻿@inherits LayoutComponentBase
 
 <TelerikRootComponent>
-    <TelerikDrawer Data="MenuItems"
-                   @ref="TelerikDrawer"
-                   Mode="DrawerMode.Push"
-                   MiniMode="true"
-                   SelectedItem="SelectedMenu"
-                   SelectedItemChanged="@((MenuItem menuItem) => SelectedMenuChanged(menuItem))"
-                   Expanded="Expanded"
-                   ExpandedChanged="@((bool newValue) => ExpandedChangedHandler(newValue))">
-        <ItemTemplate Context="item">
-            <span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
-            @if (Expanded)
-            {
-                <span style="font-weight:bold; font-family:Calibri; font-size:large">
-                    @item.Text
-                </span>
-            }
-        </ItemTemplate>
-        <Content>
-            <div class="main">
-                <div class="top-row px-4">
-                    <TelerikButton OnClick="@(() => TelerikDrawer.ToggleAsync())" Icon="@IconName.Menu"></TelerikButton> &nbsp;
-                    <TelerikButton OnClick="@(() => TelerikDrawer.ExpandAsync())"> Expand Menu</TelerikButton>&nbsp;
-                    <TelerikButton OnClick="@(() => TelerikDrawer.CollapseAsync())"> Collapse Menu</TelerikButton>
-                    <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-                </div>
-                <div class="content px-4">
-                    @Body
-                </div>
-            </div>
-        </Content>
-    </TelerikDrawer>
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
 </TelerikRootComponent>
-
-@code {
-
-    TelerikDrawer<MenuItem> TelerikDrawer { get; set; }
-    public MenuItem SelectedMenu { get; set; }
-    public bool Expanded { get; set; }
-
-    private IEnumerable<MenuItem> MenuItems =>
-        new List<MenuItem>
-        {
-            new MenuItem{ Text = "Authors", Icon = IconName.User, Url="/"},
-            new MenuItem{ Text = "Publishers", Icon = IconName.Blogger, Url="/publishers"},
-            new MenuItem{ Text = "Books", Icon = IconName.FilePdf, Url="/books"},
-            new MenuItem{ IsSeparator = true },
-            new MenuItem{ Text = "GitHub", Icon = IconName.Share, Url="https://github.com/CuriousDrive/Telerik" },
-            new MenuItem{ Text = "Telerik", Icon = IconName.HyperlinkGlobe, Url="https://telerik.com"},
-            new MenuItem{ Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction" },
-            new MenuItem{ Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" }
-        };
-
-    private void SelectedMenuChanged(MenuItem menuItem)
-    {
-        SelectedMenu = menuItem;
-    }
-
-    private void ExpandedChangedHandler(bool newValue)
-    {
-        Expanded = newValue;
-    }
-
-}
