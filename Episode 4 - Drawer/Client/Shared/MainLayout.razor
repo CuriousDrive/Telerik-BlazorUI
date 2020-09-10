@@ -1,19 +1,20 @@
 ﻿@inherits LayoutComponentBase
 
 <TelerikRootComponent>
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <TelerikDrawer Data="MenuItems" @ref="TelerikDrawer">
+        <Content>
+            <div class="main">
+                <div class="top-row px-4">
+                    <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>
+                    <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+                </div>
 
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-        </div>
-
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
+                <div class="content px-4">
+                    @Body
+                </div>
+            </div>
+        </Content>
+    </TelerikDrawer>    
 </TelerikRootComponent>
 
 @code {
@@ -22,4 +23,13 @@
     // 2 - Create list of MenuItems
     // 3 - Add TelerikDrawer
     // 4 - Add Toggle Button
+
+    private TelerikDrawer<MenuItem> TelerikDrawer;
+
+    private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
+    {
+        new MenuItem {Text = "Authors", Url ="/"},
+        new MenuItem {Text = "Publishers", Url ="/publishers" },
+        new MenuItem {Text = "Books", Url ="/books" }
+    };
 }
