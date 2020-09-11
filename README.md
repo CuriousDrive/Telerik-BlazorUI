@@ -2,11 +2,13 @@
 
 This is a demo showing how a full-stack .NET application can be built with ASP.NET Core, Blazor Wasm, and Telerik UI for Blazor.
 
+![Demo_App](https://raw.githubusercontent.com/CuriousDrive/Telerik/master/Documents/Demo_GIF.gif)
+
 ## Videos
 
 ## Requirements
 
-- .NET Core 3.2 or higher
+- .NET Core 3.1
 - Telerik UI for Blazor (Trial or Commercial)
 
 ## Running the Application
