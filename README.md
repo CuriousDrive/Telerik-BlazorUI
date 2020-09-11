@@ -11,7 +11,8 @@ This is a demo showing how a full-stack .NET application can be built with ASP.N
 
 ## Running the Application
 
-- The app is in the Final folder. You should be able to just run without any extra setup. 
+- You should be able to just run it without any extra setup. 
+- The final version of this app will be in the last episode's folder. 
 - If you are watching tutorials and want to refer to the code, then you can check out the code from that video's folder
 
 ## Telerik UI for Blazor Trial
