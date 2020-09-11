@@ -10,7 +10,7 @@ This app was made on YouTube. Please check the episodes below.
 
 | Episodes | Topics |
 | ----- | ---- |
-| [Episode #1](/docs/00-get-started.md) | TelerikTextBox, TelerikAutoComplete, TelerikButton, TelerikDropDownList, TelerikMultiSelect & TelerikCheckBox  |
+| [Episode #1](/docs/00-get-started.md) | Telerik's UI for TextBox, AutoComplete, Button, DropDownList, MultiSelect & CheckBox  |
 | [Episode #2](/docs/01-components-and-layout.md) | Get started with TelerikListView |
 | [Episode #3](/docs/02-customize-a-pizza.md) | Get started with TelerikGrid  |
 | [Episode #4](/docs/03-show-order-status.md) | Get started with TelerikDrawer |
