@@ -4,7 +4,17 @@ This is a demo showing how a full-stack .NET application can be built with ASP.N
 
 ![Demo_App](https://raw.githubusercontent.com/CuriousDrive/Telerik/master/Documents/Demo_GIF.gif)
 
-## Videos
+## YouTube Videos
+
+This app was made on YouTube. Please check the episodes below.
+
+| Episodes | Topics |
+| ----- | ---- |
+| [Episode #1](/docs/00-get-started.md) | TelerikTextBox, TelerikAutoComplete, TelerikButton, TelerikDropDownList, TelerikMultiSelect & TelerikCheckBox  |
+| [Episode #2](/docs/01-components-and-layout.md) | Get started with TelerikListView |
+| [Episode #3](/docs/02-customize-a-pizza.md) | Get started with TelerikGrid  |
+| [Episode #4](/docs/03-show-order-status.md) | Get started with TelerikDrawer |
+| [Episode #5](/docs/04-refactor-state-management.md) | Get started with Document Processing |
 
 ## Requirements
 
