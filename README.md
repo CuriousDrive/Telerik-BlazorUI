@@ -2,16 +2,29 @@
 
 This is a demo showing how a full-stack .NET application can be built with ASP.NET Core, Blazor Wasm, and Telerik UI for Blazor.
 
-## Videos
+![Demo_App](https://raw.githubusercontent.com/CuriousDrive/Telerik/master/Documents/Demo_GIF.gif)
+
+## YouTube Videos
+
+This app was made on YouTube. Please check the episodes below.
+
+| Episodes | Topics |
+| ----- | ---- |
+| [Episode #1](/docs/00-get-started.md) | Telerik's UI for TextBox, AutoComplete, Button, DropDownList, MultiSelect & CheckBox  |
+| [Episode #2](/docs/01-components-and-layout.md) | Get started with TelerikListView |
+| [Episode #3](/docs/02-customize-a-pizza.md) | Get started with TelerikGrid  |
+| [Episode #4](/docs/03-show-order-status.md) | Get started with TelerikDrawer |
+| [Episode #5](/docs/04-refactor-state-management.md) | Get started with Document Processing |
 
 ## Requirements
 
-- .NET Core 3.2 or higher
+- .NET Core 3.1
 - Telerik UI for Blazor (Trial or Commercial)
 
 ## Running the Application
 
-- The app is in the Final folder. You should be able to just run without any extra setup. 
+- You should be able to just run it without any extra setup. 
+- The final version of this app will be in the last episode's folder. 
 - If you are watching tutorials and want to refer to the code, then you can check out the code from that video's folder
 
 ## Telerik UI for Blazor Trial
