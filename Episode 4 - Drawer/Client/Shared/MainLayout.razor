@@ -8,7 +8,6 @@
                     <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>
                     <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
                 </div>
-
                 <div class="content px-4">
                     @Body
                 </div>
@@ -19,9 +18,10 @@
 
 @code {
 
-    // 1 - Set Icons and ImageUrls to MenuItem
-    // 2 - Drawer Mode
-    // 3 - Mini Mode
+    // 1 - Set Icon & ImageUrl to MenuItem
+    // 2 - IsSeparator Property
+    // 3 - Push Drawer Mode
+    // 4 - Mini Mode
 
     private TelerikDrawer<MenuItem> TelerikDrawer;
 
