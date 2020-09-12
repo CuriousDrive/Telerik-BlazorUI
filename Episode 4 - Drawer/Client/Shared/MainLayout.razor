@@ -1,7 +1,10 @@
 ﻿@inherits LayoutComponentBase
 
 <TelerikRootComponent>
-    <TelerikDrawer Data="MenuItems" @ref="TelerikDrawer">
+    <TelerikDrawer Data="MenuItems" 
+                   @ref="TelerikDrawer"
+                   Mode="DrawerMode.Push"
+                   MiniMode="true">
         <Content>
             <div class="main">
                 <div class="top-row px-4">
@@ -13,7 +16,7 @@
                 </div>
             </div>
         </Content>
-    </TelerikDrawer>    
+    </TelerikDrawer>
 </TelerikRootComponent>
 
 @code {
@@ -26,9 +29,10 @@
     private TelerikDrawer<MenuItem> TelerikDrawer;
 
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
-    {
-        new MenuItem {Text = "Authors", Url ="/"},
-        new MenuItem {Text = "Publishers", Url ="/publishers" },
-        new MenuItem {Text = "Books", Url ="/books" }
+{
+        new MenuItem {Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png" },
+        new MenuItem {Text = "Publishers", Url ="/publishers", Icon = IconName.Blogger, ImageUrl = "/img/publishers.png" },
+        new MenuItem { IsSeparator = true },
+        new MenuItem {Text = "Books", Url ="/books", Icon = IconName.FilePdf, ImageUrl = "/img/books.png" }
     };
 }
