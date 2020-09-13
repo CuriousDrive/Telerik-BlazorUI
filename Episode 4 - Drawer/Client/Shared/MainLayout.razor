@@ -1,14 +1,14 @@
 ﻿@inherits LayoutComponentBase
 
 <TelerikRootComponent>
-    <TelerikDrawer Data="MenuItems" 
+    <TelerikDrawer Data="MenuItems"
                    @ref="TelerikDrawer"
                    Mode="DrawerMode.Push"
                    MiniMode="true">
         <Content>
             <div class="main">
                 <div class="top-row px-4">
-                    <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>
+                    <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>                   
                     <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
                 </div>
                 <div class="content px-4">
@@ -20,14 +20,21 @@
 </TelerikRootComponent>
 
 @code {
-    
+
     private TelerikDrawer<MenuItem> TelerikDrawer;
 
+    private MenuItem Item { get; set; }
+
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
-{
-        new MenuItem {Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png" },
-        new MenuItem {Text = "Publishers", Url ="/publishers", Icon = IconName.Blogger, ImageUrl = "/img/publishers.png" },
+    {
+        new MenuItem { Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png" },
+        new MenuItem { Text = "Publishers", Url ="/publishers", Icon = IconName.Blogger, ImageUrl = "/img/publishers.png" },
+        new MenuItem { Text = "Books", Url ="/books", Icon = IconName.FilePdf, ImageUrl = "/img/books.png" },
         new MenuItem { IsSeparator = true },
-        new MenuItem {Text = "Books", Url ="/books", Icon = IconName.FilePdf, ImageUrl = "/img/books.png" }
+        new MenuItem { Text = "GitHub", Icon = IconName.Share, Url="https://github.com/CuriousDrive/Telerik" },
+        new MenuItem { Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction" },
+        new MenuItem { Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" },
+        new MenuItem { Text = "Telerik", Icon = IconName.HyperlinkGlobe, Url="https://telerik.com"}
+
     };
 }

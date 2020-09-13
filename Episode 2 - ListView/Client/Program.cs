@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System;
-using BookStores.Services;
 using BookStores.Models;
 
 namespace BookStores.Client

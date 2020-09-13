@@ -1,11 +1,9 @@
 ﻿@page "/"
 @using BookStores.Models
-@using BookStores.Services
 @inject HttpClient _httpClient
 
 <div class="col-12">
-    <h3><b>Enter Author Information</b></h3>
-    <hr />
+   
     <EditForm Model="@author" OnValidSubmit="@CreateAuthor">
         <div class="col-12 row">
             <label class="col-3 font-weight-bold">First Name :</label>

@@ -1,5 +1,4 @@
 ﻿@page "/publishers"
-@using BookStores.Services
 @using BookStores.Models
 @using Telerik.DataSource
 @using Telerik.DataSource.Extensions
@@ -15,7 +14,7 @@
     }
     else
     {
-        <TelerikListView Data="PublishersByPage"
+        <TelerikListView Data="AllPublishers"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
                          PageChanged="PageChangedHandler"
@@ -23,9 +22,7 @@
                          OnUpdate="UpdatePublisher"
                          OnCreate="CreatePublisher"
                          OnEdit="EditHandler"
-                         OnCancel="CancelHandler"
-                         OnRead="OnReadHandler"
-                         TotalCount="TotalCount">
+                         OnCancel="CancelHandler">
             <HeaderTemplate>
                 <br />
                 <div class="col-12 row">
@@ -118,7 +115,7 @@
                 </div>
             </EditTemplate>
             <FooterTemplate>
-                <strong style="font-size:larger">Total Count : @TotalCount</strong>
+                <strong style="font-size:larger">Total Count : @AllPublishers.Count()</strong>
             </FooterTemplate>
         </TelerikListView>
         <br/>
@@ -139,7 +136,7 @@
     public int TotalCount { get; set; }
     public string FilterText { get; set; }
     public string[] SortDirections { get; set; } = new string[] { "Ascending", "Descending" };
-    public string SortDirection { get; set; }
+    public string SortDirection { get; set; }    
 
     //Events
     protected async override Task OnInitializedAsync()
@@ -151,7 +148,7 @@
         TotalCount = await GetTotalCount();
 
         //getting all publishers
-        //AllPublishers = await GetAllPublishers();
+        AllPublishers = await GetAllPublishers();
 
     }
 
