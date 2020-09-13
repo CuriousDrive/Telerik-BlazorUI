@@ -4,11 +4,22 @@
     <TelerikDrawer Data="MenuItems"
                    @ref="TelerikDrawer"
                    Mode="DrawerMode.Push"
-                   MiniMode="true">
+                   MiniMode="true"
+                   SelectedItem="Item"
+                   SelectedItemChanged="@((MenuItem menuItem) => SelectedItemChangedHandler(menuItem))">
         <Content>
             <div class="main">
                 <div class="top-row px-4">
-                    <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>                   
+                    <div class="col-1">
+                        <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>
+
+                    </div>
+                    <div class="col-2">
+                        <label style="font-size:x-large; font-weight:bolder; color:red">
+                            @Item?.Text
+                        </label>
+                    </div>
+
                     <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
                 </div>
                 <div class="content px-4">
@@ -22,6 +33,7 @@
 @code {
 
     private TelerikDrawer<MenuItem> TelerikDrawer;
+    private MenuItem Item;
 
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
     {
@@ -35,4 +47,10 @@
         new MenuItem { Text = "Telerik", Icon = IconName.HyperlinkGlobe, Url="https://telerik.com"}
 
     };
+
+    private void SelectedItemChangedHandler(MenuItem menuItem)
+    {
+        Item = menuItem;
+        Console.WriteLine("User has selected :" + menuItem.Text);
+    }
 }
