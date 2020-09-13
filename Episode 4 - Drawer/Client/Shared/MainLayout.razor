@@ -23,8 +23,6 @@
 
     private TelerikDrawer<MenuItem> TelerikDrawer;
 
-    private MenuItem Item { get; set; }
-
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
     {
         new MenuItem { Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png" },
