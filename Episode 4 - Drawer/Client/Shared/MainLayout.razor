@@ -10,16 +10,14 @@
         <Content>
             <div class="main">
                 <div class="top-row px-4">
-                    <div class="col-1">
-                        <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>
-
+                    <div class="col-3">
+                        <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>    
                     </div>
-                    <div class="col-2">
-                        <label style="font-size:x-large; font-weight:bolder; color:red">
+                    <div class="col-4" style="text-align-last:center">
+                        <label style="font-size:x-large; font-weight:bolder; color:red; align-items:center">
                             @Item?.Text
                         </label>
                     </div>
-
                     <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
                 </div>
                 <div class="content px-4">
@@ -45,7 +43,6 @@
         new MenuItem { Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction" },
         new MenuItem { Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" },
         new MenuItem { Text = "Telerik", Icon = IconName.HyperlinkGlobe, Url="https://telerik.com"}
-
     };
 
     private void SelectedItemChangedHandler(MenuItem menuItem)
