@@ -6,12 +6,17 @@
                    Mode="DrawerMode.Push"
                    MiniMode="true"
                    SelectedItem="Item"
-                   SelectedItemChanged="@((MenuItem menuItem) => SelectedItemChangedHandler(menuItem))">
+                   SelectedItemChanged="@((MenuItem menuItem) => SelectedItemChangedHandler(menuItem))"
+                   Expanded="IsExpanded"
+                   ExpandedChanged="@((bool newValue) => ExpandedChangedHandler(newValue))">
         <Content>
             <div class="main" style="width:80vw">
                 <div class="top-row px-4">
                     <div class="col-3">
-                        <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>    
+                        <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>
+                    </div>
+                    <div class="col-3">
+                        Expanded : <TelerikCheckBox @bind-Value="IsExpanded"></TelerikCheckBox>
                     </div>
                     <div class="col-4" style="text-align-last:center">
                         <label style="font-size:x-large; font-weight:bolder; color:red; align-items:center">
@@ -32,6 +37,7 @@
 
     private TelerikDrawer<MenuItem> TelerikDrawer;
     private MenuItem Item;
+    public bool IsExpanded { get; set; }
 
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
     {
@@ -49,5 +55,10 @@
     {
         Item = menuItem;
         Console.WriteLine("User has selected :" + menuItem.Text);
+    }
+
+    private void ExpandedChangedHandler(bool newValue)
+    {
+        IsExpanded = newValue;
     }
 }
