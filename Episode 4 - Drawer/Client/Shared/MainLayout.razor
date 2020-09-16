@@ -9,6 +9,23 @@
                    SelectedItemChanged="@((MenuItem menuItem) => SelectedItemChangedHandler(menuItem))"
                    Expanded="IsExpanded"
                    ExpandedChanged="@((bool newValue) => ExpandedChangedHandler(newValue))">
+        <ItemTemplate Context="item">
+            @if (item.Group == "other")
+            {
+                <span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
+            }
+            else
+            {
+                <img src="@item.ImageUrl"/>
+            }
+
+            @if (IsExpanded)
+            {
+                <span style="font-weight:bold;font-family:Calibri;font-size:large;color:darkgreen">
+                   &nbsp; @item.Text
+                </span>
+            }
+        </ItemTemplate>
         <Content>
             <div class="main" style="width:80vw">
                 <div class="top-row px-4">
@@ -40,15 +57,15 @@
     public bool IsExpanded { get; set; }
 
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
-    {
-        new MenuItem { Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png" },
-        new MenuItem { Text = "Publishers", Url ="/publishers", Icon = IconName.Blogger, ImageUrl = "/img/publishers.png" },
-        new MenuItem { Text = "Books", Url ="/books", Icon = IconName.FilePdf, ImageUrl = "/img/books.png" },
+{
+        new MenuItem { Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png", Group = "app" },
+        new MenuItem { Text = "Publishers", Url ="/publishers", Icon = IconName.Blogger, ImageUrl = "/img/publishers.png", Group = "app" },
+        new MenuItem { Text = "Books", Url ="/books", Icon = IconName.FilePdf, ImageUrl = "/img/books.png", Group = "app" },
         new MenuItem { IsSeparator = true },
-        new MenuItem { Text = "GitHub", Icon = IconName.Share, Url="https://github.com/CuriousDrive/Telerik" },
-        new MenuItem { Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction" },
-        new MenuItem { Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" },
-        new MenuItem { Text = "Telerik", Icon = IconName.HyperlinkGlobe, Url="https://telerik.com"}
+        new MenuItem { Text = "GitHub", Icon = IconName.Share, Url="https://github.com/CuriousDrive/Telerik", Group = "other" },
+        new MenuItem { Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction", Group = "other" },
+        new MenuItem { Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" , Group = "other"},
+        new MenuItem { Text = "Telerik", Icon = IconName.HyperlinkGlobe, Url="https://telerik.com", Group = "other"}
     };
 
     private void SelectedItemChangedHandler(MenuItem menuItem)
