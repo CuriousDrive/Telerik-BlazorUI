@@ -59,11 +59,10 @@
 
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
     {
-        new MenuItem { Text = "Application" },
         new MenuItem { Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png", Group = "app" },
         new MenuItem { Text = "Publishers", Url ="/publishers", Icon = IconName.Blogger, ImageUrl = "/img/publishers.png", Group = "app" },
         new MenuItem { Text = "Books", Url ="/books", Icon = IconName.FilePdf, ImageUrl = "/img/books.png", Group = "app" },
-        new MenuItem { Text = "Resources" },
+        new MenuItem { IsSeparator = true },
         new MenuItem { Text = "GitHub", Icon = IconName.Share, Url="https://github.com/CuriousDrive/Telerik", Group = "other" },
         new MenuItem { Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction", Group = "other" },
         new MenuItem { Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" , Group = "other"},
