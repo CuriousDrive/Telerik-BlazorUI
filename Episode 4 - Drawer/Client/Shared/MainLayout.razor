@@ -10,23 +10,41 @@
                    SelectedItemChanged="@((MenuItem menuItem) => SelectedItemChangedHandler(menuItem))"
                    Expanded="IsExpanded"
                    ExpandedChanged="@((bool newValue) => ExpandedChangedHandler(newValue))">
-        <ItemTemplate Context="item">
-            @if (item.Group == "other")
-            {
-                <span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
-            }
-            else
-            {
-                <img src="@item.ImageUrl" />
-            }
+        <Template Context="items">
+            <div class="k-drawer-items">
+                <ul>
+                    @foreach (var item in items)
+                    {
+                        <li class="k-drawer-item @(IsMenuItemHeader(item) == true? "bg-secondary" : "")">
+                            @if (item.Group == "other")
+                            {
+                                <span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
+                            }
+                            else
+                            {
+                                <img src="@item.ImageUrl" />
+                            }
 
-            @if (IsExpanded)
-            {
-                <span style="font-weight:bold;font-family:Calibri;font-size:large;color:darkgreen">
-                    &nbsp; @item.Text
-                </span>
-            }
-        </ItemTemplate>
+                            @if (IsExpanded)
+                            {
+                                @if (!IsMenuItemHeader(item))
+                                {
+                                    <span style="font-weight:bold;font-family:Calibri;font-size:large;color:darkgreen">
+                                        &nbsp; @item.Text
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bold;font-family:Calibri;font-size:large;color:black">
+                                        &nbsp; @item.Text
+                                    </span>
+                                }
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+        </Template>
         <Content>
             <div class="main" style="width:80vw">
                 <div class="top-row px-4">
@@ -59,10 +77,11 @@
 
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
     {
+        new MenuItem { Text = "Application" },
         new MenuItem { Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png", Group = "app" },
         new MenuItem { Text = "Publishers", Url ="/publishers", Icon = IconName.Blogger, ImageUrl = "/img/publishers.png", Group = "app" },
         new MenuItem { Text = "Books", Url ="/books", Icon = IconName.FilePdf, ImageUrl = "/img/books.png", Group = "app" },
-        new MenuItem { IsSeparator = true },
+        new MenuItem { Text = "Resources" },
         new MenuItem { Text = "GitHub", Icon = IconName.Share, Url="https://github.com/CuriousDrive/Telerik", Group = "other" },
         new MenuItem { Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction", Group = "other" },
         new MenuItem { Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" , Group = "other"},
@@ -80,4 +99,6 @@
         IsExpanded = newValue;
     }
 
+    private bool IsMenuItemHeader(MenuItem menuItem)
+        => true ? (menuItem.Text == "Application" || menuItem.Text == "Resources") : false;
 }
