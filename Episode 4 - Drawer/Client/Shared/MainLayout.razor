@@ -11,7 +11,6 @@
                    Expanded="IsExpanded"
                    ExpandedChanged="@((bool newValue) => ExpandedChangedHandler(newValue))">
         <Template Context="items">
-           
             <div class="k-drawer-items">
                 <ul>
                     @foreach (var item in items)
@@ -102,6 +101,5 @@
 
     private bool IsMenuItemHeader(MenuItem menuItem)
         => true ? (menuItem.Text == "Application" || menuItem.Text == "Resources") : false;
-
     
 }
