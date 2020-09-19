@@ -11,11 +11,17 @@
                    Expanded="IsExpanded"
                    ExpandedChanged="@((bool newValue) => ExpandedChangedHandler(newValue))">
         <Template Context="items">
+            @if(IsExpanded)
+            {
+                <LoginDisplay></LoginDisplay>
+            }
+
             <div class="k-drawer-items">
                 <ul>
                     @foreach (var item in items)
                     {
-                        <li class="k-drawer-item @(IsMenuItemHeader(item) == true? "bg-secondary" : "")">
+                        <li class="k-drawer-item @(IsMenuItemHeader(item) == true? "bg-secondary" : "")"
+                            @onclick="@(() => NavigateTo(item))">
                             @if (item.Group == "other")
                             {
                                 <span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
@@ -101,5 +107,10 @@
 
     private bool IsMenuItemHeader(MenuItem menuItem)
         => true ? (menuItem.Text == "Application" || menuItem.Text == "Resources") : false;
-    
+
+    private void NavigateTo(MenuItem menuItem)
+    {
+        _navigationManager.NavigateTo(menuItem.Url);
+        Item = menuItem;
+    }
 }
