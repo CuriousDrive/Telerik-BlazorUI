@@ -1,244 +1,26 @@
-﻿-------------------------------- Telerik Drawer --------------------------------
+﻿-------------------------------- DOCUMENT PROCESSING --------------------------------
 
-Getting Started => 
-	Data parameter takes IEnumerable of your custom MenuItem class
-	MenuItem/DrawerItem class has some field which are understood by TelerikDrawer
-	Text => this prperty is used for showing the text of the menu item
-    Icon => this is to show the icon of the menu item
-    ImageUrl => you can show image instead of using Icon, if used then it overwrites the Icon property 
-    Url => this is used to navigate to particular route in the app
-    IsSepartor => this is used as separator if menu items needed to be grouped 
-    ToggleAsync => this event toggles between expanded and collapse
-    
-MiniMode =>
-	when this is set to true then you don't have to toggle and expand in order to get to the page
+Scope so far => 
 
-Mode =>
-	There two types of drawer Overlay and Push
-	Overlay => The menu is shown on top of your UI and then you can select the page that you want to go to
-	Push => The menu shown on the left side of the toggle button
+I am going to need some PDFs, Excel files, Word document and some files to zip them
+it seems like, I am gonna need FileExporter and UploadedFileDetails class for the all demos 
 
-SelectedItem Change Events => 
-    SelectedItemChanged => this event get fired whenever the selected item in the menu is changed
-    SelectedItem => this cound be used for one way binding it the local property
-    @bind-SelectedItem => this could be used for two way binding the local property
-	is used for two way binding with local property 
+1 - PDF Processing 
 
-Expanded & Collapse Events =>
-    ExpandAsync => this event expands the menu and if expanded then stays expanded 
-    CollapseAsync => this event collapses the menu and if collapsed then it stays collapse
-    @bind-Expanded => this is a two way bound property with the local component
-    ExpandedChanged => this event gets fired when the menu is either expanded or collapsed 
-    Expanded => this could be one way bound to the local property to express if the menu is expanded or not
+list the nuget packages
 
-ItemTemplate =>
-    this component lets you style your Menu Items
+2 - Spreadsheet Processing 
 
-Template =>
-	Template could be used for writing your Menu your way in HTML
+list the nuget packages
 
---------------------------------- QUESTIONS ---------------------------------
+3 - Word Processing
 
-1. To make it responsive?
-2. Why not give an integrated class for DrawerItem and How to use DrawerItem<>
-3. Is it okay to make GitHub Repo public?
-4. Are we going to upload all these 5 videos together?
-
---------------------------------- BEFORE CODE ---------------------------------
-
-@inherits LayoutComponentBase
-
-<TelerikRootComponent>
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-        </div>
-
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
-</TelerikRootComponent>
-
-                    @if (SelectedMenu == null || SelectedMenu?.Text == "Authors")
-                    {
-                        <Authors></Authors>
-                    }
-                    @if (SelectedMenu?.Text == "Publishers")
-                    {
-                        <Publishers></Publishers>
-                    }
-                    @if (SelectedMenu == null || SelectedMenu?.Text == "Books")
-                    {
-                        <Books></Books>
-                    }
-
---------------------------------- AFTER CODE ---------------------------------
-
-@inherits LayoutComponentBase
-
-<TelerikRootComponent>
-    <TelerikDrawer Data="MenuItems"
-                   @ref="TelerikDrawer"
-                   Mode="DrawerMode.Push"
-                   MiniMode="true"
-                   SelectedItem="SelectedMenu"
-                   SelectedItemChanged="@((MenuItem menuItem) => SelectedMenuChanged(menuItem))"
-                   Expanded="Expanded"
-                   ExpandedChanged="@((bool newValue) => ExpandedChangedHandler(newValue))">
-        <ItemTemplate Context="item">
-            <span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
-            @if (Expanded)
-            {
-                <span style="font-weight:bold; font-family:Calibri; font-size:large">
-                    @item.Text
-                </span>
-            }
-        </ItemTemplate>
-        <Content>
-            <div class="main">
-                <div class="top-row px-4">
-                    <TelerikButton OnClick="@(() => TelerikDrawer.ToggleAsync())" Icon="@IconName.Menu"></TelerikButton> &nbsp;
-                    <TelerikButton OnClick="@(() => TelerikDrawer.ExpandAsync())"> Expand Menu</TelerikButton>&nbsp;
-                    <TelerikButton OnClick="@(() => TelerikDrawer.CollapseAsync())"> Collapse Menu</TelerikButton>
-                    <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-                </div>
-                <div class="content px-4">
-                    @Body
-                </div>
-            </div>
-        </Content>
-    </TelerikDrawer>
-</TelerikRootComponent>
-
-@code {
-
-    TelerikDrawer<MenuItem> TelerikDrawer { get; set; }
-    public MenuItem SelectedMenu { get; set; }
-    public bool Expanded { get; set; }
-
-    private IEnumerable<MenuItem> MenuItems =>
-        new List<MenuItem>
-        {
-            new MenuItem{ Text = "Authors", Icon = IconName.User, Url="/"},
-            new MenuItem{ Text = "Publishers", Icon = IconName.Blogger, Url="/publishers"},
-            new MenuItem{ Text = "Books", Icon = IconName.FilePdf, Url="/books"},
-            new MenuItem{ IsSeparator = true },
-            new MenuItem{ Text = "GitHub", Icon = IconName.Share, Url="https://github.com/CuriousDrive/Telerik" },
-            new MenuItem{ Text = "Telerik", Icon = IconName.HyperlinkGlobe, Url="https://telerik.com"},
-            new MenuItem{ Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction" },
-            new MenuItem{ Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" }
-        };
-
-    private void SelectedMenuChanged(MenuItem menuItem)
-    {
-        SelectedMenu = menuItem;
-    }
-
-    private void ExpandedChangedHandler(bool newValue)
-    {
-        Expanded = newValue;
-    }
-
-}
+list the nuget packages
 
 
-<div class="col-1">
+4 - Zip Library
 
-</div>
-<div class="col-2">
-    <label style="font-size:x-large; font-weight:bolder; color:red">
-    </label>
-</div>
+list the nuget packages
 
 
--------------------------------------------------------
-
-<span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
-
-<span style="font-weight:bold;font-family:Calibri;font-size:large;color:darkgreen">
-
-            </span>
-
-
-            <ItemTemplate Context="item">
-            @if (item.Group == "other")
-            {
-                <span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
-            }
-            else
-            {
-                <img src="@item.ImageUrl"/>
-            }
-
-            @if (IsExpanded)
-            {
-                <span style="font-weight:bold;font-family:Calibri;font-size:large;color:darkgreen">
-                   &nbsp; @item.Text
-                </span>
-            }
-        </ItemTemplate>
-
- -------------------------------------------------------
-
- <Template Context="items">
-            @if (IsExpanded)
-            {
-                <div class="align-content-center">
-                    <LoginDisplay></LoginDisplay>
-                </div>
-            }
-            <div class="k-drawer-items">
-                <ul>
-                    @foreach (var item in items)
-                    {
-                        <li class="k-drawer-item @(IsMenuItemHeader(item) == true ? "bg-secondary" : "")"
-                            @onclick="@(() => NavigateTo(item))">
-                            @if (item.Group == "other")
-                            {
-                                <span class="k-icon k-i-@item.Icon" style="margin-right: 8px;"></span>
-                            }
-                            else
-                            {
-                                <img src="@item.ImageUrl" />
-                            }
-
-                            @if (IsExpanded)
-                            {
-                                @if (IsMenuItemHeader(item))
-                                {
-                                    <span style="font-weight:bold;font-family:Calibri;font-size:large;color:black">
-                                        &nbsp; @item.Text
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span style="font-weight:bold;font-family:Calibri;font-size:large;color:darkgreen">
-                                        &nbsp; @item.Text
-                                    </span>
-                                }
-                            }
-                        </li>
-                    }
-                </ul>
-            </div>
-        </Template>
-
-
-       
-
----------------------------------------------------------------------------------------
-
-
-
-private bool IsMenuItemHeader(MenuItem menuItem)
-        => true ? (menuItem.Text == "Application" || menuItem.Text == "Resources") : false;
-
-<div class="k-drawer-items">
-</div>
-
-
+-------------------------------- DOCUMENT PROCESSING --------------------------------
