@@ -15,7 +15,6 @@ namespace BookStores.Client
             builder.RootComponents.Add<App>("app");
             
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
             builder.Services.AddTelerikBlazor();
 
             await builder.Build().RunAsync();

@@ -10,8 +10,18 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.1" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
+    <PackageReference Include="Telerik.Documents.Core" Version="2020.3.915" />
+    <PackageReference Include="Telerik.Documents.Flow" Version="2020.3.915" />
+    <PackageReference Include="Telerik.Documents.Flow.FormatProviders.Pdf" Version="2020.3.915" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet" Version="2020.3.915" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.OpenXml" Version="2020.3.915" />
+    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.Pdf" Version="2020.3.915" />
+    <PackageReference Include="Telerik.Documents.SpreadsheetStreaming" Version="2020.3.915" />
     <PackageReference Include="Telerik.UI.for.Blazor" Version="2.17.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.8" />
+    <PackageReference Include="Telerik.Documents.Fixed" Version="2020.3.915" />
+    <PackageReference Include="Telerik.Zip" Version="2020.3.915" />
+
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\BookStores.Shared.csproj" />
