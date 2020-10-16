@@ -25,8 +25,8 @@ namespace BookStores.Server.Controllers
             this._webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpGet("GetPdfTemplate")]
-        public async Task<FileContentResult> GetPdfTemplate()
+        [HttpGet("GetInteractiveForms")]
+        public async Task<FileContentResult> GetInteractiveForms()
         {
             var filePath = Path.Combine(_webHostEnvironment.WebRootPath, @"shared\web\pdfprocessing\InteractiveForms.pdf");
 
@@ -41,5 +41,23 @@ namespace BookStores.Server.Controllers
                 };
             }
         }
+
+        [HttpGet("GetTemplate")]
+        public async Task<FileContentResult> GetPdfTemplate()
+        {
+            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, @"shared\web\pdfprocessing\Template.pdf");
+
+            var memoryStream = new MemoryStream();
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                await fileStream.CopyToAsync(memoryStream);
+                byte[] fileReadAllBytes = memoryStream.ToArray();
+                return new FileContentResult(fileReadAllBytes, "application/pdf")
+                {
+                    FileDownloadName = "test.pdf"
+                };
+            }
+        }
+
     }
 }
