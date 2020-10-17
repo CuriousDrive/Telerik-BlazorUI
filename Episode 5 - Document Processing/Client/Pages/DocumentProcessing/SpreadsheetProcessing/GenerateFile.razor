@@ -1,0 +1,249 @@
+﻿@page "/documentprocessing/spreadsheetprocessing/generatefile"
+@using BookStores.Models
+@using System.IO;
+@using Telerik.Windows.Documents.Spreadsheet.FormatProviders;
+@using Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.Xlsx;
+@using Telerik.Windows.Documents.Spreadsheet.Model;
+@using System.Collections
+@using System;
+@using System.Collections.Generic;
+@using Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf;
+@using Telerik.Windows.Documents.Spreadsheet.FormatProviders.TextBased.Csv;
+@using Telerik.Windows.Documents.Spreadsheet.FormatProviders.TextBased.Txt;
+@using Telerik.Windows.Documents.Spreadsheet.Utilities;
+@using System.Linq;
+@using Telerik.Documents.Common.Model;
+@using BookStores.Client.Models.DocumentProcessing 
+@inject IJSRuntime JsRuntime
+@inject HttpClient _httpClient
+
+<div class="demo-container mb-md">
+    <label class="demo-spacing">File extension:</label>
+    <TelerikDropDownList Data="@Formats" @bind-Value="@SelectedFormat" PopupHeight="" Width="140px" />
+
+    <TelerikButton Icon="save" Primary="true" OnClick="@ExportHandler"
+                   Class="demo-spacing demo-button">Generate</TelerikButton>
+</div>
+
+<div class="col-12">
+
+    @if (BookList == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <TelerikGrid Data="BookList"
+                     Pageable="true"
+                     PageSize="10">
+            <GridColumns>
+                <GridColumn Field="@nameof(Book.Title)"></GridColumn>
+                <GridColumn Field="@nameof(Book.AuthorName)" Title="Author Name"></GridColumn>
+                <GridColumn Field="@nameof(Book.Type)">
+                </GridColumn>
+                <GridColumn Field="@nameof(Book.Price)">
+                    <Template>
+                        @((context as Book).Price.ToString("C2"))
+                    </Template>
+                </GridColumn>
+                <GridColumn Field="@nameof(Book.Sales)" Groupable="false">
+                    <Template>
+                        @((context as Book).Sales.ToString("N0"))
+                    </Template>
+                </GridColumn>
+            </GridColumns>
+        </TelerikGrid>
+    }
+    <br /><br />
+</div>
+
+@code {
+
+    //properties
+
+    public Book Book { get; set; }
+    public List<Book> BookList { get; set; }
+
+    Hashtable table = new Hashtable();
+    string SelectedFormat = "XLSX";
+    string[] Formats = { "XLSX", "CSV", "TXT", "PDF" };
+
+    readonly int IndexColumnTitle = 0;
+    readonly int IndexColumnAuthorName = 1;
+    readonly int IndexColumnType = 2;
+    readonly int IndexColumnPrice = 3;
+    readonly int IndexColumnSales = 4;
+    readonly int IndexRowItemStart = 1;
+
+    readonly string EnUSCultureAccountFormatString = "_($ #,##0.00_);_($ (#,##0.00);_(@_)";
+    readonly ThemableColor InvoiceBackground = ThemableColor.FromArgb(255, 44, 62, 80);
+    readonly ThemableColor InvoiceHeaderForeground = ThemableColor.FromArgb(255, 255, 255, 255);
+
+    //Component Events
+    protected override async Task OnInitializedAsync()
+    {
+        Book = new Book();
+        BookList = await GetBooks();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task<List<Book>> GetBooks()
+    {
+        List<Book> BookList = await _httpClient.GetFromJsonAsync<List<Book>>("Books/getBooks");
+
+        if (BookList != null)
+            BookList = BookList.OrderByDescending(auth => auth.BookId).ToList();
+
+        return BookList;
+    }
+
+    void ExportHandler()
+    {
+        byte[] fileData = GenerateDocument();
+        FileExporter.Save(JsRuntime, fileData, GetMimeType(), "TelerikSpreadProcessing-Generated" + GetFileExtention());
+    }
+
+    string GetFileExtention()
+    {
+        return "." + SelectedFormat.ToLowerInvariant();
+    }
+
+    string GetMimeType()
+    {
+        string mimeType = String.Empty;
+        switch (GetFileExtention())
+        {
+            case ".xlsx": mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"; break;
+            case ".pdf": mimeType = "application/pdf"; break;
+            case ".txt": mimeType = "text/plain"; break;
+            case ".csv": mimeType = "text/csv"; break;
+        }
+        return mimeType;
+    }
+
+    IWorkbookFormatProvider GetFormatProvider(string extension)
+    {
+        IWorkbookFormatProvider formatProvider;
+        switch (extension)
+        {
+            case ".xlsx":
+                formatProvider = new XlsxFormatProvider();
+                break;
+            case ".csv":
+                formatProvider = new CsvFormatProvider();
+                ((CsvFormatProvider)formatProvider).Settings.HasHeaderRow = true;
+                break;
+            case ".txt":
+                formatProvider = new TxtFormatProvider();
+                break;
+            case ".pdf":
+                formatProvider = new PdfFormatProvider();
+                break;
+            default:
+                formatProvider = null;
+                break;
+        }
+
+        return formatProvider;
+    }
+
+    Workbook CreateWorkbook()
+    {
+        Workbook workbook = new Workbook();
+        workbook.Sheets.Add(SheetType.Worksheet);
+
+        Worksheet worksheet = workbook.ActiveWorksheet;
+
+        this.PrepareInvoiceDocument(worksheet, BookList.Count());
+
+        int currentRow = IndexRowItemStart + 1;
+        foreach (Book book in BookList)
+        {
+            worksheet.Cells[currentRow, IndexColumnTitle].SetValue(book.Title);
+            worksheet.Cells[currentRow, IndexColumnAuthorName].SetValue(book.AuthorName);
+            worksheet.Cells[currentRow, IndexColumnType].SetValue(book.Type);
+            worksheet.Cells[currentRow, IndexColumnPrice].SetValue(book.Price.ToString());
+            worksheet.Cells[currentRow, IndexColumnSales].SetValue(book.Sales);
+
+            currentRow++;
+        }
+
+        for (int i = 0; i < worksheet.Columns.Count; i++)
+        {
+            worksheet.Columns[i].AutoFitWidth();
+        }
+
+        return workbook;
+    }
+
+    void PrepareInvoiceDocument(Worksheet worksheet, int itemsCount)
+    {
+        int lastItemIndexRow = IndexRowItemStart + itemsCount;
+
+        CellIndex firstRowFirstCellIndex = new CellIndex(0, 0);
+        CellIndex firstRowLastCellIndex = new CellIndex(0, 4);
+        CellIndex lastRowFirstCellIndex = new CellIndex(lastItemIndexRow + 1, IndexColumnTitle);
+        CellIndex lastRowLastCellIndex = new CellIndex(lastItemIndexRow + 1, IndexColumnSales);
+        worksheet.Cells[firstRowFirstCellIndex, firstRowLastCellIndex].MergeAcross();
+        CellBorder border = new CellBorder(CellBorderStyle.DashDot, InvoiceBackground);
+        worksheet.Cells[firstRowFirstCellIndex, lastRowLastCellIndex].SetBorders(new CellBorders(border, border, border, border, null, null, null, null));
+        worksheet.Cells[lastRowFirstCellIndex, lastRowLastCellIndex].SetBorders(new CellBorders(border, border, border, border, null, null, null, null));
+        worksheet.Cells[firstRowFirstCellIndex].SetValue("Book Sales");
+        worksheet.Cells[firstRowFirstCellIndex].SetFontSize(20);
+
+        worksheet.Cells[IndexRowItemStart, IndexColumnTitle].SetValue("Title");
+        worksheet.Cells[IndexRowItemStart, IndexColumnAuthorName].SetValue("Author Name");
+        worksheet.Cells[IndexRowItemStart, IndexColumnType].SetValue("Type");
+        worksheet.Cells[IndexRowItemStart, IndexColumnPrice].SetValue("Price");
+        worksheet.Cells[IndexRowItemStart, IndexColumnPrice].SetHorizontalAlignment(RadHorizontalAlignment.Right);
+        worksheet.Cells[IndexRowItemStart, IndexColumnSales].SetValue("Sales");
+        worksheet.Cells[IndexRowItemStart, IndexColumnSales].SetHorizontalAlignment(RadHorizontalAlignment.Right);
+
+        worksheet.Cells[IndexRowItemStart, IndexColumnTitle, IndexRowItemStart, IndexColumnSales].SetFill
+        (new GradientFill(GradientType.Horizontal, InvoiceBackground, InvoiceBackground));
+        worksheet.Cells[IndexRowItemStart, IndexColumnTitle, IndexRowItemStart, IndexColumnSales].SetForeColor(InvoiceHeaderForeground);
+        worksheet.Cells[IndexRowItemStart, IndexColumnPrice, lastItemIndexRow, IndexColumnPrice].SetFormat(
+        new CellValueFormat(EnUSCultureAccountFormatString));
+        worksheet.Cells[IndexRowItemStart, IndexColumnSales, lastItemIndexRow, IndexColumnSales].SetFormat(
+        new CellValueFormat(EnUSCultureAccountFormatString));
+
+        worksheet.Cells[lastItemIndexRow + 1, IndexColumnPrice].SetValue("Total Sales : ");
+        worksheet.Cells[lastItemIndexRow + 1, IndexColumnSales].SetFormat(new CellValueFormat(EnUSCultureAccountFormatString));
+
+        string subTotalColumnCellRange = NameConverter.ConvertCellRangeToName(
+        new CellIndex(IndexRowItemStart + 1, IndexColumnSales),
+        new CellIndex(lastItemIndexRow, IndexColumnSales));
+
+        worksheet.Cells[lastItemIndexRow + 1, IndexColumnSales].SetValue(string.Format("=SUM({0})", subTotalColumnCellRange));
+
+        worksheet.Cells[lastItemIndexRow + 1, IndexColumnPrice, lastItemIndexRow + 1, IndexColumnSales].SetFontSize(20);
+    }
+
+    byte[] GenerateDocument()
+    {
+        IWorkbookFormatProvider formatProvider = GetFormatProvider(GetFileExtention());
+        if (formatProvider == null)
+        {
+            return null;
+        }
+
+        Workbook workbook = this.CreateWorkbook();
+        byte[] renderedBytes = null;
+
+        using (MemoryStream ms = new MemoryStream())
+        {
+            formatProvider.Export(workbook, ms);
+            renderedBytes = ms.ToArray();
+        }
+
+        return renderedBytes;
+    }
+
+}
+
+<style>
+    .demo-button {
+        width: 140px;
+    }
+</style>

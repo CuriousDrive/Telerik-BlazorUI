@@ -1,4 +1,4 @@
-﻿@page "/mergesplit"
+﻿@page "/documentprocessing/pdfprocessing/mergesplit"
 
 @using System.IO;
 @using Telerik.Windows.Documents.Fixed.Model;
@@ -8,7 +8,7 @@
 @using Telerik.Windows.Documents.Fixed.Model.Editing;
 @using Telerik.Zip;
 @using Telerik.Documents.Primitives;
-@using BookStores.Client.Models
+@using BookStores.Client.Models.DocumentProcessing
 @inject HttpClient _httpClient
 @inject IJSRuntime JsRuntime
 
@@ -172,40 +172,37 @@
         {
             byte[] renderedBytes = null;
             MemoryStream ms = new MemoryStream();
-            byte[] byteArray = await _httpClient.GetByteArrayAsync("DocumentProcessing/Template").ConfigureAwait(false);
+            byte[] byteArray = await _httpClient.GetByteArrayAsync("DocumentProcessing/GetTemplate").ConfigureAwait(false);
 
             Stream streamSource = new MemoryStream(byteArray);
 
-            //using (FileStream input = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            using (PdfStreamWriter fileWriter = new PdfStreamWriter(ms, true))
             {
-                using (PdfStreamWriter fileWriter = new PdfStreamWriter(ms, true))
+                using (MemoryStream stream = new MemoryStream(file1Details.Data))
                 {
-                    using (MemoryStream stream = new MemoryStream(file1Details.Data))
+                    using (PdfFileSource fileSource = new PdfFileSource(stream))
                     {
-                        using (PdfFileSource fileSource = new PdfFileSource(stream))
+                        using (PdfFileSource templateSource = new PdfFileSource(streamSource, true))
                         {
-                            using (PdfFileSource templateSource = new PdfFileSource(streamSource, true))
+                            PdfPageSource backgroundTemplate = templateSource.Pages[0];
+
+                            foreach (PdfPageSource pageSource in fileSource.Pages)
                             {
-                                PdfPageSource backgroundTemplate = templateSource.Pages[0];
-
-                                foreach (PdfPageSource pageSource in fileSource.Pages)
+                                using (PdfPageStreamWriter pageWriter = fileWriter.BeginPage(pageSource.Size, pageSource.Rotation))
                                 {
-                                    using (PdfPageStreamWriter pageWriter = fileWriter.BeginPage(pageSource.Size, pageSource.Rotation))
+                                    using (pageWriter.SaveContentPosition())
                                     {
-                                        using (pageWriter.SaveContentPosition())
-                                        {
-                                            double scaleX = pageSource.Size.Width / backgroundTemplate.Size.Width;
-                                            double scaleY = pageSource.Size.Height / backgroundTemplate.Size.Height;
-                                            double scale = Math.Min(scaleX, scaleY);
-                                            double xCenteringTranslation = (pageSource.Size.Width - scale * backgroundTemplate.Size.Width) / 2;
-                                            double yCenteringTranslation = (pageSource.Size.Height - scale * backgroundTemplate.Size.Height) / 2;
-                                            pageWriter.ContentPosition.Translate(xCenteringTranslation, yCenteringTranslation);
-                                            pageWriter.ContentPosition.Scale(scale, scale);
-                                            pageWriter.WriteContent(backgroundTemplate);
-                                        }
-
-                                        pageWriter.WriteContent(pageSource);
+                                        double scaleX = pageSource.Size.Width / backgroundTemplate.Size.Width;
+                                        double scaleY = pageSource.Size.Height / backgroundTemplate.Size.Height;
+                                        double scale = Math.Min(scaleX, scaleY);
+                                        double xCenteringTranslation = (pageSource.Size.Width - scale * backgroundTemplate.Size.Width) / 2;
+                                        double yCenteringTranslation = (pageSource.Size.Height - scale * backgroundTemplate.Size.Height) / 2;
+                                        pageWriter.ContentPosition.Translate(xCenteringTranslation, yCenteringTranslation);
+                                        pageWriter.ContentPosition.Scale(scale, scale);
+                                        pageWriter.WriteContent(backgroundTemplate);
                                     }
+
+                                    pageWriter.WriteContent(pageSource);
                                 }
                             }
                         }

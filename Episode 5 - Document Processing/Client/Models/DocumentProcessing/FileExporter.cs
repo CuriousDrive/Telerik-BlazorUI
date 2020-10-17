@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace BookStores.Client.Models
+namespace BookStores.Client.Models.DocumentProcessing
 {
     public static class FileExporter
     {
