@@ -17,10 +17,17 @@ And get the files on byte array using httpClient and use to download the file us
 		-> Then I used httpClient.GetByteArrayAsync() to get the file in Blazor WASM before updating it
 		-> Then I used JS interop to download the modified files from the component
 	=> Merge, Split, Append and Prepend Content
-		-> 
+		-> I had to put the documents in my local machine in order to show the demo
+		-> Also I had write another web api which returns the template file to show append demo 
 
 2 - Spreadsheet Processing 
 
+	=> Export Files
+		-> I added my Books component for this and exported the data as Sales Report for the books
+		-> 
+
+	Questions to ask => 
+		-> What if I want to export PDF in landscape format?
 
 
 3 - Word Processing
@@ -32,3 +39,7 @@ And get the files on byte array using httpClient and use to download the file us
 
 
 -------------------------------- DOCUMENT PROCESSING --------------------------------
+
+
+
+

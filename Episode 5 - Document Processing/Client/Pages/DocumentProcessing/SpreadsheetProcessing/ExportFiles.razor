@@ -1,4 +1,4 @@
-﻿@page "/documentprocessing/spreadsheetprocessing/generatefile"
+﻿@page "/documentprocessing/spreadsheetprocessing/exportfiles"
 @using BookStores.Models
 @using System.IO;
 @using Telerik.Windows.Documents.Spreadsheet.FormatProviders;
@@ -13,18 +13,21 @@
 @using Telerik.Windows.Documents.Spreadsheet.Utilities;
 @using System.Linq;
 @using Telerik.Documents.Common.Model;
-@using BookStores.Client.Models.DocumentProcessing 
+@using BookStores.Client.Models.DocumentProcessing
 @inject IJSRuntime JsRuntime
 @inject HttpClient _httpClient
 
 <div class="demo-container mb-md">
-    <label class="demo-spacing">File extension:</label>
-    <TelerikDropDownList Data="@Formats" @bind-Value="@SelectedFormat" PopupHeight="" Width="140px" />
+    <div class="col-12">
+        <label class="demo-spacing">File extension:</label>
+        <TelerikDropDownList Data="@Formats" @bind-Value="@SelectedFormat" PopupHeight="" Width="140px" />
 
-    <TelerikButton Icon="save" Primary="true" OnClick="@ExportHandler"
-                   Class="demo-spacing demo-button">Generate</TelerikButton>
+        <TelerikButton Icon="save" Primary="true" OnClick="@ExportHandler"
+                       Class="demo-spacing demo-button">Generate</TelerikButton>
+    </div>
+    
 </div>
-
+<br />
 <div class="col-12">
 
     @if (BookList == null)
@@ -189,7 +192,7 @@
         CellBorder border = new CellBorder(CellBorderStyle.DashDot, InvoiceBackground);
         worksheet.Cells[firstRowFirstCellIndex, lastRowLastCellIndex].SetBorders(new CellBorders(border, border, border, border, null, null, null, null));
         worksheet.Cells[lastRowFirstCellIndex, lastRowLastCellIndex].SetBorders(new CellBorders(border, border, border, border, null, null, null, null));
-        worksheet.Cells[firstRowFirstCellIndex].SetValue("Book Sales");
+        worksheet.Cells[firstRowFirstCellIndex].SetValue("Sales Report");
         worksheet.Cells[firstRowFirstCellIndex].SetFontSize(20);
 
         worksheet.Cells[IndexRowItemStart, IndexColumnTitle].SetValue("Title");
@@ -205,11 +208,8 @@
         worksheet.Cells[IndexRowItemStart, IndexColumnTitle, IndexRowItemStart, IndexColumnSales].SetForeColor(InvoiceHeaderForeground);
         worksheet.Cells[IndexRowItemStart, IndexColumnPrice, lastItemIndexRow, IndexColumnPrice].SetFormat(
         new CellValueFormat(EnUSCultureAccountFormatString));
-        worksheet.Cells[IndexRowItemStart, IndexColumnSales, lastItemIndexRow, IndexColumnSales].SetFormat(
-        new CellValueFormat(EnUSCultureAccountFormatString));
 
         worksheet.Cells[lastItemIndexRow + 1, IndexColumnPrice].SetValue("Total Sales : ");
-        worksheet.Cells[lastItemIndexRow + 1, IndexColumnSales].SetFormat(new CellValueFormat(EnUSCultureAccountFormatString));
 
         string subTotalColumnCellRange = NameConverter.ConvertCellRangeToName(
         new CellIndex(IndexRowItemStart + 1, IndexColumnSales),
