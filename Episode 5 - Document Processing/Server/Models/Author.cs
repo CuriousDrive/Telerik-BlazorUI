@@ -15,6 +15,7 @@ namespace BookStoresWebAPI.Models
         public string Zip { get; set; }
         public string EmailAddress { get; set; }
         public decimal Salary { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public int BooksCount { get; set; }
     }
 }

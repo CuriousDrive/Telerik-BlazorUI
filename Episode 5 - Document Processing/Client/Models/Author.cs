@@ -16,6 +16,7 @@ namespace BookStores.Models
         public string EmailAddress { get; set; }        
         public string Phone { get; set; }
         public decimal Salary { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public int BooksCount { get; set; }
 
         public Author()

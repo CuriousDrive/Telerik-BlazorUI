@@ -21,11 +21,19 @@ namespace BookStoresWebAPI.Controllers
             _bookStoresRepository = bookStoresRepository;
         }
 
-        // GET: api/Authors
+        // GET: api/GetAuthors
         [HttpGet("GetAuthors")]
         public ActionResult<IEnumerable<Author>> GetAuthors()
         {
             List<Author> authorList = _bookStoresRepository.GetAuthors();
+            return authorList;
+        }
+
+        // GET: api/GetAllAuthors
+        [HttpGet("GetAllAuthors")]
+        public ActionResult<IEnumerable<Author>> GetAllAuthors()
+        {
+            List<Author> authorList = _bookStoresRepository.GetAllAuthors();
             return authorList;
         }
 

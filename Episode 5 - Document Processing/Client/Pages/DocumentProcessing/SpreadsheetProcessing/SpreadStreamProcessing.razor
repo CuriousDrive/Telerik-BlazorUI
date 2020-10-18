@@ -1,5 +1,164 @@
-﻿<h3>SpreadStreamProcessing</h3>
+﻿@page "/documentprocessing/spreadsheetprocessing/spreadstreamprocessing"
+
+@using System.IO;
+@using Telerik.Documents.SpreadsheetStreaming;
+@using BookStores.Models
+@using BookStores.Client.Models.DocumentProcessing
+@inject IJSRuntime JsRuntime
+@inject HttpClient _httpClient
+
+
+<div class="demo-container">
+    <div class="col-12">
+        <label class="demo-spacing">Rows count: </label>
+        <TelerikNumericTextBox Decimals="0" @bind-Value="@rowsCount" Width="120px" Min="1" Max="50000"></TelerikNumericTextBox>
+
+        <label class="demo-spacing">File extension:</label>
+        <TelerikDropDownList Data="@Formats" @bind-Value="@SelectedFormat" PopupHeight="" Width="100px">
+        </TelerikDropDownList>
+
+        <TelerikButton Icon="save" Primary="true" OnClick="@ExportHandler" Class="demo-spacing">Export</TelerikButton>
+    </div>
+</div>
+<br/>
+<div class="col-12">
+
+    @if (authorList == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <TelerikGrid Data="authorList"
+                     Pageable="true"
+                     PageSize="15">
+            <GridColumns>
+                <GridColumn Title="Author Name">
+                    <Template>
+                        @((context as Author).FirstName + " " + (context as Author).LastName)
+                    </Template>
+                </GridColumn>
+                <GridColumn Field="@nameof(Author.DateOfBirth)"></GridColumn>
+                <GridColumn Field="@nameof(Author.EmailAddress)"></GridColumn>
+                <GridColumn Title="Salary">
+                    <Template>
+                        @((context as Author).Salary.ToString("C2"))
+                    </Template>
+                </GridColumn>
+                <GridColumn Field="@nameof(Author.Phone)"></GridColumn>
+            </GridColumns>
+        </TelerikGrid>
+    }
+</div>
+
 
 @code {
+    int rowsCount = 5000;
+    string SelectedFormat = "XLSX";
+    string mimeType = string.Empty;
+    string fileExtension = string.Empty;
+    string[] Formats = { "XLSX", "CSV" };
+    public List<Author> authorList { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAuthors();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadAuthors()
+    {
+        authorList = await _httpClient.GetFromJsonAsync<List<Author>>("authors/getallauthors");
+
+    }
+    void ExportHandler()
+    {
+        byte[] fileData = GenerateDocument(rowsCount, SelectedFormat.ToLowerInvariant());
+        FileExporter.Save(JsRuntime, fileData, mimeType, "SpreadStreamProcessing-Generated." + fileExtension);
+    }
+
+    byte[] GenerateDocument(int rowsCount, string fileType)
+    {
+        int headerRowHeight = 22;
+        string[] columnHeaders = { "ID", "DATE", "TIME", "CLIENT", "COMPANY", "SHIPPING", "DISCOUNT", "STATUS" };
+        double[] columnWidths = { 9.43, 12.29, 10.71, 15.43, 21.71, 14.29, 13.57, 11.29 };
+
+        int rowHeight = 18;
+
+        DocumentSettings docSettings = new DocumentSettings();
+
+        docSettings.ExportedCellsCount = 0;
+        //docSettings.exportStarted = DateTime.Now;
+
+        MemoryStream documentStream = new MemoryStream();
+        byte[] renderedBytes = null;
+
+        //set file format
+        switch (fileType)
+        {
+            case "xlsx":
+                docSettings.SelectedDocumentFormat = SpreadDocumentFormat.Xlsx;
+                mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                fileExtension = "xlsx";
+                break;
+            case "csv":
+                docSettings.SelectedDocumentFormat = SpreadDocumentFormat.Csv;
+                mimeType = "text/csv";
+                fileExtension = "csv";
+                break;
+            default:
+                break;
+        }
+
+        using (IWorkbookExporter workbookExporter = SpreadExporter.CreateWorkbookExporter(docSettings.SelectedDocumentFormat, documentStream))
+        {
+            using (IWorksheetExporter worksheetExporter = workbookExporter.CreateWorksheetExporter("Orders Log"))
+            {
+                for (int i = 0; i < columnWidths.Length; i++)
+                {
+                    using (IColumnExporter columnExporter = worksheetExporter.CreateColumnExporter())
+                    {
+                        columnExporter.SetWidthInCharacters(columnWidths[i]);
+                    }
+                }
+
+                DocumentExportHelper exportHelper = new DocumentExportHelper(headerRowHeight, columnHeaders, columnWidths);
+
+                exportHelper.ExportHeaderRows(worksheetExporter);
+
+                for (int rowIndex = 0; rowIndex < rowsCount; rowIndex++)
+                {
+                    using (IRowExporter rowExporter = worksheetExporter.CreateRowExporter())
+                    {
+                        rowExporter.SetHeightInPoints(rowHeight);
+
+                        DocumentRow row = DocumentHelper.GenerateDocumentRow(rowsCount, rowIndex);
+
+                        SpreadCellFormat normalFormat = new SpreadCellFormat();
+                        normalFormat.FontSize = 10;
+                        normalFormat.VerticalAlignment = SpreadVerticalAlignment.Center;
+                        normalFormat.HorizontalAlignment = SpreadHorizontalAlignment.Center;
+
+                        exportHelper.ExportIdColumn(rowExporter, row, normalFormat);
+                        exportHelper.ExportDateColumn(rowExporter, row);
+                        exportHelper.ExportTimeColumn(rowExporter, row);
+                        exportHelper.ExportClientColumn(rowExporter, row, normalFormat);
+                        exportHelper.ExportCompanyColumn(rowExporter, row, normalFormat);
+                        exportHelper.ExportShippingColumn(rowExporter, row);
+                        exportHelper.ExportDiscountColumn(rowExporter, row);
+                        exportHelper.ExportStatusColumn(rowExporter, row);
+                    }
+                }
+
+                worksheetExporter.MergeCells(0, 0, 0, 7);
+                worksheetExporter.MergeCells(1, 0, 1, 5);
+                worksheetExporter.MergeCells(1, 6, 1, 7);
+            }
+        }
+
+        renderedBytes = documentStream.ToArray();
+
+        return renderedBytes;
+    }
 }
