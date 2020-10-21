@@ -24,11 +24,8 @@ And get the files on byte array using httpClient and use to download the file us
 
 	=> Export Files
 		-> I added my Books component for this and exported the data as Sales Report for the books
-		-> 
-
-	Questions to ask => 
-		-> What if I want to export PDF in landscape format?
-
+	=> Spread Streaming Processing
+		-> I added Authors component with 5000 records and used t
 
 3 - Word Processing
 
@@ -40,6 +37,11 @@ And get the files on byte array using httpClient and use to download the file us
 
 -------------------------------- DOCUMENT PROCESSING --------------------------------
 
+	Questions to ask => 
+		-> What if I want to export PDF in landscape format?
+		-> Shouldn't there be a Enum for Number Formating?
+		-> General Feedback - For spread stream processing not all the files are there in docs
+		-> 
 
 
 

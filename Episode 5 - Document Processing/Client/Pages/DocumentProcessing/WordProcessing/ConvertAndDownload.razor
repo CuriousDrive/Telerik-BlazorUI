@@ -1,0 +1,200 @@
+﻿@page "/documentprocessing/wordsprocessing/convertanddownload"
+
+@using System.IO;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Docx;
+@using Telerik.Windows.Documents.Flow.Model;
+@using System;
+@using System.Text.RegularExpressions;
+@using Telerik.Windows.Documents.Common.FormatProviders;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Html;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Rtf;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Txt;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Pdf;
+@using BookStores.Client.Models.DocumentProcessing
+@inject HttpClient _httpClient
+@inject IJSRuntime JsRuntime
+
+<div class="demo-section">
+    <input id="rb1" class="k-radio" name="loadDocument" type="radio" value="1"
+           checked="@(rb == "1")" @onchange="@(() => { rb = "1"; })">
+    <label for="rb1">Load Template Document</label>
+
+    <div class="custom-radio-wrapper">
+        <input id="rb2" class="k-radio" name="loadDocument" type="radio" value="2"
+               checked="@(rb == "2")" @onchange="@(() => { rb = "2";})">
+        <label for="rb2">Load Custom Document</label>
+    </div>
+
+    <hr class="clear" />
+
+    <div class='@templateContainerClass'>
+        <span>Preview:</span>
+        <div class="image-wrapper">
+            <img class="template-image" src="shared/web/wordsprocessing/SampleDocumentImage.png" />
+        </div>
+    </div>
+
+    <div class='@(rb=="1" ? "hidden-wrapper":"visible-wrapper" )'>
+        <FileSelector ID="uploadInput" Accept=".docx, .rtf, .html, .txt" @bind-FileDetails="fileDetails" />
+    </div>
+    <br />
+
+    <label class="fileName-label">File Name: </label>@(rb == "1" ? fileName : customFileName)<br />
+    <label class="demo-spacing">Convert to:</label>
+    <TelerikDropDownList Data="@Formats" @bind-Value="@SelectedFormat" PopupHeight="" Width="180px">
+    </TelerikDropDownList>
+    <hr class="clear" />
+
+    <TelerikButton Icon="save" Primary="true" OnClick="@DownloadHandler"
+                   Enabled='@(rb=="1" || !string.IsNullOrEmpty(customFileName))'
+                   Class="demo-button">Convert and Download</TelerikButton>
+</div>
+
+@code {
+    FileDetails fileDetails = new FileDetails();
+    string rb = "1";
+    string fileName = "TelerikWordsProcessing-SampleDocument.docx";
+    string customFileName => fileDetails.Name;
+    string SelectedFormat = "DOCX";
+    string mimeType;
+    string[] Formats = { "DOCX", "RTF", "HTML", "TXT" };
+    string templateContainerClass => rb == "1" ? "visible-wrapper" : "hidden-wrapper";
+
+    async Task DownloadHandler()
+    {
+        byte[] newFileData = await GenerateFile();
+        FileExporter.Save(JsRuntime, newFileData, mimeType,
+            String.Format("{0}." + SelectedFormat.ToLowerInvariant(),
+            Path.GetFileNameWithoutExtension(rb == "1" ? fileName : customFileName)));
+    }
+
+    async Task<byte[]> GenerateFile()
+    {
+        IFormatProvider<RadFlowDocument> fileFormatProvider = null;
+        IFormatProvider<RadFlowDocument> convertFormatProvider = null;
+        RadFlowDocument document = null;
+
+        if (rb == "2" && Regex.IsMatch(Path.GetExtension(customFileName), ".docx|.rtf|.html|.txt"))
+        {
+            switch (Path.GetExtension(customFileName))
+            {
+                case ".docx":
+                    fileFormatProvider = new DocxFormatProvider();
+                    break;
+                case ".rtf":
+                    fileFormatProvider = new RtfFormatProvider();
+                    break;
+                case ".html":
+                    fileFormatProvider = new HtmlFormatProvider();
+                    break;
+                case ".txt":
+                    fileFormatProvider = new TxtFormatProvider();
+                    break;
+                default:
+                    fileFormatProvider = null;
+                    break;
+            }
+
+            using (MemoryStream stream = new MemoryStream(fileDetails.Data))
+            {
+                document = fileFormatProvider.Import(stream);
+            }
+        }
+        else
+        {
+            fileFormatProvider = new DocxFormatProvider();
+            byte[] byteArray = await _httpClient.GetByteArrayAsync("DocumentProcessing/GetSampleDocument").ConfigureAwait(false);
+            Stream streamSource = new MemoryStream(byteArray);
+            document = fileFormatProvider.Import(streamSource);
+        }
+
+        switch (SelectedFormat.ToLowerInvariant())
+        {
+            case "docx":
+                convertFormatProvider = new DocxFormatProvider();
+                mimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                break;
+            case "rtf":
+                convertFormatProvider = new RtfFormatProvider();
+                mimeType = "application/rtf";
+                break;
+            case "html":
+                convertFormatProvider = new HtmlFormatProvider();
+                mimeType = "text/html";
+                break;
+            case "txt":
+                convertFormatProvider = new TxtFormatProvider();
+                mimeType = "text/plain";
+                break;
+            default:
+                convertFormatProvider = new TxtFormatProvider();
+                mimeType = "text/plain";
+                break;
+        }
+
+        byte[] renderedBytes = null;
+        using (MemoryStream ms = new MemoryStream())
+        {
+            convertFormatProvider.Export(document, ms);
+            renderedBytes = ms.ToArray();
+        }
+
+        return renderedBytes;
+    }
+}
+
+<style>
+    .demo-button {
+        width: 240px;
+        float: right;
+    }
+
+    .demo-section {
+        max-width: 500px;
+        padding-bottom: 80px;
+    }
+
+        .demo-section label {
+            margin-left: 5px;
+        }
+
+    .fileName-label {
+        width: 90px;
+    }
+
+    .image-wrapper {
+        text-align: center;
+        min-height: 300px;
+        position: relative;
+    }
+
+        .image-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            bottom: 0;
+        }
+
+    .template-image {
+        height: 300px;
+        border: 1px solid #c9c9c9;
+    }
+
+    .custom-image {
+        height: 180px;
+    }
+
+    .custom-radio-wrapper {
+        float: right;
+    }
+
+    .visible-wrapper {
+        display: block;
+    }
+
+    .hidden-wrapper {
+        display: none;
+    }
+</style>

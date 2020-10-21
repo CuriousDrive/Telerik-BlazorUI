@@ -81,8 +81,8 @@
     byte[] GenerateDocument(int rowsCount, string fileType)
     {
         int headerRowHeight = 22;
-        string[] columnHeaders = { "ID", "DATE", "TIME", "CLIENT", "COMPANY", "SHIPPING", "DISCOUNT", "STATUS" };
-        double[] columnWidths = { 9.43, 12.29, 10.71, 15.43, 21.71, 14.29, 13.57, 11.29 };
+        string[] columnHeaders = { "TITLE", "DATE_OF_BIRTH", "EMAIL_ADDRESS", "SALARY", "PHONE", "STATUS" };
+        double[] columnWidths = { 25.43, 20.29, 30.71, 15.43, 21.71, 14.29 };
 
         int rowHeight = 18;
 
@@ -123,31 +123,27 @@
                     }
                 }
 
-                DocumentExportHelper exportHelper = new DocumentExportHelper(headerRowHeight, columnHeaders, columnWidths);
+                AuthorsExportHelper exportHelper = new AuthorsExportHelper(headerRowHeight, columnHeaders, columnWidths);
 
                 exportHelper.ExportHeaderRows(worksheetExporter);
 
-                for (int rowIndex = 0; rowIndex < rowsCount; rowIndex++)
+                foreach (var author in authorList)
                 {
                     using (IRowExporter rowExporter = worksheetExporter.CreateRowExporter())
                     {
                         rowExporter.SetHeightInPoints(rowHeight);
-
-                        DocumentRow row = DocumentHelper.GenerateDocumentRow(rowsCount, rowIndex);
 
                         SpreadCellFormat normalFormat = new SpreadCellFormat();
                         normalFormat.FontSize = 10;
                         normalFormat.VerticalAlignment = SpreadVerticalAlignment.Center;
                         normalFormat.HorizontalAlignment = SpreadHorizontalAlignment.Center;
 
-                        exportHelper.ExportIdColumn(rowExporter, row, normalFormat);
-                        exportHelper.ExportDateColumn(rowExporter, row);
-                        exportHelper.ExportTimeColumn(rowExporter, row);
-                        exportHelper.ExportClientColumn(rowExporter, row, normalFormat);
-                        exportHelper.ExportCompanyColumn(rowExporter, row, normalFormat);
-                        exportHelper.ExportShippingColumn(rowExporter, row);
-                        exportHelper.ExportDiscountColumn(rowExporter, row);
-                        exportHelper.ExportStatusColumn(rowExporter, row);
+                        exportHelper.ExportTitleColumn(rowExporter, author, normalFormat);
+                        exportHelper.ExportDateOfBirthColumn(rowExporter, author);
+                        exportHelper.ExportEmailAddressColumn(rowExporter, author, normalFormat);
+                        exportHelper.ExportSalaryColumn(rowExporter, author );
+                        exportHelper.ExportPhoneColumn(rowExporter, author, normalFormat);
+                        exportHelper.ExportStatusColumn(rowExporter, author);
                     }
                 }
 

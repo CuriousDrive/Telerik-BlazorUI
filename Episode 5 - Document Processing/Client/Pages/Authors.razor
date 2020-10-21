@@ -130,7 +130,9 @@
     }
     else
     {
-        <TelerikGrid Data="authorList">
+        <TelerikGrid Data="authorList"
+                     Pageable="true"
+                     PageSize="15">
             <GridColumns>
                 <GridColumn Field="@nameof(Author.FirstName)"></GridColumn>
                 <GridColumn Field="@nameof(Author.LastName)" Title="Author Name"></GridColumn>

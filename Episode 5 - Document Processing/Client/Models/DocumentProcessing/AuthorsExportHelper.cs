@@ -1,4 +1,5 @@
-﻿using Telerik.Documents.SpreadsheetStreaming;
+﻿using BookStores.Models;
+using Telerik.Documents.SpreadsheetStreaming;
 
 namespace BookStores.Client.Models.DocumentProcessing
 {
@@ -25,17 +26,17 @@ namespace BookStores.Client.Models.DocumentProcessing
 
         #region Columns Export Methods
 
-        public void ExportIdColumn(IRowExporter rowExporter, DocumentRow row, SpreadCellFormat normalFormat)
+        public void ExportTitleColumn(IRowExporter rowExporter, Author author, SpreadCellFormat normalFormat)
         {
             using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
             {
                 // this.UpdateProgess();
-                cellExporter.SetValue(row.Id);
+                cellExporter.SetValue(author.FirstName + " " + author.LastName);
                 cellExporter.SetFormat(normalFormat);
             }
         }
 
-        public void ExportDateColumn(IRowExporter rowExporter, DocumentRow row)
+        public void ExportDateOfBirthColumn(IRowExporter rowExporter, Author author)
         {
             using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
             {
@@ -46,121 +47,64 @@ namespace BookStores.Client.Models.DocumentProcessing
                 dateFormat.NumberFormat = "m/d/yyyy";
 
                 // this.UpdateProgess();
-                cellExporter.SetValue(row.Date);
+                cellExporter.SetValue(author.DateOfBirth);
                 cellExporter.SetFormat(dateFormat);
             }
         }
 
-        public void ExportTimeColumn(IRowExporter rowExporter, DocumentRow row)
-        {
-            using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
-            {
-                SpreadCellFormat timeFormat = new SpreadCellFormat();
-                timeFormat.FontSize = 10;
-                timeFormat.VerticalAlignment = SpreadVerticalAlignment.Center;
-                timeFormat.HorizontalAlignment = SpreadHorizontalAlignment.Center;
-                timeFormat.NumberFormat = "h:mm;@";
-
-                // this.UpdateProgess();
-                cellExporter.SetValue(row.Time);
-                cellExporter.SetFormat(timeFormat);
-            }
-        }
-
-        public void ExportClientColumn(IRowExporter rowExporter, DocumentRow row, SpreadCellFormat normalFormat)
+        public void ExportEmailAddressColumn(IRowExporter rowExporter, Author author, SpreadCellFormat normalFormat)
         {
             using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
             {
                 // this.UpdateProgess();
-                cellExporter.SetValue(row.Client);
+                cellExporter.SetValue(author.EmailAddress);
                 cellExporter.SetFormat(normalFormat);
             }
         }
 
-        public void ExportCompanyColumn(IRowExporter rowExporter, DocumentRow row, SpreadCellFormat normalFormat)
+        public void ExportSalaryColumn(IRowExporter rowExporter, Author author)
+        {
+            using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
+            {
+                //($* #,##0.00);($* (#,##0.00);($* \" - \"??);(@_)
+
+                SpreadCellFormat currencyFormat = new SpreadCellFormat();
+                currencyFormat.FontSize = 10;
+                currencyFormat.VerticalAlignment = SpreadVerticalAlignment.Center;
+                currencyFormat.HorizontalAlignment = SpreadHorizontalAlignment.Center;
+                currencyFormat.NumberFormat = "_($ #,##0.00_);_($ (#,##0.00);_(@_)";
+
+                // this.UpdateProgess();
+                cellExporter.SetValue(author.Salary.ToString());
+                cellExporter.SetFormat(currencyFormat);
+            }
+        }
+
+        public void ExportPhoneColumn(IRowExporter rowExporter, Author author, SpreadCellFormat normalFormat)
         {
             using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
             {
                 // this.UpdateProgess();
-                cellExporter.SetValue(row.Company);
+                cellExporter.SetValue(author.Phone);
                 cellExporter.SetFormat(normalFormat);
             }
         }
 
-        public void ExportShippingColumn(IRowExporter rowExporter, DocumentRow row)
-        {
-            using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
-            {
-                SpreadCellFormat expressFormat = new SpreadCellFormat();
-                expressFormat.FontSize = 10;
-                expressFormat.VerticalAlignment = SpreadVerticalAlignment.Center;
-                expressFormat.HorizontalAlignment = SpreadHorizontalAlignment.Center;
 
-                if (row.Shipping == Shipping.Express)
-                {
-                    expressFormat.IsBold = true;
-                    expressFormat.ForeColor = new SpreadThemableColor(new SpreadColor(192, 0, 0));
-                }
-
-                string shipping = string.Empty;
-                switch (row.Shipping)
-                {
-                    case Shipping.Express:
-                        shipping = "express";
-                        break;
-                    case Shipping.OneDay:
-                        shipping = "1 day";
-                        break;
-                    case Shipping.TwoDays:
-                        shipping = "2 days";
-                        break;
-                    case Shipping.Regular:
-                        shipping = "regular";
-                        break;
-                }
-
-                // this.UpdateProgess();
-                cellExporter.SetValue(shipping);
-                cellExporter.SetFormat(expressFormat);
-            }
-        }
-
-        public void ExportDiscountColumn(IRowExporter rowExporter, DocumentRow row)
-        {
-            using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
-            {
-                SpreadCellFormat percentFormat = new SpreadCellFormat();
-                percentFormat.FontSize = 10;
-                percentFormat.VerticalAlignment = SpreadVerticalAlignment.Center;
-                percentFormat.HorizontalAlignment = SpreadHorizontalAlignment.Center;
-                percentFormat.NumberFormat = "0%";
-
-                // this.UpdateProgess();
-                cellExporter.SetValue(row.Discount);
-                cellExporter.SetFormat(percentFormat);
-            }
-        }
-
-        public void ExportStatusColumn(IRowExporter rowExporter, DocumentRow row)
+        public void ExportStatusColumn(IRowExporter rowExporter, Author author)
         {
             using (ICellExporter cellExporter = rowExporter.CreateCellExporter())
             {
                 SpreadColor color = null;
-                switch (row.Shipping)
-                {
-                    case Shipping.Express:
-                        color = new SpreadColor(242, 116, 33);
-                        break;
-                    case Shipping.OneDay:
-                        color = new SpreadColor(255, 192, 0);
-                        break;
-                    case Shipping.TwoDays:
-                        color = new SpreadColor(142, 188, 0);
-                        break;
-                    case Shipping.Regular:
-                        color = new SpreadColor(27, 157, 222);
-                        break;
-                }
+               
+                if(author.Salary > 100)
+                    color = new SpreadColor(242, 116, 33);
+                if (author.Salary > 1000)
+                    color = new SpreadColor(255, 192, 0);
+                if (author.Salary > 10000)
+                    color = new SpreadColor(142, 188, 0);
+                if (author.Salary > 100000)
+                    color = new SpreadColor(27, 157, 222);
 
                 SpreadCellFormat statusFormat = new SpreadCellFormat();
                 statusFormat.Fill = SpreadPatternFill.CreateSolidFill(color);
@@ -194,7 +138,7 @@ namespace BookStores.Client.Models.DocumentProcessing
                     format.VerticalAlignment = SpreadVerticalAlignment.Center;
 
                     cellExporter.SetFormat(format);
-                    cellExporter.SetValue("ORDERS LOG");
+                    cellExporter.SetValue("List of Authors");
                 }
             }
 

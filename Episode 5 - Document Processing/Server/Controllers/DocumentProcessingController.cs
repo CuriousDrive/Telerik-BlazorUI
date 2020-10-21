@@ -59,5 +59,22 @@ namespace BookStores.Server.Controllers
             }
         }
 
+        [HttpGet("GetSampleDocument")]
+        public async Task<FileContentResult> GetSampleDocument()
+        {
+            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, @"shared\web\wordsprocessing\SampleDocument.docx");
+
+            var memoryStream = new MemoryStream();
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                await fileStream.CopyToAsync(memoryStream);
+                byte[] fileReadAllBytes = memoryStream.ToArray();
+                return new FileContentResult(fileReadAllBytes, "application/doc")
+                {
+                    FileDownloadName = "test.docx"
+                };
+            }
+        }
+
     }
 }
