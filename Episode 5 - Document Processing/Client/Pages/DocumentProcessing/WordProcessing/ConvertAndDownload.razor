@@ -57,7 +57,7 @@
     string customFileName => fileDetails.Name;
     string SelectedFormat = "DOCX";
     string mimeType;
-    string[] Formats = { "DOCX", "RTF", "HTML", "TXT" };
+    string[] Formats = { "DOCX", "RTF", "HTML", "TXT", "PDF" };
     string templateContainerClass => rb == "1" ? "visible-wrapper" : "hidden-wrapper";
 
     async Task DownloadHandler()
@@ -89,6 +89,9 @@
                     break;
                 case ".txt":
                     fileFormatProvider = new TxtFormatProvider();
+                    break;
+                case ".pdf":
+                    fileFormatProvider = new PdfFormatProvider();
                     break;
                 default:
                     fileFormatProvider = null;
@@ -125,6 +128,10 @@
             case "txt":
                 convertFormatProvider = new TxtFormatProvider();
                 mimeType = "text/plain";
+                break;
+            case "pdf":
+                convertFormatProvider = new PdfFormatProvider();
+                mimeType = "application/pdf";
                 break;
             default:
                 convertFormatProvider = new TxtFormatProvider();
