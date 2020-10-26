@@ -1,0 +1,216 @@
+﻿@page "/"
+
+@using System.IO;
+@using Telerik.Windows.Documents.Fixed.FormatProviders.Pdf;
+@using Telerik.Windows.Documents.Fixed.FormatProviders.Pdf.Export;
+@using Telerik.Windows.Documents.Fixed.Model;
+@using TelerikBlazorDemos.DocumentProcessing;
+@using Telerik.Windows.Documents.Fixed.Model.InteractiveForms;
+@using System;
+@using System.Linq;
+@using System.Text.RegularExpressions;
+@using Microsoft.AspNetCore.Hosting;
+@inject IWebHostEnvironment Environment
+@inject IJSRuntime JsRuntime
+
+<div class="demo-section">
+    <h4 class="mt-0">Modify the fields below and generate a PDF file with interactive form</h4>
+
+    <label>Text field:</label>
+    <TelerikTextBox Width="100%" @bind-Value="@textBox"></TelerikTextBox><br /><br />
+
+    <label>Choice field:</label>
+    <textarea class="k-textbox" autocomplete="off" @bind="@textArea">test</textarea><br />
+
+    <div class="list-container">
+        <label>Radio button field:</label>
+        <ul>
+            @foreach (string rbValue in new string[] { "1", "2", "3" })
+            {
+                <li>
+                    <input id="rb+@rbValue" class="k-radio" name="rb" type="radio"
+                           checked="@(rbValue == rb)" @onchange="@(() => { rb = rbValue; })">
+                    <label for="rb+@rbValue">Option @rbValue</label>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="list-container">
+        <label>CheckBox field:</label>
+        <ul>
+            @for (int i = 0; i < cbs.Count; i++)
+            {
+                int index = i;
+                <li>
+                    <input id="cb+@index" type="checkbox" class="k-checkbox" checked="@cbs[i]"
+                           @onchange="@((args) => { cbs[index] =(bool)args.Value;  })">
+                    <label for="cb+@index">CheckBox @(i + 1)</label>
+                </li>
+            }
+        </ul>
+    </div>
+    <br />
+    <br />
+    <hr class="k-hr">
+    <TelerikButton Icon="save" Primary="true" OnClick="@DownloadHandler" Class="demo-button">
+        Generate and Download
+    </TelerikButton>
+</div>
+
+@code {
+    List<bool> cbs = new List<bool>() { true, true, false };
+    string rb = "2";
+    string textBox = "Sample text";
+    string textArea = string.Join("\r\n", Enumerable.Range(1, 3).Select(x => "Choice " + x));
+
+    void DownloadHandler()
+    {
+        byte[] fileData = GenerateFile();
+        DemoFileExporter.Save(JsRuntime, fileData, "application/pdf", "TelerikPdfProcessing-FormFields.pdf");
+    }
+
+    byte[] GenerateFile()
+    {
+        var values = textArea;
+        string[] lines = Regex.Split(values, "\r\n");
+        string mimeType = String.Empty;
+
+        string fileName = Path.Combine(Environment.WebRootPath, @"shared\web\pdfprocessing\InteractiveForms.pdf");
+
+        using (FileStream input = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+        {
+            RadFixedDocument document = new PdfFormatProvider().Import(input);
+
+            foreach (FormField field in document.AcroForm.FormFields)
+            {
+                switch (field.FieldType)
+                {
+                    case FormFieldType.TextBox:
+                        ProcessTextBox((TextBoxField)field, textBox);
+                        break;
+                    case FormFieldType.ListBox:
+                        ProcessListBox((ListBoxField)field, lines);
+                        break;
+                    case FormFieldType.RadioButton:
+                        ProcessRadioButtons((RadioButtonField)field, rb);
+                        break;
+                    case FormFieldType.CheckBox:
+                        ProcessCheckBoxes((CheckBoxField)field, cbs[0], cbs[1], cbs[2]);
+                        break;
+                }
+            }
+
+            PdfFormatProvider formatProvider = new PdfFormatProvider();
+            formatProvider.ExportSettings.ImageQuality = ImageQuality.High;
+
+            byte[] renderedBytes = null;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                formatProvider.Export(document, ms);
+                renderedBytes = ms.ToArray();
+            }
+
+            return renderedBytes;
+        }
+    }
+
+    void ProcessTextBox(TextBoxField textBoxField, string textboxValue)
+    {
+        textBoxField.Value = textboxValue;
+    }
+
+    void ProcessListBox(ListBoxField listField, string[] values)
+    {
+        listField.Options.Clear();
+        if (values.Length >= 1)
+        {
+            foreach (string value in values)
+            {
+                if (value.Length > 0)
+                {
+                    ChoiceOption option = new ChoiceOption(value);
+                    listField.Options.Add(option);
+                    listField.Value = new ChoiceOption[] { option };
+                }
+            }
+        }
+    }
+
+    void ProcessRadioButtons(RadioButtonField radioField, string radioButtonValue)
+    {
+        object checkedContent = null;
+        if (radioButtonValue == "1")
+        {
+            checkedContent = "Option 1";
+        }
+        else if (radioButtonValue == "2")
+        {
+            checkedContent = "Option 2";
+        }
+        else if (radioButtonValue == "3")
+        {
+            checkedContent = "Option 3";
+        }
+        if (checkedContent != null)
+        {
+            radioField.Value = radioField.Options.Where(x => x.Value == checkedContent.ToString()).FirstOrDefault();
+        }
+    }
+
+    void ProcessCheckBoxes(CheckBoxField checkBoxField, bool cb1, bool cb2, bool cb3)
+    {
+        if (checkBoxField.Name.Contains("1"))
+        {
+            checkBoxField.IsChecked = cb1;
+        }
+        else if (checkBoxField.Name.Contains("2"))
+        {
+            checkBoxField.IsChecked = cb2;
+        }
+        else if (checkBoxField.Name.Contains("3"))
+        {
+            checkBoxField.IsChecked = cb3;
+        }
+    }
+}
+
+<style>
+    .demo-button {
+        width: 240px;
+        float: right;
+    }
+
+    .demo-section > h4 {
+        text-align: center;
+    }
+
+    .demo-section > textarea {
+        width: 100%;
+        height: 80px;
+        resize: none;
+    }
+
+    .list-container {
+        float: left;
+        width: 50%;
+        margin-top: 20px;
+    }
+
+        .list-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-container li {
+            margin: 5px;
+        }
+
+            .list-container li > input[type=radio] {
+                margin: -2px 3px 0 0;
+            }
+
+            .list-container li > input[type=checkbox] {
+                margin: 2px 3px 0 0;
+            }
+</style>
