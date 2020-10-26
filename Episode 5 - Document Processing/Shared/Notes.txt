@@ -8,31 +8,28 @@ it seems like, I am gonna need FileExporter and UploadedFileDetails class for th
 I need to understand the basics of this. I need to keep the templates/pdfs in the server
 And get the files on byte array using httpClient and use to download the file using GetByteArrayAsync 
 
-1 - PDF Processing 
-	=> Create and Download
-		-> I had to add some packages 
-		-> I copied the razor component from the demos
-		-> I needed add dcoument processing/docs from the demo project
-		-> Then made a web API to download/send the file/template to the client
-		-> Then I used httpClient.GetByteArrayAsync() to get the file in Blazor WASM before updating it
-		-> Then I used JS interop to download the modified files from the component
-	=> Merge, Split, Append and Prepend Content
-		-> I had to put the documents in my local machine in order to show the demo
-		-> Also I had write another web api which returns the template file to show append demo 
+-------------------------------- DOCUMENT PROCESSING --------------------------------
 
+1 - Introduction & Scope => 
+
+2- Setting up project for Document Processing =>
+
+3 - PDF Processing 
+	=> Merge, Split, Append and Prepend Content	
+		
+	=> Create and Download
+		
 2 - Spreadsheet Processing 
 
 	=> Export Files
-		-> I added my Books component for this and exported the data as Sales Report for the books
-	=> Spread Streaming Processing
-		-> I added Authors component with 5000 records and used t
+		
+	=> Spread Stream Processing
 
 3 - Word Processing
-
-
+	=> Export Word document to docx, rtf, txt, pdf, html
 
 4 - Zip Library
-
+	=> Extract files from Zip
 
 
 -------------------------------- DOCUMENT PROCESSING --------------------------------

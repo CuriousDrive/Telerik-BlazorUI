@@ -61,12 +61,12 @@
         if (rb == "Merge Pages" && file1Details.Data != null && file2Details.Data != null)
         {
             byte[] renderedBytes = null;
-            short filesToMurge = 2;
+            short filesToMerge = 2;
             MemoryStream ms = new MemoryStream();
 
             using (PdfStreamWriter fileWriter = new PdfStreamWriter(ms, true))
             {
-                for (int i = 0; i < filesToMurge; i++)
+                for (int i = 0; i < filesToMerge; i++)
                 {
                     if (i == 0)
                     {
