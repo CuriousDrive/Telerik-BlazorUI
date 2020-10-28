@@ -1,0 +1,44 @@
+﻿-------------------------------- DOCUMENT PROCESSING --------------------------------
+
+Scope so far => 
+
+I am going to need some PDFs, Excel files, Word document and some files to zip them
+it seems like, I am gonna need FileExporter and UploadedFileDetails class for the all demos 
+
+I need to understand the basics of this. I need to keep the templates/pdfs in the server
+And get the files on byte array using httpClient and use to download the file using GetByteArrayAsync 
+
+-------------------------------- DOCUMENT PROCESSING --------------------------------
+
+1 - Introduction & Scope => 
+
+2- Setting up project for Document Processing =>
+
+3 - PDF Processing 
+	=> Merge, Split, Append and Prepend Content	
+		
+	=> Create and Download
+		
+2 - Spreadsheet Processing 
+
+	=> Export Files
+		
+	=> Spread Stream Processing
+
+3 - Word Processing
+	=> Export Word document to docx, rtf, txt, pdf, html
+
+4 - Zip Library
+	=> Extract files from Zip
+
+
+-------------------------------- DOCUMENT PROCESSING --------------------------------
+
+	Questions to ask => 
+		-> What if I want to export PDF in landscape format?
+		-> Shouldn't there be a Enum for Number Formating?
+		-> General Feedback - For spread stream processing not all the files are there in docs
+		-> 
+
+
+

@@ -58,4 +58,10 @@
 /Episode 6 - Document Processing/DocumentProcessing/.vs/DocumentProcessing
 /Episode 6 - Document Processing/DocumentProcessing/bin/Debug/netcoreapp3.1
 /Episode 6 - Document Processing/DocumentProcessing/obj
-/Backup
+/Backup/Document Processing - WASM/.vs/BookStores
+/Backup/Document Processing - WASM/Client/bin/Debug/netstandard2.1
+/Backup/Document Processing - WASM/Client/obj
+/Backup/Document Processing - WASM/Server/bin/Debug/netcoreapp3.1
+/Backup/Document Processing - WASM/Server/obj
+/Backup/Document Processing - WASM/Shared/bin/Debug/netstandard2.1
+/Backup/Document Processing - WASM/Shared/obj

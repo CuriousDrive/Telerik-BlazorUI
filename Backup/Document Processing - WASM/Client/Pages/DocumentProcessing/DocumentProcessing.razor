@@ -1,0 +1,33 @@
+﻿@page "/documentprocessing"
+@inject NavigationManager _navigationManager
+
+<h2><b>PDF Processing - </b></h2>
+<br />
+<TelerikButton OnClick="@(() => _navigationManager.NavigateTo("/documentprocessing/pdfprocessing/createdownload"))">Create & Download PDF</TelerikButton>
+<br />
+<br />
+<TelerikButton OnClick="@(() => _navigationManager.NavigateTo("/documentprocessing/pdfprocessing/mergesplit"))">Merge & Split PDF</TelerikButton>
+<br />
+<hr />
+<h2><b>Spreadsheet Processing - </b></h2>
+<br />
+<TelerikButton OnClick="@(() => _navigationManager.NavigateTo("/documentprocessing/spreadsheetprocessing/exportfiles"))">Export File</TelerikButton>
+<br />
+<br />
+<TelerikButton OnClick="@(() => _navigationManager.NavigateTo("/documentprocessing/spreadsheetprocessing/spreadstreamprocessing"))">Spread Stream Processing</TelerikButton>
+<br />
+<br />
+<hr />
+<h2><b>Words Processing - </b></h2>
+<br />
+<TelerikButton OnClick="@(() => _navigationManager.NavigateTo("/documentprocessing/wordsprocessing/convertanddownload"))">Convert and Download File</TelerikButton>
+<br />
+<br />
+<hr />
+<h2><b>Zip Library - </b></h2>
+<br />
+<TelerikButton OnClick="@(() => _navigationManager.NavigateTo("/documentprocessing/ziplibrary/extractfiles"))">Extract Zip File</TelerikButton>
+<br />
+<br />
+
+<hr />

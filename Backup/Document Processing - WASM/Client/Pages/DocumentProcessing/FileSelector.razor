@@ -1,0 +1,34 @@
+﻿@using BookStores.Client.Models.DocumentProcessing
+@inject IJSRuntime JsRuntime
+
+<label class="k-button telerik-blazor k-button-icontext mb-sm">
+    <input @onchange="@UploadHandler"
+           id="@ID"
+           accept="@Accept"
+           class="k-hidden"
+           type="file" />
+    <span class="k-icon k-i-upload"></span>
+    Select File ...
+</label>
+<span>@FileDetails.Name</span>
+
+@code {
+    [Parameter] public string ID { get; set; }
+    [Parameter] public string Accept { get; set; }
+
+    [Parameter] public EventCallback<FileDetails> FileDetailsChanged { get; set; }
+
+    private FileDetails _fileDetails = new FileDetails();
+    [Parameter]
+    public FileDetails FileDetails
+    {
+        get { return _fileDetails; }
+        set { }
+    }
+
+    private async void UploadHandler()
+    {
+        _fileDetails = await FileExporter.Upload(JsRuntime, ID);
+        await FileDetailsChanged.InvokeAsync(FileDetails);
+    }
+}

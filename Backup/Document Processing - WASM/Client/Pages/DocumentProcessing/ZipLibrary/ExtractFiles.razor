@@ -1,0 +1,100 @@
+﻿@page "/documentprocessing/ziplibrary/extractfiles"
+
+@using System.IO;
+@using Telerik.Zip;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Collections.ObjectModel
+@using System.Net.Mime;
+@using BookStores.Client.Models.DocumentProcessing 
+@inject IJSRuntime JsRuntime
+
+<div class="demo-section wide">
+    <h6 class="kd-demo-heading">Select a zip archive to upload and display in the grid</h6>
+
+    <FileSelector ID="uploadInput" Accept=".zip" FileDetailsChanged="@LoadGrid" />
+
+    <div class="@(GridData.Count == 0 ? "no-records" : "")">
+        <TelerikGrid Data=@GridData Height="300px">
+            <GridColumns>
+                <GridColumn Field=@nameof(FileHelper.FileNameInZip) Title="File Name in Zip" />
+                <GridColumn Field=@nameof(FileHelper.UncompressedSize) Title="Uncompressed Size" />
+                <GridColumn Field=@nameof(FileHelper.CompressedSize) Title="Compressed Size" />
+                <GridColumn Title="Download">
+                    <Template>
+                        <TelerikButton Icon="download"
+                                       OnClick="@(args =>DownloadHandler(context as FileHelper))">Download</TelerikButton>
+                    </Template>
+                </GridColumn>
+            </GridColumns>
+        </TelerikGrid>
+    </div>
+</div>
+
+@code {
+    FileDetails fileDetails = new FileDetails();
+    ObservableCollection<FileHelper> GridData = new ObservableCollection<FileHelper>();
+
+    void DownloadHandler(FileHelper fileHelper)
+    {
+        FileExporter.Save(JsRuntime, fileHelper.Data,
+        MediaTypeNames.Application.Octet, fileHelper.FileNameInZip);
+    }
+
+    void LoadGrid(FileDetails fileData)
+    {
+        int count = 0;
+        GridData.Clear();
+
+        if (fileData.Data == null)
+        {
+            return;
+        }
+
+        //read  the data from the uploaded zip and return a collection of files to display in Grid
+        using (MemoryStream ms = new MemoryStream(fileData.Data))
+        {
+            using (ZipArchive archive = new ZipArchive(ms))
+            {
+                List<ZipArchiveEntry> allEntries = archive.Entries.ToList();
+                foreach (ZipArchiveEntry entry in allEntries)
+                {
+                    // skip the folders compressed into the zip file
+                    if (entry.Length == 0)
+                    {
+                        continue;
+                    }
+                    FileHelper fileHelper = new FileHelper(); //use of custom FileHelper class in order to create "files" with the needed metadata to display in the grid
+                    fileHelper.ID = count++;
+                    fileHelper.CompressedSize = (int)entry.CompressedLength;
+                    fileHelper.UncompressedSize = (int)entry.Length;
+                    fileHelper.FileNameInZip = entry.Name;
+
+                    byte[] data = new byte[entry.Length];
+
+                    Stream entryStream = entry.Open();
+                    BinaryReader reader = new BinaryReader(entryStream);
+                    reader.Read(data, 0, data.Length);
+
+                    fileHelper.Data = data;
+
+                    GridData.Add(fileHelper); //fill the session variable with the collection of "files"
+                }
+            }
+        }
+    }
+}
+<style>
+    .demo-section {
+        max-width: 800px;
+    }
+
+    .no-records .k-grid-content:after {
+        content: "Upload zip File to Load Content";
+        position: absolute;
+        margin-top: 60px;
+        width: 100%;
+        text-align: center;
+    }
+</style>
