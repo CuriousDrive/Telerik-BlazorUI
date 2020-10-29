@@ -1,0 +1,156 @@
+﻿@page "/"
+
+@using System;
+@using System.IO;
+@using DocumentProcessing.Utilities;
+@using Telerik.Windows.Documents.Fixed.Model;
+@using Telerik.Windows.Documents.Fixed.FormatProviders.Pdf.Streaming;
+@using Telerik.Windows.Documents.Fixed.Model.ColorSpaces;
+@using Telerik.Windows.Documents.Fixed.Model.Editing;
+@using Telerik.Zip;
+@using Telerik.Documents.Primitives;
+@inject IJSRuntime JsRuntime
+
+<div class="demo-section">
+    <h4 class="mt-0">Upload Files:</h4>
+    <FileSelector ID="uploadInput1" Accept=".pdf" @bind-FileDetails="file1Details" />
+
+    <div style='@customInputStyle'>
+        <FileSelector ID="uploadInput2" Accept=".pdf" @bind-FileDetails="file2Details" />
+    </div>
+
+    <h4 class="mt-lg">Choose Action:</h4>
+    <div class="list-container">
+        <ul>
+            @foreach (string rbValue in actions)
+            {
+                <li>
+                    <input id="rb+@rbValue" class="k-radio" name="rb" type="radio"
+                           checked="@(rbValue == rb)" @onchange="@(() => { rb = rbValue; })">
+                    <label for="rb+@rbValue">@rbValue</label>
+                </li>
+            }
+        </ul>
+    </div>
+    <hr class="k-hr">
+    <TelerikButton Icon="save" Primary="true" OnClick="@DownloadHandler" Class="demo-button"
+                   Enabled="@isButtonEnabled">
+        Generate and Download
+    </TelerikButton>
+</div>
+
+@code {
+
+    string rb = "Merge Pages";
+    string[] actions = new string[] { "Merge Pages", "Split Pages" };
+    FileDetails file1Details = new FileDetails();
+    FileDetails file2Details = new FileDetails();
+    string customInputStyle => rb == "Merge Pages" ? "display: block;" : "display: none;";
+    bool isButtonEnabled => (rb == "Merge Pages" && file1Details.Data != null && file2Details.Data != null) || (rb != "Merge Pages" && file1Details.Data != null);
+
+    void DownloadHandler()
+    {
+        byte[] fileData = GenerateFile();
+        string type = rb == "Split Pages" ? "zip" : "pdf";
+        FileExporter.Save(JsRuntime, fileData, "application/" + type, $"TelerikPdfProcessing-{rb.Replace(" ", "")}.{type}");
+    }
+
+    byte[] GenerateFile()
+    {
+        if (rb == "Merge Pages" && file1Details.Data != null && file2Details.Data != null)
+        {
+            byte[] renderedBytes = null;
+            List<FileDetails> fileDetailList = new List<FileDetails>();
+            fileDetailList.Add(file1Details);
+            fileDetailList.Add(file2Details);
+            MemoryStream ms = new MemoryStream();
+
+            using (PdfStreamWriter fileWriter = new PdfStreamWriter(ms, true))
+            {
+                foreach (var fileDetail in fileDetailList)
+                {
+                    using (MemoryStream stream = new MemoryStream(fileDetail.Data))
+                    {
+                        using (PdfFileSource fileSource = new PdfFileSource(stream))
+                        {
+                            foreach (PdfPageSource pageSource in fileSource.Pages)
+                            {
+                                fileWriter.WritePage(pageSource);
+                            }
+                        }
+                    }
+                }
+            }
+            renderedBytes = ms.ToArray();
+            return renderedBytes;
+        }
+
+        if (rb == "Split Pages" && file1Details.Data != null)
+        {
+            byte[] renderedBytes = null;
+            MemoryStream msSource = new MemoryStream();
+            MemoryStream msSplitPDF = new MemoryStream();
+
+            using (MemoryStream streamSource = new MemoryStream(file1Details.Data))
+            {
+                using (PdfFileSource fileSource = new PdfFileSource(streamSource))
+                {
+                    using (Stream stream = msSplitPDF)
+                    {
+                        using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Create, false, null))
+                        {
+                            for (int i = 0; i < fileSource.Pages.Length; i++)
+                            {
+                                using (PdfStreamWriter fileWriter = new PdfStreamWriter(msSource, true))
+                                {
+                                    using (ZipArchiveEntry entry = archive.CreateEntry(i + 1 + "page.pdf"))
+                                    {
+                                        PdfStreamWriter writer = new PdfStreamWriter(entry.Open());
+                                        PdfPageSource pageSource = fileSource.Pages[i];
+                                        writer.WritePage(pageSource);
+                                        writer.Dispose();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                renderedBytes = msSplitPDF.ToArray();
+                return renderedBytes;
+            }
+        }
+
+        return null;
+    }
+}
+
+<style>
+    .demo-button {
+        width: 240px;
+        float: right;
+    }
+
+    .list-container ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .list-container li {
+        margin: 5px;
+        height: 80px;
+    }
+
+    .list-container img {
+        float: right;
+        width: 80px;
+        height: 80px;
+    }
+
+    .list-container label {
+        margin-top: 30px;
+    }
+
+    .list-container li > input[type=radio] {
+        margin: -2px 3px 0 0;
+    }
+</style>
