@@ -9,6 +9,8 @@
 @using Telerik.Windows.Documents.Fixed.Model.Editing;
 @using Telerik.Zip;
 @using Telerik.Documents.Primitives;
+@using Microsoft.AspNetCore.Hosting;
+@inject IWebHostEnvironment Environment
 @inject IJSRuntime JsRuntime
 
 <div class="demo-section">
@@ -42,7 +44,7 @@
 @code {
 
     string rb = "Merge Pages";
-    string[] actions = new string[] { "Merge Pages", "Split Pages" };
+    string[] actions = new string[] { "Merge Pages", "Split Pages", "Append Content To Pages", "Prepend Content To Pages" };
     FileDetails file1Details = new FileDetails();
     FileDetails file2Details = new FileDetails();
     string customInputStyle => rb == "Merge Pages" ? "display: block;" : "display: none;";
@@ -53,6 +55,26 @@
         byte[] fileData = GenerateFile();
         string type = rb == "Split Pages" ? "zip" : "pdf";
         FileExporter.Save(JsRuntime, fileData, "application/" + type, $"TelerikPdfProcessing-{rb.Replace(" ", "")}.{type}");
+    }
+
+    RadFixedPage GenerateForegroundTextContent(string text)
+    {
+        Block block = new Block();
+        block.BackgroundColor = new RgbColor(50, 0, 0, 0);
+        block.GraphicProperties.FillColor = new RgbColor(255, 0, 0);
+        block.TextProperties.FontSize = 120;
+        block.InsertText(text);
+        Size horizontalTextSize = block.Measure();
+        double rotatedTextSquareSize = (horizontalTextSize.Width + horizontalTextSize.Height) / Math.Sqrt(2);
+
+        RadFixedPage foregroundContentOwner = new RadFixedPage();
+        foregroundContentOwner.Size = new Size(rotatedTextSquareSize, rotatedTextSquareSize);
+        FixedContentEditor foregroundEditor = new FixedContentEditor(foregroundContentOwner);
+        foregroundEditor.Position.Translate(horizontalTextSize.Height / Math.Sqrt(2), 0);
+        foregroundEditor.Position.Rotate(45);
+        foregroundEditor.DrawBlock(block);
+
+        return foregroundContentOwner;
     }
 
     byte[] GenerateFile()
@@ -118,6 +140,85 @@
                 renderedBytes = msSplitPDF.ToArray();
                 return renderedBytes;
             }
+        }
+
+        if (rb == "Append Content To Pages" && file1Details.Data != null)
+        {
+            RadFixedPage foregroundContentOwner = GenerateForegroundTextContent("STAMP");
+            MemoryStream ms = new MemoryStream();
+            byte[] renderedBytes = null;
+            using (MemoryStream stream = new MemoryStream(file1Details.Data))
+            {
+                using (PdfFileSource fileSource = new PdfFileSource(stream))
+                {
+                    using (PdfStreamWriter fileWriter = new PdfStreamWriter(ms, true))
+                    {
+                        foreach (PdfPageSource pageSource in fileSource.Pages)
+                        {
+                            using (PdfPageStreamWriter pageWriter = fileWriter.BeginPage(pageSource.Size, pageSource.Rotation))
+                            {
+                                pageWriter.WriteContent(pageSource);
+
+                                using (pageWriter.SaveContentPosition())
+                                {
+                                    double xCenteringTranslation = (pageSource.Size.Width - foregroundContentOwner.Size.Width) / 2;
+                                    double yCenteringTranslation = (pageSource.Size.Height - foregroundContentOwner.Size.Height) / 2;
+                                    pageWriter.ContentPosition.Translate(xCenteringTranslation, yCenteringTranslation);
+                                    pageWriter.WriteContent(foregroundContentOwner);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            renderedBytes = ms.ToArray();
+            return renderedBytes;
+        }
+
+        if (rb == "Prepend Content To Pages" && file1Details.Data != null)
+        {
+            byte[] renderedBytes = null;
+            MemoryStream ms = new MemoryStream();
+            string fileName = Path.Combine(Environment.WebRootPath, @"shared\web\pdfprocessing\template.pdf");
+
+            using (FileStream input = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                using (PdfStreamWriter fileWriter = new PdfStreamWriter(ms, true))
+                {
+                    using (MemoryStream stream = new MemoryStream(file1Details.Data))
+                    {
+                        using (PdfFileSource fileSource = new PdfFileSource(stream))
+                        {
+                            using (PdfFileSource templateSource = new PdfFileSource(input, true))
+                            {
+                                PdfPageSource backgroundTemplate = templateSource.Pages[0];
+
+                                foreach (PdfPageSource pageSource in fileSource.Pages)
+                                {
+                                    using (PdfPageStreamWriter pageWriter = fileWriter.BeginPage(pageSource.Size, pageSource.Rotation))
+                                    {
+                                        using (pageWriter.SaveContentPosition())
+                                        {
+                                            double scaleX = pageSource.Size.Width / backgroundTemplate.Size.Width;
+                                            double scaleY = pageSource.Size.Height / backgroundTemplate.Size.Height;
+                                            double scale = Math.Min(scaleX, scaleY);
+                                            double xCenteringTranslation = (pageSource.Size.Width - scale * backgroundTemplate.Size.Width) / 2;
+                                            double yCenteringTranslation = (pageSource.Size.Height - scale * backgroundTemplate.Size.Height) / 2;
+                                            pageWriter.ContentPosition.Translate(xCenteringTranslation, yCenteringTranslation);
+                                            pageWriter.ContentPosition.Scale(scale, scale);
+                                            pageWriter.WriteContent(backgroundTemplate);
+                                        }
+
+                                        pageWriter.WriteContent(pageSource);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            renderedBytes = ms.ToArray();
+            return renderedBytes;
         }
 
         return null;
