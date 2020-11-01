@@ -65,7 +65,6 @@
 
     //properties
 
-    public Book Book { get; set; }
     public List<Book> BookList { get; set; }
 
     Hashtable table = new Hashtable();
@@ -73,51 +72,33 @@
     string[] Formats = { "XLSX", "CSV", "TXT", "PDF" };
 
     readonly int IndexColumnTitle = 0;
-    readonly int IndexColumnAuthorName = 1;
-    readonly int IndexColumnType = 2;
-    readonly int IndexColumnPrice = 3;
-    readonly int IndexColumnSales = 4;
+    readonly int IndexColumnPrice = 1;
+    readonly int IndexColumnSales = 2;
     readonly int IndexRowItemStart = 1;
 
     readonly string EnUSCultureAccountFormatString = "_($ #,##0.00_);_($ (#,##0.00);_(@_)";
     readonly ThemableColor InvoiceBackground = ThemableColor.FromArgb(255, 44, 62, 80);
     readonly ThemableColor InvoiceHeaderForeground = ThemableColor.FromArgb(255, 255, 255, 255);
 
-    //Component Events
     protected override async Task OnInitializedAsync()
     {
-        Book = new Book();
         BookList = new BookStoresRepository().GetBooks();
+
         await base.OnInitializedAsync();
     }
 
     void ExportHandler()
     {
         byte[] fileData = GenerateDocument();
-        FileExporter.Save(JsRuntime, fileData, GetMimeType(), "TelerikSpreadProcessing-Generated" + GetFileExtention());
+        FileExporter.Save(JsRuntime, fileData, GetMimeType(), "TelerikSpreadProcessing-Generated" + "." + SelectedFormat.ToLowerInvariant());
     }
 
-    string GetFileExtention()
+    byte[] GenerateDocument()
     {
-        return "." + SelectedFormat.ToLowerInvariant();
-    }
+        string extension = "." + SelectedFormat.ToLowerInvariant();
 
-    string GetMimeType()
-    {
-        string mimeType = String.Empty;
-        switch (GetFileExtention())
-        {
-            case ".xlsx": mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"; break;
-            case ".pdf": mimeType = "application/pdf"; break;
-            case ".txt": mimeType = "text/plain"; break;
-            case ".csv": mimeType = "text/csv"; break;
-        }
-        return mimeType;
-    }
-
-    IWorkbookFormatProvider GetFormatProvider(string extension)
-    {
         IWorkbookFormatProvider formatProvider;
+
         switch (extension)
         {
             case ".xlsx":
@@ -138,7 +119,29 @@
                 break;
         }
 
-        return formatProvider;
+        Workbook workbook = CreateWorkbook();
+        byte[] renderedBytes = null;
+
+        using (MemoryStream ms = new MemoryStream())
+        {
+            formatProvider.Export(workbook, ms);
+            renderedBytes = ms.ToArray();
+        }
+
+        return renderedBytes;
+    }
+
+    string GetMimeType()
+    {
+        string mimeType = String.Empty;
+        switch ("." + SelectedFormat.ToLowerInvariant())
+        {
+            case ".xlsx": mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"; break;
+            case ".pdf": mimeType = "application/pdf"; break;
+            case ".txt": mimeType = "text/plain"; break;
+            case ".csv": mimeType = "text/csv"; break;
+        }
+        return mimeType;
     }
 
     Workbook CreateWorkbook()
@@ -148,14 +151,12 @@
 
         Worksheet worksheet = workbook.ActiveWorksheet;
 
-        this.PrepareInvoiceDocument(worksheet, BookList.Count());
+        PrepareSalesReport(worksheet, BookList.Count());
 
         int currentRow = IndexRowItemStart + 1;
         foreach (Book book in BookList)
         {
             worksheet.Cells[currentRow, IndexColumnTitle].SetValue(book.Title);
-            worksheet.Cells[currentRow, IndexColumnAuthorName].SetValue(book.AuthorName);
-            worksheet.Cells[currentRow, IndexColumnType].SetValue(book.Type);
             worksheet.Cells[currentRow, IndexColumnPrice].SetValue(book.Price.ToString());
             worksheet.Cells[currentRow, IndexColumnSales].SetValue(book.Sales);
 
@@ -170,12 +171,12 @@
         return workbook;
     }
 
-    void PrepareInvoiceDocument(Worksheet worksheet, int itemsCount)
+    void PrepareSalesReport(Worksheet worksheet, int itemsCount)
     {
         int lastItemIndexRow = IndexRowItemStart + itemsCount;
 
         CellIndex firstRowFirstCellIndex = new CellIndex(0, 0);
-        CellIndex firstRowLastCellIndex = new CellIndex(0, 4);
+        CellIndex firstRowLastCellIndex = new CellIndex(0, 2);
         CellIndex lastRowFirstCellIndex = new CellIndex(lastItemIndexRow + 1, IndexColumnTitle);
         CellIndex lastRowLastCellIndex = new CellIndex(lastItemIndexRow + 1, IndexColumnSales);
         worksheet.Cells[firstRowFirstCellIndex, firstRowLastCellIndex].MergeAcross();
@@ -186,12 +187,10 @@
         worksheet.Cells[firstRowFirstCellIndex].SetFontSize(20);
 
         worksheet.Cells[IndexRowItemStart, IndexColumnTitle].SetValue("Title");
-        worksheet.Cells[IndexRowItemStart, IndexColumnAuthorName].SetValue("Author Name");
-        worksheet.Cells[IndexRowItemStart, IndexColumnType].SetValue("Type");
         worksheet.Cells[IndexRowItemStart, IndexColumnPrice].SetValue("Price");
-        worksheet.Cells[IndexRowItemStart, IndexColumnPrice].SetHorizontalAlignment(RadHorizontalAlignment.Right);
+        worksheet.Cells[IndexRowItemStart, IndexColumnPrice].SetHorizontalAlignment(RadHorizontalAlignment.Left);
         worksheet.Cells[IndexRowItemStart, IndexColumnSales].SetValue("Sales");
-        worksheet.Cells[IndexRowItemStart, IndexColumnSales].SetHorizontalAlignment(RadHorizontalAlignment.Right);
+        worksheet.Cells[IndexRowItemStart, IndexColumnSales].SetHorizontalAlignment(RadHorizontalAlignment.Left);
 
         worksheet.Cells[IndexRowItemStart, IndexColumnTitle, IndexRowItemStart, IndexColumnSales].SetFill
         (new GradientFill(GradientType.Horizontal, InvoiceBackground, InvoiceBackground));
@@ -208,26 +207,6 @@
         worksheet.Cells[lastItemIndexRow + 1, IndexColumnSales].SetValue(string.Format("=SUM({0})", subTotalColumnCellRange));
 
         worksheet.Cells[lastItemIndexRow + 1, IndexColumnPrice, lastItemIndexRow + 1, IndexColumnSales].SetFontSize(20);
-    }
-
-    byte[] GenerateDocument()
-    {
-        IWorkbookFormatProvider formatProvider = GetFormatProvider(GetFileExtention());
-        if (formatProvider == null)
-        {
-            return null;
-        }
-
-        Workbook workbook = this.CreateWorkbook();
-        byte[] renderedBytes = null;
-
-        using (MemoryStream ms = new MemoryStream())
-        {
-            formatProvider.Export(workbook, ms);
-            renderedBytes = ms.ToArray();
-        }
-
-        return renderedBytes;
     }
 
 }
