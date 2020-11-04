@@ -6,9 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="Telerik.Documents.Fixed" Version="2020.3.1019" />
-    <PackageReference Include="Telerik.Documents.Spreadsheet" Version="2020.3.1019" />
-    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.OpenXml" Version="2020.3.1019" />
-    <PackageReference Include="Telerik.Documents.Spreadsheet.FormatProviders.Pdf" Version="2020.3.1019" />
     <PackageReference Include="Telerik.UI.for.Blazor" Version="2.18.0" />
   </ItemGroup>
 
