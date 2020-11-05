@@ -5,115 +5,32 @@
 @using DocumentProcessing.Models
 @using DocumentProcessing.Utilities
 @using System.Text.RegularExpressions;
-@using Telerik.Windows.Documents.Flow.Model;
-@using Telerik.Windows.Documents.Flow.FormatProviders.Docx;
-@using Telerik.Windows.Documents.Common.FormatProviders;
-@using Telerik.Windows.Documents.Flow.FormatProviders.Html;
-@using Telerik.Windows.Documents.Flow.FormatProviders.Rtf;
-@using Telerik.Windows.Documents.Flow.FormatProviders.Txt;
-@using Telerik.Windows.Documents.Flow.FormatProviders.Pdf;
-@using Microsoft.AspNetCore.Hosting;
-@inject IWebHostEnvironment Environment
 @inject IJSRuntime JsRuntime
 
 <div class="demo-section">
 
-    <div>
-        <FileSelector ID="uploadInput" Accept=".docx, .rtf, .html, .txt, .pdf" @bind-FileDetails="fileDetails" />
-    </div>
+    <label class="demo-spacing">Convert from:</label>
+    <FileSelector ID="uploadInput" Accept=".docx, .rtf, .html, .txt" @bind-FileDetails="fileDetails" />
+    <label class="demo-spacing">Select .docx, .rtf, .html or .txt file formats</label>
+    <br />
     <br />
     <label class="demo-spacing">Convert to:</label>
     <TelerikDropDownList Data="@Formats" @bind-Value="@SelectedFormat" PopupHeight="" Width="180px">
     </TelerikDropDownList>
     <hr class="clear" />
-    <TelerikButton Icon="save" Primary="true" OnClick="@DownloadHandler"
-                   Enabled='@(!string.IsNullOrEmpty(customFileName))'
-                   Class="demo-button">Convert and Download</TelerikButton>
+    <TelerikButton Icon="save" Primary="true" OnClick="@DownloadHandler" Enabled='@(!string.IsNullOrEmpty(fileDetails.Name))' Class="demo-button">Convert and Download</TelerikButton>
 </div>
 
 @code {
 
     FileDetails fileDetails = new FileDetails();
-    string customFileName => fileDetails.Name;
     string SelectedFormat = "DOCX";
     string mimeType;
     string[] Formats = { "DOCX", "RTF", "HTML", "TXT", "PDF" };
 
     private void DownloadHandler()
     {
-        byte[] newFileData = GenerateFile();
-        FileExporter.Save(JsRuntime, newFileData, mimeType, String.Format("{0}." + SelectedFormat.ToLowerInvariant(), Path.GetFileNameWithoutExtension(customFileName)));
-    }
 
-    private byte[] GenerateFile()
-    {
-        IFormatProvider<RadFlowDocument> fileFormatProvider = null;
-        IFormatProvider<RadFlowDocument> convertFormatProvider = null;
-        RadFlowDocument document = null;
-
-        switch (Path.GetExtension(customFileName))
-        {
-            case ".docx":
-                fileFormatProvider = new DocxFormatProvider();
-                break;
-            case ".rtf":
-                fileFormatProvider = new RtfFormatProvider();
-                break;
-            case ".html":
-                fileFormatProvider = new HtmlFormatProvider();
-                break;
-            case ".txt":
-                fileFormatProvider = new TxtFormatProvider();
-                break;
-            case ".pdf":
-                fileFormatProvider = new PdfFormatProvider();
-                break;
-            default:
-                fileFormatProvider = null;
-                break;
-        }
-
-        using (MemoryStream stream = new MemoryStream(fileDetails.Data))
-        {
-            document = fileFormatProvider.Import(stream);
-        }
-
-        switch (SelectedFormat.ToLowerInvariant())
-        {
-            case "docx":
-                convertFormatProvider = new DocxFormatProvider();
-                mimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-                break;
-            case "rtf":
-                convertFormatProvider = new RtfFormatProvider();
-                mimeType = "application/rtf";
-                break;
-            case "html":
-                convertFormatProvider = new HtmlFormatProvider();
-                mimeType = "text/html";
-                break;
-            case "txt":
-                convertFormatProvider = new TxtFormatProvider();
-                mimeType = "text/plain";
-                break;
-            case "pdf":
-                convertFormatProvider = new PdfFormatProvider();
-                mimeType = "application/pdf";
-                break;
-            default:
-                convertFormatProvider = new TxtFormatProvider();
-                mimeType = "text/plain";
-                break;
-        }
-
-        byte[] renderedBytes = null;
-        using (MemoryStream ms = new MemoryStream())
-        {
-            convertFormatProvider.Export(document, ms);
-            renderedBytes = ms.ToArray();
-        }
-
-        return renderedBytes;
     }
 }
 

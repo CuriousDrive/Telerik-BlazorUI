@@ -1,0 +1,16 @@
+WordsProcessing is a high-performance .NET library that enables users to effortlessly import and export files to and from some of the most commonly used formats. Supported formats include Open XML Word Document (.DOCX), Rich Text Format (.RTF) and Text Files (.TXT).
+Rich Document Model Support
+Enable your application users to easily convert, generate or modify rich-text documents using the various formatting options and capabilities, including tables, inline and floating images, hyperlinks, a variety of built-in styles and themes.
+No External Dependencies
+The document model is completely independent from external libraries or UI. Users are able to process Microsoft Word supported documents even without having Microsoft Word or any other external library installed on the client or server.
+This handy .NET document processing functionality enables users to import and work with data that comes from third-party applications/sources not controlled by them.
+Convert From One Format to Another
+Not only does WordsProcessing component allow seamless export, import, creation and modification of different file formats, but it also allows you to easily convert files from one format to another so any WPF application scenario is covered.
+Fast Performance
+WordsProcessing is optimized to offer unmatched performance with virtually no limitations on the amount of data processed. You can quickly generate files with large amounts of data without hindering performance or consuming too much memory.
+Comprehensive API
+The powerful API allows you to swiftly generate documents from scratch. Designed with the user in mind, WordsProcessing is intuitive and easy to use.
+Telerik Document Processing
+Telerik Document Processing
+PAGE1
+ HYPERLINK "www.telerik.com" www.telerik.com
