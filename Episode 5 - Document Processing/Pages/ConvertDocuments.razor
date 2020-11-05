@@ -5,6 +5,13 @@
 @using DocumentProcessing.Models
 @using DocumentProcessing.Utilities
 @using System.Text.RegularExpressions;
+@using Telerik.Windows.Documents.Flow.Model;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Docx;
+@using Telerik.Windows.Documents.Common.FormatProviders;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Html;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Rtf;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Txt;
+@using Telerik.Windows.Documents.Flow.FormatProviders.Pdf;
 @inject IJSRuntime JsRuntime
 
 <div class="demo-section">
@@ -30,7 +37,77 @@
 
     private void DownloadHandler()
     {
+        byte[] newFileData = GenerateFile();
+        FileExporter.Save(JsRuntime, newFileData, mimeType, String.Format("{0}." + SelectedFormat.ToLowerInvariant(), Path.GetFileNameWithoutExtension(fileDetails.Name)));
+    }
 
+    private byte[] GenerateFile()
+    {
+        IFormatProvider<RadFlowDocument> convertFromFormatProvider = null;
+        IFormatProvider<RadFlowDocument> convertToFormatProvider = null;
+
+        switch (Path.GetExtension(fileDetails.Name))
+        {
+            case ".docx":
+                convertFromFormatProvider = new DocxFormatProvider();
+                break;
+            case ".rtf":
+                convertFromFormatProvider = new RtfFormatProvider();
+                break;
+            case ".html":
+                convertFromFormatProvider = new HtmlFormatProvider();
+                break;
+            case ".txt":
+                convertFromFormatProvider = new TxtFormatProvider();
+                break;
+            default:
+                convertFromFormatProvider = null;
+                break;
+        }
+
+        switch (SelectedFormat.ToLowerInvariant())
+        {
+            case "docx":
+                convertToFormatProvider = new DocxFormatProvider();
+                mimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                break;
+            case "rtf":
+                convertToFormatProvider = new RtfFormatProvider();
+                mimeType = "application/rtf";
+                break;
+            case "html":
+                convertToFormatProvider = new HtmlFormatProvider();
+                mimeType = "text/html";
+                break;
+            case "txt":
+                convertToFormatProvider = new TxtFormatProvider();
+                mimeType = "text/plain";
+                break;
+            case "pdf":
+                convertToFormatProvider = new PdfFormatProvider();
+                mimeType = "application/pdf";
+                break;
+            default:
+                convertToFormatProvider = new TxtFormatProvider();
+                mimeType = "text/plain";
+                break;
+        }
+
+        RadFlowDocument document = null;
+
+        using (MemoryStream stream = new MemoryStream(fileDetails.Data))
+        {
+            document = convertFromFormatProvider.Import(stream);
+        }
+
+        byte[] renderedBytes = null;
+        using (MemoryStream ms = new MemoryStream())
+        {
+            convertToFormatProvider.Export(document, ms);
+            renderedBytes = ms.ToArray();
+        }
+
+        return renderedBytes;
     }
 }
 
