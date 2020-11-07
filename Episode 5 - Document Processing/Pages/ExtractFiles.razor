@@ -12,13 +12,74 @@
 
 <div class="demo-section wide">
     <h6 class="kd-demo-heading">Select a zip archive to upload and display in the grid</h6>
-    <FileSelector ID="uploadInput" Accept=".zip" />
+    <FileSelector ID="uploadInput" Accept=".zip" FileDetailsChanged="@LoadGrid" />
+
+    <div class="@(GridData.Count == 0 ? "no-records" : "")">
+        <TelerikGrid Data=@GridData Height="500px">
+            <GridColumns>
+                <GridColumn Field=@nameof(FileDetails.FileNameInZip) Title="File Name in Zip" />
+                <GridColumn Field=@nameof(FileDetails.UncompressedSize) Title="Uncompressed Size" />
+                <GridColumn Field=@nameof(FileDetails.CompressedSize) Title="Compressed Size" />
+                <GridColumn Title="Download">
+                    <Template>
+                        <TelerikButton Icon="download" OnClick="@(args => DownloadHandler(context as FileDetails))">Download</TelerikButton>
+                    </Template>
+                </GridColumn>
+            </GridColumns>
+        </TelerikGrid>
+    </div>
 
 </div>
 
 @code {
 
+    ObservableCollection<FileDetails> GridData = new ObservableCollection<FileDetails>();
 
+    void DownloadHandler(FileDetails fileDetails)
+    {
+        FileExporter.Save(JsRuntime, fileDetails.Data, MediaTypeNames.Application.Octet, fileDetails.FileNameInZip);
+    }
+
+    void LoadGrid(FileDetails fileData)
+    {
+        int count = 0;
+        GridData.Clear();
+
+        if (fileData.Data == null)
+        {
+            return;
+        }
+
+        using (MemoryStream ms = new MemoryStream(fileData.Data))
+        {
+            using (ZipArchive archive = new ZipArchive(ms))
+            {
+                List<ZipArchiveEntry> allEntries = archive.Entries.ToList();
+                foreach (ZipArchiveEntry entry in allEntries)
+                {
+                    if (entry.Length == 0)
+                    {
+                        continue;
+                    }
+                    FileDetails fileDetails = new FileDetails();
+                    fileDetails.ID = count++;
+                    fileDetails.CompressedSize = (int)entry.CompressedLength;
+                    fileDetails.UncompressedSize = (int)entry.Length;
+                    fileDetails.FileNameInZip = entry.Name;
+
+                    byte[] data = new byte[entry.Length];
+
+                    Stream entryStream = entry.Open();
+                    BinaryReader reader = new BinaryReader(entryStream);
+                    reader.Read(data, 0, data.Length);
+
+                    fileDetails.Data = data;
+
+                    GridData.Add(fileDetails);
+                }
+            }
+        }
+    }
 }
 
 <style>
