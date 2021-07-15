@@ -1,0 +1,13 @@
+-------------------- System Requirements --------------------
+
+Windows Only
+
+Visual Studio Plug-in
+
+*Database Scheduling Configuration - MongoDB - this is something new and need to look into it.
+
+Databinding - MS Excel
+
+*Source Control - Need to check this. It has to be for the test cases. But I could be wrong.
+
+Build Server / Continous Integration

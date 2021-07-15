@@ -1,0 +1,12 @@
+-------------------- Getting Started --------------------
+
+Functional Testing
+    1. Test Recorder with cross browser support
+    2. Element Detection
+    3. Dashboard & Reports
+    4. Scheduling & Cocurrent runs
+    5. Centralized Test Cases
+
+API Testing
+
+Load Testing

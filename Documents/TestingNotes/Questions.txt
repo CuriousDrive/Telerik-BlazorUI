@@ -1,0 +1,5 @@
+What do they want from me?
+    1. Testing Blazor Components using Test Studio
+    2. Testing Charts => I will need to use this Component
+    3. Automated Testing within Visual Studio => Need to install dev edition
+    4. 

@@ -1,0 +1,17 @@
+-------------------- Test Studio Editions --------------------
+
+1. Stand-alone application
+    => Test Studio - Web & Desktops 
+    => Test Studio - Ultimate (includes Load & REST API testing)
+
+2. Test studio run-time add-on
+    => CI/CD build servers
+    => Execution Machine - Need to look into this*
+
+3. Test Studio Dev Edition 
+    => This is a whole another tool that will work with visual Studio
+
+4. Test studio testing framework 
+    => You can use this framework to code your tests
+    => It helps in testing UI elements
+    => It's free :) 

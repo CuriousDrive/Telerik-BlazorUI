@@ -1,0 +1,312 @@
+﻿@page "/publishers"
+@using BookStores.Models
+@using Telerik.DataSource
+@using Telerik.DataSource.Extensions
+@using System.Collections.Generic
+@inject HttpClient _httpClient
+
+
+<div class="col-12">
+
+    @if (PublishersByPage == null && AllPublishers == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <TelerikListView Data="PublishersByPage"
+                         Pageable="Paging"
+                         PageSize="PageSizeOption"
+                         PageChanged="PageChangedHandler"
+                         OnDelete="DeletePublisher"
+                         OnUpdate="UpdatePublisher"
+                         OnCreate="CreatePublisher"
+                         OnEdit="EditHandler"
+                         OnCancel="CancelHandler"
+                         OnRead="OnReadHandler"
+                         TotalCount="TotalCount">
+            <HeaderTemplate>
+                <br />
+                <div class="col-12 row">
+                    &nbsp;
+                    <label style="font-size:large; font-weight:bold">
+                        Enable Paging :
+                        <TelerikCheckBox @bind-Value="Paging"></TelerikCheckBox>
+                    </label>
+                </div>
+                <div class="col-12 row">
+                    &nbsp;
+                    <label style="font-size:large; font-weight:bold">
+                        Page Size :
+                        <TelerikDropDownList Data="PageSizeOptions"
+                                             @bind-Value="PageSizeOption"
+                                             Class="col-3"></TelerikDropDownList>
+                    </label>
+                </div>
+                <div class="col-12 row">
+                    &nbsp;
+                    <label style="font-size:large; font-weight:bold">
+                        @PageChangedMessage
+                    </label>
+                </div>
+                <div class="col-12 row">
+                    &nbsp;
+                    <label style="font-size:large; font-weight:bold">Sort by Publihser Name : </label>&nbsp;
+                        <TelerikDropDownList Data="SortDirections"
+                                             @bind-Value="SortDirection"
+                                             Width="150px"></TelerikDropDownList> &nbsp;
+                        <TelerikButton @onclick="Sort">Sort</TelerikButton>
+                </div>
+                <br />
+                <div class="col-12 row">
+                    &nbsp;
+                    <TelerikTextBox @bind-Value="@FilterText" PlaceHolder="Search by publisher name" Width="250px"></TelerikTextBox> &nbsp;
+                    <TelerikButton OnClick="@Filter">Filter</TelerikButton> &nbsp;
+                    <TelerikButton OnClick="@ClearFilter">Clear Filter</TelerikButton>
+                </div>
+                <br />
+                <div class="col-12 row">
+                    &nbsp;
+                    <ListViewCommandButton Command="Add" Icon="@IconName.Plus">Add</ListViewCommandButton>
+                </div>
+                <br />
+            </HeaderTemplate>
+            <Template Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bolder">@publisher.PublisherName</h5>
+                                <p class="card-subtitle">@publisher.City , @publisher.State</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br />
+                            <ListViewCommandButton Command="Edit" Icon="@IconName.Edit">Edit</ListViewCommandButton>
+                            <ListViewCommandButton Command="Delete" Icon="@IconName.Delete">Delete</ListViewCommandButton>
+                        </div>
+                    </div>
+                </div>
+            </Template>
+            <EditTemplate Context="publisher">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-2">
+                            <img src=@($"/img/telerik.jpg") class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <TelerikTextBox @bind-Value="publisher.PublisherName"></TelerikTextBox>
+                                <TelerikDropDownList Data="Cities"
+                                                     Value="publisher.City"
+                                                     ValueChanged="@((string value) => ValueChangedHandler(value, publisher))"
+                                                     Enabled="EditCities"></TelerikDropDownList>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br />
+                            <ListViewCommandButton Command="Save" Icon="@IconName.Save">Save</ListViewCommandButton>
+                            <ListViewCommandButton Command="Cancel" Icon="@IconName.Cancel">Cancel</ListViewCommandButton>
+                        </div>
+                    </div>
+                </div>
+            </EditTemplate>
+            <FooterTemplate>
+                <strong style="font-size:larger">Total Count : @TotalCount</strong>
+            </FooterTemplate>
+        </TelerikListView>
+        <br/>
+    }
+</div>
+
+@code {
+
+    public List<Publisher> PublishersByPage { get; set; } = new List<Publisher>();
+    public List<Publisher> AllPublishers { get; set; } = new List<Publisher>();
+    public string[] Cities { get; set; }
+
+    public bool Paging { get; set; } = true;
+    public int[] PageSizeOptions { get; set; } = new int[] { 2, 3, 4, 5, 10 };
+    public int PageSizeOption { get; set; } = 5;
+    public string PageChangedMessage { get; set; }
+    public bool EditCities { get; set; } = true;
+    public int TotalCount { get; set; }
+    public string FilterText { get; set; }
+    public string[] SortDirections { get; set; } = new string[] { "Ascending", "Descending" };
+    public string SortDirection { get; set; }
+
+    //Events
+    protected async override Task OnInitializedAsync()
+    {
+        //loading cities
+        Cities = new string[] { "Boston", "Washington", "Chicago", "Dallas", "Berkeley", "New York City", "Portland", "Naperville", "Nashville" };
+
+        //getting total count of publishers
+        TotalCount = await GetTotalCount();
+
+        //getting all publishers
+        //AllPublishers = await GetAllPublishers();
+
+    }
+
+    private async Task OnReadHandler(ListViewReadEventArgs listViewReadEventArgs)
+    {
+        PublishersByPage = await GetPublishersByPage(listViewReadEventArgs.Request.Page, listViewReadEventArgs.Request.PageSize);
+    }
+
+    private void PageChangedHandler(int currentPageNumber)
+    {
+        //PageChangedMessage = "You are on page : " + currentPageNumber;
+    }
+
+    private void EditHandler(ListViewCommandEventArgs listViewCommandEventArgs)
+    {
+        var publisher = listViewCommandEventArgs.Item as Publisher;
+        EditCities = publisher.PubId > 4 ? true : false;
+    }
+
+    private void CancelHandler(ListViewCommandEventArgs listViewCommandEventArgs)
+    {
+        var publisher = listViewCommandEventArgs.Item as Publisher;
+        //EditCities = publisher.PubId < 4 ? true : false;
+    }
+
+    private void ValueChangedHandler(string city, Publisher publisher)
+    {
+        publisher.State = GetStateFromCity(city);
+        publisher.City = city;
+    }
+
+    //CRUD Operations
+    private async Task<List<Publisher>> GetPublishersByPage(int pageIndex, int pageSize)
+    {
+        return await _httpClient.GetFromJsonAsync<List<Publisher>>($"publishers/getpublishersbypage?pageIndex={pageIndex}&pageSize={pageSize}");
+    }
+
+    private async Task<int> GetTotalCount()
+    {
+        return await _httpClient.GetFromJsonAsync<int>("publishers/gettotalcount");
+    }
+
+    private async Task<List<Publisher>> GetAllPublishers()
+    {
+        return await _httpClient.GetFromJsonAsync<List<Publisher>>("publishers/getpublishers");
+    }
+
+    private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+    {
+        var publisher = listViewCommandEventArgs.Item as Publisher;
+        await _httpClient.PostAsJsonAsync<Publisher>("publishers/createpublisher", publisher);
+
+        AllPublishers = await GetAllPublishers();
+    }
+
+    private async Task UpdatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+    {
+        var publisher = listViewCommandEventArgs.Item as Publisher;
+        await _httpClient.PutAsJsonAsync<Publisher>("publishers/UpdatePublisher/" + publisher.PubId, publisher);
+
+        AllPublishers = await GetAllPublishers();
+    }
+
+    private async Task DeletePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
+    {
+        var publisher = listViewCommandEventArgs.Item as Publisher;
+        await _httpClient.DeleteAsync("publishers/deletepublisher/" + publisher.PubId);
+
+        AllPublishers = await GetAllPublishers();
+    }
+
+    //Other Methods
+    private void ClearPublisher()
+    {
+        //publisher = new Publisher();
+    }
+
+    private string GetStateFromCity(string city)
+    {
+        if (city == "New York City")
+            return "NY";
+        if (city == "Los Angeles" || city == "San Diego" || city == "San Jose" || city == "San Francisco" || city == "Berkeley")
+            return "CA";
+        if (city == "San Antonio" || city == "Houston" || city == "Dallas" || city == "Austin" || city == "Fort Worth")
+            return "TX";
+        if (city == "Chicago" || city == "Naperville")
+            return "IL";
+        if (city == "Phoenix")
+            return "AZ";
+        if (city == "Philadelphia")
+            return "PA";
+        if (city == "Jacksonville")
+            return "FL";
+        if (city == "Columbus")
+            return "OH";
+        if (city == "Charlotte")
+            return "NC";
+        if (city == "Indianapolis")
+            return "IN";
+        if (city == "Seattle")
+            return "WA";
+        if (city == "Denver")
+            return "CO";
+        if (city == "Boston")
+            return "MA";
+        if (city == "Washington")
+            return "DC";
+        if (city == "Portland")
+            return "OR";
+        if (city == "Nashville")
+            return "TN";
+
+        return "";
+    }
+
+    private async Task Filter()
+    {
+        var request = new DataSourceRequest()
+        {
+            Filters = new List<IFilterDescriptor>()
+        };
+        request.Filters.Add(new FilterDescriptor("PublisherName", FilterOperator.Contains, FilterText));
+
+        if (FilterText != string.Empty)
+        {
+            var response = await _httpClient.PostAsJsonAsync<DataSourceRequest>("publishers/getpublishersbyname", request); //AllPublishers.ToDataSourceResult(request).Data as List<Publisher>;
+
+            if (response.IsSuccessStatusCode)
+            {
+                AllPublishers = await response.Content.ReadFromJsonAsync<List<Publisher>>();
+            }
+        }
+        else
+        {
+            AllPublishers = await GetAllPublishers();
+        }
+    }
+
+    private async Task ClearFilter()
+    {
+        FilterText = string.Empty;
+        await Filter();
+    }
+
+    private void Sort()
+    {
+        var request = new DataSourceRequest()
+        {
+            Sorts = new List<SortDescriptor>()
+        };
+
+        if(SortDirection == "Ascending")
+            request.Sorts.Add(new SortDescriptor("PublisherName", ListSortDirection.Ascending));
+        else
+            request.Sorts.Add(new SortDescriptor("PublisherName", ListSortDirection.Descending));
+
+        AllPublishers = AllPublishers.ToDataSourceResult(request).Data as List<Publisher>;
+    }
+}
