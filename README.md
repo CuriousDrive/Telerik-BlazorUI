@@ -6,7 +6,7 @@ This is a sample app showing how you can build Blazor apps using Telerik UI for 
 
 ![Demo_App](https://raw.githubusercontent.com/CuriousDrive/Telerik/master/Documents/Demo_GIF-1.gif)
 
-## Document Processing using Telerik.Documents Librarires
+## Document Processing using Telerik.Documents Libraries
 
 ![Demo_App](https://raw.githubusercontent.com/CuriousDrive/Telerik/master/Documents/Demo_GIF-2.gif)
 
