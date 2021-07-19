@@ -29,9 +29,9 @@ This app was made on YouTube. Please check the episodes below.
 
 ## Running the Application
 
-- You should be able to just run it without any extra setup. 
-- The final version of this app will be in the last episode's folder. 
-- If you are watching tutorials and want to refer to the code, then you can check out the code from that video's folder
+- This is a Blazor WASM app, please run the server project. 
+- The final version of this app will be in the `src` folder.
+- If you are watching tutorials and want to refer to particular code, then you can check out the `Source Code By Episode` folder
 
 ## Telerik UI for Blazor Trial
 
