@@ -1,5 +1,9 @@
-What do they want from me?
-    1. Testing Blazor Components using Test Studio
-    2. Testing Charts => I will need to use this Component
-    3. Automated Testing within Visual Studio => Need to install dev edition
-    4. 
+Questions for the next meeting
+    1. Is there any way to run all the tests together?
+    2. Is there any way that I can run these tests from Visual Studio Test Explorer?
+        => I think that's because, system needs start 
+    3. Cascading dropdown list is not working, I even tried Build Step
+    4. What's the best way to stop the test recording?
+
+Observations 
+    1. On thing that is missing is login page for this app

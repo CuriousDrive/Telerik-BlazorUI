@@ -1,0 +1,2 @@
+Recording the tests =>
+    1. You need to have Telerik Test Studio Extension to 

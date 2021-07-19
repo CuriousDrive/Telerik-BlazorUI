@@ -2,6 +2,18 @@
 <ArrayOfOpenItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik\src\TestStudioProject\WebTest1.tstest</Path>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik\src\TestStudioProject\LableFirstNameExists.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik\src\TestStudioProject\SubscriptionAllCheckBoxSelectsAll.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik\src\TestStudioProject\StateGetLoadedAfterSelectingCity.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik\src\TestStudioProject\AuthorsGridIsLoaded.tstest</Path>
   </OpenItem>
 </ArrayOfOpenItem>
