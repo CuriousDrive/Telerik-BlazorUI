@@ -1,2 +1,8 @@
-Recording the tests =>
-    1. You need to have Telerik Test Studio Extension to 
+Test Studio Project Layout 
+    1. Project Explorer
+    2. Elements Explorer
+    3. Edit Steps Pane
+    4. Output Pane
+    5. Step Builder
+    6. Properties Pane
+    7. Tools Pane

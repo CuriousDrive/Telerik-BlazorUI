@@ -20,7 +20,9 @@
       "Telerik.TestingFramework.Controls.KendoUI, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
       "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
       "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestStudio.Translators.Common, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45"
+      "Telerik.TestStudio.Translators.Common, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "..\\..\\..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\PublicAssemblies\\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll",
+      "System.Windows.Forms"
     ],
     "Steps": {
       "__type": "ArtOfTest.Common.Design.ProjectModel.AutomationStepList",
@@ -28,7 +30,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "6dc0f008-e9da-4355-b060-693ec42bc5e1",
+            "Runtime ID": "5d7d7996-4bc6-4719-b39a-f04122f8fe12",
             "Description": "Navigate to : 'https://localhost:5001'",
             "CustomDescription": null,
             "Step": {
@@ -64,7 +66,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCitydy5cbcan.fnj",
+            "StepImageKey": "StateGetLoadedAfterSelectingCityjtdk5dyl.2zc",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -73,7 +75,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "e9cf0013-1c21-4f3c-953b-a2a5ee5de202",
+            "Runtime ID": "a7e7517f-56d4-45cb-bca9-88b9687f8b7d",
             "Description": "KendoAngularTextBox value 'Phi' entered.",
             "CustomDescription": null,
             "Step": {
@@ -85,9 +87,9 @@
                 "KeyHoldTime": 100,
                 "IsPassword": false,
                 "TypingInfo": {
-                  "ElementText": "Phia",
-                  "TypedText": "phia",
-                  "CaretPosition": 4,
+                  "ElementText": "Phi",
+                  "TypedText": "phi",
+                  "CaretPosition": 3,
                   "IsTextArea": false,
                   "IsBackSpace": false
                 },
@@ -202,7 +204,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCityksmrhvi5.zfa",
+            "StepImageKey": "StateGetLoadedAfterSelectingCityyprk04jn.ltw",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -211,7 +213,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "a84df638-3a7e-4957-8d2a-175a3d63c583",
+            "Runtime ID": "95439515-5188-4418-b5a3-a12297b63c04",
             "Description": "TelerikBlazorList : click on item with text 'Philadelphia, PA'",
             "CustomDescription": null,
             "Step": {
@@ -348,7 +350,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCitywihp3pj5.zb2",
+            "StepImageKey": "StateGetLoadedAfterSelectingCitybjpnl103.moh",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -357,15 +359,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "911cc174-3e66-49f6-b1f5-17591180bddf",
-            "Description": "Verify 'InnerText' 'Exact' 'PA' on 'DdlStatesSpan'",
+            "Runtime ID": "d9e8e0c2-857c-493f-b724-c55226cb2031",
+            "Description": "TelerikBlazorDropdownList: TelerikBlazorDropdownList selected item text 'Exact' 'PA'.",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.CommonVerificationDescriptors.TelerikBlazorContentVerificationDescriptor",
+              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.DropdownList.VerificationDescriptors.SelectedItemTextVerificationDescriptor",
               "__value": {
+                "SelectedItemText": "PA",
                 "CompareType": 0,
-                "SegmentType": 0,
-                "ExpectedString": "PA",
                 "DataBindVariableName": null,
                 "Timeout": 30000,
                 "CheckInterval": 500,
@@ -383,10 +384,10 @@
                   }
                 },
                 "Elements": {
-                  "textTarget": {
+                  "TelerikBlazorDropdownList": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "textTarget",
+                      "Name": "TelerikBlazorDropdownList",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -474,7 +475,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCitypb4nvb3v.ybe",
+            "StepImageKey": "StateGetLoadedAfterSelectingCityataq3lk3.o4s",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -492,7 +493,7 @@
     "SilverlightAppOriginUri": null,
     "WpfAppPath": null,
     "UseDefaultWpfAppPath": false,
-    "TestAssembly": "BookStores.TestStudioProject.dll",
+    "TestAssembly": "TestStudioProject.dll",
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,
@@ -532,9 +533,9 @@
     "Path": "StateGetLoadedAfterSelectingCity.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "09bb6f87-937f-461a-a9c9-52e1b98f7f2a",
-    "Id": "09bb6f87-937f-461a-a9c9-52e1b98f7f2a",
-    "ProjectId": "ed5c82e3-3504-4b95-a8b1-6f203ea35488",
+    "UniqueId": "4b83e5be-3313-4d9a-9557-55a67e550a38",
+    "Id": "4b83e5be-3313-4d9a-9557-55a67e550a38",
+    "ProjectId": "bec36f83-73cf-4cff-88fd-2d4b58025c55",
     "Version": 200
   }
 }

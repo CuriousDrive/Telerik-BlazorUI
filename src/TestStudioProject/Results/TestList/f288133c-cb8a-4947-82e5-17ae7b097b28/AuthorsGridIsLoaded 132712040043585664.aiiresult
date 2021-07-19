@@ -1,0 +1,152 @@
+﻿{
+  "Id": null,
+  "Data": {
+    "__type": "ArtOfTest.WebAii.Design.Execution.RunResult",
+    "__value": {
+      "IsComplete": true,
+      "Name": "AuthorsGridIsLoaded 132712040043585664",
+      "StartTime": "2021-07-19T21:33:24.3934664Z",
+      "EndTime": "2021-07-19T21:33:37.469947Z",
+      "Id": "45945f03-5527-411e-b309-6a0177994206",
+      "PassedResult": true,
+      "IsRerun": false,
+      "HasWarnings": false,
+      "PassedCount": 1,
+      "FailedCount": 0,
+      "NotRunCount": 0,
+      "DispatchGroupId": "f288133c-cb8a-4947-82e5-17ae7b097b28",
+      "DataCollectors": {},
+      "TestResults": [
+        {
+          "__type": "ArtOfTest.WebAii.Design.Execution.TestResult",
+          "__value": {
+            "Browser": 7,
+            "ExeType": 5,
+            "SeparatorLineCharCount": 60,
+            "Message": "Overall Result: Pass\r\n------------------------------------------------------------\r\n'7/19/2021 5:33:27 PM' - Executing test: 'AuthorsGridIsLoaded', path: 'AuthorsGridIsLoaded.tstest.'\r\n'7/19/2021 5:33:27 PM' - Using .Net Runtime version: '4.0.30319.42000' for test execution. Build version is '2021.1.616.0'.\r\n'7/19/2021 5:33:27 PM' - Starting execution....\r\n------------------------------------------------------------\r\n------------------------------------------------------------\r\n'7/19/2021 5:33:30 PM' - Using 'Chrome' version '91.0.4472.124' as default browser. \r\n'7/19/2021 5:33:32 PM' - 'Pass' : 1. Navigate to : 'https://localhost:5001'\r\n'7/19/2021 5:33:35 PM' - 'Pass' : 2. TelerikBlazorGrid: 'Data' items count 'GreaterThan' '0'.\r\n------------------------------------------------------------\r\n'7/19/2021 5:33:35 PM' - Overall Result: Pass\r\n'7/19/2021 5:33:35 PM' - Duration: [0 min: 5 sec: 642 msec]\r\n------------------------------------------------------------\r\n'7/19/2021 5:33:36 PM' - Test completed!\r\n\r\n",
+            "ScreenRecordingResultPath": null,
+            "ScreenRecordingResultError": null,
+            "ScreenRecordingResultCodec": null,
+            "ScreenRecordingResultSize": 0,
+            "FailureException": null,
+            "Result": 0,
+            "TestId": "cd2c45b5-2a42-41cb-9083-ce802054cb3c",
+            "TestName": "AuthorsGridIsLoaded",
+            "IsRerun": false,
+            "TestPath": "AuthorsGridIsLoaded.tstest",
+            "TestOwner": "",
+            "TestDescription": "",
+            "ProjectPath": "",
+            "StepResults": [
+              {
+                "__type": "ArtOfTest.WebAii.Design.AutomationStepResult",
+                "__value": {
+                  "TestName": "AuthorsGridIsLoaded",
+                  "TestPath": "AuthorsGridIsLoaded.tstest",
+                  "TestId": "cd2c45b5-2a42-41cb-9083-ce802054cb3c",
+                  "TestStepIndex": 0,
+                  "StepDescription": "Navigate to : 'https://localhost:5001'",
+                  "Exception": null,
+                  "ResultType": 0,
+                  "State": null,
+                  "Order": 1,
+                  "LogMessageOnError": "",
+                  "UserComment": null,
+                  "HashCode": 1347723234,
+                  "IsManual": false,
+                  "WasStepEnabled": false,
+                  "Warnings": null
+                }
+              },
+              {
+                "__type": "ArtOfTest.WebAii.Design.AutomationStepResult",
+                "__value": {
+                  "TestName": "AuthorsGridIsLoaded",
+                  "TestPath": "AuthorsGridIsLoaded.tstest",
+                  "TestId": "cd2c45b5-2a42-41cb-9083-ce802054cb3c",
+                  "TestStepIndex": 1,
+                  "StepDescription": "TelerikBlazorGrid: 'Data' items count 'GreaterThan' '0'.",
+                  "Exception": null,
+                  "ResultType": 0,
+                  "State": null,
+                  "Order": 2,
+                  "LogMessageOnError": "",
+                  "UserComment": null,
+                  "HashCode": 1979130648,
+                  "IsManual": false,
+                  "WasStepEnabled": false,
+                  "Warnings": null
+                }
+              }
+            ],
+            "NotRunStepDescriptions": [],
+            "TotalPassedSteps": 2,
+            "ExecutingTestStepCount": 2,
+            "TotalNumberOfNotRunSteps": 0,
+            "IsDataDrivenResult": false,
+            "DataIterationResults": [],
+            "EndTime": "2021-07-19T21:33:35.681128Z",
+            "StartTime": "2021-07-19T21:33:30.0383872Z",
+            "ProfilerResultsPath": null,
+            "VersionGroupKey": "00000000-0000-0000-0000-000000000000",
+            "CommitedBy": null,
+            "HasWarnings": false
+          }
+        }
+      ],
+      "FileName": "AuthorsGridIsLoaded 132712040043585664",
+      "Machine": {
+        "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.Machine",
+        "__value": {
+          "Id": "00000000-0000-0000-0000-000000000000",
+          "NetworkName": "DESKTOP-8BF81DU",
+          "OperatingSystem": "Windows 10",
+          "InstalledBrowsers": [
+            {
+              "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation",
+              "__value": {
+                "Type": 1,
+                "Version": "9.11.19041.0",
+                "IsConfigured": false
+              }
+            },
+            {
+              "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation",
+              "__value": {
+                "Type": 2,
+                "Version": "90.0 (x64 en-US)",
+                "IsConfigured": false
+              }
+            },
+            {
+              "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation",
+              "__value": {
+                "Type": 7,
+                "Version": "91.0.4472.124",
+                "IsConfigured": false
+              }
+            },
+            {
+              "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation",
+              "__value": {
+                "Type": 10,
+                "Version": "91.0.864.70",
+                "IsConfigured": false
+              }
+            }
+          ],
+          "Status": 0,
+          "ServiceUri": null,
+          "DBState": 0,
+          "UserName": "User"
+        }
+      },
+      "Messages": null,
+      "RunId": "45945f03-5527-411e-b309-6a0177994206",
+      "Comment": null,
+      "TestListId": "6f8c1747-62cf-4e59-b9ee-3b6860333f35",
+      "IsManual": false
+    }
+  },
+  "Metadata": null
+}

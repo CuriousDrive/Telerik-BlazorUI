@@ -1,9 +1,11 @@
 Questions for the next meeting
     1. Is there any way to run all the tests together?
+        => Yes you can add tests as steps in new steps that will allow us to run all the tests
     2. Is there any way that I can run these tests from Visual Studio Test Explorer?
-        => I think that's because, system needs start 
+        => I think that's because, system needs start browser
     3. Cascading dropdown list is not working, I even tried Build Step
     4. What's the best way to stop the test recording?
+    5. Do I need to keep the test studio running in order to run the Automated Tests?
 
 Observations 
     1. On thing that is missing is login page for this app
