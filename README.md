@@ -1,11 +1,13 @@
 # Book Stores
 
-This is a demo showing how a full-stack .NET application can be built with ASP.NET Core, Blazor Wasm, and Telerik UI for Blazor.
+This is a sample app showing how you can build Blazor apps using Telerik UI for Blazor.
 
 ## Telerik Components for Blazor
+
 ![Demo_App](https://raw.githubusercontent.com/CuriousDrive/Telerik/master/Documents/Demo_GIF-1.gif)
 
-## Document Processing using Telerik.Document Librarires
+## Document Processing using Telerik.Documents Librarires
+
 ![Demo_App](https://raw.githubusercontent.com/CuriousDrive/Telerik/master/Documents/Demo_GIF-2.gif)
 
 ## YouTube Videos
