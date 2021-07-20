@@ -1,0 +1,49 @@
+Questions for the next meeting
+
+    1. Is there any way to run all the tests together?
+        => Yes you can add tests as steps in new steps that will allow us to run all the tests
+    2. Is there any way that I can run these tests from Visual Studio Test Explorer?
+        => I think that's because, system needs start browser
+    3. Cascading dropdown list is not working, I even tried Build Step
+        => Need to check with the team, next time we meet
+    4. What's the best way to stop the test recording?
+        => Need to check with the team, next time we meet
+    5. Do I need to keep the test studio running in order to run the Automated Tests?
+        => Need to check with the team, next time we meet
+    6. After moving the files from Test Studio the Visual Studion solution does not get updated
+        => Need to check with the team, next time we meet
+
+Pending from my end
+
+    1. On thing that is missing is login page for this app
+    2. I also need to have charts in the app
+    3. I need to write a code test in the studio too
+    4. CI/CD integration
+
+Outline
+    Video 1 => Getting Started
+        1. What are we going to test?
+        2. Installing Test Studio & extension for the browser
+        3. Test studio Layout
+        4. Recodring first test
+        5. Executing first test
+        6. Creating test list
+        7. Running test list
+        8. Results
+        9. Reports
+        10. Scheduling test list
+    
+    Video 2 => Deep dive
+        1. Exploring Test Studio top panel
+        2. Exploring Test Steps Properties
+        3. Exploring Step Builder
+        4. Telerik UI for Blazor translator
+        5. Converting tests into code in Test Studio
+
+    Video 3 => Developers & CI/CD
+        1. Loading tests in Visual Studio
+        2. Running tests from Visual Studio
+        3. CI/CD integration
+
+Final Question
+    => Are we doing this? I will have to tell my viewers

@@ -9,28 +9,14 @@
     "ProfilerBenchmarkResultsId": "00000000-0000-0000-0000-000000000000",
     "ProfilerConfigurationId": "00000000-0000-0000-0000-000000000000",
     "ProfilerConfigurations": {},
-    "CurrentReferences": [
-      "System",
-      "System.Core",
-      "ArtOfTest.WebAii, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
-      "ArtOfTest.WebAii.Design, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d",
-      "Telerik.WebAii.Controls.Html, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.WebAii.Controls.Xaml, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.WebAii.Controls.Xaml.Wpf, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.KendoUI, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestStudio.Translators.Common, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "..\\..\\..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\PublicAssemblies\\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll",
-      "System.Windows.Forms"
-    ],
+    "CurrentReferences": [],
     "Steps": {
       "__type": "ArtOfTest.Common.Design.ProjectModel.AutomationStepList",
       "__value": [
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "5d7d7996-4bc6-4719-b39a-f04122f8fe12",
+            "Runtime ID": "611116fc-0fd4-40e5-aa8a-2cfe876ce177",
             "Description": "Navigate to : 'https://localhost:5001'",
             "CustomDescription": null,
             "Step": {
@@ -66,7 +52,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCityjtdk5dyl.2zc",
+            "StepImageKey": "LableFirstNameExistsmsxckpu2.kb3",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -75,26 +61,17 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "a7e7517f-56d4-45cb-bca9-88b9687f8b7d",
-            "Description": "KendoAngularTextBox value 'Phi' entered.",
+            "Runtime ID": "e76a6670-6a83-4838-acb2-bef0ae2e6fee",
+            "Description": "Keyboard (KeyPress) - Tab (1 times) on 'BodyTag'",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.KendoUI.Angular.Input.ActionDescriptors.TextBoxTypeActionDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.DesktopKeyboardActionDescriptor",
               "__value": {
-                "RawText": "Phi",
-                "SimulateRealTyping": true,
-                "TypingSpeed": 50,
-                "KeyHoldTime": 100,
-                "IsPassword": false,
-                "TypingInfo": {
-                  "ElementText": "Phi",
-                  "TypedText": "phi",
-                  "CaretPosition": 3,
-                  "IsTextArea": false,
-                  "IsBackSpace": false
-                },
-                "Encrypt": false,
-                "SupportUnicode": true,
+                "focus": true,
+                "KeyPress": "Tab",
+                "HoldFor": 150,
+                "Action": 0,
+                "RepeatCount": 1,
                 "UsejQuery": false,
                 "ClosesBrowser": false,
                 "AjaxTimeout": 0,
@@ -111,10 +88,10 @@
                   }
                 },
                 "Elements": {
-                  "KendoAngularTextBox": {
+                  "target": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "KendoAngularTextBox",
+                      "Name": "target",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -134,10 +111,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "Rg5+KZRRxRcVHEpbGrsoUgcG6PE=",
+                          "uniqueKey": "aUWxqHbhpja1sxZOvvC2Ud42fWE=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "AcCitiesText",
+                          "Name": "BodyTag",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -148,13 +125,7 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=k-input"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=!telerik-blazor"
+                                        "Clause": "TagIndex=body:0"
                                       }
                                     }
                                   ],
@@ -164,14 +135,14 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[3]/span[1]/span[1]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "E230BB7D046808F9AE9F6B6A62B301242338B6BE972D6310DF080F2DA2417AE2",
+                                "Image": "2FFCB7647FB08C2A5715FBCC2B9B26784524D18850397436E376752B3FB4EC0B",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -183,7 +154,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.KendoUI.Angular.Input.KendoAngularTextBox",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -194,9 +165,7 @@
                 "StepType": 4,
                 "LogMessageOnFailure": "",
                 "EditorType": "",
-                "DataBindingExpressions": {},
-                "canEncrypt": false,
-                "cipher": null
+                "DataBindingExpressions": {}
               }
             },
             "Enabled": true,
@@ -204,7 +173,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCityyprk04jn.ltw",
+            "StepImageKey": "LableFirstNameExistsmz1kuzdw.mmn",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -213,16 +182,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "95439515-5188-4418-b5a3-a12297b63c04",
-            "Description": "TelerikBlazorList : click on item with text 'Philadelphia, PA'",
+            "Runtime ID": "1c8ffb6a-901a-4fcf-9e18-4bdfdd7dd731",
+            "Description": "Click 'FirstNameLabelTag'",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.List.ActionDescriptors.SelectItemActionDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ClickActionDescriptor",
               "__value": {
-                "SelectDropDownType": 1,
-                "Text": "Philadelphia, PA",
-                "Index": 0,
-                "SimulateRealClick": false,
+                "SimulateRealClick": true,
+                "ScrollToVisibleType": 2,
                 "UsejQuery": false,
                 "ClosesBrowser": false,
                 "AjaxTimeout": 0,
@@ -239,10 +206,10 @@
                   }
                 },
                 "Elements": {
-                  "TelerikBlazorList": {
+                  "target": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TelerikBlazorList",
+                      "Name": "target",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -262,10 +229,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "3t7V6cBMm8GeiZ5dW6fSrXgj4eQ=",
+                          "uniqueKey": "fjQOzoj+03T3pUjBNs/p+3ffa0Q=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "Div",
+                          "Name": "FirstNameLabelTag",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -276,50 +243,30 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~telerik-blazor"
+                                        "Clause": "TextContent=First Name :"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-animation-container"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "GroupIndex=2"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~k-popup"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~k-reset"
+                                        "Clause": "tagname=label"
                                       }
                                     }
                                   ],
                                   "Constraints": [],
-                                  "ChainStops": [
-                                    3
-                                  ]
+                                  "ChainStops": []
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[4]/div[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[1]/label[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "0943704395E15776CEC793752062803D330DED1F608821178F44850417C65E42",
+                                "Image": "0EA1C43F4143B9EE4017CEC63A2E049BDF4F98237B3644ED9F9AFB5E31E11993",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -331,7 +278,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.List.TelerikBlazorList",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -350,7 +297,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCitybjpnl103.moh",
+            "StepImageKey": "LableFirstNameExistskj0sixhd.4hv",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -359,14 +306,15 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "d9e8e0c2-857c-493f-b724-c55226cb2031",
-            "Description": "TelerikBlazorDropdownList: TelerikBlazorDropdownList selected item text 'Exact' 'PA'.",
+            "Runtime ID": "3467e545-ade0-49b6-8df3-1fbef09ea1a5",
+            "Description": "Verify 'TextContent' 'Contains' 'First Name :' on 'FirstNameLabelTag'",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.DropdownList.VerificationDescriptors.SelectedItemTextVerificationDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ContentVerificationDescriptor",
               "__value": {
-                "SelectedItemText": "PA",
-                "CompareType": 0,
+                "CompareType": 2,
+                "SegmentType": 3,
+                "ExpectedString": "First Name :",
                 "DataBindVariableName": null,
                 "Timeout": 30000,
                 "CheckInterval": 500,
@@ -384,10 +332,10 @@
                   }
                 },
                 "Elements": {
-                  "TelerikBlazorDropdownList": {
+                  "textTarget": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TelerikBlazorDropdownList",
+                      "Name": "textTarget",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -407,10 +355,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "kWAuNVcfvQQzXJ4Tte+DmWadJfU=",
+                          "uniqueKey": "fjQOzoj+03T3pUjBNs/p+3ffa0Q=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "DdlStatesSpan",
+                          "Name": "FirstNameLabelTag",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -421,13 +369,13 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-dropdown"
+                                        "Clause": "TextContent=First Name :"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~telerik-blazor"
+                                        "Clause": "tagname=label"
                                       }
                                     }
                                   ],
@@ -437,14 +385,14 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[4]/span[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[1]/label[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "81A64A561A85E46BBAF70EF9E13993B44D0D1728AD529BAE222CF144226D7FD8",
+                                "Image": "0EA1C43F4143B9EE4017CEC63A2E049BDF4F98237B3644ED9F9AFB5E31E11993",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -456,7 +404,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.DropdownList.TelerikBlazorDropdownList",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -475,7 +423,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCityataq3lk3.o4s",
+            "StepImageKey": "LableFirstNameExistsyxjoeb1r.exc",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -493,12 +441,12 @@
     "SilverlightAppOriginUri": null,
     "WpfAppPath": null,
     "UseDefaultWpfAppPath": false,
-    "TestAssembly": "TestStudioProject.dll",
+    "TestAssembly": "BookStores.TestStudioProject.dll",
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,
-    "ResourceFilePath": "StateGetLoadedAfterSelectingCity.resx",
-    "ElementImageStoreFilePath": "StateGetLoadedAfterSelectingCity.imgstore",
+    "ResourceFilePath": "Authors\\LableFirstNameExists.resx",
+    "ElementImageStoreFilePath": "Authors\\LableFirstNameExists.imgstore",
     "HasCodeBehind": false,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -528,13 +476,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "StateGetLoadedAfterSelectingCity",
+    "Name": "LableFirstNameExists",
     "Owner": "",
-    "Path": "StateGetLoadedAfterSelectingCity.tstest",
+    "Path": "Authors\\LableFirstNameExists.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "4b83e5be-3313-4d9a-9557-55a67e550a38",
-    "Id": "4b83e5be-3313-4d9a-9557-55a67e550a38",
+    "UniqueId": "c2bd6179-5fec-42c2-8221-cc2cdac9385d",
+    "Id": "c2bd6179-5fec-42c2-8221-cc2cdac9385d",
     "ProjectId": "bec36f83-73cf-4cff-88fd-2d4b58025c55",
     "Version": 200
   }
