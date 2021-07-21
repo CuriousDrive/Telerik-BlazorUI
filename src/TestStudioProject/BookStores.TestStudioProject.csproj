@@ -59,40 +59,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="AuthorsGridIsLoaded.imgstore">
-      <DependentUpon>AuthorsGridIsLoaded.tstest</DependentUpon>
-    </None>
-    <None Include="AuthorsGridIsLoaded.tstest" />
-    <None Include="LableFirstNameExists.imgstore">
-      <DependentUpon>LableFirstNameExists.tstest</DependentUpon>
-    </None>
-    <None Include="LableFirstNameExists.tstest" />
+    <None Include="Authors\AllWebTests.tstest" />
+    <None Include="Authors\AuthorsGridIsLoaded.tstest" />
+    <None Include="Authors\LableFirstNameExists.tstest" />
+    <None Include="Authors\StateGetLoadedAfterSelectingCity.tstest" />
+    <None Include="Authors\SubscriptionAllCheckBoxSelectsAll.tstest" />
     <None Include="Settings.aiis" />
-    <None Include="StateGetLoadedAfterSelectingCity.imgstore">
-      <DependentUpon>StateGetLoadedAfterSelectingCity.tstest</DependentUpon>
-    </None>
-    <None Include="StateGetLoadedAfterSelectingCity.tstest" />
-    <None Include="SubscriptionAllCheckBoxSelectsAll.imgstore">
-      <DependentUpon>SubscriptionAllCheckBoxSelectsAll.tstest</DependentUpon>
-    </None>
-    <None Include="SubscriptionAllCheckBoxSelectsAll.tstest" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestLists\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="AuthorsGridIsLoaded.resx">
-      <DependentUpon>AuthorsGridIsLoaded.tstest</DependentUpon>
-    </None>
-    <None Include="LableFirstNameExists.resx">
-      <DependentUpon>LableFirstNameExists.tstest</DependentUpon>
-    </None>
-    <None Include="StateGetLoadedAfterSelectingCity.resx">
-      <DependentUpon>StateGetLoadedAfterSelectingCity.tstest</DependentUpon>
-    </None>
-    <None Include="SubscriptionAllCheckBoxSelectsAll.resx">
-      <DependentUpon>SubscriptionAllCheckBoxSelectsAll.tstest</DependentUpon>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

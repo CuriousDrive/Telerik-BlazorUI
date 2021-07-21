@@ -4,4 +4,12 @@
     <OpenItemType>TestFile</OpenItemType>
     <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik\src\TestStudioProject\Authors\SubscriptionAllCheckBoxSelectsAll.tstest</Path>
   </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik\src\TestStudioProject\Authors\FirstNameKeyPressedEvent.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik\src\TestStudioProject\Authors\CreateNewAuthor.tstest</Path>
+  </OpenItem>
 </ArrayOfOpenItem>

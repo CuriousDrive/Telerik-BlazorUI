@@ -10,12 +10,18 @@ Questions for the next meeting
         => Need to check with the team, next time we meet
     5. Do I need to keep the test studio running in order to run the Automated Tests?
         => Need to check with the team, next time we meet
-    6. After moving the files from Test Studio the Visual Studion solution does not get updated
+    6. After moving the files from Test Studio the Visual Studio solution does not get updated
         => Need to check with the team, next time we meet
+    7. Do we need to add NavigateToUrl Step manually for Drawer component or this is for all navigation
+        =>
+    8. Scrolling isn't working?
+        =>
+    9. How do I check if a particular element exists or not
+        =>
 
 Pending from my end
 
-    1. On thing that is missing is login page for this app
+    1. One thing that is missing is login page for this app
     2. I also need to have charts in the app
     3. I need to write a code test in the studio too
     4. CI/CD integration
@@ -37,13 +43,21 @@ Outline
         1. Exploring Test Studio top panel
         2. Exploring Test Steps Properties
         3. Exploring Step Builder
-        4. Telerik UI for Blazor translator
-        5. Converting tests into code in Test Studio
+        4. Debugging/Troubleshooting Tests
+        5. Telerik UI for Blazor translator
+        6. Converting tests into code in Test Studio
 
-    Video 3 => Developers & CI/CD
+    Video 3 => Testing Telerik UI for Blazor
+        1. Basic Components
+        2. ListView
+        3. Grid
+        4. Drawer
+    
+    Video 4 => Developers & CI/CD
         1. Loading tests in Visual Studio
         2. Running tests from Visual Studio
         3. CI/CD integration
 
 Final Question
     => Are we doing this? I will have to tell my viewers
+    => I am gonna need Test Studio License
