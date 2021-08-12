@@ -61,9 +61,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Authors\AllWebTests.tstest" />
     <None Include="Authors\AuthorsGridIsLoaded.tstest" />
+    <None Include="Authors\CreateNewAuthor.tstest" />
+    <None Include="Authors\FirstNameKeyPressedEvent.tstest" />
     <None Include="Authors\LableFirstNameExists.tstest" />
     <None Include="Authors\StateGetLoadedAfterSelectingCity.tstest" />
     <None Include="Authors\SubscriptionAllCheckBoxSelectsAll.tstest" />
+    <None Include="Layout\Expand&amp;CollapseButton.tstest" />
+    <None Include="Layout\Expand&amp;CollapseCheckBox.tstest" />
+    <None Include="Publishers\CreateNewPublisher.tstest" />
+    <None Include="Publishers\PublisherListViewPaging.tstest" />
     <None Include="Settings.aiis" />
   </ItemGroup>
   <ItemGroup>

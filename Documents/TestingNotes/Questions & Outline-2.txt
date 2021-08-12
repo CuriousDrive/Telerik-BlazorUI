@@ -1,0 +1,27 @@
+Questions for the next meeting
+
+    1. Are we going to use BookStores for video series?
+
+    2. If yes then are we going to use GitHub for CI/CD process?
+
+    1. Cascading dropdown list is not working, I even tried Build Step
+        => Need to check with the team, next time we meet
+
+    2. What's the best way to stop the test recording?
+        => Need to check with the team, next time we meet
+
+    3. Do I need to keep the test studio running in order to run the Automated Tests?
+        => Need to check with the team, next time we meet
+
+    4. After moving the files from Test Studio the Visual Studio solution does not get updated
+        => Need to check with the team, next time we meet
+        => Also do I even need to do anything with the Visual Studio? 
+
+    5. Do we need to add NavigateToUrl Step manually for Drawer component or this is for all navigation
+        =>
+
+    6. Scrolling isn't working?
+        =>
+
+    7. How do I check if a particular element exists or not
+        =>

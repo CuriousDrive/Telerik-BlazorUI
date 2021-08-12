@@ -30,7 +30,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "5d7d7996-4bc6-4719-b39a-f04122f8fe12",
+            "Runtime ID": "456e1d38-8935-4e98-b4c3-1409641265aa",
             "Description": "Navigate to : 'https://localhost:5001'",
             "CustomDescription": null,
             "Step": {
@@ -66,7 +66,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCityjtdk5dyl.2zc",
+            "StepImageKey": "StateGetLoadedAfterSelectingCityud1lulqr.tql",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -75,7 +75,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "a7e7517f-56d4-45cb-bca9-88b9687f8b7d",
+            "Runtime ID": "3e8d97fd-73e5-4786-b88d-99df0e174f47",
             "Description": "KendoAngularTextBox value 'Phi' entered.",
             "CustomDescription": null,
             "Step": {
@@ -204,7 +204,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCityyprk04jn.ltw",
+            "StepImageKey": "StateGetLoadedAfterSelectingCity1s2bvxcz.l5i",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -213,7 +213,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "95439515-5188-4418-b5a3-a12297b63c04",
+            "Runtime ID": "4adcad53-426e-46d8-92ce-15c6b38360c9",
             "Description": "TelerikBlazorList : click on item with text 'Philadelphia, PA'",
             "CustomDescription": null,
             "Step": {
@@ -350,7 +350,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCitybjpnl103.moh",
+            "StepImageKey": "StateGetLoadedAfterSelectingCitynqnp541s.3ml",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -359,14 +359,15 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "d9e8e0c2-857c-493f-b724-c55226cb2031",
-            "Description": "TelerikBlazorDropdownList: TelerikBlazorDropdownList selected item text 'Exact' 'PA'.",
+            "Runtime ID": "cc701dbf-8375-435f-9b18-af1007e978e5",
+            "Description": "Verify 'TextContent' 'Contains' 'PA' on 'x2e985a67135c48a097a5Bd2d3e13c1f1Span'",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.DropdownList.VerificationDescriptors.SelectedItemTextVerificationDescriptor",
+              "__type": "Telerik.TestStudio.Translators.KendoUI.Angular.CommonVerificationDescriptors.KendoUIContentVerificationDescriptor",
               "__value": {
-                "SelectedItemText": "PA",
-                "CompareType": 0,
+                "CompareType": 2,
+                "SegmentType": 3,
+                "ExpectedString": "PA",
                 "DataBindVariableName": null,
                 "Timeout": 30000,
                 "CheckInterval": 500,
@@ -384,10 +385,10 @@
                   }
                 },
                 "Elements": {
-                  "TelerikBlazorDropdownList": {
+                  "textTarget": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TelerikBlazorDropdownList",
+                      "Name": "textTarget",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -407,10 +408,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "kWAuNVcfvQQzXJ4Tte+DmWadJfU=",
+                          "uniqueKey": "hyyd+tQWAp1AYMAp5p/yRcl2qI8=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "DdlStatesSpan",
+                          "Name": "x2e985a67135c48a097a5Bd2d3e13c1f1Span",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -421,13 +422,13 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-dropdown"
+                                        "Clause": "id=2e985a67-135c-48a0-97a5-bd2d3e13c1f1"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~telerik-blazor"
+                                        "Clause": "tagname=span"
                                       }
                                     }
                                   ],
@@ -437,14 +438,14 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[4]/span[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[4]/span[1]/span[1]/span[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "81A64A561A85E46BBAF70EF9E13993B44D0D1728AD529BAE222CF144226D7FD8",
+                                "Image": "42B601BC0D93DFCA6E350B46D113BF8E7FF9E40A87A0C57AB9B3C9C219062423",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -456,7 +457,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.DropdownList.TelerikBlazorDropdownList",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -475,7 +476,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCityataq3lk3.o4s",
+            "StepImageKey": "StateGetLoadedAfterSelectingCityhn0xrl4o.rfh",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200

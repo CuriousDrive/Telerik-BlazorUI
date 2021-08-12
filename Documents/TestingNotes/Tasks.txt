@@ -1,0 +1,4 @@
+1. Update the BookStores project to .NET 5
+2. Setup GitHub actions for BookStores app
+3. Reproduce the issues that you were facing
+4. Send an email to finalize the content
