@@ -84,7 +84,7 @@
         "__type": "ArtOfTest.WebAii.Design.Execution.TestInfo",
         "__value": {
           "Id": "cd2c45b5-2a42-41cb-9083-ce802054cb3c",
-          "Path": "AuthorsGridIsLoaded.tstest",
+          "Path": "Authors\\AuthorsGridIsLoaded.tstest",
           "PathType": 0
         }
       },
@@ -92,7 +92,7 @@
         "__type": "ArtOfTest.WebAii.Design.Execution.TestInfo",
         "__value": {
           "Id": "c2bd6179-5fec-42c2-8221-cc2cdac9385d",
-          "Path": "LableFirstNameExists.tstest",
+          "Path": "Authors\\LableFirstNameExists.tstest",
           "PathType": 0
         }
       }
