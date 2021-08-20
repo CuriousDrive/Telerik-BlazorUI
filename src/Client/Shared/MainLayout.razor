@@ -55,7 +55,7 @@
             <div class="main" style="width:80vw">
                 <div class="top-row px-4">
                     <div class="col-3">
-                        <TelerikButton Icon="@IconName.Menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>
+                        <TelerikButton Icon="menu" OnClick="@(() => TelerikDrawer.ToggleAsync())"></TelerikButton>
                     </div>
                     <div class="col-3">
                         Expanded : <TelerikCheckBox @bind-Value="IsExpanded"></TelerikCheckBox>
@@ -84,14 +84,15 @@
     private IEnumerable<MenuItem> MenuItems => new List<MenuItem>
     {
         new MenuItem { Text = "Application" },
-        new MenuItem { Text = "Authors", Url ="/", Icon = IconName.User, ImageUrl = "/img/authors.png", Group = "app" },
-        new MenuItem { Text = "Publishers", Url ="/publishers", Icon = IconName.Blogger, ImageUrl = "/img/publishers.png", Group = "app" },
-        new MenuItem { Text = "Books", Url ="/books", Icon = IconName.FilePdf, ImageUrl = "/img/books.png", Group = "app" },
+        new MenuItem { Text = "Authors", Url ="/", Icon = "user", ImageUrl = "/img/authors.png", Group = "app" },
+        new MenuItem { Text = "Publishers", Url ="/publishers", Icon = "blogger", ImageUrl = "/img/publishers.png", Group = "app" },
+        new MenuItem { Text = "Books", Url ="/books", Icon = "filepdf", ImageUrl = "/img/books.png", Group = "app" },
+        new MenuItem { Text = "Make an appointment", Url ="/makeanappointment", Icon = "calendar", ImageUrl = "/img/calendar.png", Group = "app" },
         new MenuItem { Text = "Resources" },
-        new MenuItem { Text = "GitHub", Icon = IconName.Share, Url="https://github.com/CuriousDrive/Telerik", Group = "other" },
-        new MenuItem { Text = "Documentation", Icon = IconName.Html, Url="https://docs.telerik.com/blazor-ui/introduction", Group = "other" },
-        new MenuItem { Text = "Support", Icon = IconName.Question, Url="https://www.telerik.com/account/support-tickets" , Group = "other"},
-        new MenuItem { Text = "Telerik", Icon = IconName.HyperlinkGlobe, Url="https://telerik.com", Group = "other"}
+        new MenuItem { Text = "GitHub", Icon = "share", Url="https://github.com/CuriousDrive/Telerik", Group = "other" },
+        new MenuItem { Text = "Documentation", Icon = "html", Url="https://docs.telerik.com/blazor-ui/introduction", Group = "other" },
+        new MenuItem { Text = "Support", Icon = "question", Url="https://www.telerik.com/account/support-tickets" , Group = "other"},
+        new MenuItem { Text = "Telerik", Icon = "hyperlinkglobe", Url="https://telerik.com", Group = "other"}
     };
 
     private void SelectedItemChangedHandler(MenuItem menuItem)

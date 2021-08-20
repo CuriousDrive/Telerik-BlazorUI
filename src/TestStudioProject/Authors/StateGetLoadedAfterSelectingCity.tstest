@@ -82,7 +82,7 @@
               "__type": "Telerik.TestStudio.Translators.KendoUI.Angular.Input.ActionDescriptors.TextBoxTypeActionDescriptor",
               "__value": {
                 "RawText": "Phi",
-                "SimulateRealTyping": true,
+                "SimulateRealTyping": false,
                 "TypingSpeed": 50,
                 "KeyHoldTime": 100,
                 "IsPassword": false,
@@ -359,8 +359,8 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "cc701dbf-8375-435f-9b18-af1007e978e5",
-            "Description": "Verify 'TextContent' 'Contains' 'PA' on 'x2e985a67135c48a097a5Bd2d3e13c1f1Span'",
+            "Runtime ID": "500e2b33-f61d-4855-96f1-3b414bd2ffaa",
+            "Description": "Wait for 'TextContent' 'Contains' 'PA' on 'x869198655af64bdf81d0D8e995fbb8d1Span'",
             "CustomDescription": null,
             "Step": {
               "__type": "Telerik.TestStudio.Translators.KendoUI.Angular.CommonVerificationDescriptors.KendoUIContentVerificationDescriptor",
@@ -408,10 +408,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "hyyd+tQWAp1AYMAp5p/yRcl2qI8=",
+                          "uniqueKey": "Rh5zd3X7CxL8eGEaO/s4cnn/pME=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "x2e985a67135c48a097a5Bd2d3e13c1f1Span",
+                          "Name": "x869198655af64bdf81d0D8e995fbb8d1Span",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -422,7 +422,7 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "id=2e985a67-135c-48a0-97a5-bd2d3e13c1f1"
+                                        "Clause": "id=86919865-5af6-4bdf-81d0-d8e995fbb8d1"
                                       }
                                     },
                                     {
@@ -438,7 +438,7 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[4]/span[1]/span[1]/span[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[4]/span[1]/span[1]/span[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
@@ -465,7 +465,7 @@
                     }
                   }
                 },
-                "StepType": 2,
+                "StepType": 1,
                 "LogMessageOnFailure": "",
                 "EditorType": "",
                 "DataBindingExpressions": {}
@@ -476,7 +476,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "StateGetLoadedAfterSelectingCityhn0xrl4o.rfh",
+            "StepImageKey": "StateGetLoadedAfterSelectingCity1j0zclyy.ymy",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200

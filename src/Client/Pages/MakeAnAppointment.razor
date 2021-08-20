@@ -1,0 +1,72 @@
+﻿@page "/MakeAnAppointment"
+
+@using BookStores.Models
+@using BookStores.Services
+@inject SchedulerAppointmentService appointmentService
+
+<TelerikScheduler Data="@Appointments" @bind-Date="@StartDate" Height="600px" @bind-View="@CurrView"
+                  OnUpdate="@UpdateAppointment" OnCreate="@AddAppointment" OnDelete="@DeleteAppointment"
+                  AllowCreate="true" AllowDelete="true" AllowUpdate="true"
+                  IdField="@(nameof(SchedulerAppointment.Id))"
+                  StartField="@(nameof(SchedulerAppointment.Start))"
+                  EndField="@(nameof(SchedulerAppointment.End))"
+                  TitleField="@(nameof(SchedulerAppointment.Title))"
+                  DescriptionField="@(nameof(SchedulerAppointment.Description))"
+                  IsAllDayField="@(nameof(SchedulerAppointment.IsAllDay))"
+                  RecurrenceRuleField="@(nameof(SchedulerAppointment.RecurrenceRule))"
+                  RecurrenceExceptionsField="@(nameof(SchedulerAppointment.RecurrenceExceptions))"
+                  RecurrenceIdField="@(nameof(SchedulerAppointment.RecurrenceId))">
+    <SchedulerViews>
+        <SchedulerDayView StartTime="@DayStart" EndTime="@DayEnd" WorkDayStart="@WorkDayStart" WorkDayEnd="@WorkDayEnd" />
+        <SchedulerWeekView StartTime="@DayStart" EndTime="@DayEnd" WorkDayStart="@WorkDayStart" WorkDayEnd="@WorkDayEnd" />
+        <SchedulerMultiDayView StartTime="@DayStart" EndTime="@DayEnd" WorkDayStart="@WorkDayStart" WorkDayEnd="@WorkDayEnd" NumberOfDays="10" />
+        <SchedulerMonthView></SchedulerMonthView>
+    </SchedulerViews>
+</TelerikScheduler>
+
+@code {
+    List<SchedulerAppointment> Appointments = new List<SchedulerAppointment>();
+    public DateTime StartDate { get; set; }
+    public SchedulerView CurrView { get; set; } = SchedulerView.Week;
+
+    //the time portions are important
+    public DateTime DayStart { get; set; } = new DateTime(2000, 1, 1, 8, 0, 0);
+    public DateTime DayEnd { get; set; } = new DateTime(2000, 1, 1, 20, 0, 0);
+    public DateTime WorkDayStart { get; set; } = new DateTime(2000, 1, 1, 9, 0, 0);
+    public DateTime WorkDayEnd { get; set; } = new DateTime(2000, 1, 1, 17, 0, 0);
+
+    protected override async Task OnInitializedAsync()
+    {
+        StartDate = appointmentService.GetStartTime();
+
+        Appointments = await appointmentService.GetAppointmentsAsync();
+    }
+
+    void UpdateAppointment(SchedulerUpdateEventArgs args)
+    {
+        SchedulerAppointment item = (SchedulerAppointment)args.Item;
+        var matchingItem = Appointments.FirstOrDefault(a => a.Id == item.Id);
+        if (matchingItem != null)
+        {
+            matchingItem.Title = item.Title;
+            matchingItem.Description = item.Description;
+            matchingItem.Start = item.Start;
+            matchingItem.End = item.End;
+            matchingItem.IsAllDay = item.IsAllDay;
+            matchingItem.RecurrenceExceptions = item.RecurrenceExceptions;
+            matchingItem.RecurrenceRule = item.RecurrenceRule;
+        }
+    }
+
+    void AddAppointment(SchedulerCreateEventArgs args)
+    {
+        SchedulerAppointment item = args.Item as SchedulerAppointment;
+        Appointments.Add(item);
+    }
+
+    void DeleteAppointment(SchedulerDeleteEventArgs args)
+    {
+        SchedulerAppointment item = (SchedulerAppointment)args.Item;
+        Appointments.Remove(item);
+    }
+}
