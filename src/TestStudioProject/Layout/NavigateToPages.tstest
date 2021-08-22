@@ -9,28 +9,14 @@
     "ProfilerBenchmarkResultsId": "00000000-0000-0000-0000-000000000000",
     "ProfilerConfigurationId": "00000000-0000-0000-0000-000000000000",
     "ProfilerConfigurations": {},
-    "CurrentReferences": [
-      "System",
-      "System.Core",
-      "ArtOfTest.WebAii, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
-      "ArtOfTest.WebAii.Design, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d",
-      "Telerik.WebAii.Controls.Html, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.WebAii.Controls.Xaml, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.WebAii.Controls.Xaml.Wpf, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.KendoUI, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "Telerik.TestStudio.Translators.Common, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "..\\..\\..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\PublicAssemblies\\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll",
-      "System.Windows.Forms"
-    ],
+    "CurrentReferences": [],
     "Steps": {
       "__type": "ArtOfTest.Common.Design.ProjectModel.AutomationStepList",
       "__value": [
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "b718c07e-edd7-4299-b108-b96f4be5cbba",
+            "Runtime ID": "34aa2e32-4a7f-45af-b474-5ff722cb606b",
             "Description": "Navigate to : 'https://localhost:5001'",
             "CustomDescription": null,
             "Step": {
@@ -66,7 +52,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "SubscriptionAllCheckBoxSelectsAll54xeb1sg.xwg",
+            "StepImageKey": "NavigateToPages00m15pil.p54",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -75,15 +61,13 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "657a1a5a-eba2-4ada-b18c-9ab4332513fc",
-            "Description": "Check 'CbAllCheckBox' to be 'True'",
+            "Runtime ID": "d151e739-0534-432c-9808-c82521e23667",
+            "Description": "TelerikBlazorButton Click",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CheckActionDescriptor",
+              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.Button.ActionDescriptors.ClickActionDescriptor",
               "__value": {
-                "CheckedState": true,
-                "InvokeOnClick": false,
-                "InvokeOnChange": false,
+                "SimulateRealClick": true,
                 "UsejQuery": false,
                 "ClosesBrowser": false,
                 "AjaxTimeout": 0,
@@ -100,10 +84,10 @@
                   }
                 },
                 "Elements": {
-                  "checkBox": {
+                  "TelerikBlazorButton": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "checkBox",
+                      "Name": "TelerikBlazorButton",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -123,10 +107,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "QM+dvRchKp2r7HVoAuhEWnVOKtY=",
+                          "uniqueKey": "B+s9kYJ/9VgaKi1oLXEaUkyDcvo=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "CbAllCheckBox",
+                          "Name": "ButtonTag",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -137,13 +121,13 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "id=cbAll"
+                                        "Clause": "class=~k-button"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "tagname=input"
+                                        "Clause": "class=~telerik-blazor"
                                       }
                                     }
                                   ],
@@ -153,15 +137,15 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[7]/label[2]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "CA90C4A8C6EEB5C7B861C931616AEC828056C55AE4F91C4C1BFFD19F91109319",
-                                "Index": 1,
+                                "Image": "F2399C26DF051C10620B02FA63C6F6CB2ED02436D4CD254E10D57031640AB469",
+                                "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
                                 "ScreenScale": 1.0,
@@ -172,7 +156,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputCheckBox",
+                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.Button.TelerikBlazorButton",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -191,7 +175,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "SubscriptionAllCheckBoxSelectsAll4pets5lz.qsu",
+            "StepImageKey": "NavigateToPagesqccorzky.5qc",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -200,17 +184,17 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "f003e8d3-fa8d-4541-991e-6b81065d9c41",
-            "Description": "Verify checked value is 'True' on 'CbSubsCheckBox'",
+            "Runtime ID": "386da74a-6157-48d3-9d69-3683245f180f",
+            "Description": "TelerikBlazorDrawerItem : 'Authors' select action.",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CheckVerificationDescriptor",
+              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.Drawer.ActionDescriptor.DrawerItemSelectActionDescriptor",
               "__value": {
-                "Checked": true,
-                "DataBindVariableName": null,
-                "Timeout": 30000,
-                "CheckInterval": 500,
-                "EnsureStateIsCurrent": false,
+                "Title": "Authors",
+                "SimulateRealClick": true,
+                "UsejQuery": false,
+                "ClosesBrowser": false,
+                "AjaxTimeout": 0,
                 "Pause": 0,
                 "WaitOnElementsTimeout": 30000,
                 "SearchByImageFirst": 0,
@@ -224,10 +208,10 @@
                   }
                 },
                 "Elements": {
-                  "check": {
+                  "TelerikBlazorDrawerItem": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "check",
+                      "Name": "TelerikBlazorDrawerItem",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -247,10 +231,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "7l4DbmBi5YxJSuyhUl9ssuriqPY=",
+                          "uniqueKey": "D1dPeadPxv0NcOWLW7qOJMuaRao=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "CbSubsCheckBox",
+                          "Name": "ListItem0",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -261,33 +245,43 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "id=app"
+                                        "Clause": "class=~k-drawer-item"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "tagIndex=input:6"
+                                        "Clause": "class=!k-drawer-items"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=!k-drawer-separator"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "GroupIndex=1"
                                       }
                                     }
                                   ],
                                   "Constraints": [],
-                                  "ChainStops": [
-                                    1
-                                  ]
+                                  "ChainStops": []
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[8]/label[1]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[2]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "B96C6AE89D2C8DE815CFAB7CF2A3D83DE54B4F025D0FA0F8BEF5642CDCDDC1D2",
-                                "Index": 1,
+                                "Image": "68F514FA867340721F41512173C24EA1153271A0FE4A6C5931B1D3970656AF38",
+                                "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
                                 "ScreenScale": 1.0,
@@ -298,7 +292,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputCheckBox",
+                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.Drawer.TelerikBlazorDrawerItem",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -306,7 +300,7 @@
                     }
                   }
                 },
-                "StepType": 2,
+                "StepType": 4,
                 "LogMessageOnFailure": "",
                 "EditorType": "",
                 "DataBindingExpressions": {}
@@ -317,7 +311,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "SubscriptionAllCheckBoxSelectsAllu113ju2t.zzg",
+            "StepImageKey": "NavigateToPagesqlu0xqwn.4rv",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -326,17 +320,17 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "9e840a0f-fb78-498f-8a6d-93829b86e7c2",
-            "Description": "Verify checked value is 'True' on 'CbSubsCheckBox'",
+            "Runtime ID": "8c503af5-d420-46f9-a1c5-d92d62c9d071",
+            "Description": "TelerikBlazorDrawerItem : 'Publishers' select action.",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CheckVerificationDescriptor",
+              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.Drawer.ActionDescriptor.DrawerItemSelectActionDescriptor",
               "__value": {
-                "Checked": true,
-                "DataBindVariableName": null,
-                "Timeout": 30000,
-                "CheckInterval": 500,
-                "EnsureStateIsCurrent": false,
+                "Title": "Publishers",
+                "SimulateRealClick": true,
+                "UsejQuery": false,
+                "ClosesBrowser": false,
+                "AjaxTimeout": 0,
                 "Pause": 0,
                 "WaitOnElementsTimeout": 30000,
                 "SearchByImageFirst": 0,
@@ -350,10 +344,10 @@
                   }
                 },
                 "Elements": {
-                  "check": {
+                  "TelerikBlazorDrawerItem": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "check",
+                      "Name": "TelerikBlazorDrawerItem",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -373,10 +367,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "bIN8wMxJT5xlt784msz39cPANFc=",
+                          "uniqueKey": "N91uXmgbhIITMgSj0JybYvHlyiw=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "CbSubsCheckBox0",
+                          "Name": "ListItem",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -387,33 +381,43 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "id=app"
+                                        "Clause": "class=~k-drawer-item"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "tagIndex=input:7"
+                                        "Clause": "class=!k-drawer-items"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=!k-drawer-separator"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "GroupIndex=2"
                                       }
                                     }
                                   ],
                                   "Constraints": [],
-                                  "ChainStops": [
-                                    1
-                                  ]
+                                  "ChainStops": []
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[9]/label[1]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[3]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "B96C6AE89D2C8DE815CFAB7CF2A3D83DE54B4F025D0FA0F8BEF5642CDCDDC1D2",
-                                "Index": 2,
+                                "Image": "456AA1B5C3F000D4BEA55C38AF9C803A3314E7B2A4FD8446F282FC2323BF75FC",
+                                "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
                                 "ScreenScale": 1.0,
@@ -424,7 +428,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputCheckBox",
+                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.Drawer.TelerikBlazorDrawerItem",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -432,7 +436,7 @@
                     }
                   }
                 },
-                "StepType": 2,
+                "StepType": 4,
                 "LogMessageOnFailure": "",
                 "EditorType": "",
                 "DataBindingExpressions": {}
@@ -443,7 +447,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "SubscriptionAllCheckBoxSelectsAllwz014ya5.pwf",
+            "StepImageKey": "NavigateToPagestm04roxz.h01",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -452,13 +456,287 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "3fc2785c-952d-4328-a181-61f7d52fed84",
-            "Description": "Verify checked value is 'True' on 'CbSubsCheckBox'",
+            "Runtime ID": "1ce3e8bc-7978-4d46-ae85-a150703ec48b",
+            "Description": "TelerikBlazorDrawerItem : 'Books' select action.",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CheckVerificationDescriptor",
+              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.Drawer.ActionDescriptor.DrawerItemSelectActionDescriptor",
               "__value": {
-                "Checked": true,
+                "Title": "Books",
+                "SimulateRealClick": true,
+                "UsejQuery": false,
+                "ClosesBrowser": false,
+                "AjaxTimeout": 0,
+                "Pause": 0,
+                "WaitOnElementsTimeout": 30000,
+                "SearchByImageFirst": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {
+                  "TelerikBlazorDrawerItem": {
+                    "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
+                    "__value": {
+                      "Name": "TelerikBlazorDrawerItem",
+                      "Region": null,
+                      "Page": {
+                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
+                        "__value": {
+                          "Path": "https://localhost:5001/publishers",
+                          "Query": "",
+                          "BaseUrl": "",
+                          "EquivalentUrls": [],
+                          "Fragment": "",
+                          "Title": "Book Stores",
+                          "CompareMode": 2,
+                          "AlwaysUseTitleInCompare": false,
+                          "FriendlyName": "BookStores0"
+                        }
+                      },
+                      "Frame": null,
+                      "FindExpression": {
+                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
+                        "__value": {
+                          "uniqueKey": "F+lit1rmu6CTIRZLghPmbm+kXqQ=",
+                          "NodeKind": 4,
+                          "TechnologyType": 1,
+                          "Name": "ListItem",
+                          "FindExpressions": [
+                            {
+                              "Key": 1,
+                              "Value": {
+                                "__type": "ArtOfTest.WebAii.Core.HtmlFindExpression",
+                                "__value": {
+                                  "Clauses": [
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=~k-drawer-item"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=!k-drawer-items"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=!k-drawer-separator"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "GroupIndex=3"
+                                      }
+                                    }
+                                  ],
+                                  "Constraints": [],
+                                  "ChainStops": []
+                                }
+                              }
+                            }
+                          ],
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[4]",
+                          "ImageSearchClauses": [
+                            {
+                              "__type": "ArtOfTest.Common.ImageSearchClause",
+                              "__value": {
+                                "Resolution": "1920, 1080",
+                                "BroweserType": 7,
+                                "Image": "EFE6515ADFA4903E585D353894DE4E7D412FBE01FEB2F7E40A6C03317711C4A8",
+                                "Index": 0,
+                                "MatchThreshold": 90,
+                                "OsVersion": "10.0.19043.0",
+                                "ScreenScale": 1.0,
+                                "ScrollOnImageSearch": null
+                              }
+                            }
+                          ],
+                          "DataBindingExpressions": {}
+                        }
+                      },
+                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.Drawer.TelerikBlazorDrawerItem",
+                      "IsIndependent": false,
+                      "DomStateKey": "",
+                      "TechnologyType": 1,
+                      "Version": 200
+                    }
+                  }
+                },
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 5,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "NavigateToPagessohgsoxo.bqn",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "7ca6d5cd-14f5-4694-8c05-84216a07f533",
+            "Description": "TelerikBlazorDrawerItem : 'Make an appointment' select action.",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.Drawer.ActionDescriptor.DrawerItemSelectActionDescriptor",
+              "__value": {
+                "Title": "Make an appointment",
+                "SimulateRealClick": true,
+                "UsejQuery": false,
+                "ClosesBrowser": false,
+                "AjaxTimeout": 0,
+                "Pause": 0,
+                "WaitOnElementsTimeout": 30000,
+                "SearchByImageFirst": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {
+                  "TelerikBlazorDrawerItem": {
+                    "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
+                    "__value": {
+                      "Name": "TelerikBlazorDrawerItem",
+                      "Region": null,
+                      "Page": {
+                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
+                        "__value": {
+                          "Path": "https://localhost:5001/books",
+                          "Query": "",
+                          "BaseUrl": "",
+                          "EquivalentUrls": [],
+                          "Fragment": "",
+                          "Title": "Book Stores",
+                          "CompareMode": 2,
+                          "AlwaysUseTitleInCompare": false,
+                          "FriendlyName": "BookStores1"
+                        }
+                      },
+                      "Frame": null,
+                      "FindExpression": {
+                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
+                        "__value": {
+                          "uniqueKey": "+dwKZnsLu92EiuqFKALKbmJytn8=",
+                          "NodeKind": 4,
+                          "TechnologyType": 1,
+                          "Name": "ListItem",
+                          "FindExpressions": [
+                            {
+                              "Key": 1,
+                              "Value": {
+                                "__type": "ArtOfTest.WebAii.Core.HtmlFindExpression",
+                                "__value": {
+                                  "Clauses": [
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=~k-drawer-item"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=!k-drawer-items"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=!k-drawer-separator"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "GroupIndex=4"
+                                      }
+                                    }
+                                  ],
+                                  "Constraints": [],
+                                  "ChainStops": []
+                                }
+                              }
+                            }
+                          ],
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[5]",
+                          "ImageSearchClauses": [
+                            {
+                              "__type": "ArtOfTest.Common.ImageSearchClause",
+                              "__value": {
+                                "Resolution": "1920, 1080",
+                                "BroweserType": 7,
+                                "Image": "A5BCB177D0A609172457FE7AB5DEE4938BF02F6CC8D9C4908CBEEE896BCAEEFE",
+                                "Index": 0,
+                                "MatchThreshold": 90,
+                                "OsVersion": "10.0.19043.0",
+                                "ScreenScale": 1.0,
+                                "ScrollOnImageSearch": null
+                              }
+                            }
+                          ],
+                          "DataBindingExpressions": {}
+                        }
+                      },
+                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.Drawer.TelerikBlazorDrawerItem",
+                      "IsIndependent": false,
+                      "DomStateKey": "",
+                      "TechnologyType": 1,
+                      "Version": 200
+                    }
+                  }
+                },
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 6,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "NavigateToPagesm34zffap.eji",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "a4ac3756-1fa2-4247-981d-f74627b6922a",
+            "Description": "Verify 'TextContent' 'Contains' 'Authors' on 'AuthorsSpan'",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ContentVerificationDescriptor",
+              "__value": {
+                "CompareType": 2,
+                "SegmentType": 3,
+                "ExpectedString": "Authors",
                 "DataBindVariableName": null,
                 "Timeout": 30000,
                 "CheckInterval": 500,
@@ -476,15 +754,15 @@
                   }
                 },
                 "Elements": {
-                  "check": {
+                  "textTarget": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "check",
+                      "Name": "textTarget",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
                         "__value": {
-                          "Path": "https://localhost:5001/",
+                          "Path": "https://localhost:5001/makeanappointment",
                           "Query": "",
                           "BaseUrl": "",
                           "EquivalentUrls": [],
@@ -492,17 +770,17 @@
                           "Title": "Book Stores",
                           "CompareMode": 2,
                           "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores"
+                          "FriendlyName": "BookStores2"
                         }
                       },
                       "Frame": null,
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "oCzfYGlP78WXq/HDcvxStchdRPg=",
+                          "uniqueKey": "Y+QDIx5oj3IsIUXuLthqWCHWay0=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "CbSubsCheckBox1",
+                          "Name": "AuthorsSpan",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -513,33 +791,31 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "id=app"
+                                        "Clause": "TextContent=Authors"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "tagIndex=input:8"
+                                        "Clause": "tagname=span"
                                       }
                                     }
                                   ],
                                   "Constraints": [],
-                                  "ChainStops": [
-                                    1
-                                  ]
+                                  "ChainStops": []
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[10]/label[1]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[2]/span[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "B96C6AE89D2C8DE815CFAB7CF2A3D83DE54B4F025D0FA0F8BEF5642CDCDDC1D2",
-                                "Index": 3,
+                                "Image": "8FCF6FBBA141ECE393A439C7FEEA9BC469FBC1B2FB3FEB767C571517E04739D5",
+                                "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
                                 "ScreenScale": 1.0,
@@ -550,7 +826,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputCheckBox",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -565,11 +841,11 @@
               }
             },
             "Enabled": true,
-            "Order": 5,
+            "Order": 7,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "SubscriptionAllCheckBoxSelectsAlli3yogdhe.zob",
+            "StepImageKey": "NavigateToPagese5z4lac4.sru",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -591,8 +867,8 @@
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,
-    "ResourceFilePath": "Authors\\SubscriptionAllCheckBoxSelectsAll.resx",
-    "ElementImageStoreFilePath": "Authors\\SubscriptionAllCheckBoxSelectsAll.imgstore",
+    "ResourceFilePath": "Layout\\NavigateToPages.resx",
+    "ElementImageStoreFilePath": "Layout\\NavigateToPages.imgstore",
     "HasCodeBehind": false,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -611,10 +887,7 @@
         "TSQL": ""
       }
     },
-    "VSProperties": {
-      "Timeout": "0",
-      "ExecId": "00000000-0000-0000-0000-000000000000"
-    },
+    "VSProperties": {},
     "DeploymentItems": [],
     "IsTestFragment": false,
     "StopTestListOnFailure": false,
@@ -625,13 +898,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "SubscriptionAllCheckBoxSelectsAll",
+    "Name": "NavigateToPages",
     "Owner": "",
-    "Path": "Authors\\SubscriptionAllCheckBoxSelectsAll.tstest",
+    "Path": "Layout\\NavigateToPages.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "656ccd8c-dcc1-45f9-9a93-9ac6843f8dce",
-    "Id": "656ccd8c-dcc1-45f9-9a93-9ac6843f8dce",
+    "UniqueId": "1c290f9b-6529-4904-a3c1-75da9e96fcf2",
+    "Id": "1c290f9b-6529-4904-a3c1-75da9e96fcf2",
     "ProjectId": "bec36f83-73cf-4cff-88fd-2d4b58025c55",
     "Version": 200
   }

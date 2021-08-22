@@ -20,4 +20,8 @@
     <OpenItemType>TestFile</OpenItemType>
     <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Publishers\CreateNewPublisher.tstest</Path>
   </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Layout\NavigateToPages.tstest</Path>
+  </OpenItem>
 </ArrayOfOpenItem>

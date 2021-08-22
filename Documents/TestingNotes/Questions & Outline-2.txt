@@ -26,14 +26,14 @@ Techinal Questions :
         => Need to check with the team, next time we meet
 
     4. Cascading dropdown list is not working, I even tried Build Step
-        => Need to check with the team, next time we meet
+        Author => StateGetLoadedAfterSelectingCity
 
-    5. Do we need to add NavigateToUrl Step manually for Drawer component or this is for all navigation
-        => Can't remember where this was happening
+    5. Scrolling isn't working?
+        => Publishers => PublisherListViewPaging
+        => Publishers => CreateNewPublisher
 
-    6. Scrolling isn't working?
-        => Publishers-PublisherListViewPaging
-        => Publishers-CreateNewPublisher
-
-    7. How do I check if a particular element exists or not
+    6. How do I check if a particular element exists or not
         => Layout-ExpandCollapseCheckBox
+
+
+Tests that are not working =>
