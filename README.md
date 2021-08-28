@@ -1,6 +1,6 @@
 # What is Telerik-BlazorUI : BookStores?
 
-Telerik-BlazorUI : BookSores app is built with Telerik components for Blazor. This app has sample code for Textboxes, Dropdown list, ListViews, GridViews, Drawer components. Also there's a Blazor server app showing how to use Telerik's document processing libraries. Please check it out.
+Telerik-BlazorUI : BookStores app is built with Telerik components for Blazor. This app has sample code for Textboxes, Dropdown list, ListViews, GridViews, Drawer components. Also there's a Blazor server app showing how to use Telerik's document processing libraries. Please check it out.
 
 ## Telerik Components for Blazor
 
