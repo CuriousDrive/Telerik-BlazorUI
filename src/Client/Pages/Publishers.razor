@@ -185,6 +185,7 @@
     //CRUD Operations
     private async Task<List<Publisher>> GetPublishersByPage(int pageIndex, int pageSize)
     {
+        //await Task.Delay(4000);
         return await _httpClient.GetFromJsonAsync<List<Publisher>>($"publishers/getpublishersbypage?pageIndex={pageIndex}&pageSize={pageSize}");
     }
 
@@ -195,6 +196,7 @@
 
     private async Task<List<Publisher>> GetAllPublishers()
     {
+        //await Task.Delay(4000);
         return await _httpClient.GetFromJsonAsync<List<Publisher>>("publishers/getpublishers");
     }
 

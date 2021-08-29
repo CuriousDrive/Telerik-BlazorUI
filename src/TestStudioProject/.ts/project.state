@@ -6,15 +6,7 @@
   </OpenItem>
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Publishers\PublisherListViewPaging.tstest</Path>
-  </OpenItem>
-  <OpenItem>
-    <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Layout\Expand&amp;CollapseButton.tstest</Path>
-  </OpenItem>
-  <OpenItem>
-    <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Layout\Expand&amp;CollapseCheckBox.tstest</Path>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Authors\CreateNewAuthor.tstest</Path>
   </OpenItem>
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
@@ -22,6 +14,18 @@
   </OpenItem>
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Layout\NavigateToPages.tstest</Path>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Publishers\Paging&amp;ScrollingTest.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Books\AddToElements.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Books\Gridview&amp;ExtractTextForFilter.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\MakeAnAppointment\BusinessHourTest.tstest</Path>
   </OpenItem>
 </ArrayOfOpenItem>

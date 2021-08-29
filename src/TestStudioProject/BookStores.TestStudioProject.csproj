@@ -66,8 +66,13 @@
     <None Include="Authors\LableFirstNameExists.tstest" />
     <None Include="Authors\StateGetLoadedAfterSelectingCity.tstest" />
     <None Include="Authors\SubscriptionAllCheckBoxSelectsAll.tstest" />
+    <None Include="Books\IsGridviewLoaded.tstest" />
     <None Include="Layout\Expand&amp;CollapseButton.tstest" />
     <None Include="Layout\Expand&amp;CollapseCheckBox.tstest" />
+    <None Include="Layout\NavigateToPages.tstest" />
+    <None Include="MakeAnAppointment\BusinessHourTest.tstest" />
+    <None Include="MakeAnAppointment\DayWeekMonthTest.tstest" />
+    <None Include="MakeAnAppointment\IfCalendarExistsOrNot.tstest" />
     <None Include="Publishers\CreateNewPublisher.tstest" />
     <None Include="Publishers\PublisherListViewPaging.tstest" />
     <None Include="Settings.aiis" />

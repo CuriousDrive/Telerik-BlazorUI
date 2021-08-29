@@ -30,14 +30,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "29c9b0cd-ab93-4275-8e57-ae52f7005e0d",
-            "Description": "Navigate to : 'https://localhost:5001'",
+            "Runtime ID": "5b6c8527-92f8-40d2-8ce0-f5d702fa98e6",
+            "Description": "Navigate to : 'https://localhost:5001/MakeAnAppointment'",
             "CustomDescription": null,
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.NavigateToActionDescriptor",
               "__value": {
                 "UseDecodedUrl": true,
-                "NavigateURL": "https://localhost:5001",
+                "NavigateURL": "https://localhost:5001/MakeAnAppointment",
                 "BaseUrl": "",
                 "SearchByImageFirst": 0,
                 "WaitOnElementsTimeout": 0,
@@ -66,7 +66,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewAuthorlxwpnliy.23p",
+            "StepImageKey": "BusinessHourTestbgmicdre.e52",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -75,15 +75,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "28124c6c-58eb-44fc-ab91-01a099a60c92",
-            "Description": "TelerikBlazorTextBox : Update value to Bill",
+            "Runtime ID": "1fc1b756-0a96-4214-87ed-5faaaf8cef1b",
+            "Description": "TelerikBlazorDrawerItem : '[Element: 'li:4']' select action.",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.TextBox.ActionDescriptors.UpdateValueActionDescriptor",
+              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.Drawer.ActionDescriptor.DrawerItemSelectActionDescriptor",
               "__value": {
-                "InputValue": "Bill",
-                "WriteDelay": 500,
-                "KeyPressDelay": 50,
+                "Title": "",
+                "SimulateRealClick": true,
                 "UsejQuery": false,
                 "ClosesBrowser": false,
                 "AjaxTimeout": 0,
@@ -100,10 +99,10 @@
                   }
                 },
                 "Elements": {
-                  "TelerikBlazorTextBox": {
+                  "TelerikBlazorDrawerItem": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TelerikBlazorTextBox",
+                      "Name": "TelerikBlazorDrawerItem",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -123,10 +122,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "iExwuZJW8bv/FKuGY/drFjK7930=",
+                          "uniqueKey": "+dwKZnsLu92EiuqFKALKbmJytn8=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "TxtFirstNameText",
+                          "Name": "ListItem2",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -137,13 +136,25 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-textbox"
+                                        "Clause": "class=~k-drawer-item"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~telerik-blazor"
+                                        "Clause": "class=!k-drawer-items"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "class=!k-drawer-separator"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "GroupIndex=4"
                                       }
                                     }
                                   ],
@@ -153,14 +164,14 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[1]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/ul[1]/li[5]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "70BCBAD7EFE3128A893B38FD4120A2AE6B27FD3695DB4728CE111CFA00F30689",
+                                "Image": "8B572E4EB7EDB6B10AC7B1D46421581B11A0B053F14EC2363478E35403DFA02E",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -172,7 +183,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.TextBox.TelerikBlazorTextBox",
+                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.Drawer.TelerikBlazorDrawerItem",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -191,7 +202,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewAuthoru32ldzzn.j4c",
+            "StepImageKey": "BusinessHourTestbng5uf2c.mhp",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -200,18 +211,19 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "9f75e439-ea21-4c99-b9b3-5139e02c9d9c",
-            "Description": "TelerikBlazorTextBox : Update value to Gates",
+            "Runtime ID": "08504330-970c-441f-ac30-288d11fcce99",
+            "Description": "Verify 'TextContent' 'Contains' '8:00 AM' on 'x800AMDiv'",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.TextBox.ActionDescriptors.UpdateValueActionDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ContentVerificationDescriptor",
               "__value": {
-                "InputValue": "Gates",
-                "WriteDelay": 500,
-                "KeyPressDelay": 50,
-                "UsejQuery": false,
-                "ClosesBrowser": false,
-                "AjaxTimeout": 0,
+                "CompareType": 2,
+                "SegmentType": 3,
+                "ExpectedString": "8:00 AM",
+                "DataBindVariableName": null,
+                "Timeout": 30000,
+                "CheckInterval": 500,
+                "EnsureStateIsCurrent": false,
                 "Pause": 0,
                 "WaitOnElementsTimeout": 30000,
                 "SearchByImageFirst": 0,
@@ -225,15 +237,15 @@
                   }
                 },
                 "Elements": {
-                  "TelerikBlazorTextBox": {
+                  "textTarget": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TelerikBlazorTextBox",
+                      "Name": "textTarget",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
                         "__value": {
-                          "Path": "https://localhost:5001/",
+                          "Path": "https://localhost:5001/makeanappointment",
                           "Query": "",
                           "BaseUrl": "",
                           "EquivalentUrls": [],
@@ -241,17 +253,17 @@
                           "Title": "Book Stores",
                           "CompareMode": 2,
                           "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores"
+                          "FriendlyName": "BookStores2"
                         }
                       },
                       "Frame": null,
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "KmMiwXIkPgA7HndXG2QppYUQsCo=",
+                          "uniqueKey": "TixYBOPyX8763qPtwGESNbUiFRU=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "TxtFirstNameText0",
+                          "Name": "x800AMDiv",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -262,19 +274,13 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-textbox"
+                                        "Clause": "TextContent=8:00 AM"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~telerik-blazor"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "GroupIndex=1"
+                                        "Clause": "tagname=div"
                                       }
                                     }
                                   ],
@@ -284,14 +290,14 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[2]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "70BCBAD7EFE3128A893B38FD4120A2AE6B27FD3695DB4728CE111CFA00F30689",
+                                "Image": "B29F72791212CA0087A431D9A6EA3BEB74ED0F66922D0501CF14162D60471066",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -303,7 +309,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.TextBox.TelerikBlazorTextBox",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -311,7 +317,7 @@
                     }
                   }
                 },
-                "StepType": 4,
+                "StepType": 2,
                 "LogMessageOnFailure": "",
                 "EditorType": "",
                 "DataBindingExpressions": {}
@@ -322,7 +328,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewAuthorcgboh5c2.4th",
+            "StepImageKey": "BusinessHourTest45kuqhqt.ts0",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -331,14 +337,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "f7d3a996-af6c-4ee3-ae66-89ca838b0efc",
-            "Description": "TelerikBlazorDropdownList : toggle dropdown options list",
+            "Runtime ID": "2d56495c-d0c2-4d81-87ad-8d70c66d12ad",
+            "Description": "Click 'ShowBusinessSpan'",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.DropdownList.ActionDescriptors.ToggleOptionsListActionDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ClickActionDescriptor",
               "__value": {
-                "ToggleWaitTime": 1500,
                 "SimulateRealClick": true,
+                "ScrollToVisibleType": 2,
                 "UsejQuery": false,
                 "ClosesBrowser": false,
                 "AjaxTimeout": 0,
@@ -355,15 +361,15 @@
                   }
                 },
                 "Elements": {
-                  "TelerikBlazorDropdownList": {
+                  "target": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TelerikBlazorDropdownList",
+                      "Name": "target",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
                         "__value": {
-                          "Path": "https://localhost:5001/",
+                          "Path": "https://localhost:5001/makeanappointment",
                           "Query": "",
                           "BaseUrl": "",
                           "EquivalentUrls": [],
@@ -371,17 +377,17 @@
                           "Title": "Book Stores",
                           "CompareMode": 2,
                           "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores"
+                          "FriendlyName": "BookStores2"
                         }
                       },
                       "Frame": null,
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "kWAuNVcfvQQzXJ4Tte+DmWadJfU=",
+                          "uniqueKey": "8JTWZIdr9ZjA3vkoxNdx5Qi5c/E=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "DdlStatesSpan",
+                          "Name": "ShowBusinessSpan",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -392,13 +398,13 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-dropdown"
+                                        "Clause": "TextContent=^Show business h"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~telerik-blazor"
+                                        "Clause": "tagname=span"
                                       }
                                     }
                                   ],
@@ -408,14 +414,14 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[4]/span[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/span[1]/span[2]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "F1A026CC7638C61EE8B4318F3D69E148789A4B23507B478B49D8E623DE07A8EB",
+                                "Image": "E1A167D4A37A70DE98FF1685ACA04A8358ECF09CA3CE11892FD7D50756ADE0E0",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -427,7 +433,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.DropdownList.TelerikBlazorDropdownList",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -446,7 +452,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewAuthorfrzyzss0.q1u",
+            "StepImageKey": "BusinessHourTestn3fjtl3p.vee",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -455,154 +461,15 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "24bdda49-3cd7-4932-b604-9b2e4ea67782",
-            "Description": "TelerikBlazorList : click on item with text 'CA'",
+            "Runtime ID": "01c387d4-c1af-4231-b3cf-7e0b3ab74da9",
+            "Description": "Verify 'TextContent' 'Contains' '9:00 AM' on 'x900AMDiv'",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.List.ActionDescriptors.SelectItemActionDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ContentVerificationDescriptor",
               "__value": {
-                "SelectDropDownType": 1,
-                "Text": "CA",
-                "Index": 1,
-                "SimulateRealClick": false,
-                "UsejQuery": false,
-                "ClosesBrowser": false,
-                "AjaxTimeout": 0,
-                "Pause": 0,
-                "WaitOnElementsTimeout": 30000,
-                "SearchByImageFirst": 0,
-                "UseStepWaitOnElementsTimout": false,
-                "WaitOnElements": true,
-                "RunsAgainstVersion": "",
-                "Constraints": {
-                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
-                  "__value": {
-                    "ConstraintValues": {}
-                  }
-                },
-                "Elements": {
-                  "TelerikBlazorList": {
-                    "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
-                    "__value": {
-                      "Name": "TelerikBlazorList",
-                      "Region": null,
-                      "Page": {
-                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
-                        "__value": {
-                          "Path": "https://localhost:5001/",
-                          "Query": "",
-                          "BaseUrl": "",
-                          "EquivalentUrls": [],
-                          "Fragment": "",
-                          "Title": "Book Stores",
-                          "CompareMode": 2,
-                          "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores"
-                        }
-                      },
-                      "Frame": null,
-                      "FindExpression": {
-                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
-                        "__value": {
-                          "uniqueKey": "2MYV6zjdBUngbXP9XTjn1XYdW00=",
-                          "NodeKind": 4,
-                          "TechnologyType": 1,
-                          "Name": "Div2",
-                          "FindExpressions": [
-                            {
-                              "Key": 1,
-                              "Value": {
-                                "__type": "ArtOfTest.WebAii.Core.HtmlFindExpression",
-                                "__value": {
-                                  "Clauses": [
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~telerik-blazor"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~k-animation-container"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~k-popup"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~k-reset"
-                                      }
-                                    }
-                                  ],
-                                  "Constraints": [],
-                                  "ChainStops": [
-                                    2
-                                  ]
-                                }
-                              }
-                            }
-                          ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[2]/div[1]",
-                          "ImageSearchClauses": [
-                            {
-                              "__type": "ArtOfTest.Common.ImageSearchClause",
-                              "__value": {
-                                "Resolution": "1920, 1080",
-                                "BroweserType": 7,
-                                "Image": "7428670964AB5236C1A9D797FB86F6615F2ED66ED26E1951C730CE4AF1E05000",
-                                "Index": 0,
-                                "MatchThreshold": 90,
-                                "OsVersion": "10.0.19043.0",
-                                "ScreenScale": 1.0,
-                                "ScrollOnImageSearch": null
-                              }
-                            }
-                          ],
-                          "DataBindingExpressions": {}
-                        }
-                      },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.List.TelerikBlazorList",
-                      "IsIndependent": false,
-                      "DomStateKey": "",
-                      "TechnologyType": 1,
-                      "Version": 200
-                    }
-                  }
-                },
-                "StepType": 4,
-                "LogMessageOnFailure": "",
-                "EditorType": "",
-                "DataBindingExpressions": {}
-              }
-            },
-            "Enabled": true,
-            "Order": 5,
-            "Id": "",
-            "StepState": 0,
-            "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewAuthorsblji4gp.4th",
-            "QcId": 0,
-            "QcVersionStamp": 0,
-            "Version": 200
-          }
-        },
-        {
-          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
-          "__value": {
-            "Runtime ID": "5427baeb-b1ca-4d3f-b8ad-977318d20f42",
-            "Description": "TelerikBlazorMultiSelect: 'Text content' 'Exact' 'Adenture'",
-            "CustomDescription": null,
-            "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.MultiSelect.VerificationDescriptors.TextContentVerificationDescriptor",
-              "__value": {
-                "TextContent": "Adenture",
-                "CompareType": 0,
+                "CompareType": 2,
+                "SegmentType": 3,
+                "ExpectedString": "9:00 AM",
                 "DataBindVariableName": null,
                 "Timeout": 30000,
                 "CheckInterval": 500,
@@ -620,15 +487,15 @@
                   }
                 },
                 "Elements": {
-                  "TelerikBlazorMultiSelect": {
+                  "textTarget": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TelerikBlazorMultiSelect",
+                      "Name": "textTarget",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
                         "__value": {
-                          "Path": "https://localhost:5001/",
+                          "Path": "https://localhost:5001/makeanappointment",
                           "Query": "",
                           "BaseUrl": "",
                           "EquivalentUrls": [],
@@ -636,17 +503,17 @@
                           "Title": "Book Stores",
                           "CompareMode": 2,
                           "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores"
+                          "FriendlyName": "BookStores2"
                         }
                       },
                       "Frame": null,
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "qmmFJMY+OL9JKNy7a+FhSt6cxE0=",
+                          "uniqueKey": "fPj0dLKe4H3cllTuZ3tSq43Le24=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "Div3",
+                          "Name": "x900AMDiv",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -657,19 +524,13 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-multiselect"
+                                        "Clause": "TextContent=9:00 AM"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-widget"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~telerik-blazor"
+                                        "Clause": "tagname=div"
                                       }
                                     }
                                   ],
@@ -679,14 +540,14 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[5]/div[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "70BCBAD7EFE3128A893B38FD4120A2AE6B27FD3695DB4728CE111CFA00F30689",
+                                "Image": "00282A3CCEB4F0808BF6187BB5B5D9519B56272B53229D52079B62ACF51ACC1D",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -698,7 +559,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.MultiSelect.TelerikBlazorMultiSelect",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -713,11 +574,11 @@
               }
             },
             "Enabled": true,
-            "Order": 6,
+            "Order": 5,
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewAuthorf1i2jksm.pwf",
+            "StepImageKey": "BusinessHourTestj2ccggog.aki",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -739,8 +600,8 @@
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,
-    "ResourceFilePath": "Authors\\CreateNewAuthor.resx",
-    "ElementImageStoreFilePath": "Authors\\CreateNewAuthor.imgstore",
+    "ResourceFilePath": "MakeAnAppointment\\BusinessHourTest.resx",
+    "ElementImageStoreFilePath": "MakeAnAppointment\\BusinessHourTest.imgstore",
     "HasCodeBehind": false,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -770,13 +631,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "CreateNewAuthor",
+    "Name": "BusinessHourTest",
     "Owner": "",
-    "Path": "Authors\\CreateNewAuthor.tstest",
+    "Path": "MakeAnAppointment\\BusinessHourTest.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "6d732372-0f4d-4c2e-85b9-190306e041c5",
-    "Id": "6d732372-0f4d-4c2e-85b9-190306e041c5",
+    "UniqueId": "7fe0cdce-5984-4b9e-aff7-4dc25f05eb9b",
+    "Id": "7fe0cdce-5984-4b9e-aff7-4dc25f05eb9b",
     "ProjectId": "bec36f83-73cf-4cff-88fd-2d4b58025c55",
     "Version": 200
   }

@@ -30,14 +30,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "b0ea45b2-9097-4adf-ba89-c5348347de3e",
-            "Description": "Navigate to : 'https://localhost:5001/Publishers'",
+            "Runtime ID": "b12f7cbe-8121-42af-822c-9bb72630e973",
+            "Description": "Navigate to : 'https://localhost:5001'",
             "CustomDescription": null,
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.NavigateToActionDescriptor",
               "__value": {
                 "UseDecodedUrl": true,
-                "NavigateURL": "https://localhost:5001/Publishers",
+                "NavigateURL": "https://localhost:5001",
                 "BaseUrl": "",
                 "SearchByImageFirst": 0,
                 "WaitOnElementsTimeout": 0,
@@ -66,7 +66,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewPublisher&PagingTestvw5klzyk.0gj",
+            "StepImageKey": "MouseActions5ie24bsg.2zi",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -75,14 +75,15 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "3e3a326e-5a8a-485f-bb2e-4f3275f2dfed",
-            "Description": "Click 'Div'",
+            "Runtime ID": "7abc6426-bbf7-408e-b57b-b35dd1ee325f",
+            "Description": "Check 'CheckBox' to be 'True'",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ClickActionDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CheckActionDescriptor",
               "__value": {
-                "SimulateRealClick": true,
-                "ScrollToVisibleType": 2,
+                "CheckedState": true,
+                "InvokeOnClick": false,
+                "InvokeOnChange": false,
                 "UsejQuery": false,
                 "ClosesBrowser": false,
                 "AjaxTimeout": 0,
@@ -99,15 +100,15 @@
                   }
                 },
                 "Elements": {
-                  "target": {
+                  "checkBox": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "target",
+                      "Name": "checkBox",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
                         "__value": {
-                          "Path": "https://localhost:5001/publishers",
+                          "Path": "https://localhost:5001/",
                           "Query": "",
                           "BaseUrl": "",
                           "EquivalentUrls": [],
@@ -115,17 +116,17 @@
                           "Title": "Book Stores",
                           "CompareMode": 2,
                           "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores0"
+                          "FriendlyName": "BookStores"
                         }
                       },
                       "Frame": null,
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "1iXnYhEyyteZZfHfTAF07wyQhQ8=",
+                          "uniqueKey": "qxVsBvX5aFoQ+aDG4oMtxPzvB4s=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "Div",
+                          "Name": "CheckBox0",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -142,7 +143,7 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "tagIndex=div:19"
+                                        "Clause": "tagIndex=input:0"
                                       }
                                     }
                                   ],
@@ -154,14 +155,14 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[6]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/input[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "61E1FFF303D5B518EDBB18CF870C6542662EFC1CC1E1161EBDBC906CB88CFDA6",
+                                "Image": "D4E08103903F80FA97E0BB29EE34B4D502F60D8DD1BAB2C82F812C0F09D4F031",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -173,7 +174,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputCheckBox",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -192,143 +193,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewPublisher&PagingTest4zrthi4u.p0k",
-            "QcId": 0,
-            "QcVersionStamp": 0,
-            "Version": 200
-          }
-        },
-        {
-          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
-          "__value": {
-            "Runtime ID": "9e748655-e8dd-43f6-8b75-9ccc9a7f87e1",
-            "Description": "Scroll Div to bottom of window.",
-            "CustomDescription": null,
-            "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.FocusActionDescriptor",
-              "__value": {
-                "ScrollVisibleType": 1,
-                "ScrollTypeSet": true,
-                "UsejQuery": false,
-                "ClosesBrowser": false,
-                "AjaxTimeout": 0,
-                "Pause": 0,
-                "WaitOnElementsTimeout": 30000,
-                "SearchByImageFirst": 0,
-                "UseStepWaitOnElementsTimout": false,
-                "WaitOnElements": true,
-                "RunsAgainstVersion": "",
-                "Constraints": {
-                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
-                  "__value": {
-                    "ConstraintValues": {}
-                  }
-                },
-                "Elements": {
-                  "target": {
-                    "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
-                    "__value": {
-                      "Name": "target",
-                      "Region": null,
-                      "Page": {
-                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
-                        "__value": {
-                          "Path": "https://localhost:5001/publishers",
-                          "Query": "",
-                          "BaseUrl": "",
-                          "EquivalentUrls": [],
-                          "Fragment": "",
-                          "Title": "Book Stores",
-                          "CompareMode": 2,
-                          "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores0"
-                        }
-                      },
-                      "Frame": null,
-                      "FindExpression": {
-                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
-                        "__value": {
-                          "uniqueKey": "sKE31d7+LSPgczxvQ1GoYSwg+Dg=",
-                          "NodeKind": 4,
-                          "TechnologyType": 1,
-                          "Name": "Div0",
-                          "FindExpressions": [
-                            {
-                              "Key": 1,
-                              "Value": {
-                                "__type": "ArtOfTest.WebAii.Core.HtmlFindExpression",
-                                "__value": {
-                                  "Clauses": [
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~k-listview"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~k-widget"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=~telerik-blazor"
-                                      }
-                                    },
-                                    {
-                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
-                                      "__value": {
-                                        "Clause": "class=!pager"
-                                      }
-                                    }
-                                  ],
-                                  "Constraints": [],
-                                  "ChainStops": []
-                                }
-                              }
-                            }
-                          ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]",
-                          "ImageSearchClauses": [
-                            {
-                              "__type": "ArtOfTest.Common.ImageSearchClause",
-                              "__value": {
-                                "Resolution": "1920, 1080",
-                                "BroweserType": 7,
-                                "Image": "42B601BC0D93DFCA6E350B46D113BF8E7FF9E40A87A0C57AB9B3C9C219062423",
-                                "Index": 0,
-                                "MatchThreshold": 90,
-                                "OsVersion": "10.0.19043.0",
-                                "ScreenScale": 1.0,
-                                "ScrollOnImageSearch": null
-                              }
-                            }
-                          ],
-                          "DataBindingExpressions": {}
-                        }
-                      },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.ListView.TelerikBlazorListView",
-                      "IsIndependent": false,
-                      "DomStateKey": "",
-                      "TechnologyType": 1,
-                      "Version": 200
-                    }
-                  }
-                },
-                "StepType": 4,
-                "LogMessageOnFailure": "",
-                "EditorType": "",
-                "DataBindingExpressions": {}
-              }
-            },
-            "Enabled": true,
-            "Order": 3,
-            "Id": "",
-            "StepState": 0,
-            "ContinueOnFailure": false,
-            "StepImageKey": "CreateNewPublisher&PagingTestsbgkjkdu.tmt",
+            "StepImageKey": "MouseActionsl13fkwm1.eus",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -350,8 +215,8 @@
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,
-    "ResourceFilePath": "Publishers\\CreateNewPublisher.resx",
-    "ElementImageStoreFilePath": "Publishers\\CreateNewPublisher.imgstore",
+    "ResourceFilePath": "Layout\\MouseActions.resx",
+    "ElementImageStoreFilePath": "Layout\\MouseActions.imgstore",
     "HasCodeBehind": false,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -381,13 +246,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "CreateNewPublisher",
+    "Name": "MouseActions",
     "Owner": "",
-    "Path": "Publishers\\CreateNewPublisher.tstest",
+    "Path": "Layout\\MouseActions.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "5d534ad9-1cc1-4470-9c35-48f0c85b8022",
-    "Id": "5d534ad9-1cc1-4470-9c35-48f0c85b8022",
+    "UniqueId": "22cdf518-8d66-40c0-8f75-52b28660d8ab",
+    "Id": "22cdf518-8d66-40c0-8f75-52b28660d8ab",
     "ProjectId": "bec36f83-73cf-4cff-88fd-2d4b58025c55",
     "Version": 200
   }
