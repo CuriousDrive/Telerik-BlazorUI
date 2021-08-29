@@ -9,21 +9,35 @@
     "ProfilerBenchmarkResultsId": "00000000-0000-0000-0000-000000000000",
     "ProfilerConfigurationId": "00000000-0000-0000-0000-000000000000",
     "ProfilerConfigurations": {},
-    "CurrentReferences": [],
+    "CurrentReferences": [
+      "System",
+      "System.Core",
+      "ArtOfTest.WebAii, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
+      "ArtOfTest.WebAii.Design, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d",
+      "Telerik.WebAii.Controls.Html, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.WebAii.Controls.Xaml, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.WebAii.Controls.Xaml.Wpf, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.KendoUI, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestStudio.Translators.Common, Version=2021.1.616.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "..\\..\\..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\PublicAssemblies\\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll",
+      "System.Windows.Forms"
+    ],
     "Steps": {
       "__type": "ArtOfTest.Common.Design.ProjectModel.AutomationStepList",
       "__value": [
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "9fafef62-31ab-42b8-9abd-83310b1de412",
-            "Description": "Navigate to : 'https://localhost:5001'",
+            "Runtime ID": "883fcfef-b6bb-40e0-b8cb-f98011b8dafd",
+            "Description": "Navigate to : 'https://localhost:5001/Publishers'",
             "CustomDescription": null,
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.NavigateToActionDescriptor",
               "__value": {
                 "UseDecodedUrl": true,
-                "NavigateURL": "https://localhost:5001",
+                "NavigateURL": "https://localhost:5001/Publishers",
                 "BaseUrl": "",
                 "SearchByImageFirst": 0,
                 "WaitOnElementsTimeout": 0,
@@ -52,7 +66,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "Expand&CollapseButtonsd3ke1fn.z0e",
+            "StepImageKey": "OCR-Testkba40spt.emf",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -61,19 +75,24 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "312208d2-a148-4a5c-95a0-3ce43a9a6821",
-            "Description": "TelerikBlazorButton Click",
+            "Runtime ID": "9ab8b150-4232-4380-b000-1af67f9bf819",
+            "Description": "Verify text of 'Image' Contains 'RT ERE'",
             "CustomDescription": null,
             "Step": {
-              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.Button.ActionDescriptors.ClickActionDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.TextFromImageVerificationDescriptor",
               "__value": {
-                "SimulateRealClick": true,
-                "UsejQuery": false,
-                "ClosesBrowser": false,
-                "AjaxTimeout": 0,
+                "TextToMatch": "RT ERE",
+                "CompareType": 2,
+                "ScrollToVisible": true,
+                "ScrollToVisibleType": 2,
+                "SelectedArea": "0, 0, 0, 0",
+                "SearchByImageFirst": 0,
+                "DataBindVariableName": null,
+                "Timeout": 30000,
+                "CheckInterval": 500,
+                "EnsureStateIsCurrent": false,
                 "Pause": 0,
                 "WaitOnElementsTimeout": 30000,
-                "SearchByImageFirst": 0,
                 "UseStepWaitOnElementsTimout": false,
                 "WaitOnElements": true,
                 "RunsAgainstVersion": "",
@@ -84,15 +103,15 @@
                   }
                 },
                 "Elements": {
-                  "TelerikBlazorButton": {
+                  "TargetKey1": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TelerikBlazorButton",
+                      "Name": "TargetKey1",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
                         "__value": {
-                          "Path": "https://localhost:5001/",
+                          "Path": "https://localhost:5001/publishers",
                           "Query": "",
                           "BaseUrl": "",
                           "EquivalentUrls": [],
@@ -100,17 +119,17 @@
                           "Title": "Book Stores",
                           "CompareMode": 2,
                           "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores"
+                          "FriendlyName": "BookStores0"
                         }
                       },
                       "Frame": null,
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "B+s9kYJ/9VgaKi1oLXEaUkyDcvo=",
+                          "uniqueKey": "YKN38UvIZz+uOHgfUu2VLoe6oQo=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "ButtonTag",
+                          "Name": "Image",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -121,30 +140,32 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~k-button"
+                                        "Clause": "id=app"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "class=~telerik-blazor"
+                                        "Clause": "tagIndex=img:6"
                                       }
                                     }
                                   ],
                                   "Constraints": [],
-                                  "ChainStops": []
+                                  "ChainStops": [
+                                    1
+                                  ]
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/img[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "46F5164D64E5A9D4966492AD1323A9079D19C8478324E6DC2701D93020858916",
+                                "Image": "42B601BC0D93DFCA6E350B46D113BF8E7FF9E40A87A0C57AB9B3C9C219062423",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -156,7 +177,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.Button.TelerikBlazorButton",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlImage",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -164,7 +185,7 @@
                     }
                   }
                 },
-                "StepType": 4,
+                "StepType": 2,
                 "LogMessageOnFailure": "",
                 "EditorType": "",
                 "DataBindingExpressions": {}
@@ -175,7 +196,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "Expand&CollapseButtonajcxjxr5.mdn",
+            "StepImageKey": "OCR-Testmk0i5bce.0na",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -184,20 +205,24 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "c26c43c4-0317-402d-9993-fcc5aa7ea5ba",
-            "Description": "Verify element 'Div' 'is' visible.",
+            "Runtime ID": "6fcc3ebb-926c-47e1-9995-53258a97ee78",
+            "Description": "Verify text of 'Image' Contains 'TELE'",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.VisibleVerificationDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.TextFromImageVerificationDescriptor",
               "__value": {
-                "IsVisible": true,
+                "TextToMatch": "TELE",
+                "CompareType": 2,
+                "ScrollToVisible": true,
+                "ScrollToVisibleType": 2,
+                "SelectedArea": "0, 0, 0, 0",
+                "SearchByImageFirst": 0,
                 "DataBindVariableName": null,
                 "Timeout": 30000,
                 "CheckInterval": 500,
                 "EnsureStateIsCurrent": false,
                 "Pause": 0,
                 "WaitOnElementsTimeout": 30000,
-                "SearchByImageFirst": 0,
                 "UseStepWaitOnElementsTimout": false,
                 "WaitOnElements": true,
                 "RunsAgainstVersion": "",
@@ -208,15 +233,15 @@
                   }
                 },
                 "Elements": {
-                  "verifyTarget": {
+                  "TargetKey1": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "verifyTarget",
+                      "Name": "TargetKey1",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
                         "__value": {
-                          "Path": "https://localhost:5001/",
+                          "Path": "https://localhost:5001/publishers",
                           "Query": "",
                           "BaseUrl": "",
                           "EquivalentUrls": [],
@@ -224,17 +249,17 @@
                           "Title": "Book Stores",
                           "CompareMode": 2,
                           "AlwaysUseTitleInCompare": false,
-                          "FriendlyName": "BookStores"
+                          "FriendlyName": "BookStores0"
                         }
                       },
                       "Frame": null,
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "m52Wz9GiWBvz3ksaAjfi9ncJUV8=",
+                          "uniqueKey": "YKN38UvIZz+uOHgfUu2VLoe6oQo=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "Div1",
+                          "Name": "Image",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -245,24 +270,32 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "TagIndex=div:1"
+                                        "Clause": "id=app"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "tagIndex=img:6"
                                       }
                                     }
                                   ],
                                   "Constraints": [],
-                                  "ChainStops": []
+                                  "ChainStops": [
+                                    1
+                                  ]
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/img[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "39A0678A350503596C50D8A5BB00A744FF9B6474215D6F47FD86B5652DD870EF",
+                                "Image": "42B601BC0D93DFCA6E350B46D113BF8E7FF9E40A87A0C57AB9B3C9C219062423",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -274,7 +307,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv",
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlImage",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -293,7 +326,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "Expand&CollapseButtonye50ravw.5ho",
+            "StepImageKey": "OCR-Testdet1ur5d.q0r",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -315,8 +348,8 @@
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,
-    "ResourceFilePath": "Layout\\Expand&CollapseButton.resx",
-    "ElementImageStoreFilePath": "Layout\\Expand&CollapseButton.imgstore",
+    "ResourceFilePath": "Publishers\\OCR-Test.resx",
+    "ElementImageStoreFilePath": "Publishers\\OCR-Test.imgstore",
     "HasCodeBehind": false,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -346,13 +379,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "Expand&CollapseButton",
+    "Name": "OCR-Test",
     "Owner": "",
-    "Path": "Layout\\Expand&CollapseButton.tstest",
+    "Path": "Publishers\\OCR-Test.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "1e548d6a-0273-4c58-bfdf-e4a678f85ff6",
-    "Id": "1e548d6a-0273-4c58-bfdf-e4a678f85ff6",
+    "UniqueId": "8922fabd-bd37-4d49-9b6b-3e4e73401088",
+    "Id": "8922fabd-bd37-4d49-9b6b-3e4e73401088",
     "ProjectId": "bec36f83-73cf-4cff-88fd-2d4b58025c55",
     "Version": 200
   }

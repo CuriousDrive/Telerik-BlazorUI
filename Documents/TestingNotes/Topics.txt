@@ -1,17 +1,15 @@
 1. Test Studio automation and find Logic on Blazor dynamic controls like the Grid, Scheduler, Dropdowns etc.
     => https://docs.telerik.com/teststudio/automated-tests/recording/overview
-    => https://docs.telerik.com/teststudio/automated-tests/test-lists/test-list-execution
     => Recording tests
     => Running Tests
 
 2. Blazor automation prep work: analyzing your app § UI elements, identifying unique attributes that are key to inform Test Studio's element location logic
     => https://docs.telerik.com/teststudio/automated-tests/recording/hover-over-highlighting#highlighting-elements-in-recording-mode
-    => Quick Steps
-    => Mouse Actions
-    => Scroll Actions
-    => Add to elements
-    => Locate in DOM
-    => Build Step
+    => Mouse Actions => Done
+    => Scroll Actions => Done
+    => Add to elements => Done
+    => Locate in DOM => Done
+    => Build Step => Done
 
 3. Showing automation of components that require OCR (e.g. image, animation container)
 
@@ -20,6 +18,7 @@
 5. Verifications and how they are set with the native Test Studio translators for Blazor components
 
 6. Headless Execution (more of a broader topic that we want to cover in the context of Blazor)
+    => https://docs.telerik.com/teststudio/automated-tests/test-lists/test-list-execution
     => Adding them to Test lists
     => Scheduling the test lists
 

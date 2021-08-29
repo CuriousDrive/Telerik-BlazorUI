@@ -36,4 +36,8 @@ Techinal Questions :
         => Layout-ExpandCollapseCheckBox
 
 
-Tests that are not working =>
+Things pending form Telerik 
+    => Slides
+    => Resources for the topics
+    => Extending Telerik UI for license
+    => And go ahead on the outline?

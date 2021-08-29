@@ -30,7 +30,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "b12f7cbe-8121-42af-822c-9bb72630e973",
+            "Runtime ID": "e1d56eb8-d992-4be0-b038-933e2e3496e8",
             "Description": "Navigate to : 'https://localhost:5001'",
             "CustomDescription": null,
             "Step": {
@@ -66,7 +66,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "MouseActions5ie24bsg.2zi",
+            "StepImageKey": "LocateInDom-Testjvo31kd2.u3g",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -75,18 +75,18 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "7abc6426-bbf7-408e-b57b-b35dd1ee325f",
-            "Description": "Check 'CheckBox' to be 'True'",
+            "Runtime ID": "0856ef6f-4d9d-458e-8309-483589dd5a92",
+            "Description": "TelerikBlazorTextBox: Verify display text is empty",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CheckActionDescriptor",
+              "__type": "Telerik.TestStudio.Translators.TelerikUI.Blazor.TextBox.VerificationDescriptors.DisplayTextVerificationDescriptor",
               "__value": {
-                "CheckedState": true,
-                "InvokeOnClick": false,
-                "InvokeOnChange": false,
-                "UsejQuery": false,
-                "ClosesBrowser": false,
-                "AjaxTimeout": 0,
+                "DisplayText": "",
+                "CompareType": 0,
+                "DataBindVariableName": null,
+                "Timeout": 30000,
+                "CheckInterval": 500,
+                "EnsureStateIsCurrent": false,
                 "Pause": 0,
                 "WaitOnElementsTimeout": 30000,
                 "SearchByImageFirst": 0,
@@ -100,10 +100,10 @@
                   }
                 },
                 "Elements": {
-                  "checkBox": {
+                  "TelerikBlazorTextBox": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "checkBox",
+                      "Name": "TelerikBlazorTextBox",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -123,10 +123,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "qxVsBvX5aFoQ+aDG4oMtxPzvB4s=",
+                          "uniqueKey": "iExwuZJW8bv/FKuGY/drFjK7930=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "CheckBox0",
+                          "Name": "TxtFirstNameText",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -137,32 +137,30 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "id=app"
+                                        "Clause": "class=~k-textbox"
                                       }
                                     },
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "tagIndex=input:0"
+                                        "Clause": "class=~telerik-blazor"
                                       }
                                     }
                                   ],
                                   "Constraints": [],
-                                  "ChainStops": [
-                                    1
-                                  ]
+                                  "ChainStops": []
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[1]/input[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "D4E08103903F80FA97E0BB29EE34B4D502F60D8DD1BAB2C82F812C0F09D4F031",
+                                "Image": "70BCBAD7EFE3128A893B38FD4120A2AE6B27FD3695DB4728CE111CFA00F30689",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
@@ -174,7 +172,7 @@
                           "DataBindingExpressions": {}
                         }
                       },
-                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputCheckBox",
+                      "HtmlControlType": "Telerik.TestingFramework.Controls.TelerikUI.Blazor.TextBox.TelerikBlazorTextBox",
                       "IsIndependent": false,
                       "DomStateKey": "",
                       "TechnologyType": 1,
@@ -182,7 +180,7 @@
                     }
                   }
                 },
-                "StepType": 4,
+                "StepType": 2,
                 "LogMessageOnFailure": "",
                 "EditorType": "",
                 "DataBindingExpressions": {}
@@ -193,7 +191,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "MouseActionsl13fkwm1.eus",
+            "StepImageKey": "LocateInDom-Testwlmv1gdk.ker",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -215,8 +213,8 @@
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,
-    "ResourceFilePath": "Layout\\MouseActions.resx",
-    "ElementImageStoreFilePath": "Layout\\MouseActions.imgstore",
+    "ResourceFilePath": "Authors\\LocateInDom-FirstNameTextBoxVerification.resx",
+    "ElementImageStoreFilePath": "Authors\\LocateInDom-FirstNameTextBoxVerification.imgstore",
     "HasCodeBehind": false,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -246,13 +244,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "MouseActions",
+    "Name": "LocateInDom-FirstNameTextBoxVerification",
     "Owner": "",
-    "Path": "Layout\\MouseActions.tstest",
+    "Path": "Authors\\LocateInDom-FirstNameTextBoxVerification.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "22cdf518-8d66-40c0-8f75-52b28660d8ab",
-    "Id": "22cdf518-8d66-40c0-8f75-52b28660d8ab",
+    "UniqueId": "7736377b-3515-4154-8b7d-08c37ff11987",
+    "Id": "7736377b-3515-4154-8b7d-08c37ff11987",
     "ProjectId": "bec36f83-73cf-4cff-88fd-2d4b58025c55",
     "Version": 200
   }

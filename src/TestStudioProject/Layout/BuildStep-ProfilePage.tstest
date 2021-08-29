@@ -318,15 +318,19 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "3bcbf6cc-2097-41e3-b0ff-bf9e7ed4060f",
-            "Description": "Check 'CheckBox' to be 'False'",
+            "Runtime ID": "abbbe5e4-0295-49f1-a083-776c25cb3585",
+            "Description": "Desktop command: LeftClick on CheckBox0",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CheckActionDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.DesktopActionDescriptor",
               "__value": {
-                "CheckedState": false,
-                "InvokeOnClick": false,
-                "InvokeOnChange": false,
+                "Focus": true,
+                "ScrollToVisibleType": 2,
+                "DesktopActionType": 0,
+                "OffSet": {
+                  "__type": "ArtOfTest.Common.Design.ActionPoint",
+                  "__value": "0, 0, Percentage, AbsoluteCenter"
+                },
                 "UsejQuery": false,
                 "ClosesBrowser": false,
                 "AjaxTimeout": 0,
@@ -343,10 +347,10 @@
                   }
                 },
                 "Elements": {
-                  "checkBox": {
+                  "target": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "checkBox",
+                      "Name": "target",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -366,10 +370,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "SWZqCwHhqYAOfAq28VU7s4+14Xg=",
+                          "uniqueKey": "qxVsBvX5aFoQ+aDG4oMtxPzvB4s=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "CheckBox",
+                          "Name": "CheckBox0",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -380,17 +384,25 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "TagIndex=input:0"
+                                        "Clause": "id=app"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "tagIndex=input:0"
                                       }
                                     }
                                   ],
                                   "Constraints": [],
-                                  "ChainStops": []
+                                  "ChainStops": [
+                                    1
+                                  ]
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[2]/div[1]/div[1]/div[2]/input[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/input[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
@@ -428,7 +440,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "Expand&CollapseCheckBoxm3yxq0lt.ufp",
+            "StepImageKey": "Expand&CollapseCheckBoxjv2dpzsh.1mx",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -437,14 +449,14 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "899b656a-2ba3-4c07-b4a7-6f425556a834",
-            "Description": "Wait for Exists 'BlankProfilePngImage'",
-            "CustomDescription": "Wait for Exists 'BlankProfilePngImage'",
+            "Runtime ID": "8da8001b-e387-41d6-96b4-2fd838ebd51e",
+            "Description": "Wait for ExistsNot 'BlankProfilePngImage'",
+            "CustomDescription": null,
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ExistsVerificationDescriptor",
               "__value": {
                 "SearchByImageFirst": 0,
-                "ExistsNot": false,
+                "ExistsNot": true,
                 "WaitOnElements": true,
                 "WaitOnElementsTimeout": 30000,
                 "UseStepWaitOnElementsTimout": false,
@@ -514,8 +526,22 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/app[1]/div[1]/div[1]/div[1]/div[1]/div[2]/img[1]",
-                          "ImageSearchClauses": [],
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/img[1]",
+                          "ImageSearchClauses": [
+                            {
+                              "__type": "ArtOfTest.Common.ImageSearchClause",
+                              "__value": {
+                                "Resolution": "1920, 1080",
+                                "BroweserType": 7,
+                                "Image": "42B601BC0D93DFCA6E350B46D113BF8E7FF9E40A87A0C57AB9B3C9C219062423",
+                                "Index": 0,
+                                "MatchThreshold": 90,
+                                "OsVersion": "10.0.19043.0",
+                                "ScreenScale": 1.0,
+                                "ScrollOnImageSearch": null
+                              }
+                            }
+                          ],
                           "DataBindingExpressions": {}
                         }
                       },
@@ -538,7 +564,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "Expand&CollapseCheckBoxvpk0x45t.ebx",
+            "StepImageKey": "Expand&CollapseCheckBoxqjgl1w1n.rms",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -560,8 +586,8 @@
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,
-    "ResourceFilePath": "Layout\\Expand&CollapseCheckBox.resx",
-    "ElementImageStoreFilePath": "Layout\\Expand&CollapseCheckBox.imgstore",
+    "ResourceFilePath": "Layout\\BuildStep-ProfilePage.resx",
+    "ElementImageStoreFilePath": "Layout\\BuildStep-ProfilePage.imgstore",
     "HasCodeBehind": false,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -591,9 +617,9 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "Expand&CollapseCheckBox",
+    "Name": "BuildStep-ProfilePage",
     "Owner": "",
-    "Path": "Layout\\Expand&CollapseCheckBox.tstest",
+    "Path": "Layout\\BuildStep-ProfilePage.tstest",
     "Priority": 0,
     "TestType": 0,
     "UniqueId": "bcc9105d-b264-4c69-8d29-f9834ebe79e4",
