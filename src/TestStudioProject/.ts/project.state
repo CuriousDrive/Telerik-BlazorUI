@@ -6,11 +6,7 @@
   </OpenItem>
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Authors\CreateNewAuthor.tstest</Path>
-  </OpenItem>
-  <OpenItem>
-    <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Publishers\CreateNewPublisher.tstest</Path>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Books\Gridview&amp;ExtractTextForFilter.tstest</Path>
   </OpenItem>
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
@@ -18,14 +14,30 @@
   </OpenItem>
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Books\AddToElements.tstest</Path>
-  </OpenItem>
-  <OpenItem>
-    <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Books\Gridview&amp;ExtractTextForFilter.tstest</Path>
-  </OpenItem>
-  <OpenItem>
-    <OpenItemType>TestFile</OpenItemType>
     <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\MakeAnAppointment\BusinessHourTest.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Layout\BuildStep-ProfilePage.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Layout\AddToElements-ProfilePage.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Layout\NavigateToPages.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Authors\LocateInDom-FirstNameTextBoxVerification.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Publishers\OCR-Test.tstest</Path>
+  </OpenItem>
+  <OpenItem>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\src\TestStudioProject\Authors\AuthorsGridIsLoaded.tstest</Path>
   </OpenItem>
 </ArrayOfOpenItem>

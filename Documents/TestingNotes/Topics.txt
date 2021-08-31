@@ -1,7 +1,10 @@
 1. Test Studio automation and find Logic on Blazor dynamic controls like the Grid, Scheduler, Dropdowns etc.
     => https://docs.telerik.com/teststudio/automated-tests/recording/overview
-    => Recording tests
-    => Running Tests
+    => Recording Tests => Done
+    => Running Tests => Done
+
+5. Verifications and how they are set with the native Test Studio translators for Blazor components
+    => Using translators for Blazor components => Done
 
 2. Blazor automation prep work: analyzing your app § UI elements, identifying unique attributes that are key to inform Test Studio's element location logic
     => https://docs.telerik.com/teststudio/automated-tests/recording/hover-over-highlighting#highlighting-elements-in-recording-mode
@@ -11,21 +14,27 @@
     => Locate in DOM => Done
     => Build Step => Done
 
-3. Showing automation of components that require OCR (e.g. image, animation container)
-
 4. Showing automation of data visualization components that utilize dynamic data 
+    => Extracting data & using it for testing => Done
+    => ListView components example => Done
 
-5. Verifications and how they are set with the native Test Studio translators for Blazor components
+3. Showing automation of components that require OCR (e.g. image, animation container)
+    => There are multiple ways
+        => Locate in DOM => Done
+        => Build Step => Done
 
 6. Headless Execution (more of a broader topic that we want to cover in the context of Blazor)
     => https://docs.telerik.com/teststudio/automated-tests/test-lists/test-list-execution
-    => Adding them to Test lists
-    => Scheduling the test lists
+    => Headless Test Execution => Done
+    => Adding them to Test lists => Done
+    => Scheduling the test lists => Done
 
 7. CI/CD integration (same as above)
-    => Setting up Azure DevOps
-    => Adding Agent Pool
-    => Downloading & Configuring Agent on the local machine
-    => Setting and running the pipeline
-    => Viewing the results
+    => Setting up Azure DevOps => Done
+    => Adding Agent Pool => Done
+    => Downloading & Configuring Agent on the local machine => Done
+    => Setting and running the pipeline => Done
+    => Viewing the results => Done
     => Deploying if all the tests pass
+
+-------------------------------------------------------------------------

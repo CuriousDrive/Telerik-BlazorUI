@@ -40,4 +40,5 @@ Things pending form Telerik
     => Slides
     => Resources for the topics
     => Extending Telerik UI for license
+    => Is it okay if I change the order of the videos?
     => And go ahead on the outline?

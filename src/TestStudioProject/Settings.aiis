@@ -226,7 +226,7 @@
     "BugAddAttachment": true,
     "BugAutoSubmit": false,
     "BugDescriptionMask": "{Description}",
-    "SelectedBrowserOption": 4,
+    "SelectedBrowserOption": 0,
     "SelectedResponsiveBrowserOption": 0,
     "ResponsiveBrowserDevice": null,
     "ResponsiveBrowserWidth": 375,

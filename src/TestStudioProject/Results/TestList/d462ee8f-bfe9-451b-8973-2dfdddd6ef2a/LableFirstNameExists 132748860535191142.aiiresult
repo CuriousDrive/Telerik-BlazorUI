@@ -1,0 +1,232 @@
+﻿{
+  "Id": null,
+  "Data": {
+    "__type": "ArtOfTest.WebAii.Design.Execution.RunResult",
+    "__value": {
+      "IsComplete": true,
+      "Name": "LableFirstNameExists 132748860535191142",
+      "StartTime": "2021-08-31T12:20:53.5351482Z",
+      "EndTime": "2021-08-31T12:21:00.3266644Z",
+      "Id": "5825cef8-52be-41ca-80c8-ad3d4331e6a2",
+      "PassedResult": true,
+      "IsRerun": false,
+      "HasWarnings": false,
+      "PassedCount": 1,
+      "FailedCount": 0,
+      "NotRunCount": 0,
+      "DispatchGroupId": "d462ee8f-bfe9-451b-8973-2dfdddd6ef2a",
+      "DataCollectors": {},
+      "TestResults": [
+        {
+          "__type": "ArtOfTest.WebAii.Design.Execution.TestResult",
+          "__value": {
+            "Browser": 11,
+            "ExeType": 5,
+            "SeparatorLineCharCount": 60,
+            "Message": "Overall Result: Pass\r\n------------------------------------------------------------\r\n'8/31/2021 8:20:53 AM' - Executing test: 'LableFirstNameExists', path: 'Authors\\LableFirstNameExists.tstest.'\r\n'8/31/2021 8:20:53 AM' - Using .Net Runtime version: '4.0.30319.42000' for test execution. Build version is '2021.2.809.0'.\r\n'8/31/2021 8:20:53 AM' - Starting execution....\r\n------------------------------------------------------------\r\n------------------------------------------------------------\r\n'8/31/2021 8:20:54 AM' - Using 'ChromeHeadless' version '92.0.4515.159' as default browser. \r\n'8/31/2021 8:20:56 AM' - 'Pass' : 1. Navigate to : 'https://localhost:5001'\r\n'8/31/2021 8:20:59 AM' - 'Pass' : 2. Keyboard (KeyPress) - Tab (1 times) on 'BodyTag'\r\n'8/31/2021 8:20:59 AM' - 'Pass' : 3. Click 'FirstNameLabelTag'\r\n'8/31/2021 8:20:59 AM' - 'Pass' : 4. Verify 'TextContent' 'Contains' 'First Name :' on 'FirstNameLabelTag'\r\n------------------------------------------------------------\r\n'8/31/2021 8:20:59 AM' - Overall Result: Pass\r\n'8/31/2021 8:20:59 AM' - Duration: [0 min: 5 sec: 387 msec]\r\n------------------------------------------------------------\r\n'8/31/2021 8:20:59 AM' - Test completed!\r\n\r\n",
+            "ScreenRecordingResultPath": null,
+            "ScreenRecordingResultError": null,
+            "ScreenRecordingResultCodec": null,
+            "ScreenRecordingResultSize": 0,
+            "FailureException": null,
+            "Result": 0,
+            "TestId": "c2bd6179-5fec-42c2-8221-cc2cdac9385d",
+            "TestName": "LableFirstNameExists",
+            "IsRerun": false,
+            "TestPath": "Authors\\LableFirstNameExists.tstest",
+            "TestOwner": "",
+            "TestDescription": "",
+            "ProjectPath": "",
+            "StepResults": [
+              {
+                "__type": "ArtOfTest.WebAii.Design.AutomationStepResult",
+                "__value": {
+                  "TestName": "LableFirstNameExists",
+                  "TestPath": "Authors\\LableFirstNameExists.tstest",
+                  "TestId": "c2bd6179-5fec-42c2-8221-cc2cdac9385d",
+                  "TestStepIndex": 0,
+                  "StepDescription": "Navigate to : 'https://localhost:5001'",
+                  "Exception": null,
+                  "ResultType": 0,
+                  "State": {
+                    "__type": "ArtOfTest.WebAii.Design.AutomationHostState",
+                    "__value": {
+                      "Mode": 1,
+                      "DomFilePath": null,
+                      "ImageFilePath": null,
+                      "ExpectedImageFilePath": null,
+                      "TechnologyType": 1,
+                      "FriendlyName": "Capture Of 'Page (Book Stores)' @8/31/2021 8:20:55 AM"
+                    }
+                  },
+                  "Order": 1,
+                  "LogMessageOnError": "",
+                  "UserComment": null,
+                  "HashCode": 1347723234,
+                  "IsManual": false,
+                  "WasStepEnabled": false,
+                  "Warnings": null
+                }
+              },
+              {
+                "__type": "ArtOfTest.WebAii.Design.AutomationStepResult",
+                "__value": {
+                  "TestName": "LableFirstNameExists",
+                  "TestPath": "Authors\\LableFirstNameExists.tstest",
+                  "TestId": "c2bd6179-5fec-42c2-8221-cc2cdac9385d",
+                  "TestStepIndex": 1,
+                  "StepDescription": "Keyboard (KeyPress) - Tab (1 times) on 'BodyTag'",
+                  "Exception": null,
+                  "ResultType": 0,
+                  "State": {
+                    "__type": "ArtOfTest.WebAii.Design.AutomationHostState",
+                    "__value": {
+                      "Mode": 1,
+                      "DomFilePath": null,
+                      "ImageFilePath": null,
+                      "ExpectedImageFilePath": null,
+                      "TechnologyType": 1,
+                      "FriendlyName": "Capture Of 'Page (Book Stores)' @8/31/2021 8:20:59 AM"
+                    }
+                  },
+                  "Order": 2,
+                  "LogMessageOnError": "",
+                  "UserComment": null,
+                  "HashCode": -1170792672,
+                  "IsManual": false,
+                  "WasStepEnabled": false,
+                  "Warnings": null
+                }
+              },
+              {
+                "__type": "ArtOfTest.WebAii.Design.AutomationStepResult",
+                "__value": {
+                  "TestName": "LableFirstNameExists",
+                  "TestPath": "Authors\\LableFirstNameExists.tstest",
+                  "TestId": "c2bd6179-5fec-42c2-8221-cc2cdac9385d",
+                  "TestStepIndex": 2,
+                  "StepDescription": "Click 'FirstNameLabelTag'",
+                  "Exception": null,
+                  "ResultType": 0,
+                  "State": {
+                    "__type": "ArtOfTest.WebAii.Design.AutomationHostState",
+                    "__value": {
+                      "Mode": 1,
+                      "DomFilePath": null,
+                      "ImageFilePath": null,
+                      "ExpectedImageFilePath": null,
+                      "TechnologyType": 1,
+                      "FriendlyName": "Capture Of 'Page (Book Stores)' @8/31/2021 8:20:59 AM"
+                    }
+                  },
+                  "Order": 3,
+                  "LogMessageOnError": "",
+                  "UserComment": null,
+                  "HashCode": 2087960562,
+                  "IsManual": false,
+                  "WasStepEnabled": false,
+                  "Warnings": null
+                }
+              },
+              {
+                "__type": "ArtOfTest.WebAii.Design.AutomationStepResult",
+                "__value": {
+                  "TestName": "LableFirstNameExists",
+                  "TestPath": "Authors\\LableFirstNameExists.tstest",
+                  "TestId": "c2bd6179-5fec-42c2-8221-cc2cdac9385d",
+                  "TestStepIndex": 3,
+                  "StepDescription": "Verify 'TextContent' 'Contains' 'First Name :' on 'FirstNameLabelTag'",
+                  "Exception": null,
+                  "ResultType": 0,
+                  "State": {
+                    "__type": "ArtOfTest.WebAii.Design.AutomationHostState",
+                    "__value": {
+                      "Mode": 1,
+                      "DomFilePath": null,
+                      "ImageFilePath": null,
+                      "ExpectedImageFilePath": null,
+                      "TechnologyType": 1,
+                      "FriendlyName": "Capture Of 'Page (Book Stores)' @8/31/2021 8:20:59 AM"
+                    }
+                  },
+                  "Order": 4,
+                  "LogMessageOnError": "",
+                  "UserComment": null,
+                  "HashCode": -1313506170,
+                  "IsManual": false,
+                  "WasStepEnabled": false,
+                  "Warnings": null
+                }
+              }
+            ],
+            "NotRunStepDescriptions": [],
+            "TotalPassedSteps": 4,
+            "ExecutingTestStepCount": 4,
+            "TotalNumberOfNotRunSteps": 0,
+            "IsDataDrivenResult": false,
+            "DataIterationResults": [],
+            "EndTime": "2021-08-31T12:20:59.6250448Z",
+            "StartTime": "2021-08-31T12:20:54.2372392Z",
+            "ProfilerResultsPath": null,
+            "VersionGroupKey": "00000000-0000-0000-0000-000000000000",
+            "CommitedBy": null,
+            "HasWarnings": false
+          }
+        }
+      ],
+      "FileName": "LableFirstNameExists 132748860535191142",
+      "Machine": {
+        "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.Machine",
+        "__value": {
+          "Id": "00000000-0000-0000-0000-000000000000",
+          "NetworkName": "DESKTOP-8BF81DU",
+          "OperatingSystem": "Windows 10",
+          "InstalledBrowsers": [
+            {
+              "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation",
+              "__value": {
+                "Type": 1,
+                "Version": "9.11.19041.0",
+                "IsConfigured": false
+              }
+            },
+            {
+              "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation",
+              "__value": {
+                "Type": 2,
+                "Version": "91.0.2 (x64 en-US)",
+                "IsConfigured": false
+              }
+            },
+            {
+              "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation",
+              "__value": {
+                "Type": 7,
+                "Version": "92.0.4515.159",
+                "IsConfigured": false
+              }
+            },
+            {
+              "__type": "ArtOfTest.WebAii.Design.Execution.Scheduling.BrowserInformation",
+              "__value": {
+                "Type": 10,
+                "Version": "92.0.902.84",
+                "IsConfigured": false
+              }
+            }
+          ],
+          "Status": 0,
+          "ServiceUri": null,
+          "DBState": 0,
+          "UserName": "User"
+        }
+      },
+      "Messages": null,
+      "RunId": "5825cef8-52be-41ca-80c8-ad3d4331e6a2",
+      "Comment": null,
+      "TestListId": "6f8c1747-62cf-4e59-b9ee-3b6860333f35",
+      "IsManual": false
+    }
+  },
+  "Metadata": null
+}

@@ -3,7 +3,7 @@
   "__value": {
     "TestListId": "6f8c1747-62cf-4e59-b9ee-3b6860333f35",
     "Id": "6f8c1747-62cf-4e59-b9ee-3b6860333f35",
-    "TestListName": "FirstAutomatedList",
+    "TestListName": "FirstAutomatedList-Headless",
     "CreationDate": "2021-07-19T17:29:28-04:00",
     "OwnerName": null,
     "Settings": {
