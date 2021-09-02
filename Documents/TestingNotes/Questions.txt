@@ -1,0 +1,5 @@
+Things pending form Telerik 
+    => Slides
+    => Extending Telerik UI for license
+    => Go ahead on the outline? => OCR & Headless
+    => Where should I fit visual studio integration in the outline? - When 

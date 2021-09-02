@@ -1,0 +1,55 @@
+1. Test Studio automation and find Logic on Blazor dynamic controls like the Grid, Scheduler, Dropdowns etc.
+    => https://docs.telerik.com/teststudio/automated-tests/recording/overview
+    => Getting Started with Telerik Test Studio => Done
+    => BookStores Project => Done
+    => Recording Sample Tests => Done
+    => Running/Executing Tests => Done
+
+5. Verifications and how they are set with the native Test Studio translators for Blazor components
+    => Why do calibrate your browsers => https://docs.telerik.com/teststudio/prerequisites/configure-your-browser/chrome
+    => https://docs.telerik.com/blazor-ui/integrations/e2e-testing-with-test-studio
+    => Add wait steps because the page does not load all the time
+    => StateGetLoadedAfterSelectingCity => Done
+    => AddNewBook => Done
+    => BusinessHourTest => Done
+    => Recording & Running above tests => Done
+
+2. Blazor automation prep work: analyzing your app § UI elements, identifying unique attributes that are key to inform Test Studio's element location logic
+    => https://docs.telerik.com/teststudio/automated-tests/recording/hover-over-highlighting#highlighting-elements-in-recording-mode
+    => Mouse Actions => BuildStep-ProfilePage => Done
+    => Scroll Actions => Paging&ScrollingTest => Done
+    => Add to elements => AddToElements-ProfilePage => Done
+    => Locate in DOM => LocateInDom-FirstNameTextBoxVerification => Done
+    => Build Step => BuildStep-ProfilePage => Done
+
+4. Showing automation of data visualization components that utilize dynamic data 
+    => Blazor Chart => 
+    => Extracting data & using it for testing => Done
+    => GridView Components Filtering example => Done
+    => Need to think of an example for ListView Components => 
+
+3. Showing automation of components that require OCR (e.g. image, animation container)
+    => https://www.telerik.com/blogs/automated-tests-for-chart-elements-with-ocr-and-coded-steps-an-uphill-climb-or-a-lift-ride
+    => There are multiple ways
+        => Locate in DOM => Done
+        => Build Step => Done
+
+6. Headless Execution (more of a broader topic that we want to cover in the context of Blazor)
+    => https://docs.telerik.com/teststudio/automated-tests/test-lists/test-list-execution
+    => https://docs.telerik.com/teststudio/automated-tests/headless/headless-test-execution
+    => https://www.telerik.com/blogs/headless-testing-with-telerik-test-studio-webinar-recap
+    => Headless Test Execution => Done
+    => Adding them to Test lists => Done
+    => Scheduling the test lists => Done
+
+7. CI/CD integration (same as above)
+    => Setting up Azure DevOps => Done
+    => Adding Agent Pool => Done
+    => Downloading & Configuring Agent on the local machine => Done
+    => Setting and running the pipeline => Done
+    => Viewing the results => Done
+    => Deploying if all the tests pass
+    => Showing tests in visual studio professional 
+    => Custom code could be written
+
+-------------------------------------------------------------------------
