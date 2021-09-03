@@ -14,7 +14,7 @@
     }
     else
     {
-        <TelerikListView Data="PublishersByPage"
+        <TelerikListView Data="AllPublishers"
                          Pageable="Paging"
                          PageSize="PageSizeOption"
                          PageChanged="PageChangedHandler"
@@ -23,7 +23,6 @@
                          OnCreate="CreatePublisher"
                          OnEdit="EditHandler"
                          OnCancel="CancelHandler"
-                         OnRead="OnReadHandler"
                          TotalCount="TotalCount">
             <HeaderTemplate>
                 <br />
@@ -34,32 +33,30 @@
                         <TelerikCheckBox @bind-Value="Paging"></TelerikCheckBox>
                     </label>
                 </div>
+                <br />
                 <div class="col-12 row">
                     &nbsp;
                     <label style="font-size:large; font-weight:bold">
                         Page Size :
-                        <TelerikDropDownList Data="PageSizeOptions"
-                                             @bind-Value="PageSizeOption"
-                                             Class="col-3"></TelerikDropDownList>
                     </label>
-                </div>
-                <div class="col-12 row">
-                    &nbsp;
-                    <label style="font-size:large; font-weight:bold">
-                        @PageChangedMessage
-                    </label>
-                </div>
-                <div class="col-12 row">
-                    &nbsp;
-                    <label style="font-size:large; font-weight:bold">Sort by Publihser Name : </label>&nbsp;
-                        <TelerikDropDownList Data="SortDirections"
-                                             @bind-Value="SortDirection"
-                                             Width="150px"></TelerikDropDownList> &nbsp;
-                        <TelerikButton @onclick="Sort">Sort</TelerikButton>
+                    <TelerikDropDownList Data="PageSizeOptions"
+                                         @bind-Value="PageSizeOption"
+                                         Class="col-3"></TelerikDropDownList>
                 </div>
                 <br />
                 <div class="col-12 row">
                     &nbsp;
+                    <label style="font-size:large; font-weight:bold">Sort by :</label>&nbsp;
+                    <TelerikDropDownList Data="SortDirections"
+                                         @bind-Value="SortDirection"
+                                         Width="150px"></TelerikDropDownList> &nbsp;
+                    <TelerikButton @onclick="Sort">Sort</TelerikButton>
+                    <br />
+                </div>
+                <br />
+                <div class="col-12 row">
+                    &nbsp;
+                    <label style="font-size:large; font-weight:bold">Search by :</label>&nbsp;
                     <TelerikTextBox @bind-Value="@FilterText" PlaceHolder="Search by publisher name" Width="250px"></TelerikTextBox> &nbsp;
                     <TelerikButton OnClick="@Filter">Filter</TelerikButton> &nbsp;
                     <TelerikButton OnClick="@ClearFilter">Clear Filter</TelerikButton>
@@ -150,7 +147,7 @@
         TotalCount = await GetTotalCount();
 
         //getting all publishers
-        //AllPublishers = await GetAllPublishers();
+        AllPublishers = await GetAllPublishers();
 
     }
 
