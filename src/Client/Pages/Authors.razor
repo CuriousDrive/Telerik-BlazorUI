@@ -23,17 +23,6 @@
         </div>
         <br />
         <div class="col-12 row">
-            <label class="col-3 font-weight-bold">State :</label>
-            @if (States.Length > 0)
-            {
-                <TelerikDropDownList Id="ddlStates"
-                                     Class="form-control col-4"
-                                     @bind-Value="author.State"
-                                     Data="States"></TelerikDropDownList>
-            }
-        </div>
-        <br />
-        <div class="col-12 row">
             <label class="col-3 font-weight-bold">City :</label>
             @if (Cities.Count() > 0)
             {
@@ -45,7 +34,7 @@
                                      Filterable="true"
                                      MinLength="2"
                                      FilterOperator="StringFilterOperator"
-                                     Placeholder="please select city..."
+                                     Placeholder="Please select city..."
                                      ClearButton="false"
                                      OnChange="DropDownListEventHandler">
                     <HeaderTemplate>
@@ -58,6 +47,17 @@
                         @city.CityName, @GetStateFromCity(city.CityName)
                     </ItemTemplate>
                 </TelerikAutoComplete>
+            }
+        </div>
+        <br />
+        <div class="col-12 row">
+            <label class="col-3 font-weight-bold">State :</label>
+            @if (States.Length > 0)
+            {
+                <TelerikDropDownList Id="ddlStates"
+                                     Class="form-control col-4"
+                                     @bind-Value="author.State"
+                                     Data="States"></TelerikDropDownList>
             }
         </div>
         @*<br />
@@ -103,7 +103,7 @@
                 <div class="col-3"></div>
                 @foreach (Subscription subscription in Subscriptions)
                 {
-                    <label class="col-1">
+                    <label class="col-2">
                         <TelerikCheckBox Id="cbSubs" @bind-Value="subscription.Selected"></TelerikCheckBox>
                         @subscription.SubscriptionName
                     </label>
@@ -214,8 +214,6 @@
     protected override async Task OnInitializedAsync()
     {
         author = new Author();
-        //authorList = new List<Author>();
-        await LoadAuthors();
 
         //loading cities
         LoadCities();
@@ -225,6 +223,10 @@
 
         //loading subscriptions
         LoadSubscriptions();
+
+        //Loading Authors
+        //await Task.Delay(6000);
+        await LoadAuthors();
 
         await base.OnInitializedAsync();
     }

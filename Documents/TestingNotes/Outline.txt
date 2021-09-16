@@ -5,16 +5,21 @@
     => Recording Sample Tests => Done
     => Running/Executing Tests => Done
 
-5. Verifications and how they are set with the native Test Studio translators for Blazor components
+2. Verifications and how they are set with the native Test Studio translators for Blazor components
     => Why do calibrate your browsers => https://docs.telerik.com/teststudio/prerequisites/configure-your-browser/chrome
-    => https://docs.telerik.com/blazor-ui/integrations/e2e-testing-with-test-studio
+        => Setting zoom level to 100%
+        => Enable File Downloads
+        => Disable Pop-up Blocker
+        => Allowing Run JavaScript
+        => Allowing Open PDF Files Externally
+
+    => Translator => https://docs.telerik.com/blazor-ui/integrations/e2e-testing-with-test-studio
     => Add wait steps because the page does not load all the time
     => StateGetLoadedAfterSelectingCity => Done
     => AddNewBook => Done
     => BusinessHourTest => Done
-    => Recording & Running above tests => Done
 
-2. Blazor automation prep work: analyzing your app § UI elements, identifying unique attributes that are key to inform Test Studio's element location logic
+3. Blazor automation prep work: analyzing your app § UI elements, identifying unique attributes that are key to inform Test Studio's element location logic
     => https://docs.telerik.com/teststudio/automated-tests/recording/hover-over-highlighting#highlighting-elements-in-recording-mode
     => Mouse Actions => BuildStep-ProfilePage => Done
     => Scroll Actions => Paging&ScrollingTest => Done
@@ -28,7 +33,7 @@
     => GridView Components Filtering example => Done
     => Need to think of an example for ListView Components => 
 
-3. Showing automation of components that require OCR (e.g. image, animation container)
+5. Showing automation of components that require OCR (e.g. image, animation container)
     => https://www.telerik.com/blogs/automated-tests-for-chart-elements-with-ocr-and-coded-steps-an-uphill-climb-or-a-lift-ride
     => There are multiple ways
         => Locate in DOM => Done
