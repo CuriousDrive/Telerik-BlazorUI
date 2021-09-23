@@ -17,6 +17,7 @@ namespace BookStores.Client
             
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<SchedulerAppointmentService>();
+            builder.Services.AddScoped<ProductService>();
 
             builder.Services.AddTelerikBlazor();
 

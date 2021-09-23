@@ -1,0 +1,170 @@
+﻿@page "/salesandrevenue"
+
+@using Telerik.Blazor
+@using BookStores.Models;
+@using BookStores.Services; 
+
+@inject ProductService ProductService
+
+<div>
+    <div class="kd-border kd-rounded">
+        @if (ChartData?.ProductAggregation != null)
+        {
+<TelerikChart Height="230px">
+    <ChartTooltip Visible="true" Shared="true"></ChartTooltip>
+    <ChartTitle Text="Sales and Revenue Total" />
+
+    <ChartSeriesItems>
+        @foreach (var product in ChartData.ProductAggregation)
+        {
+<ChartSeries Type="ChartSeriesType.Column"
+             Name="@product.ProductName"
+             Data="@product.ProductRevenueAndSales"
+             Field="@nameof(ProductRevenueAndSalesModel.SalesCount)"
+             CategoryField="@nameof(ProductRevenueAndSalesModel.Category)" />}
+
+        <ChartSeries Type="ChartSeriesType.Line"
+                     Name="Total Revenue"
+                     Data="@ChartData.TotalAggregation"
+                     Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
+                     Axis="RevenueAxis">
+        </ChartSeries>
+
+    </ChartSeriesItems>
+
+    <ChartValueAxes>
+        <ChartValueAxis>
+            <ChartValueAxisTitle Text="Sold items (thousands)" />
+            <ChartValueAxisMajorGridLines Visible="false" />
+        </ChartValueAxis>
+        <ChartValueAxis Name="RevenueAxis">
+            <ChartValueAxisTitle Text="Revenue" />
+            <ChartValueAxisLabels Format="{0:C}M" />
+            <ChartValueAxisMajorGridLines Visible="false" />
+        </ChartValueAxis>
+    </ChartValueAxes>
+
+    <ChartCategoryAxes>
+        <ChartCategoryAxis AxisCrossingValue="@(new object[] { 20, 0 })" />
+    </ChartCategoryAxes>
+</TelerikChart>}
+    </div>
+    <div class="mt-md k-d-flex k-flex-wrap">
+        <div class="k-flex-grow mb-md kd-border kd-rounded chart-item">
+            @if (ChartData?.ProductAggregation != null)
+            {
+            <TelerikChart Height="230px">
+                <ChartTitle Text="Revenue Trend per Product" />
+
+                <ChartSeriesItems>
+                    @foreach (var item in ChartData.ProductAggregation)
+                    {
+            <ChartSeries Type="ChartSeriesType.Line"
+                         Name="@item.ProductName"
+                         Data="@item.ProductRevenueAndSales"
+                         CategoryField="@nameof(ProductRevenueAndSalesModel.Category)"
+                         Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
+                         Style="ChartSeriesStyle.Smooth">
+                <ChartSeriesMarkers Visible="false" />
+                <ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
+            </ChartSeries>                        }
+                </ChartSeriesItems>
+
+                <ChartValueAxes>
+                    <ChartValueAxis Name="RevenueAxis">
+                        <ChartValueAxisTitle Text="Revenue" />
+                        <ChartValueAxisLabels Format="{0:C}M" />
+                    </ChartValueAxis>
+                </ChartValueAxes>
+            </TelerikChart>            }
+        </div>
+        <div class="k-flex-grow mb-md kd-border kd-rounded chart-item">
+            @if (ChartData?.ProductAggregation != null && DonutData != null)
+            {
+                <TelerikChart Height="250px">
+                    <ChartTitle Text="Sales Distribution for the Last Year" />
+
+                    <ChartSeriesItems>
+                        <ChartSeries Type="ChartSeriesType.Donut"
+                                     Data="@DonutData"
+                                     Field="SalesCount"
+                                     CategoryField="ProductName">
+                            <ChartSeriesLabels Visible="true"
+                                               Template="#=category#"
+                                               Background="transparent"
+                                               Position="ChartSeriesLabelsPosition.OutsideEnd" />
+                            <ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
+                        </ChartSeries>
+                    </ChartSeriesItems>
+
+                    <ChartLegend Visible="false"></ChartLegend>
+                </TelerikChart>            
+            }
+        </div>
+    </div>
+    <div class="kd-border kd-rounded">
+            @if (ChartData?.ProductAggregation != null)
+            {
+                <TelerikChart Height="230px">
+                    <ChartTitle Text="Revenue per Product" />
+
+                    <ChartSeriesItems>
+                        @foreach (var item in ChartData.ProductAggregation)
+                        {
+                <ChartSeries Type="ChartSeriesType.Area"
+                             Name="@item.ProductName"
+                             Data="@item.ProductRevenueAndSales"
+                             Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
+                             CategoryField="@nameof(ProductRevenueAndSalesModel.Category)">
+                    <ChartSeriesStack Enabled="true" Type="ChartSeriesStackType.Stack100"></ChartSeriesStack>
+                    <ChartSeriesLine Style="ChartSeriesLineStyle.Smooth"></ChartSeriesLine>
+                    <ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
+                </ChartSeries>}
+                    </ChartSeriesItems>
+
+                    <ChartValueAxes>
+                        <ChartValueAxis>
+                            <ChartValueAxisMajorGridLines Visible="false" />
+                        </ChartValueAxis>
+                    </ChartValueAxes>
+
+                    <ChartCategoryAxes>
+                        <ChartCategoryAxis>
+                            <ChartCategoryAxisMajorGridLines Visible="false" />
+                        </ChartCategoryAxis>
+                    </ChartCategoryAxes>
+                </TelerikChart>
+            }
+    </div>
+</div>
+
+@code { 
+    ProductsAggregationModel ChartData { get; set; } = new ProductsAggregationModel();
+    IEnumerable<object> DonutData { get; set; } = Enumerable.Empty<object>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ChartData = await ProductService.GetAggregatedProductsFromJsonAsync();
+
+        DonutData = ChartData.ProductAggregation.Select(x =>
+            new
+            {
+                x.ProductName,
+                SalesCount = x.ProductRevenueAndSales.Sum(p => p.SalesCount)
+            });
+
+        await base.OnInitializedAsync();
+    } }
+
+<style>
+    .chart-item {
+        width: 50%;
+        min-width: 500px;
+    }
+
+    @@media only screen and (max-width:600px) {
+        .chart-item {
+            min-width: 250px;
+        }
+    }
+</style>

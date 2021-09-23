@@ -2,14 +2,10 @@
 <ArrayOfOpenItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\TestStudioProject\IsAuthorsGridLoadedTest.tstest</Path>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\TestStudioProject\ProfilePictureExistsTest.tstest</Path>
   </OpenItem>
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\TestStudioProject\NavigateToPages.tstest</Path>
-  </OpenItem>
-  <OpenItem>
-    <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\TestStudioProject\WebTest.tstest</Path>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\TestStudioProject\CreateNewPublisherPagingTest.tstest</Path>
   </OpenItem>
 </ArrayOfOpenItem>
