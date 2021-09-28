@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStores.Client", "Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStores.Shared", "Shared\BookStores.Shared.csproj", "{2EA0955F-4760-4479-A228-EEAF49442BF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStores.Tests", "..\tests\Telerik.TestStudio.Tests\BookStores.Tests.csproj", "{7571F672-DE4B-4F95-884E-4C6B9F92C50D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2EA0955F-4760-4479-A228-EEAF49442BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EA0955F-4760-4479-A228-EEAF49442BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EA0955F-4760-4479-A228-EEAF49442BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7571F672-DE4B-4F95-884E-4C6B9F92C50D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7571F672-DE4B-4F95-884E-4C6B9F92C50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7571F672-DE4B-4F95-884E-4C6B9F92C50D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7571F672-DE4B-4F95-884E-4C6B9F92C50D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

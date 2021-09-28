@@ -29,7 +29,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "30d62392-2728-4a6e-bec6-e5528624043f",
+            "Runtime ID": "3fcd9fa2-59ab-490f-a43a-88b054d08c03",
             "Description": "Navigate to : 'https://localhost:5001/'",
             "CustomDescription": null,
             "Step": {
@@ -65,7 +65,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "OCRTest4xva12qq.xlf",
+            "StepImageKey": "ProfilePictureExistsTestu2qrbtf3.1jj",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -74,24 +74,25 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "1ad087d1-887e-4906-8744-0429fd6a82cf",
-            "Description": "Verify text of 'Telerik12JpgImage' Contains 'Teleri'",
+            "Runtime ID": "4adc52a0-121e-4078-986c-ba9528bbbaf4",
+            "Description": "Desktop command: LeftClick on CheckBox",
             "CustomDescription": null,
             "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.TextFromImageVerificationDescriptor",
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.DesktopActionDescriptor",
               "__value": {
-                "TextToMatch": "Teleri",
-                "CompareType": 2,
-                "ScrollToVisible": true,
+                "Focus": true,
                 "ScrollToVisibleType": 2,
-                "SelectedArea": "0, 0, 0, 0",
-                "SearchByImageFirst": 0,
-                "DataBindVariableName": null,
-                "Timeout": 30000,
-                "CheckInterval": 500,
-                "EnsureStateIsCurrent": false,
+                "DesktopActionType": 0,
+                "OffSet": {
+                  "__type": "ArtOfTest.Common.Design.ActionPoint",
+                  "__value": "0, 0, Percentage, AbsoluteCenter"
+                },
+                "UsejQuery": false,
+                "ClosesBrowser": false,
+                "AjaxTimeout": 0,
                 "Pause": 0,
                 "WaitOnElementsTimeout": 30000,
+                "SearchByImageFirst": 0,
                 "UseStepWaitOnElementsTimout": false,
                 "WaitOnElements": true,
                 "RunsAgainstVersion": "",
@@ -102,10 +103,10 @@
                   }
                 },
                 "Elements": {
-                  "TargetKey1": {
+                  "target": {
                     "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
                     "__value": {
-                      "Name": "TargetKey1",
+                      "Name": "target",
                       "Region": null,
                       "Page": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
@@ -125,10 +126,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "hkF/RZw4aXGqFjofUXM7d+NXnFc=",
+                          "uniqueKey": "qxVsBvX5aFoQ+aDG4oMtxPzvB4s=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "Telerik12JpgImage",
+                          "Name": "CheckBox",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -139,7 +140,133 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "src=/img/telerik-12.jpg"
+                                        "Clause": "id=app"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "tagIndex=input:0"
+                                      }
+                                    }
+                                  ],
+                                  "Constraints": [],
+                                  "ChainStops": [
+                                    1
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/input[1]",
+                          "ImageSearchClauses": [
+                            {
+                              "__type": "ArtOfTest.Common.ImageSearchClause",
+                              "__value": {
+                                "Resolution": "1920, 1080",
+                                "BroweserType": 7,
+                                "Image": "3407A976A414DC388F284FA5566CB2370D5DB4FA36DD9AC8B816DA5E6957EE7E",
+                                "Index": 0,
+                                "MatchThreshold": 90,
+                                "OsVersion": "10.0.19043.0",
+                                "ScreenScale": 1.25,
+                                "ScrollOnImageSearch": null
+                              }
+                            }
+                          ],
+                          "DataBindingExpressions": {}
+                        }
+                      },
+                      "HtmlControlType": "ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputCheckBox",
+                      "IsIndependent": false,
+                      "DomStateKey": "",
+                      "TechnologyType": 1,
+                      "Version": 200
+                    }
+                  }
+                },
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 2,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "ProfilePictureExistsTeste3fveki4.x0g",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "d3f4da4c-05a2-40f0-8144-0ac7b848a444",
+            "Description": "Wait for ExistsNot 'BlankProfilePngImage'",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.ExistsVerificationDescriptor",
+              "__value": {
+                "SearchByImageFirst": 0,
+                "ExistsNot": true,
+                "WaitOnElements": true,
+                "WaitOnElementsTimeout": 30000,
+                "UseStepWaitOnElementsTimout": false,
+                "DataBindVariableName": null,
+                "Timeout": 30000,
+                "CheckInterval": 500,
+                "EnsureStateIsCurrent": false,
+                "Pause": 0,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {
+                  "target": {
+                    "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
+                    "__value": {
+                      "Name": "target",
+                      "Region": null,
+                      "Page": {
+                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.PageUri",
+                        "__value": {
+                          "Path": "https://localhost:5001/",
+                          "Query": "",
+                          "BaseUrl": "",
+                          "EquivalentUrls": [],
+                          "Fragment": "",
+                          "Title": "Book Stores",
+                          "CompareMode": 2,
+                          "AlwaysUseTitleInCompare": false,
+                          "FriendlyName": "BookStores"
+                        }
+                      },
+                      "Frame": null,
+                      "FindExpression": {
+                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
+                        "__value": {
+                          "uniqueKey": "6KJaP1Q31Bi57BJ9299XbWL3H4U=",
+                          "NodeKind": 4,
+                          "TechnologyType": 1,
+                          "Name": "BlankProfilePngImage",
+                          "FindExpressions": [
+                            {
+                              "Key": 1,
+                              "Value": {
+                                "__type": "ArtOfTest.WebAii.Core.HtmlFindExpression",
+                                "__value": {
+                                  "Clauses": [
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
+                                        "Clause": "src=/img/blank-profile.png"
                                       }
                                     },
                                     {
@@ -182,48 +309,7 @@
                     }
                   }
                 },
-                "StepType": 2,
-                "LogMessageOnFailure": "",
-                "EditorType": "",
-                "DataBindingExpressions": {}
-              }
-            },
-            "Enabled": false,
-            "Order": 2,
-            "Id": "",
-            "StepState": 0,
-            "ContinueOnFailure": false,
-            "StepImageKey": "OCRTestiq4sqsfb.dzw",
-            "QcId": 0,
-            "QcVersionStamp": 0,
-            "Version": 200
-          }
-        },
-        {
-          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
-          "__value": {
-            "Runtime ID": "3c6884bb-d03e-4f0c-a360-10cdd9bbaf1e",
-            "Description": "New Coded Step",
-            "CustomDescription": null,
-            "Step": {
-              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CodedStepDescriptor",
-              "__value": {
-                "Code": "            // Make sure we have latest DOM to pull up the image\r\n            this.ActiveBrowser.RefreshDomTree();\r\n            // Find the profilePictureDiv\r\n            var profilePictureDiv = this.Find.ById(\"profilePictureDiv\");\r\n            // Capture Image\r\n            var profilePictureImage = profilePictureDiv.CaptureImage();\r\n            // Get text from Image\r\n            var imgText = Telerik.TestStudio.OCR.OcrManager.GetTextFromImageBytes(profilePictureImage.Image, false);\r\n            // Verify Image text\r\n            Assert.IsTrue(imgText.Contains(\"Teleri\"));",
-                "RequiresSilverlight": false,
-                "WaitOnElements": true,
-                "WaitOnElementsTimeout": 30000,
-                "UseStepWaitOnElementsTimout": false,
-                "SearchByImageFirst": 0,
-                "Pause": 0,
-                "RunsAgainstVersion": "",
-                "Constraints": {
-                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
-                  "__value": {
-                    "ConstraintValues": {}
-                  }
-                },
-                "Elements": {},
-                "StepType": 4,
+                "StepType": 1,
                 "LogMessageOnFailure": "",
                 "EditorType": "",
                 "DataBindingExpressions": {}
@@ -231,10 +317,10 @@
             },
             "Enabled": true,
             "Order": 3,
-            "Id": "OCRTest_VerifyingImage",
-            "StepState": 1,
+            "Id": "",
+            "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "OCRTestbwspa2eg.mcm",
+            "StepImageKey": "ProfilePictureExistsTestsglkqetu.pda",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -254,11 +340,11 @@
     "UseDefaultWpfAppPath": false,
     "TestAssembly": "TestStudioProject.dll",
     "TestAssemblyPath": "bin",
-    "TestClass": "TestStudioProject.OCRTest",
+    "TestClass": "",
     "IsManual": false,
-    "ResourceFilePath": "OCRTest.resx",
-    "ElementImageStoreFilePath": "OCRTest.imgstore",
-    "HasCodeBehind": true,
+    "ResourceFilePath": "ProfilePictureExistsTest.resx",
+    "ElementImageStoreFilePath": "ProfilePictureExistsTest.imgstore",
+    "HasCodeBehind": false,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
       "__value": {
@@ -287,13 +373,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "OCRTest",
+    "Name": "ProfilePictureExistsTest",
     "Owner": "",
-    "Path": "OCRTest.tstest",
+    "Path": "ProfilePictureExistsTest.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "67b5990d-44d3-4053-9b70-fd803df4be15",
-    "Id": "67b5990d-44d3-4053-9b70-fd803df4be15",
+    "UniqueId": "84d5e79d-4149-4a16-babf-a998165ba771",
+    "Id": "84d5e79d-4149-4a16-babf-a998165ba771",
     "ProjectId": "c43a767d-7e89-477e-b6dd-e84a9eef34d4",
     "Version": 200
   }
