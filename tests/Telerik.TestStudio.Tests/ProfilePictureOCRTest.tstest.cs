@@ -18,16 +18,39 @@ using ArtOfTest.WebAii.Design.Execution;
 using ArtOfTest.WebAii.ObjectModel;
 using ArtOfTest.WebAii.Silverlight;
 using ArtOfTest.WebAii.Silverlight.UI;
-using ArtOfTest.Common;
 
-namespace BookStores_Tests
+namespace BookStores.Tests
 {
 
-    public class OCRTest : BaseWebAiiTest
+    public class ProfilePictureOCRTest : BaseWebAiiTest
     {
+        #region [ Dynamic Pages Reference ]
+
+        private Pages _pages;
+
+        /// <summary>
+        /// Gets the Pages object that has references
+        /// to all the elements, frames or regions
+        /// in this project.
+        /// </summary>
+        public Pages Pages
+        {
+            get
+            {
+                if (_pages == null)
+                {
+                    _pages = new Pages(Manager.Current);
+                }
+                return _pages;
+            }
+        }
+
+        #endregion
+        
         // Add your test methods here...
+    
         [CodedStep(@"New Coded Step")]
-        public void OCRTest_CodedStep()
+        public void ProfilePictureOCRTest_CodedStep()
         {
             // Make sure we have latest DOM to pull up the image
             this.ActiveBrowser.RefreshDomTree();

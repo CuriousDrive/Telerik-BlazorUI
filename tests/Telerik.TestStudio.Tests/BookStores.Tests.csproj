@@ -62,42 +62,28 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestStudioProject\OCRTest.tstest.cs">
+    <Compile Include="OCRTest.tstest.cs">
       <DependentUpon>OCRTest.tstest</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="CascadingDropdownListTest.tstest" />
     <None Include="CreateANewAuthorTest.tstest" />
     <None Include="CreateNewPublisherPagingTest.tstest" />
     <None Include="IsAuthorsGridLoadedTest.tstest" />
     <None Include="NavigateToPages.tstest" />
-    <None Include="OCRTest.tstest" />
-    <None Include="ProfilePictureExistsTest.tstest" />
-    <None Include="Settings.aiis" />
-    <None Include="TestStudioProject\CascadingDropdownListTest.tstest" />
-    <None Include="TestStudioProject\CreateANewAuthorTest.tstest" />
-    <None Include="TestStudioProject\CreateNewPublisherPagingTest.tstest" />
-    <None Include="TestStudioProject\IsAuthorsGridLoadedTest.tstest" />
-    <None Include="TestStudioProject\NavigateToPages.tstest" />
-    <None Include="TestStudioProject\OCRTest.imgstore">
+    <None Include="OCRTest.imgstore">
       <DependentUpon>OCRTest.tstest</DependentUpon>
     </None>
-    <None Include="TestStudioProject\OCRTest.tstest" />
-    <None Include="TestStudioProject\ProfilePictureExistsTest.imgstore">
-      <DependentUpon>ProfilePictureExistsTest.tstest</DependentUpon>
-    </None>
-    <None Include="TestStudioProject\ProfilePictureExistsTest.tstest" />
+    <None Include="OCRTest.tstest" />
+    <None Include="ProfilePictureExistsTest.tstest" />
+    <None Include="ProfilePictureOCRTest.tstest" />
+    <None Include="Settings.aiis" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestLists\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="TestStudioProject\ProfilePictureExistsTest.resx">
-      <DependentUpon>ProfilePictureExistsTest.tstest</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TestStudioProject\OCRTest.resx">
+    <None Include="OCRTest.resx">
       <DependentUpon>OCRTest.tstest</DependentUpon>
     </None>
   </ItemGroup>

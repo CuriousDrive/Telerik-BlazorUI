@@ -2,14 +2,10 @@
 <ArrayOfOpenItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OpenItem>
     <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\TestStudioProject\OCRTest.tstest</Path>
-  </OpenItem>
-  <OpenItem>
-    <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\TestStudioProject\CascadingDropdownListTest.tstest</Path>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\Telerik.TestStudio.Tests\ProfilePictureOCRTest.tstest</Path>
   </OpenItem>
   <OpenItem>
     <OpenItemType>CodeFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\TestStudioProject\OCRTest.tstest.cs</Path>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\Telerik.TestStudio.Tests\ProfilePictureOCRTest.tstest.cs</Path>
   </OpenItem>
 </ArrayOfOpenItem>

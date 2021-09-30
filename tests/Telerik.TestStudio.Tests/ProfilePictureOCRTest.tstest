@@ -30,7 +30,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "d537a511-b76c-4513-a56e-dc4aad1d2ba9",
+            "Runtime ID": "fcbad60e-0bef-4206-87e3-9813bfdb5c10",
             "Description": "Navigate to : 'https://localhost:5001/'",
             "CustomDescription": null,
             "Step": {
@@ -66,7 +66,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "OCRTestdt4amn3b.a21",
+            "StepImageKey": "ProfilePictureOCRTestpw2nn4j3.sff",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -75,13 +75,13 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "b5ada11c-004a-413f-a140-4b4463de4738",
+            "Runtime ID": "33df8d4c-5697-4df4-b68b-fd795a4540fa",
             "Description": "New Coded Step",
             "CustomDescription": null,
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CodedStepDescriptor",
               "__value": {
-                "Code": "            // Make sure we have latest DOM to pull up the image\r\n            this.ActiveBrowser.RefreshDomTree();\r\n            // Find the profilePictureImage\r\n            var profilePictureImage = this.Find.ById<HtmlImage>(\"profilePictureImage\");\r\n            if(profilePictureImage != null)\r\n            {\r\n                string basePath = @\"C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik-BlazorUI\\src\\Client\\wwwroot\";\r\n                // Get Image text\r\n                var imgText = Telerik.TestStudio.OCR.OcrManager.GetTextFromImagePath(basePath + profilePictureImage.Src, false);\r\n                // Verify Image text\r\n                Assert.IsTrue(imgText.ToLower().Contains(\"progres\"));            \r\n                //Assert.IsTrue(true);    \r\n            }\r\n            else\r\n            {\r\n                Assert.IsTrue(false);\r\n            }\r\n",
+                "Code": "            // Make sure we have latest DOM to pull up the image\r\n            this.ActiveBrowser.RefreshDomTree();\r\n            // Find the profilePictureImage\r\n            var profilePictureImage = this.Find.ById<HtmlImage>(\"profilePictureImage\");\r\n            if(profilePictureImage != null)\r\n            {\r\n                string basePath = @\"C:\\Data\\CuriousDrive\\GitHub Repos\\Telerik-BlazorUI\\src\\Client\\wwwroot\";\r\n                // Get Image text\r\n                var imgText = Telerik.TestStudio.OCR.OcrManager.GetTextFromImagePath(basePath + profilePictureImage.Src, false);\r\n                // Verify Image text\r\n                Assert.IsTrue(imgText.ToLower().Contains(\"progres\"));            \r\n                //Assert.IsTrue(true);    \r\n            }\r\n            else\r\n            {\r\n                Assert.IsTrue(false);\r\n            }",
                 "RequiresSilverlight": false,
                 "WaitOnElements": true,
                 "WaitOnElementsTimeout": 30000,
@@ -104,10 +104,10 @@
             },
             "Enabled": true,
             "Order": 2,
-            "Id": "OCRTest_CodedStep",
+            "Id": "ProfilePictureOCRTest_CodedStep",
             "StepState": 1,
             "ContinueOnFailure": false,
-            "StepImageKey": "OCRTestwpervnqr.2e0",
+            "StepImageKey": "ProfilePictureOCRTestgj44mbtw.k1q",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -126,11 +126,11 @@
     "WpfAppPath": null,
     "UseDefaultWpfAppPath": false,
     "TestAssembly": "BookStores.Tests.dll",
-    "TestAssemblyPath": "bin\\Debug\\",
-    "TestClass": "BookStores_Tests.OCRTest",
+    "TestAssemblyPath": "bin",
+    "TestClass": "BookStores.Tests.ProfilePictureOCRTest",
     "IsManual": false,
-    "ResourceFilePath": "OCRTest.resx",
-    "ElementImageStoreFilePath": "OCRTest.imgstore",
+    "ResourceFilePath": "ProfilePictureOCRTEst.resx",
+    "ElementImageStoreFilePath": "ProfilePictureOCRTEst.imgstore",
     "HasCodeBehind": true,
     "DataInfo": {
       "__type": "ArtOfTest.Common.Design.Data.DataInfo",
@@ -149,10 +149,7 @@
         "TSQL": ""
       }
     },
-    "VSProperties": {
-      "Timeout": "0",
-      "ExecId": "00000000-0000-0000-0000-000000000000"
-    },
+    "VSProperties": {},
     "DeploymentItems": [],
     "IsTestFragment": false,
     "StopTestListOnFailure": false,
@@ -163,13 +160,13 @@
     "QcTestVersionStamp": 0,
     "TestLinks": [],
     "Description": "",
-    "Name": "OCRTest",
+    "Name": "ProfilePictureOCRTest",
     "Owner": "",
-    "Path": "OCRTest.tstest",
+    "Path": "ProfilePictureOCRTest.tstest",
     "Priority": 0,
     "TestType": 0,
-    "UniqueId": "94831733-4494-4c30-b44f-69ebf195be82",
-    "Id": "94831733-4494-4c30-b44f-69ebf195be82",
+    "UniqueId": "813bc7c3-28c6-4af2-8d37-e12167b98afe",
+    "Id": "813bc7c3-28c6-4af2-8d37-e12167b98afe",
     "ProjectId": "c43a767d-7e89-477e-b6dd-e84a9eef34d4",
     "Version": 200
   }
