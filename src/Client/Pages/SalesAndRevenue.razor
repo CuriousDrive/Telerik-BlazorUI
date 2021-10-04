@@ -17,37 +17,40 @@
     <ChartSeriesItems>
         @foreach (var product in ChartData.ProductAggregation)
         {
-<ChartSeries Type="ChartSeriesType.Column"
-             Name="@product.ProductName"
-             Data="@product.ProductRevenueAndSales"
-             Field="@nameof(ProductRevenueAndSalesModel.SalesCount)"
-             CategoryField="@nameof(ProductRevenueAndSalesModel.Category)" />}
+            <ChartSeries Type="ChartSeriesType.Column"
+                         Name="@product.ProductName"
+                         Data="@product.ProductRevenueAndSales"
+                         Field="@nameof(ProductRevenueAndSalesModel.SalesCount)"
+                         CategoryField="@nameof(ProductRevenueAndSalesModel.Category)" />
+        }
 
-        <ChartSeries Type="ChartSeriesType.Line"
-                     Name="Total Revenue"
-                     Data="@ChartData.TotalAggregation"
-                     Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
-                     Axis="RevenueAxis">
-        </ChartSeries>
+            <ChartSeries Type="ChartSeriesType.Line"
+                                 Name="Total Revenue"
+                                 Data="@ChartData.TotalAggregation"
+                                 Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
+                                 Axis="RevenueAxis">
+            </ChartSeries>
 
-    </ChartSeriesItems>
+                </ChartSeriesItems>
 
-    <ChartValueAxes>
-        <ChartValueAxis>
-            <ChartValueAxisTitle Text="Sold items (thousands)" />
-            <ChartValueAxisMajorGridLines Visible="false" />
-        </ChartValueAxis>
-        <ChartValueAxis Name="RevenueAxis">
-            <ChartValueAxisTitle Text="Revenue" />
-            <ChartValueAxisLabels Format="{0:C}M" />
-            <ChartValueAxisMajorGridLines Visible="false" />
-        </ChartValueAxis>
-    </ChartValueAxes>
+                <ChartValueAxes>
+                    <ChartValueAxis>
+                        <ChartValueAxisTitle Text="Sold items (thousands)" />
+                        <ChartValueAxisMajorGridLines Visible="false" />
+                    </ChartValueAxis>
+                    <ChartValueAxis Name="RevenueAxis">
+                        <ChartValueAxisTitle Text="Revenue" />
+                        <ChartValueAxisLabels Format="{0:C}" />
+                        <ChartValueAxisMajorGridLines Visible="false" />
+                    </ChartValueAxis>
+                </ChartValueAxes>
 
-    <ChartCategoryAxes>
-        <ChartCategoryAxis AxisCrossingValue="@(new object[] { 20, 0 })" />
-    </ChartCategoryAxes>
-</TelerikChart>}
+                <ChartCategoryAxes>
+                    <ChartCategoryAxis AxisCrossingValue="@(new object[] { 20, 0 })" />
+                </ChartCategoryAxes>
+</TelerikChart>
+        
+        }
     </div>
     <div class="mt-md k-d-flex k-flex-wrap">
         <div class="k-flex-grow mb-md kd-border kd-rounded chart-item">
@@ -59,21 +62,22 @@
                 <ChartSeriesItems>
                     @foreach (var item in ChartData.ProductAggregation)
                     {
-            <ChartSeries Type="ChartSeriesType.Line"
-                         Name="@item.ProductName"
-                         Data="@item.ProductRevenueAndSales"
-                         CategoryField="@nameof(ProductRevenueAndSalesModel.Category)"
-                         Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
-                         Style="ChartSeriesStyle.Smooth">
-                <ChartSeriesMarkers Visible="false" />
-                <ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
-            </ChartSeries>                        }
+                        <ChartSeries Type="ChartSeriesType.Line"
+                                     Name="@item.ProductName"
+                                     Data="@item.ProductRevenueAndSales"
+                                     CategoryField="@nameof(ProductRevenueAndSalesModel.Category)"
+                                     Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
+                                     Style="ChartSeriesStyle.Smooth">
+                            <ChartSeriesMarkers Visible="false" />
+                            <ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
+                        </ChartSeries>                        
+                    }
                 </ChartSeriesItems>
 
                 <ChartValueAxes>
                     <ChartValueAxis Name="RevenueAxis">
                         <ChartValueAxisTitle Text="Revenue" />
-                        <ChartValueAxisLabels Format="{0:C}M" />
+                        <ChartValueAxisLabels Format="{0:C}" />
                     </ChartValueAxis>
                 </ChartValueAxes>
             </TelerikChart>            }

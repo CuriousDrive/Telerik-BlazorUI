@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOpenItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OpenItem>
-    <OpenItemType>TestFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\Telerik.TestStudio.Tests\ProfilePictureOCRTest.tstest</Path>
+    <OpenItemType>CodeFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\Telerik.TestStudio.Tests\BlazorChartTest.tstest.cs</Path>
   </OpenItem>
   <OpenItem>
-    <OpenItemType>CodeFile</OpenItemType>
-    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\Telerik.TestStudio.Tests\ProfilePictureOCRTest.tstest.cs</Path>
+    <OpenItemType>TestFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\Telerik.TestStudio.Tests\BlazorChartTest.tstest</Path>
   </OpenItem>
 </ArrayOfOpenItem>

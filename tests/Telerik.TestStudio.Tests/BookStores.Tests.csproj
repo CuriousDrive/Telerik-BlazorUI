@@ -62,10 +62,17 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlazorChartTest.tstest.cs">
+      <DependentUpon>BlazorChartTest.tstest</DependentUpon>
+    </Compile>
     <Compile Include="OCRTest.tstest.cs">
       <DependentUpon>OCRTest.tstest</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="BlazorChartTest.imgstore">
+      <DependentUpon>BlazorChartTest.tstest</DependentUpon>
+    </None>
+    <None Include="BlazorChartTest.tstest" />
     <None Include="CascadingDropdownListTest.tstest" />
     <None Include="CreateANewAuthorTest.tstest" />
     <None Include="CreateNewPublisherPagingTest.tstest" />
@@ -86,6 +93,11 @@
     <None Include="OCRTest.resx">
       <DependentUpon>OCRTest.tstest</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BlazorChartTest.resx">
+      <DependentUpon>BlazorChartTest.tstest</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
