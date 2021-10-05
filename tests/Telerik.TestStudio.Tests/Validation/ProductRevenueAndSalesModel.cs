@@ -1,4 +1,4 @@
-﻿namespace BookStores.Models
+﻿namespace BookStores.Tests.Models
 {
     public class ProductRevenueAndSalesModel
     {

@@ -22,7 +22,10 @@
       "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
       "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
       "Telerik.TestStudio.Translators.Common, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
-      "..\\..\\..\\..\\..\\Program Files (x86)\\Progress\\Test Studio\\Bin\\Telerik.TestStudio.OCR.dll"
+      "..\\..\\..\\..\\..\\Program Files (x86)\\Progress\\Test Studio\\Bin\\Telerik.TestStudio.OCR.dll",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.net.http.json\\5.0.0\\lib\\net461\\System.Net.Http.Json.dll",
+      "System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.text.json\\5.0.0\\lib\\net461\\System.Text.Json.dll"
     ],
     "Steps": {
       "__type": "ArtOfTest.Common.Design.ProjectModel.AutomationStepList",
@@ -217,7 +220,7 @@
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CodedStepDescriptor",
               "__value": {
-                "Code": "            this.ActiveBrowser.RefreshDomTree();\r\n\r\n            HtmlDiv chart = this.Find.ByExpression<HtmlDiv>(\"tagName=div\", \"class=~k-chart\");\r\n            \r\n            HtmlControl pointsGroup = chart.Find.ByExpression<HtmlControl>(\"tagName=g\", \"clip-path=~salesandrevenue#kdef1\");\r\n            \r\n            var points = pointsGroup.Find.AllByTagName(\"circle\");\r\n            \r\n            foreach(Element point in points)\r\n            {\r\n                HtmlControl pCtrl = point.As<HtmlControl>();\r\n                pCtrl.MouseHover(1, 1);\r\n                \r\n                System.Threading.Thread.Sleep(1000);\r\n                \r\n                this.ExtractPointData();\r\n                \r\n                this.ActiveBrowser.RefreshDomTree();\r\n                \r\n                System.Threading.Thread.Sleep(1000);\r\n            }\r\n\r\n            Assert.IsNotNull(this.DataPoints);",
+                "Code": "            this.ActiveBrowser.RefreshDomTree();\r\n\r\n            HtmlDiv chart = this.Find.ByExpression<HtmlDiv>(\"tagName=div\", \"class=~k-chart\");\r\n            \r\n            HtmlControl pointsGroup = chart.Find.ByExpression<HtmlControl>(\"tagName=g\", \"clip-path=~salesandrevenue#kdef1\");\r\n            \r\n            var points = pointsGroup.Find.AllByTagName(\"circle\");\r\n            \r\n            foreach(Element point in points)\r\n            {\r\n                this.ActiveBrowser.RefreshDomTree();\r\n                \r\n                HtmlControl pCtrl = point.As<HtmlControl>();\r\n                pCtrl.MouseHover(1, 1);\r\n                \r\n                System.Threading.Thread.Sleep(1000);\r\n                \r\n                this.ExtractPointData();\r\n                \r\n                this.ActiveBrowser.RefreshDomTree();\r\n                \r\n                System.Threading.Thread.Sleep(1000);\r\n            }\r\n            \r\n            foreach(var dataPoint in this.DataPoints)\r\n            {\r\n                Log.WriteLine(\"HL : \" + dataPoint.HL);\r\n                Log.WriteLine(\"ML : \" + dataPoint.ML);\r\n                Log.WriteLine(\"LL : \" + dataPoint.LL);\r\n                Log.WriteLine(\"Total : \" + dataPoint.TotalRevenue);\r\n                Log.WriteLine(\"Category : \" + dataPoint.Category);\r\n            }\r\n            \r\n            Assert.IsTrue(ValidationService.ValidateProductPoints(this.DataPoints));",
                 "RequiresSilverlight": false,
                 "WaitOnElements": true,
                 "WaitOnElementsTimeout": 30000,

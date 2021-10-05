@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BookStores.Models
+namespace BookStores.Shared.Models
 {
     public class ProductsAggregationModel
     {

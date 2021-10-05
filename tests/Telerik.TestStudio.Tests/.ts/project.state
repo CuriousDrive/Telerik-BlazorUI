@@ -8,4 +8,8 @@
     <OpenItemType>TestFile</OpenItemType>
     <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\Telerik.TestStudio.Tests\BlazorChartTest.tstest</Path>
   </OpenItem>
+  <OpenItem>
+    <OpenItemType>CodeFile</OpenItemType>
+    <Path>C:\Data\CuriousDrive\GitHub Repos\Telerik-BlazorUI\tests\Telerik.TestStudio.Tests\Validation\ValidationService.cs</Path>
+  </OpenItem>
 </ArrayOfOpenItem>
