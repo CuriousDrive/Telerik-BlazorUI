@@ -82,14 +82,14 @@ namespace BookStores.Tests
             
             foreach(var dataPoint in this.DataPoints)
             {
+                Log.WriteLine("Category : " + dataPoint.Category);
                 Log.WriteLine("HL : " + dataPoint.HL);
                 Log.WriteLine("ML : " + dataPoint.ML);
-                Log.WriteLine("LL : " + dataPoint.LL);
+                Log.WriteLine("SF : " + dataPoint.SF);
                 Log.WriteLine("Total : " + dataPoint.TotalRevenue);
-                Log.WriteLine("Category : " + dataPoint.Category);
             }
             
-            Assert.IsTrue(ValidationService.ValidateProductPoints(this.DataPoints));
+            Assert.IsTrue(new ValidationService().ValidateProductPoints(this.DataPoints));
         }
         
         private void ExtractPointData()
@@ -112,7 +112,7 @@ namespace BookStores.Tests
     {
         public string HL { get; private set; }
         public string ML { get; private set; }
-        public string LL { get; private set; }
+        public string SF { get; private set; }
         public string Category { get; private set; }
         public string TotalRevenue { get; private set; }
     
@@ -133,13 +133,14 @@ namespace BookStores.Tests
                 
                 line = line.TrimStart('=').TrimStart();
                 string[] splitLine = line.Split(' ');
+                
                 if(line.StartsWith("HL")) 
                     p.HL = splitLine[splitLine.Length -1];
                 else if(line.StartsWith("ML"))
                    p.ML = splitLine[splitLine.Length -1]; 
-                else if(line.StartsWith("LL")) 
-                    p.LL = splitLine[splitLine.Length -1];
-                else if(line.StartsWith("Total")) 
+                else if(line.StartsWith("SF")) 
+                    p.SF = splitLine[splitLine.Length -1];
+                else if(line.StartsWith("Revenue")) 
                     p.TotalRevenue = splitLine[splitLine.Length -1];
                 else
                     p.Category = line;

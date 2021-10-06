@@ -1,181 +1,181 @@
 {
-    "ProductAggregation": [
+  "ProductAggregation": [
+    {
+      "ProductName": "HL",
+      "ProductRevenueAndSales": [
         {
-            "ProductName": "HL Mountain Rear Wheel",
-            "ProductRevenueAndSales": [
-                {
-                    "Revenue": 13422.621072,
-                    "SalesCount": 69,
-                    "Category": "May"
-                },
-                {
-                    "Revenue": 23559.48,
-                    "SalesCount": 120,
-                    "Category": "Jun"
-                },
-                {
-                    "Revenue": 20056.31621,
-                    "SalesCount": 104,
-                    "Category": "Jul"
-                },
-                {
-                    "Revenue": 10798.095,
-                    "SalesCount": 55,
-                    "Category": "Aug"
-                },
-                {
-                    "Revenue": 17080.623,
-                    "SalesCount": 87,
-                    "Category": "Sep"
-                },
-                {
-                    "Revenue": 13154.043,
-                    "SalesCount": 67,
-                    "Category": "Oct"
-                },
-                {
-                    "Revenue": 8049.489,
-                    "SalesCount": 41,
-                    "Category": "Nov"
-                },
-                {
-                    "Revenue": 10012.779,
-                    "SalesCount": 51,
-                    "Category": "Dec"
-                }
-            ]
+          "Revenue": 13422,
+          "SalesCount": 69,
+          "Category": "May"
         },
         {
-            "ProductName": "ML Mountain Rear Wheel",
-            "ProductRevenueAndSales": [
-                {
-                    "Revenue": 8616.04542,
-                    "SalesCount": 62,
-                    "Category": "May"
-                },
-                {
-                    "Revenue": 16621.06932,
-                    "SalesCount": 118,
-                    "Category": "Jun"
-                },
-                {
-                    "Revenue": 15166.35369,
-                    "SalesCount": 110,
-                    "Category": "Jul"
-                },
-                {
-                    "Revenue": 6231.06,
-                    "SalesCount": 44,
-                    "Category": "Aug"
-                },
-                {
-                    "Revenue": 11895.66,
-                    "SalesCount": 84,
-                    "Category": "Sep"
-                },
-                {
-                    "Revenue": 11470.815,
-                    "SalesCount": 81,
-                    "Category": "Oct"
-                },
-                {
-                    "Revenue": 5381.37,
-                    "SalesCount": 38,
-                    "Category": "Nov"
-                },
-                {
-                    "Revenue": 6231.06,
-                    "SalesCount": 44,
-                    "Category": "Dec"
-                }
-            ]
+          "Revenue": 23559,
+          "SalesCount": 120,
+          "Category": "Jun"
         },
         {
-            "ProductName": "LL Road Rear Wheel",
-            "ProductRevenueAndSales": [
-                {
-                    "Revenue": 3849.723,
-                    "SalesCount": 57,
-                    "Category": "May"
-                },
-                {
-                    "Revenue": 8577.453,
-                    "SalesCount": 127,
-                    "Category": "Jun"
-                },
-                {
-                    "Revenue": 5470.659,
-                    "SalesCount": 81,
-                    "Category": "Jul"
-                },
-                {
-                    "Revenue": 4525.113,
-                    "SalesCount": 67,
-                    "Category": "Aug"
-                },
-                {
-                    "Revenue": 7226.673,
-                    "SalesCount": 107,
-                    "Category": "Sep"
-                },
-                {
-                    "Revenue": 3782.184,
-                    "SalesCount": 56,
-                    "Category": "Oct"
-                },
-                {
-                    "Revenue": 2026.17,
-                    "SalesCount": 30,
-                    "Category": "Nov"
-                },
-                {
-                    "Revenue": 4525.113,
-                    "SalesCount": 67,
-                    "Category": "Dec"
-                }
-            ]
+          "Revenue": 20056,
+          "SalesCount": 104,
+          "Category": "Jul"
+        },
+        {
+          "Revenue": 10798,
+          "SalesCount": 55,
+          "Category": "Aug"
+        },
+        {
+          "Revenue": 17080,
+          "SalesCount": 87,
+          "Category": "Sep"
+        },
+        {
+          "Revenue": 13154,
+          "SalesCount": 67,
+          "Category": "Oct"
+        },
+        {
+          "Revenue": 8049,
+          "SalesCount": 41,
+          "Category": "Nov"
+        },
+        {
+          "Revenue": 10012,
+          "SalesCount": 51,
+          "Category": "Dec"
         }
-    ],
-    "TotalAggregation": [
+      ]
+    },
+    {
+      "ProductName": "ML",
+      "ProductRevenueAndSales": [
         {
-            "Revenue": 25888.389492,
-            "SalesCount": 188,
-            "Category": "May"
+          "Revenue": 8616,
+          "SalesCount": 62,
+          "Category": "May"
         },
         {
-            "Revenue": 48758.00232,
-            "SalesCount": 365,
-            "Category": "Jun"
+          "Revenue": 16621,
+          "SalesCount": 118,
+          "Category": "Jun"
         },
         {
-            "Revenue": 40693.3289,
-            "SalesCount": 295,
-            "Category": "Jul"
+          "Revenue": 15166,
+          "SalesCount": 110,
+          "Category": "Jul"
         },
         {
-            "Revenue": 21554.268,
-            "SalesCount": 166,
-            "Category": "Aug"
+          "Revenue": 6231,
+          "SalesCount": 44,
+          "Category": "Aug"
         },
         {
-            "Revenue": 36202.956,
-            "SalesCount": 278,
-            "Category": "Sep"
+          "Revenue": 11895,
+          "SalesCount": 84,
+          "Category": "Sep"
         },
         {
-            "Revenue": 28407.042,
-            "SalesCount": 204,
-            "Category": "Oct"
+          "Revenue": 11470,
+          "SalesCount": 81,
+          "Category": "Oct"
         },
         {
-            "Revenue": 15457.029,
-            "SalesCount": 109,
-            "Category": "Nov"
+          "Revenue": 5381,
+          "SalesCount": 38,
+          "Category": "Nov"
         },
         {
-            "Revenue": 20768.952,
-            "SalesCount": 162,
-            "Category": "Dec"
+          "Revenue": 6231,
+          "SalesCount": 44,
+          "Category": "Dec"
         }
-    ]
+      ]
+    },
+    {
+      "ProductName": "SF",
+      "ProductRevenueAndSales": [
+        {
+          "Revenue": 3849,
+          "SalesCount": 57,
+          "Category": "May"
+        },
+        {
+          "Revenue": 8577,
+          "SalesCount": 127,
+          "Category": "Jun"
+        },
+        {
+          "Revenue": 5470,
+          "SalesCount": 81,
+          "Category": "Jul"
+        },
+        {
+          "Revenue": 4525,
+          "SalesCount": 67,
+          "Category": "Aug"
+        },
+        {
+          "Revenue": 7226,
+          "SalesCount": 107,
+          "Category": "Sep"
+        },
+        {
+          "Revenue": 3782,
+          "SalesCount": 56,
+          "Category": "Oct"
+        },
+        {
+          "Revenue": 2026,
+          "SalesCount": 30,
+          "Category": "Nov"
+        },
+        {
+          "Revenue": 4525,
+          "SalesCount": 67,
+          "Category": "Dec"
+        }
+      ]
+    }
+  ],
+  "TotalAggregation": [
+    {
+      "Revenue": 25888,
+      "SalesCount": 188,
+      "Category": "May"
+    },
+    {
+      "Revenue": 48758,
+      "SalesCount": 365,
+      "Category": "Jun"
+    },
+    {
+      "Revenue": 40693,
+      "SalesCount": 295,
+      "Category": "Jul"
+    },
+    {
+      "Revenue": 21554,
+      "SalesCount": 166,
+      "Category": "Aug"
+    },
+    {
+      "Revenue": 36202,
+      "SalesCount": 278,
+      "Category": "Sep"
+    },
+    {
+      "Revenue": 28407,
+      "SalesCount": 204,
+      "Category": "Oct"
+    },
+    {
+      "Revenue": 15457,
+      "SalesCount": 109,
+      "Category": "Nov"
+    },
+    {
+      "Revenue": 20768,
+      "SalesCount": 162,
+      "Category": "Dec"
+    }
+  ]
 }
