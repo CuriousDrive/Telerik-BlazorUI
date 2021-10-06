@@ -1,25 +1,13 @@
-using Telerik.TestStudio.Translators.Common;
-using Telerik.TestingFramework.Controls.TelerikUI.Blazor;
-using Telerik.TestingFramework.Controls.KendoUI.Angular;
-using Telerik.TestingFramework.Controls.KendoUI;
-using Telerik.WebAii.Controls.Html;
-using Telerik.WebAii.Controls.Xaml;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using System.IO;
-
 using ArtOfTest.Common.UnitTesting;
-using ArtOfTest.WebAii.Core;
 using ArtOfTest.WebAii.Controls.HtmlControls;
-using ArtOfTest.WebAii.Controls.HtmlControls.HtmlAsserts;
+using ArtOfTest.WebAii.Core;
 using ArtOfTest.WebAii.Design;
 using ArtOfTest.WebAii.Design.Execution;
 using ArtOfTest.WebAii.ObjectModel;
-using ArtOfTest.WebAii.Silverlight;
-using ArtOfTest.WebAii.Silverlight.UI;
 using BookStores.Tests.Validation;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace BookStores.Tests
 {
@@ -49,31 +37,33 @@ namespace BookStores.Tests
 
         #endregion
         
-        // Add your test methods here...
-    
+        // Property to capture product points
         public List<ProductPoint> DataPoints = new List<ProductPoint>();
         
         [CodedStep(@"New Coded Step")]
         public void BlazorChartTest_CodedStep()
         {
-            
+            // Refreshing the DOM tree
             this.ActiveBrowser.RefreshDomTree();
 
+            // Loading the chart
             HtmlDiv chart = this.Find.ByExpression<HtmlDiv>("tagName=div", "class=~k-chart");
             
+            // Loading chart's point groups
             HtmlControl pointsGroup = chart.Find.ByExpression<HtmlControl>("tagName=g", "clip-path=~salesandrevenue#kdef1");
             
+            // Finding the points by circle
             var points = pointsGroup.Find.AllByTagName("circle");
             
             foreach(Element point in points)
             {
-                this.ActiveBrowser.RefreshDomTree();
-                
+                // Hovering over the circles 
                 HtmlControl pCtrl = point.As<HtmlControl>();
                 pCtrl.MouseHover(1, 1);
                 
                 System.Threading.Thread.Sleep(1000);
                 
+                // Capturing the image and using OCR to convert image into text data
                 this.ExtractPointData();
                 
                 this.ActiveBrowser.RefreshDomTree();
@@ -81,6 +71,7 @@ namespace BookStores.Tests
                 System.Threading.Thread.Sleep(1000);
             }
 
+            // Logging captured data
             var dataPoint = this.DataPoints.Where(dp => dp.Category == "Jun").FirstOrDefault();
 
             Log.WriteLine("Category : " + dataPoint.Category);
@@ -89,33 +80,41 @@ namespace BookStores.Tests
             Log.WriteLine("SF : " + dataPoint.SF);
             Log.WriteLine("Total : " + dataPoint.TotalRevenue);
 
+            // Validating if the captured data is matching with the data from the service
             Assert.IsTrue(new ValidationService().ValidateProductPoints(this.DataPoints));
         }
         
         private void ExtractPointData()
         {
+            // Refreshing the DOM tree
             this.ActiveBrowser.RefreshDomTree();
             
+            // Loading the tool tip div
             HtmlDiv tooltipDiv = this.Find.ByExpression<HtmlDiv>("tagName=div","class=telerik-blazor k-animation-container k-chart-tooltip-wrapper");
             
+            // Capturing the image
             var img = tooltipDiv.BaseElement.CaptureImage();
             
+            // Using OCR to get text from image
             var imgText = Telerik.TestStudio.OCR.OcrManager.GetTextFromImageBytes(img.Image, false);
             
+            // Parsing and adding captured data into list of objects
             this.DataPoints.Add(ProductPoint.Parse(imgText));
         }
     }
     
+    // Class for loading parsed text
     public class ProductPoint
     {
-        public string AA { get; private set; }
-        public string DM { get; private set; }
-        public string SF { get; private set; }
+        public string AA { get; private set; } // Action and Adventure
+        public string DM { get; private set; } // Detective and Mystery
+        public string SF { get; private set; } // Science Fiction
         public string Category { get; private set; }
         public string TotalRevenue { get; private set; }
     
         private ProductPoint() { }
         
+        // Method to parse text into ProductPoint
         public static ProductPoint Parse(string text)
         {
             var p = new ProductPoint();
