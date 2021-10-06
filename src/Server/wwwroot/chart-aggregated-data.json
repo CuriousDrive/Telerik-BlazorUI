@@ -1,7 +1,7 @@
 {
   "ProductAggregation": [
     {
-      "ProductName": "HL",
+      "ProductName": "AA",
       "ProductRevenueAndSales": [
         {
           "Revenue": 13422,
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "ProductName": "ML",
+      "ProductName": "DM",
       "ProductRevenueAndSales": [
         {
           "Revenue": 8616,

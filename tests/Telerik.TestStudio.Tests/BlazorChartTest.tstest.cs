@@ -56,6 +56,7 @@ namespace BookStores.Tests
         [CodedStep(@"New Coded Step")]
         public void BlazorChartTest_CodedStep()
         {
+            
             this.ActiveBrowser.RefreshDomTree();
 
             HtmlDiv chart = this.Find.ByExpression<HtmlDiv>("tagName=div", "class=~k-chart");
@@ -76,19 +77,18 @@ namespace BookStores.Tests
                 this.ExtractPointData();
                 
                 this.ActiveBrowser.RefreshDomTree();
-                
+
                 System.Threading.Thread.Sleep(1000);
             }
-            
-            foreach(var dataPoint in this.DataPoints)
-            {
-                Log.WriteLine("Category : " + dataPoint.Category);
-                Log.WriteLine("HL : " + dataPoint.HL);
-                Log.WriteLine("ML : " + dataPoint.ML);
-                Log.WriteLine("SF : " + dataPoint.SF);
-                Log.WriteLine("Total : " + dataPoint.TotalRevenue);
-            }
-            
+
+            var dataPoint = this.DataPoints.Where(dp => dp.Category == "Jun").FirstOrDefault();
+
+            Log.WriteLine("Category : " + dataPoint.Category);
+            Log.WriteLine("HL : " + dataPoint.AA);
+            Log.WriteLine("ML : " + dataPoint.DM);
+            Log.WriteLine("SF : " + dataPoint.SF);
+            Log.WriteLine("Total : " + dataPoint.TotalRevenue);
+
             Assert.IsTrue(new ValidationService().ValidateProductPoints(this.DataPoints));
         }
         
@@ -102,16 +102,14 @@ namespace BookStores.Tests
             
             var imgText = Telerik.TestStudio.OCR.OcrManager.GetTextFromImageBytes(img.Image, false);
             
-            //Log.WriteLine(imgText);
-            
             this.DataPoints.Add(ProductPoint.Parse(imgText));
         }
     }
     
     public class ProductPoint
     {
-        public string HL { get; private set; }
-        public string ML { get; private set; }
+        public string AA { get; private set; }
+        public string DM { get; private set; }
         public string SF { get; private set; }
         public string Category { get; private set; }
         public string TotalRevenue { get; private set; }
@@ -134,10 +132,10 @@ namespace BookStores.Tests
                 line = line.TrimStart('=').TrimStart();
                 string[] splitLine = line.Split(' ');
                 
-                if(line.StartsWith("HL")) 
-                    p.HL = splitLine[splitLine.Length -1];
-                else if(line.StartsWith("ML"))
-                   p.ML = splitLine[splitLine.Length -1]; 
+                if(line.StartsWith("AA")) 
+                    p.AA = splitLine[splitLine.Length -1];
+                else if(line.StartsWith("DM"))
+                   p.DM = splitLine[splitLine.Length -1]; 
                 else if(line.StartsWith("SF")) 
                     p.SF = splitLine[splitLine.Length -1];
                 else if(line.StartsWith("Revenue")) 

@@ -31,7 +31,21 @@
       "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.buffers\\4.5.1\\lib\\net461\\System.Buffers.dll",
       "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\lib\\net45\\System.Runtime.CompilerServices.Unsafe.dll",
       "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.text.encodings.web\\5.0.0\\lib\\net461\\System.Text.Encodings.Web.dll",
-      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\lib\\net46\\System.Numerics.Vectors.dll"
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\lib\\net46\\System.Numerics.Vectors.dll",
+      "..\\src\\packages\\Microsoft.Bcl.AsyncInterfaces.5.0.0\\lib\\net461\\Microsoft.Bcl.AsyncInterfaces.dll",
+      "System.Buffers",
+      "..\\..\\..\\..\\..\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\Common7\\IDE\\PublicAssemblies\\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll",
+      "System.Memory",
+      "System.Net.Http",
+      "System.Net.Http.Json",
+      "System.Numerics",
+      "System.Numerics.Vectors",
+      "System.Runtime.CompilerServices.Unsafe",
+      "System.Text.Encodings.Web",
+      "System.Text.Json",
+      "System.Threading.Tasks.Extensions",
+      "System.ValueTuple",
+      "System.Windows.Forms"
     ],
     "Steps": {
       "__type": "ArtOfTest.Common.Design.ProjectModel.AutomationStepList",
@@ -226,7 +240,7 @@
             "Step": {
               "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.Descriptors.CodedStepDescriptor",
               "__value": {
-                "Code": "            this.ActiveBrowser.RefreshDomTree();\r\n\r\n            HtmlDiv chart = this.Find.ByExpression<HtmlDiv>(\"tagName=div\", \"class=~k-chart\");\r\n            \r\n            HtmlControl pointsGroup = chart.Find.ByExpression<HtmlControl>(\"tagName=g\", \"clip-path=~salesandrevenue#kdef1\");\r\n            \r\n            var points = pointsGroup.Find.AllByTagName(\"circle\");\r\n            \r\n            foreach(Element point in points)\r\n            {\r\n                this.ActiveBrowser.RefreshDomTree();\r\n                \r\n                HtmlControl pCtrl = point.As<HtmlControl>();\r\n                pCtrl.MouseHover(1, 1);\r\n                \r\n                System.Threading.Thread.Sleep(1000);\r\n                \r\n                this.ExtractPointData();\r\n                \r\n                this.ActiveBrowser.RefreshDomTree();\r\n                \r\n                System.Threading.Thread.Sleep(1000);\r\n            }\r\n            \r\n            foreach(var dataPoint in this.DataPoints)\r\n            {\r\n                Log.WriteLine(\"Category : \" + dataPoint.Category);\r\n                Log.WriteLine(\"HL : \" + dataPoint.HL);\r\n                Log.WriteLine(\"ML : \" + dataPoint.ML);\r\n                Log.WriteLine(\"SF : \" + dataPoint.SF);\r\n                Log.WriteLine(\"Total : \" + dataPoint.TotalRevenue);\r\n            }\r\n            \r\n            Assert.IsTrue(new ValidationService().ValidateProductPoints(this.DataPoints));",
+                "Code": "            \r\n            this.ActiveBrowser.RefreshDomTree();\r\n\r\n            HtmlDiv chart = this.Find.ByExpression<HtmlDiv>(\"tagName=div\", \"class=~k-chart\");\r\n            \r\n            HtmlControl pointsGroup = chart.Find.ByExpression<HtmlControl>(\"tagName=g\", \"clip-path=~salesandrevenue#kdef1\");\r\n            \r\n            var points = pointsGroup.Find.AllByTagName(\"circle\");\r\n            \r\n            foreach(Element point in points)\r\n            {\r\n                this.ActiveBrowser.RefreshDomTree();\r\n                \r\n                HtmlControl pCtrl = point.As<HtmlControl>();\r\n                pCtrl.MouseHover(1, 1);\r\n                \r\n                System.Threading.Thread.Sleep(1000);\r\n                \r\n                this.ExtractPointData();\r\n                \r\n                this.ActiveBrowser.RefreshDomTree();\r\n\r\n                System.Threading.Thread.Sleep(1000);\r\n            }\r\n\r\n            var dataPoint = this.DataPoints.Where(dp => dp.Category == \"Jun\").FirstOrDefault();\r\n\r\n            Log.WriteLine(\"Category : \" + dataPoint.Category);\r\n            Log.WriteLine(\"HL : \" + dataPoint.AA);\r\n            Log.WriteLine(\"ML : \" + dataPoint.DM);\r\n            Log.WriteLine(\"SF : \" + dataPoint.SF);\r\n            Log.WriteLine(\"Total : \" + dataPoint.TotalRevenue);\r\n\r\n            Assert.IsTrue(new ValidationService().ValidateProductPoints(this.DataPoints));\r\n",
                 "RequiresSilverlight": false,
                 "WaitOnElements": true,
                 "WaitOnElementsTimeout": 30000,

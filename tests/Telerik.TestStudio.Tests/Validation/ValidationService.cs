@@ -20,10 +20,10 @@ namespace BookStores.Tests.Validation
             {
                 if(productPoint.Category == "Jun")
                 {
-                    var productHL = productsAggregationModel.ProductAggregation.Where(pa => pa.ProductName == "HL").FirstOrDefault();
+                    var productHL = productsAggregationModel.ProductAggregation.Where(pa => pa.ProductName == "AA").FirstOrDefault();
                     var productRevenueAndSales = productHL.ProductRevenueAndSales.Where(prs => prs.Category == "Jun").FirstOrDefault();
 
-                    if (productRevenueAndSales.SalesCount == Convert.ToInt32(productPoint.HL))
+                    if (productRevenueAndSales.SalesCount == Convert.ToInt32(productPoint.AA))
                         return true;
                 }
             }
