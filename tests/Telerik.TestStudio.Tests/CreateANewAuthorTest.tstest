@@ -9,14 +9,37 @@
     "ProfilerBenchmarkResultsId": "00000000-0000-0000-0000-000000000000",
     "ProfilerConfigurationId": "00000000-0000-0000-0000-000000000000",
     "ProfilerConfigurations": {},
-    "CurrentReferences": [],
+    "CurrentReferences": [
+      "System",
+      "System.Core",
+      "ArtOfTest.WebAii, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
+      "ArtOfTest.WebAii.Messaging, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c",
+      "ArtOfTest.WebAii.Design, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d",
+      "Telerik.WebAii.Controls.Html, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.WebAii.Controls.Xaml, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.WebAii.Controls.Xaml.Wpf, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.KendoUI, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.KendoUI.Angular, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestingFramework.Controls.TelerikUI.Blazor, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "Telerik.TestStudio.Translators.Common, Version=2021.2.809.0, Culture=neutral, PublicKeyToken=528163f3e645de45",
+      "..\\..\\..\\..\\..\\Program Files (x86)\\Progress\\Test Studio\\Bin\\Telerik.TestStudio.OCR.dll",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.net.http.json\\5.0.0\\lib\\net461\\System.Net.Http.Json.dll",
+      "System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.text.json\\5.0.0\\lib\\net461\\System.Text.Json.dll",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\lib\\net461\\System.Threading.Tasks.Extensions.dll",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.memory\\4.5.4\\lib\\net461\\System.Memory.dll",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.buffers\\4.5.1\\lib\\net461\\System.Buffers.dll",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\lib\\net45\\System.Runtime.CompilerServices.Unsafe.dll",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.text.encodings.web\\5.0.0\\lib\\net461\\System.Text.Encodings.Web.dll",
+      "..\\..\\..\\..\\..\\Users\\User\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\lib\\net46\\System.Numerics.Vectors.dll"
+    ],
     "Steps": {
       "__type": "ArtOfTest.Common.Design.ProjectModel.AutomationStepList",
       "__value": [
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "6e1c622e-ec4b-4822-bc81-87892b7e6ba5",
+            "Runtime ID": "d2f7ed15-98b0-43b8-bee1-51fcc4dc784a",
             "Description": "Navigate to : 'https://localhost:5001/'",
             "CustomDescription": null,
             "Step": {
@@ -52,7 +75,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateANewAuthorTestdhcyt3bw.v53",
+            "StepImageKey": "CreateANewAuthorTestcjof3qdp.ofo",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -61,7 +84,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "b085829d-0b95-4039-9ef3-0dc70598cd1b",
+            "Runtime ID": "fc7ffb4e-5360-420a-ae0a-3334adc3eb29",
             "Description": "TelerikBlazorTextBox : Update value to Fahad",
             "CustomDescription": null,
             "Step": {
@@ -146,11 +169,11 @@
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "0746E37FF63DEF4E7F24C1BFA83CF661286A1B9CC156348580D22E6BA6174EE8",
+                                "Image": "9FC32791E081111F924FC5334F24ADE7DF333F688ACE2E001B20ABE5E7CFC548",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
-                                "ScreenScale": 1.25,
+                                "ScreenScale": 1.0,
                                 "ScrollOnImageSearch": null
                               }
                             }
@@ -177,7 +200,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateANewAuthorTestyef2np4y.y1a",
+            "StepImageKey": "CreateANewAuthorTestcd5435nq.edi",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -186,7 +209,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "8bc61b5d-7a6d-4b1b-a77d-f190ae2997b0",
+            "Runtime ID": "dcffd0af-0a3c-4bd9-84f4-a6605f5ff78a",
             "Description": "TelerikBlazorTextBox : Update value to Mullaji",
             "CustomDescription": null,
             "Step": {
@@ -277,11 +300,11 @@
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "9474342774219CE1B954F10D2B2BA8683B7A11070B6542B31A160199D2EE80F4",
+                                "Image": "9FC32791E081111F924FC5334F24ADE7DF333F688ACE2E001B20ABE5E7CFC548",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
-                                "ScreenScale": 1.25,
+                                "ScreenScale": 1.0,
                                 "ScrollOnImageSearch": null
                               }
                             }
@@ -308,7 +331,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateANewAuthorTestdyxyqah2.jwq",
+            "StepImageKey": "CreateANewAuthorTestc5w4logt.50c",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -317,7 +340,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "8c552217-e86f-4031-a0dc-b8d002adb108",
+            "Runtime ID": "153d1262-e2b7-4c28-8800-dd94196921c8",
             "Description": "TelerikBlazorDropdownList : toggle dropdown options list",
             "CustomDescription": null,
             "Step": {
@@ -394,18 +417,18 @@
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[3]/span[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/form[1]/div[4]/span[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "9D509CAE9A2010FDB66247F817798788EEC2389571B1FDBA19D04080032E984C",
+                                "Image": "CD9A12FB89ED2796199E9F38E2923595D972ADE4CB6FDB33B7580B30D37FE5D5",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
-                                "ScreenScale": 1.25,
+                                "ScreenScale": 1.0,
                                 "ScrollOnImageSearch": null
                               }
                             }
@@ -432,7 +455,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateANewAuthorTestbevcnccq.bbc",
+            "StepImageKey": "CreateANewAuthorTestusk5a1rl.hpy",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -441,7 +464,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "16b41b84-4b61-4e74-b154-eac350ab14c9",
+            "Runtime ID": "cd828606-c8ed-4d3a-b9a9-348d379c1a4c",
             "Description": "TelerikBlazorList : click on item with text 'PA'",
             "CustomDescription": null,
             "Step": {
@@ -490,10 +513,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "2MYV6zjdBUngbXP9XTjn1XYdW00=",
+                          "uniqueKey": "x5aR0X7CAjQcQAUuqCsUKO/HyaU=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "Div",
+                          "Name": "Div1",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -516,6 +539,12 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
+                                        "Clause": "GroupIndex=1"
+                                      }
+                                    },
+                                    {
+                                      "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
+                                      "__value": {
                                         "Clause": "class=~k-popup"
                                       }
                                     },
@@ -528,24 +557,24 @@
                                   ],
                                   "Constraints": [],
                                   "ChainStops": [
-                                    2
+                                    3
                                   ]
                                 }
                               }
                             }
                           ],
-                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[2]/div[1]",
+                          "BackupSearchClause": "/html[1]/body[1]/div[1]/div[3]/div[1]",
                           "ImageSearchClauses": [
                             {
                               "__type": "ArtOfTest.Common.ImageSearchClause",
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "EB65DD1151DA0F1A18955201B17221F1F09CA58B720A66410D00DE5448F3D3E2",
+                                "Image": "61D2E20C6D7EBFF35E60EA47619F8263985D2DD48B305728989D5CB6067935A3",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
-                                "ScreenScale": 1.25,
+                                "ScreenScale": 1.0,
                                 "ScrollOnImageSearch": null
                               }
                             }
@@ -572,7 +601,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateANewAuthorTestfo0ybvxs.kh0",
+            "StepImageKey": "CreateANewAuthorTestp101uxw2.cm0",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -581,7 +610,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "11732d37-22b9-4802-b965-a7e744dceb40",
+            "Runtime ID": "03b5fee4-2d04-4d10-8957-c7606ce2591e",
             "Description": "TelerikBlazorButton Click",
             "CustomDescription": null,
             "Step": {
@@ -627,10 +656,10 @@
                       "FindExpression": {
                         "__type": "ArtOfTest.WebAii.Design.ProjectModel.HtmlFindExpressionElement",
                         "__value": {
-                          "uniqueKey": "UoNO+PeMziHn6xdeYFTHasSWvbI=",
+                          "uniqueKey": "hDrhKTmv+9M9tLc6s8dD0scGGCE=",
                           "NodeKind": 4,
                           "TechnologyType": 1,
-                          "Name": "SaveButtonTag",
+                          "Name": "ButtonTag0",
                           "FindExpressions": [
                             {
                               "Key": 1,
@@ -653,7 +682,7 @@
                                     {
                                       "__type": "ArtOfTest.WebAii.Core.HtmlFindClause",
                                       "__value": {
-                                        "Clause": "GroupIndex=3"
+                                        "Clause": "GroupIndex=2"
                                       }
                                     }
                                   ],
@@ -670,11 +699,11 @@
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "5E7E5156383AA1BCFD696D5052B73BC80C0FD3520E8095F65EBD2215DFC4DF57",
+                                "Image": "A3D29EEE62B1FF594D243AB9AAAF1128E595EE6A6E4D8B7327619E094FDF26AB",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
-                                "ScreenScale": 1.25,
+                                "ScreenScale": 1.0,
                                 "ScrollOnImageSearch": null
                               }
                             }
@@ -701,7 +730,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateANewAuthorTestpaan2yn2.idm",
+            "StepImageKey": "CreateANewAuthorTestlv5k4one.lm5",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -710,7 +739,7 @@
         {
           "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
           "__value": {
-            "Runtime ID": "28be2c00-d94d-479c-8306-ad6816b786a8",
+            "Runtime ID": "561a09ab-a392-42f5-ac77-8379310a0b1b",
             "Description": "TelerikBlazorGridDataCell: [0, 0]Cell text 'Exact' 'Fahad'",
             "CustomDescription": null,
             "Step": {
@@ -823,11 +852,11 @@
                               "__value": {
                                 "Resolution": "1920, 1080",
                                 "BroweserType": 7,
-                                "Image": "DEBF06E08CF91E8666FA6772246F4249AE333698F888088D80C98C3B9436347F",
+                                "Image": "5C0B0822FC43DEA1E1C9990C50FB1BC61C75778A8829DFD2C8AD0FCA83AB071A",
                                 "Index": 0,
                                 "MatchThreshold": 90,
                                 "OsVersion": "10.0.19043.0",
-                                "ScreenScale": 1.25,
+                                "ScreenScale": 1.0,
                                 "ScrollOnImageSearch": null
                               }
                             }
@@ -854,7 +883,7 @@
             "Id": "",
             "StepState": 0,
             "ContinueOnFailure": false,
-            "StepImageKey": "CreateANewAuthorTestlt00ades.u1w",
+            "StepImageKey": "CreateANewAuthorTest3lrmmeo2.wth",
             "QcId": 0,
             "QcVersionStamp": 0,
             "Version": 200
@@ -872,7 +901,7 @@
     "SilverlightAppOriginUri": null,
     "WpfAppPath": null,
     "UseDefaultWpfAppPath": false,
-    "TestAssembly": "TestStudioProject.dll",
+    "TestAssembly": "BookStores.Tests.dll",
     "TestAssemblyPath": "bin",
     "TestClass": "",
     "IsManual": false,

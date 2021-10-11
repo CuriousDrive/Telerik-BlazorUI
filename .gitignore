@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 
 vsts-agent-win-x64-2.190.0/
+/tests/Telerik.TestStudio.Tests/Results
