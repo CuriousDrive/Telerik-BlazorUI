@@ -48,13 +48,12 @@
     => Scheduling the test lists => Done
 
 7. CI/CD integration (same as above)
+    => https://docs.telerik.com/teststudio/advanced-topics/build-server/azure-devops
     => Setting up Azure DevOps => Done
     => Adding Agent Pool => Done
     => Downloading & Configuring Agent on the local machine => Done
     => Setting and running the pipeline => Done
     => Viewing the results => Done
     => Deploying if all the tests pass
-    => Showing tests in visual studio professional 
-    => Custom code could be written
 
 -------------------------------------------------------------------------
