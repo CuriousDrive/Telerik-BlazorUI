@@ -351,3 +351,4 @@ MigrationBackup/
 
 vsts-agent-win-x64-2.190.0/
 /tests/Telerik.TestStudio.Tests/Results
+/src/Server/Properties/ServiceDependencies/telerikblazorui - Web Deploy
