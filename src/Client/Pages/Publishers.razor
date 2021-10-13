@@ -200,7 +200,7 @@
     private async Task CreatePublisher(ListViewCommandEventArgs listViewCommandEventArgs)
     {
         var publisher = listViewCommandEventArgs.Item as Publisher;
-        await _httpClient.PostAsJsonAsync<Publisher>("publishers/createpublisher", publisher);
+        //await _httpClient.PostAsJsonAsync<Publisher>("publishers/createpublisher", publisher);
 
         AllPublishers = await GetAllPublishers();
     }
